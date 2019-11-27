@@ -17,7 +17,7 @@ The Windows Zivid installer adds some basic samples in C:\Users\Public\Documents
 ## Instructions
 
 1. [**Install Zivid Software**](https://www.zivid.com/downloads)
-Note: The version tested with Zivid cameras is 1.6.0.
+Note: The version tested with Zivid cameras is 1.7.0.
 
 2. Launch Visual Studio 2017.
 
