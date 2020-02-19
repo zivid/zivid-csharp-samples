@@ -19,7 +19,7 @@ class Program
 
             var Filename = "Zivid3D.zdf";
             Console.WriteLine("Reading " + Filename + " point cloud");
-            var frame = new Zivid.NET.Frame("../../" + Filename);
+            var frame = new Zivid.NET.Frame(Filename);
 
             Console.WriteLine("Displaying the frame");
             visualizer.Show(frame);
