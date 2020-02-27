@@ -7,8 +7,8 @@
     <ProjectGuid>{24B7F4D2-63DA-4BCF-9516-F0578118104A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SampleCapture2DNET</RootNamespace>
-    <AssemblyName>SampleCapture2DNET</AssemblyName>
+    <RootNamespace>Capture2D</RootNamespace>
+    <AssemblyName>Capture2D</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SampleCapture2D.cs" />
+    <Compile Include="Capture2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

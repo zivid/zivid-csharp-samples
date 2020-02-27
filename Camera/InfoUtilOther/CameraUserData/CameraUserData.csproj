@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD533F88-E34D-41A8-B734-1B94A5A4A31F}</ProjectGuid>
+    <ProjectGuid>{a55da9e4-9d9b-41b0-8b27-0fa2c2a8ac55}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SampleCaptureNET</RootNamespace>
-    <AssemblyName>SampleCaptureNET</AssemblyName>
+    <RootNamespace>CameraUserData</RootNamespace>
+    <AssemblyName>CameraUserData</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,7 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SampleCapture.cs" />
+    <Compile Include="CameraUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

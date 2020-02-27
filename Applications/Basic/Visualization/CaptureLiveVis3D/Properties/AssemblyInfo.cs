@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly:AssemblyTitleAttribute("ZividSampleCaptureLiveVis3DNET")]
+[assembly:AssemblyTitleAttribute("CaptureLiveVis3D")]
 [assembly:AssemblyDescriptionAttribute("")]
 [assembly:AssemblyConfigurationAttribute("")]
 [assembly:AssemblyCompanyAttribute("")]
-[assembly:AssemblyProductAttribute("ZividSampleCaptureLiveVis3DNET")]
+[assembly:AssemblyProductAttribute("CaptureLiveVis3D")]
 [assembly:AssemblyCopyrightAttribute("Copyright 2015-2020 (C) Zivid AS")]
 [assembly:AssemblyTrademarkAttribute("")]
 [assembly:AssemblyCultureAttribute("")]
