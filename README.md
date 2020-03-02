@@ -52,7 +52,7 @@ Zivid Samples are distributed under the [BSD license](https://github.com/zivid/c
 [CaptureFromFile-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
 [CaptureHDR-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDR/CaptureHDR.cs
 [CameraUserData-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
-[GetCameraIntrinsics-url]: https://github.com/zivid/csharp-extra-samples/tree/source/master/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
+[GetCameraIntrinsics-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
 [CaptureFromFileVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
 [CaptureVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
 [CaptureLiveVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureLiveVis3D/CaptureLiveVis3D.cs
