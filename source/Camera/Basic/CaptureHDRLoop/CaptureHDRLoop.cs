@@ -15,10 +15,6 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Setting up visualization");
-            var visualizer = new Zivid.NET.CloudVisualizer();
-            zivid.DefaultComputeDevice = visualizer.ComputeDevice;
-
             Console.WriteLine("Connecting to the camera");
             var camera = zivid.ConnectCamera();
 
@@ -59,21 +55,14 @@ class Program
             }
 
             Console.WriteLine("Creating the HDR frame");
-            var hdrFrame = Zivid.NET.HDR.CombineFrames(frames);
-
-            Console.WriteLine("Saving the frames");
-            frames[0].Save("10.zdf");
-            frames[1].Save("20.zdf");
-            frames[2].Save("30.zdf");
-            hdrFrame.Save("HDR.zdf");
-
-            Console.WriteLine("Displaying the HDR frame");
-            visualizer.ShowMaximized();
-            visualizer.Show(hdrFrame);
-            visualizer.ResetToFit();
-
-            Console.WriteLine("Running the visualizer. Blocking until the window closes");
-            visualizer.Run();
+            using (var hdrFrame = Zivid.NET.HDR.CombineFrames(frames))
+            {
+                Console.WriteLine("Saving the frames");
+                frames[0].Save("10.zdf");
+                frames[1].Save("20.zdf");
+                frames[2].Save("30.zdf");
+                hdrFrame.Save("HDR.zdf");
+            }
         }
         catch (Exception ex)
         {

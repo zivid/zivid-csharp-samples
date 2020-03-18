@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFile", "Camera\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDR", "Camera\Basic\CaptureHDR\CaptureHDR.csproj", "{F09339D7-0C30-471F-8E61-B86B895C440E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Basic\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraUserData", "Camera\InfoUtilOther\CameraUserData\CameraUserData.csproj", "{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
@@ -24,8 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileVis3D", "Applications\Basic\Visualization\CaptureFromFileVis3D\CaptureFromFileVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings", "Applications\Basic\Visualization\CaptureHDRCompleteSettings\CaptureHDRCompleteSettings.csproj", "{C0E744F5-0DDD-4E29-B899-101546A6CBEA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Applications\Basic\Visualization\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureLiveVis3D", "Applications\Basic\Visualization\CaptureLiveVis3D\CaptureLiveVis3D.csproj", "{29B70436-3CE0-42CF-A45C-F52B29A5020A}"
 EndProject

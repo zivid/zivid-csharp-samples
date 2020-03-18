@@ -15,6 +15,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - [**CaptureAssistant**][CaptureAssistant-url] - This example shows how to use Capture Assistant to acquire HDR images from the Zivid camera.
     - [**CaptureFromFile**][CaptureFromFile-url] - This example shows how to acquire HDR images from file. This example can be used without access to a physical camera.
     - [**CaptureHDR**][CaptureHDR-url] - This example shows how to acquire HDR images from the Zivid camera.
+    - [**CaptureHDRLoop**][CaptureHDRLoop-url] - This example shows how to acquire HDR images from the Zivid camera in a loop (while actively changing some HDR settings).
   - **InfoUtilOther**
     - [**CameraUserData**][CameraUserData-url] - This example shows how to store user data on the Zivid camera.
     - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - This example shows how to get camera intrinsics from the Zivid camera.
@@ -25,7 +26,6 @@ There are two main categories of samples: **Camera** and **Applications**. The s
       - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - This example shows how capture a Zivid point cloud from file, and visualize it.
       - [**CaptureVis3D**][CaptureVis3D-url] - This example shows how to capture a Zivid point cloud, and visualize it.
       - [**CaptureLiveVis3D**][CaptureLiveVis3D-url] - This example shows how to continuosly capture a Zivid point cloud, and visualize it.
-      - [**CaptureHDRLoop**][CaptureHDRLoop-url] - This example shows how to acquire HDR images from the Zivid camera in a loop (while actively changing some HDR settings).
       - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - This example shows how to acquire an HDR image from the Zivid camera (with fully configured settings for each frame).
     - **FileFormats**
       - [**ReadZDF**][ReadZDF-url] - This example shows how to import and display a Zivid point cloud from a .ZDF file.
@@ -53,12 +53,12 @@ Zivid Samples are distributed under the [BSD license](https://github.com/zivid/c
 [CaptureAssistant-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs
 [CaptureFromFile-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
 [CaptureHDR-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDR/CaptureHDR.cs
+[CaptureHDRLoop-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDRLoop/CaptureHDRLoop.cs
 [CameraUserData-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
 [GetCameraIntrinsics-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
 [CaptureFromFileVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
 [CaptureVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
 [CaptureLiveVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureLiveVis3D/CaptureLiveVis3D.cs
-[CaptureHDRLoop-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/Visualization/CaptureHDRLoop/CaptureHDRLoop.cs
 [CaptureHDRCompleteSettings-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/Visualization/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
 [ReadZDF-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/FileFormats/ReadZDF/ReadZDF.cs
 [ZDF2PLY-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
