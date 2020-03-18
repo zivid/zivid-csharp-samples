@@ -44,21 +44,21 @@ Note: The version tested with Zivid cameras is 1.8.0.
 If you need assistance with using Zivid cameras, visit our [**Knowledge Base**](https://help.zivid.com/) or contact us at [customersuccess@zivid.com](mailto:customersuccess@zivid.com).
 
 ## Licence
-Zivid Samples are distributed under the [BSD license](https://github.com/zivid/csharp-extra-samples/blob/master/LICENSE).
+Zivid Samples are distributed under the [BSD license](LICENSE).
 
 [QuickCaptureTutorial-url]: source/Camera/Basic/QuickCaptureTutorial.md
 [CompleteCaptureTutorial-url]: source/Camera/Basic/CaptureTutorial.md
-[Capture-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/Capture/Capture.cs
-[Capture2D-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/Capture2D/Capture2D.cs
-[CaptureAssistant-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs
-[CaptureFromFile-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
-[CaptureHDR-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDR/CaptureHDR.cs
-[CaptureHDRLoop-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDRLoop/CaptureHDRLoop.cs
-[CaptureHDRCompleteSettings-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
-[CameraUserData-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
-[GetCameraIntrinsics-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
+[Capture-url]: source/Camera/Basic/Capture/Capture.cs
+[Capture2D-url]: source/Camera/Basic/Capture2D/Capture2D.cs
+[CaptureAssistant-url]: source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs
+[CaptureFromFile-url]: source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
+[CaptureHDR-url]: source/Camera/Basic/CaptureHDR/CaptureHDR.cs
+[CaptureHDRCompleteSettings-url]: source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
+[CaptureHDRLoop-url]: source/Camera/Basic/CaptureHDRLoop/CaptureHDRLoop.cs
+[CameraUserData-url]: source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
+[GetCameraIntrinsics-url]: source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
 [CaptureFromFileVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
 [CaptureVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
 [CaptureLiveVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureLiveVis3D/CaptureLiveVis3D.cs
-[ReadZDF-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/FileFormats/ReadZDF/ReadZDF.cs
-[ZDF2PLY-url]: https://github.com/zivid/csharp-extra-samples/tree/master/source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
+[ReadZDF-url]: source/Applications/Basic/FileFormats/ReadZDF/ReadZDF.cs
+[ZDF2PLY-url]: source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
