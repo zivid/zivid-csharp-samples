@@ -1,11 +1,10 @@
 /*
-This example shows how to acquire HDR images from the Zivid camera in a loop
-(while actively changing some HDR settings).
+This example shows how to acquire HDR images from the Zivid camera in a loop,
+with settings from .yml files
 */
 
 using System;
 using System.Collections.Generic;
-using Duration = Zivid.NET.Duration;
 
 class Program
 {
@@ -18,50 +17,29 @@ class Program
             Console.WriteLine("Connecting to the camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Recording HDR source images");
-            var frames = new List<Zivid.NET.Frame>();
-
-            camera.UpdateSettings(s =>
+            const int numberOfCaptures = 3;
+            const int numberOfFramesPerCapture = 3;
+            for (var set = 1; set <= numberOfCaptures; set++)
             {
-                s.Iris = 10;
-                s.ExposureTime = Duration.FromMicroseconds(10000);
-                s.Brightness = 1;
-                s.Gain = 1;
-                s.Bidirectional = false;
-                s.Filters.Contrast.Enabled = true;
-                s.Filters.Contrast.Threshold = 5;
-                s.Filters.Gaussian.Enabled = true;
-                s.Filters.Gaussian.Sigma = 1.5;
-                s.Filters.Outlier.Enabled = true;
-                s.Filters.Outlier.Threshold = 5;
-                s.Filters.Reflection.Enabled = true;
-                s.Filters.Saturated.Enabled = true;
-                s.BlueBalance = 1.081;
-                s.RedBalance = 1.709;
-            });
+                Console.WriteLine("Configure HDR settings");
 
-            ulong[] iris = { 10, 20, 30 };
-            long[] exposure = { 10000, 20000, 30000 };
-
-            for (int i = 0; i < 3; ++i)
-            {
-                camera.UpdateSettings(s =>
+                var settingsList = new List<Zivid.NET.Settings>();
+                for (var frame = 1; frame <= numberOfFramesPerCapture; frame++)
                 {
-                    s.Iris = iris[i];
-                    s.ExposureTime = Duration.FromMicroseconds(exposure[i]);
-                });
-                frames.Add(camera.Capture());
-                Console.WriteLine("Frame " + (i + 1) + " " + camera.Settings.ToString());
-            }
+                    string file_path = "Settings/set" + set + "/frame_0" + frame + ".yml";
+                    Console.WriteLine("Add settings from " + file_path + ":");
+                    var settings = new Zivid.NET.Settings(file_path);
+                    Console.WriteLine(settings);
+                    settingsList.Add(settings);
+                }
 
-            Console.WriteLine("Creating the HDR frame");
-            using (var hdrFrame = Zivid.NET.HDR.CombineFrames(frames))
-            {
-                Console.WriteLine("Saving the frames");
-                frames[0].Save("10.zdf");
-                frames[1].Save("20.zdf");
-                frames[2].Save("30.zdf");
-                hdrFrame.Save("HDR.zdf");
+                Console.WriteLine("Capture the HDR frame");
+                using (var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsList))
+                {
+                    string hdr_path = "HDR_" + set + ".zdf";
+                    Console.WriteLine("Saving the HDR to " + hdr_path);
+                    hdrFrame.Save(hdr_path);
+                }
             }
         }
         catch (Exception ex)
