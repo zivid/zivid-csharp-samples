@@ -184,6 +184,7 @@ It is possible to [manually create](#hdr-frame) the `settingsList`, if not set v
 If we only want to capture a 2D image, which is faster than 3D, we can do so via the 2D API ([go to source][capture2d-url]).
 ```csharp
 var frame2D = camera.Capture2D(settings2D);
+var image2D = frame2D.Image<Zivid.NET.RGBA8>();
 ```
 
 ## Save
@@ -198,7 +199,7 @@ The API detects which format to use. See [Point Cloud][kb-point_cloud-url] for a
 
 If we captured a 2D image, we can save it ([go to source][save2d-url]).
 ```csharp
-frame2D.Save("result.png");
+image2D.Save("result.png");
 ```
 
 ## Conclusion
