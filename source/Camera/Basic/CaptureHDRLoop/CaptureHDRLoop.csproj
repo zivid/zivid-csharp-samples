@@ -62,9 +62,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)\Settings" "$(TargetDir)\Settings" /Y /E /H /C /I
-
-if $(ConfigurationName) == Debug GOTO Debug
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
 if $(ConfigurationName) == Release GOTO Release
 goto Error
 

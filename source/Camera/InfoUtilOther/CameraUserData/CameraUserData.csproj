@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{a55da9e4-9d9b-41b0-8b27-0fa2c2a8ac55}</ProjectGuid>
+    <ProjectGuid>{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CameraUserData</RootNamespace>
@@ -62,7 +62,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-      <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
 if $(ConfigurationName) == Release GOTO Release
 goto Error
 

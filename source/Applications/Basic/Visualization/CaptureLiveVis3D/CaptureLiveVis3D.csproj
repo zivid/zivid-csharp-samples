@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29b70436-3ce0-42cf-a45c-f52b29a5020a}</ProjectGuid>
+    <ProjectGuid>{29B70436-3CE0-42CF-A45C-F52B29A5020A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CaptureLiveVis3D</RootNamespace>
@@ -68,26 +68,22 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-      <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
 if $(ConfigurationName) == Release GOTO Release
 goto Error
 
 :Debug
-mkdir "$(TargetDir)plugins"
-xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\*.dll" "$(TargetDir)" /Y
-xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\plugins\*" "$(TargetDir)plugins" /Y
+xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\*.dll" "$(TargetDir)" /Y/Y
 exit /B 0
 
 :Release
-mkdir "$(TargetDir)plugins"
 xcopy "$(ZIVID_INSTALL_FOLDER)\bin\*.dll" "$(TargetDir)" /Y
-xcopy "$(ZIVID_INSTALL_FOLDER)\bin\plugins\*" "$(TargetDir)plugins" /Y
 exit /B 0
 
 :Error
 echo Unsupported config
 exit /B 1
-    </PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

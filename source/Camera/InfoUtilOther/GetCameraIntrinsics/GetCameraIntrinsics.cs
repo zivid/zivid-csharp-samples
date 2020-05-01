@@ -16,7 +16,7 @@ class Program
             Console.WriteLine("Connecting to the camera");
             var camera = zivid.ConnectCamera();
 
-            var fileNameIntrinsics = "intrinsics.yml";
+            var fileNameIntrinsics = "Intrinsics.yml";
             Console.WriteLine("Saving camera intrinsics to " + fileNameIntrinsics);
             camera.Intrinsics.save(fileNameIntrinsics);
 

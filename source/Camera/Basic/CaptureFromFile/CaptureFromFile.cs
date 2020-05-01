@@ -12,7 +12,7 @@ class Program
             var zivid = new Zivid.NET.Application();
 
             var zdfFile = Zivid.NET.Environment.DataPath + "/MiscObjects.zdf";
-            var resultFile = "result.zdf";
+            var resultFile = "Result.zdf";
 
             Console.WriteLine("Initializing camera emulation using file: " + zdfFile);
             var camera = zivid.CreateFileCamera(zdfFile);

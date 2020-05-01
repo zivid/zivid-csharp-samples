@@ -161,7 +161,7 @@ var settings2D = new Zivid.NET.Settings2D()
 
 Zivid Studio can store the current settings to .yml files. These can be read and applied in the API. You may find it easier to modify the settings in these (human-readable) yaml-files in your preferred editor.
 ```csharp
-camera.SetSettings(new Zivid.NET.Settings("frame_01.yml"));
+camera.SetSettings(new Zivid.NET.Settings("Frame01.yml"));
 ```
 
 ## Capture
@@ -191,7 +191,7 @@ var image2D = frame2D.Image<Zivid.NET.RGBA8>();
 
 We can now save our results ([go to source][save-url]).
 ```csharp
-frame.Save("result.zdf");
+frame.Save("Result.zdf");
 ```
 The API detects which format to use. See [Point Cloud][kb-point_cloud-url] for a list of supported formats.
 
@@ -199,7 +199,7 @@ The API detects which format to use. See [Point Cloud][kb-point_cloud-url] for a
 
 If we captured a 2D image, we can save it ([go to source][save2d-url]).
 ```csharp
-image2D.Save("result.png");
+image2D.Save("Result.png");
 ```
 
 ## Conclusion

@@ -63,12 +63,10 @@ goto Error
 
 :Debug
 xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\*.dll" "$(TargetDir)" /Y
-xcopy "$(ProjectDir)..\..\..\..\Zivid3D.zdf" "$(TargetDir)" /Y
 exit /B 0
 
 :Release
 xcopy "$(ZIVID_INSTALL_FOLDER)\bin\*.dll" "$(TargetDir)" /Y
-xcopy "$(ProjectDir)..\..\..\..\Zivid3D.zdf" "$(TargetDir)" /Y
 exit /B 0
 
 :Error

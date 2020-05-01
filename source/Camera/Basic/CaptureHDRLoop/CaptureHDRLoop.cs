@@ -26,7 +26,7 @@ class Program
                 var settingsList = new List<Zivid.NET.Settings>();
                 for (var frame = 1; frame <= numberOfFramesPerCapture; frame++)
                 {
-                    string file_path = "Settings/set" + set + "/frame_0" + frame + ".yml";
+                    string file_path = Zivid.NET.Environment.DataPath + "/Settings/Set" + set + "/Frame0" + frame + ".yml";
                     Console.WriteLine("Add settings from " + file_path + ":");
                     var settings = new Zivid.NET.Settings(file_path);
                     Console.WriteLine(settings);

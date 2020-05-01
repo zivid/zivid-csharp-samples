@@ -33,7 +33,7 @@ var frame = camera.Capture();
 
 We can now save our results. By default the 3D point cloud is saved in Zivid format `.zdf` ([go to source][save-url]).
 ```csharp
-frame.Save("result.zdf");
+frame.Save("Result.zdf");
 ```
 
 ## Conclusion
