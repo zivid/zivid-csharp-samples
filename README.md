@@ -29,6 +29,9 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - **FileFormats**
       - [**ReadIterateZDF**][ReadIterateZDF-url] - Read point cloud data from a ZDF file, iterate through it, and extract individual points.
       - [**ZDF2PLY**][ZDF2PLY-url] - Convert point cloud from ZDF a file to a PLY file.
+  - **Advanced**
+    - [**HandEyeCalibration**][HandEyeCalibration-url] - Perform Hand-Eye calibration
+    - [**MultiCameraCalibration**][MultiCameraCalibration-url] - Use captures of a calibration object to generate transformation matrices to a single coordinate frame.
 
 ## Instructions
 
@@ -62,3 +65,5 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [CaptureVis3D-url]: source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
 [ReadIterateZDF-url]: source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs
 [ZDF2PLY-url]: source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
+[HandEyeCalibration-url]: source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration.cs
+[MultiCameraCalibration-url]: source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs
