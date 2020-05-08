@@ -16,22 +16,25 @@ class Program
             Console.WriteLine("Connecting to the camera");
             var camera = zivid.ConnectCamera();
 
-            var fileNameIntrinsics = "Intrinsics.yml";
-            Console.WriteLine("Saving camera intrinsics to " + fileNameIntrinsics);
-            camera.Intrinsics.save(fileNameIntrinsics);
+            Console.WriteLine("Getting camera intrinsics");
+            var intrinsics = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera);
 
-            Console.WriteLine(camera.Intrinsics.ToString());
+            Console.WriteLine(intrinsics.ToString());
 
-            Console.WriteLine("CX = " + camera.Intrinsics.CameraMatrix.CX.ToString());
-            Console.WriteLine("CY = " + camera.Intrinsics.CameraMatrix.CY.ToString());
-            Console.WriteLine("FX = " + camera.Intrinsics.CameraMatrix.FX.ToString());
-            Console.WriteLine("FY = " + camera.Intrinsics.CameraMatrix.FY.ToString());
+            Console.WriteLine("CX = " + intrinsics.CameraMatrix.CX.ToString());
+            Console.WriteLine("CY = " + intrinsics.CameraMatrix.CY.ToString());
+            Console.WriteLine("FX = " + intrinsics.CameraMatrix.FX.ToString());
+            Console.WriteLine("FY = " + intrinsics.CameraMatrix.FY.ToString());
 
-            Console.WriteLine("K1 = " + camera.Intrinsics.Distortion.K1.ToString());
-            Console.WriteLine("K2 = " + camera.Intrinsics.Distortion.K2.ToString());
-            Console.WriteLine("K3 = " + camera.Intrinsics.Distortion.K3.ToString());
-            Console.WriteLine("P1 = " + camera.Intrinsics.Distortion.K1.ToString());
-            Console.WriteLine("P2 = " + camera.Intrinsics.Distortion.K2.ToString());
+            Console.WriteLine("K1 = " + intrinsics.Distortion.K1.ToString());
+            Console.WriteLine("K2 = " + intrinsics.Distortion.K2.ToString());
+            Console.WriteLine("K3 = " + intrinsics.Distortion.K3.ToString());
+            Console.WriteLine("P1 = " + intrinsics.Distortion.K1.ToString());
+            Console.WriteLine("P2 = " + intrinsics.Distortion.K2.ToString());
+
+            var intrinsicsFile = "Intrinsics.yml";
+            Console.WriteLine("Saving camera intrinsics to file: " + intrinsicsFile);
+            intrinsics.Save(intrinsicsFile);
         }
         catch (Exception ex)
         {

@@ -13,8 +13,9 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var FilenameZDF = Zivid.NET.Environment.DataPath + "/Zivid3D.zdf";
-            var FilenamePLY = "Zivid3D.ply";
+            var dataFile =
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
+            var pointCloudFile = "Zivid/Zivid3D.ply";
 
             var frame = new Zivid.NET.Frame(FilenameZDF);
 

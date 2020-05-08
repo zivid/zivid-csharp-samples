@@ -1,8 +1,6 @@
-# C#-samples
+# C# samples
 
 This repository contains **C#** code samples for **Zivid**.
-
-The Windows Zivid installer adds some basic samples in C:\Users\Public\Documents\Zivid\samples and they should build out of the box using Visual Studio 2015 or 2017. Check out our [tutorial on running these **C#** samples](https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/427340/C+Samples+with+Visual+Studio).
 
 ## Samples list
 
@@ -10,13 +8,15 @@ There are two main categories of samples: **Camera** and **Applications**. The s
 
 - **Camera**
   - **Basic** ([quick tutorial][QuickCaptureTutorial-url] / [complete tutorial][CompleteCaptureTutorial-url])
-    - [**Capture**][Capture-url] - This example shows how to acquire images from the Zivid camera.
-    - [**Capture2D**][Capture2D-url] - This example shows how to acquire only 2D images from the Zivid camera.
-    - [**CaptureAssistant**][CaptureAssistant-url] - This example shows how to use Capture Assistant to acquire HDR images from the Zivid camera.
-    - [**CaptureFromFile**][CaptureFromFile-url] - This example shows how to acquire HDR images from file. This example can be used without access to a physical camera.
-    - [**CaptureHDR**][CaptureHDR-url] - This example shows how to acquire HDR images from the Zivid camera.
-    - [**CaptureHDRLoop**][CaptureHDRLoop-url] - This example shows how to acquire HDR images from the Zivid camera in a loop, with settings from .yml files.
-    - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - This example shows how to acquire an HDR image from the Zivid camera (with fully configured settings for each frame).
+    - [**Capture**][Capture-url] - Acquire point clouds, with color, from the Zivid camera.
+    - [**Capture2D**][Capture2D-url] - Acquire 2D images from the Zivid camera.
+    - [**CaptureAssistant**][CaptureAssistant-url] - Use Capture Assistant to acquire point clouds, with color, from the Zivid camera.
+    - [**CaptureFromFile**][CaptureFromFile-url] - Acquire point clouds, with color, from the virtual Zivid camera.
+    - [**CaptureFromYML**][CaptureFromYML-url] - Acquire point clouds, with color, from the Zivid camera, with settings from YML file.
+    - [**CaptureHDR**][CaptureHDR-url] - Acquire HDR point clouds, with color, from the Zivid camera.
+    - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Acquire point clouds, with color, from the Zivid camera with fully configured settings.
+  - **Advanced**
+    - [**CaptureHDRLoop**][CaptureHDRLoop-url] - Cover the same dynamic range in a scene with different acquisition settings to optimize for quality, speed, or to find a compromise.
   - **InfoUtilOther**
     - [**CameraUserData**][CameraUserData-url] - This example shows how to store user data on the Zivid camera.
     - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - This example shows how to get camera intrinsics from the Zivid camera.
@@ -26,10 +26,9 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - **Visualization**
       - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - This example shows how capture a Zivid point cloud from file, and visualize it.
       - [**CaptureVis3D**][CaptureVis3D-url] - This example shows how to capture a Zivid point cloud, and visualize it.
-      - [**CaptureLiveVis3D**][CaptureLiveVis3D-url] - This example shows how to continuosly capture a Zivid point cloud, and visualize it.
     - **FileFormats**
-      - [**ReadZDF**][ReadZDF-url] - This example shows how to import and display a Zivid point cloud from a .ZDF file.
-      - [**ZDF2PLY**][ZDF2PLY-url] - This example shows how to convert a Zivid point cloud from a .ZDF file format to a .PLY file format.
+      - [**ReadIterateZDF**][ReadIterateZDF-url] - Read point cloud data from a ZDF file, iterate through it, and extract individual points.
+      - [**ZDF2PLY**][ZDF2PLY-url] - Convert point cloud from ZDF a file to a PLY file.
 
 ## Instructions
 
@@ -43,7 +42,7 @@ Note: The version tested with Zivid cameras is 1.8.1.
 4. Open and run one of the samples.
 
 ## Support
-If you need assistance with using Zivid cameras, visit our [**Knowledge Base**](https://help.zivid.com/) or contact us at [customersuccess@zivid.com](mailto:customersuccess@zivid.com).
+If you need assistance with using Zivid cameras, visit our Knowledge Base at [help.zivid.com](https://help.zivid.com/) or contact us at [customersuccess@zivid.com](mailto:customersuccess@zivid.com).
 
 ## Licence
 Zivid Samples are distributed under the [BSD license](LICENSE).
@@ -56,11 +55,10 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [CaptureFromFile-url]: source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
 [CaptureHDR-url]: source/Camera/Basic/CaptureHDR/CaptureHDR.cs
 [CaptureHDRCompleteSettings-url]: source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
-[CaptureHDRLoop-url]: source/Camera/Basic/CaptureHDRLoop/CaptureHDRLoop.cs
+[CaptureHDRLoop-url]: source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs
 [CameraUserData-url]: source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
 [GetCameraIntrinsics-url]: source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
-[CaptureFromFileVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
-[CaptureVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
-[CaptureLiveVis3D-url]: https://github.com/zivid/csharp-extra-samples/blob/master/source/Applications/Basic/Visualization/CaptureLiveVis3D/CaptureLiveVis3D.cs
-[ReadZDF-url]: source/Applications/Basic/FileFormats/ReadZDF/ReadZDF.cs
+[CaptureFromFileVis3D-url]: source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
+[CaptureVis3D-url]: source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
+[ReadIterateZDF-url]: source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs
 [ZDF2PLY-url]: source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs

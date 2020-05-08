@@ -1,5 +1,4 @@
-﻿// Please make sure that Zivid sample data has been selected during installation of Zivid software.
-// Latest version of Zivid software (including samples) can be found at http://zivid.com/software/.
+﻿// Latest version of Zivid software (including samples) can be found at http://zivid.com/software/.
 
 using System;
 
@@ -11,17 +10,28 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var zdfFile = Zivid.NET.Environment.DataPath + "/MiscObjects.zdf";
-            var resultFile = "Result.zdf";
+            // This FileCamera file is in Zivid Sample Data. See instructions in README.md.
+            var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                             + "/Zivid/FileCameraZividOne.zfc";
 
-            Console.WriteLine("Initializing camera emulation using file: " + zdfFile);
-            var camera = zivid.CreateFileCamera(zdfFile);
+            Console.WriteLine("Initializing camera emulation using file: " + cameraFile);
+            var camera = zivid.CreateFileCamera(cameraFile);
+
+            Console.WriteLine("Configuring settings");
+            var settings = new Zivid.NET.Settings
+            {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+                Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
+                                           Reflection = { Removal = { Enabled = true } } },
+                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+            };
 
             Console.WriteLine("Capture a frame");
-            var frame = camera.Capture();
-
-            Console.WriteLine("Saving frame to file: " + resultFile);
-            frame.Save(resultFile);
+            using (var frame = camera.Capture(settings))
+            {
+                Console.WriteLine("Saving frame to file: " + resultFile);
+                frame.Save(resultFile);
+            }
         }
         catch (Exception ex)
         {

@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-
 using Duration = Zivid.NET.Duration;
 
 class Program
@@ -14,37 +12,52 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Setting the capture settings");
-            var settings = new Zivid.NET.Settings2D()
+            Console.WriteLine("Configuring 2D settings");
+            // Note: The Zivid SDK supports 2D captures with a single acquisition only
+            var settings2D = new Zivid.NET.Settings2D
             {
-                Iris = 22,
-                ExposureTime = Duration.FromMicroseconds(10000),
-                Gain = 1.0
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition{
+                    Aperture = 2.83, ExposureTime = Duration.FromMicroseconds(10000), Gain = 1.0, Brightness = 1.0 } },
+                Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
             };
 
-            Console.WriteLine("Capture a 2D frame");
-            var frame2D = camera.Capture2D(settings);
+            Console.WriteLine("Capturing 2D frame");
+            using (var frame2D = camera.Capture(settings2D))
+            {
+                Console.WriteLine("Getting RGBA image");
+                var image = frame2D.ImageRGBA();
 
-            Console.WriteLine("Get RGBA8 image from Frame2D");
-            var image = frame2D.Image<Zivid.NET.RGBA8>();
+                var pixelRow = 100;
+                var pixelCol = 50;
 
-            Console.WriteLine("Image Width: {0}, Height: {1}", image.Width, image.Height);
-            Console.WriteLine("Pixel (0, 0): R={0}, G={1}, B={2}, A={3}",
-                              image[0, 0].r,
-                              image[0, 0].g,
-                              image[0, 0].b,
-                              image[0, 0].a);
+                var pixelArray = image.ToArray();
+                Console.WriteLine("Height: {0}, Width: {1}", pixelArray.GetLength(0), pixelArray.GetLength(1));
+                Console.WriteLine("Color at pixel ({0},{1}):  R:{2}  G:{3}  B:{4}  A:{5}",
+                                  pixelRow,
+                                  pixelCol,
+                                  pixelArray[pixelRow, pixelCol].r,
+                                  pixelArray[pixelRow, pixelCol].g,
+                                  pixelArray[pixelRow, pixelCol].b,
+                                  pixelArray[pixelRow, pixelCol].a);
 
-            byte[] byteArray = image.ToArray();
-            Console.WriteLine("First four bytes:  [0]: {0}, [1]: {1}, [2]: {2}, [3]: {3}",
-                              byteArray[0],
-                              byteArray[1],
-                              byteArray[2],
-                              byteArray[3]);
+                // Get 3D array of bytes
+                var nativeArray = image.ToByteArray();
+                Console.WriteLine("Image Height: {0}, Image Width: {1}, Channels: {2}",
+                                  nativeArray.GetLength(0),
+                                  nativeArray.GetLength(1),
+                                  nativeArray.GetLength(2));
+                Console.WriteLine("Color at pixel ({0},{1}):  R:{2}  G:{3}  B:{4}  A:{5}",
+                                  pixelRow,
+                                  pixelCol,
+                                  nativeArray[pixelRow, pixelCol, 0],
+                                  nativeArray[pixelRow, pixelCol, 1],
+                                  nativeArray[pixelRow, pixelCol, 2],
+                                  nativeArray[pixelRow, pixelCol, 3]);
 
-            var resultFile = "Image.png";
-            Console.WriteLine("Saving the image to {0}", resultFile);
-            image.Save(resultFile);
+                var resultFile = "image.png";
+                Console.WriteLine("Saving the image to {0}", resultFile);
+                image.Save(resultFile);
+            }
         }
         catch (Exception ex)
         {

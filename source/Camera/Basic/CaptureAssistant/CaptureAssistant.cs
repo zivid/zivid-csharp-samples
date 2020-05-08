@@ -12,22 +12,31 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters(Duration.FromMilliseconds(1200), Zivid.NET.CaptureAssistant.AmbientLightFrequency.none);
-            Console.WriteLine("Running Capture Assistant with parameters: {0}", suggestSettingsParameters);
-            var settingsList = Zivid.NET.CaptureAssistant.SuggestSettings(camera, suggestSettingsParameters);
-
-            Console.WriteLine("Suggested settings are:");
-            foreach (var settings in settingsList)
+            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
             {
-                Console.WriteLine(settings);
+                AmbientLightFrequency =
+                    Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
+                MaxCaptureTime = Duration.FromMilliseconds(1200)
+            };
+
+            Console.WriteLine("Running Capture Assistant with parameters: {0}", suggestSettingsParameters);
+            var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+
+            Console.WriteLine("Settings suggested by Capture Assistant:");
+            Console.WriteLine(settings.Acquisitions);
+
+            Console.WriteLine("Manually configuring processing settings (Capture Assistant only suggests acquisition settings)");
+            settings.Processing.Filters.Reflection.Removal.Enabled = true;
+            settings.Processing.Filters.Smoothing.Gaussian.Enabled = true;
+            settings.Processing.Filters.Smoothing.Gaussian.Sigma = 1.5;
+
+            Console.WriteLine("Capturing frame");
+            using (var frame = camera.Capture(settings))
+            {
+                string resultFile = "result.zdf";
+                Console.WriteLine("Saving frame to file: " + resultFile);
+                hdrFrame.Save(resultFile);
             }
-
-            Console.WriteLine("Capture (and merge) frames using automatically suggested settings");
-            var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsList);
-
-            string resultFile = "Result.zdf";
-            Console.WriteLine("Saving frame to file: " + resultFile);
-            hdrFrame.Save(resultFile);
         }
         catch (Exception ex)
         {

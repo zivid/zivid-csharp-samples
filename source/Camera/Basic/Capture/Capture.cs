@@ -14,20 +14,20 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Adjusting the iris");
-            camera.UpdateSettings(s =>
+            Console.WriteLine("Creating settings");
+            var settings = new Zivid.NET.Settings
             {
-                s.Iris = 22;
-                s.ExposureTime = Duration.FromMicroseconds(8333);
-                s.Filters.Outlier.Enabled = true;
-                s.Filters.Outlier.Threshold = 5;
-            });
+                Acquisitions = { new Zivid.NET.Settings.Acquisition{ Aperture = 5.66,
+                                                                     ExposureTime = Duration.FromMicroseconds(8333) } },
+                Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
+            };
 
             Console.WriteLine("Capture a frame");
-            var frame = camera.Capture();
-
-            Console.WriteLine("Saving frame to file: " + resultFile);
-            frame.Save(resultFile);
+            using (var frame = camera.Capture(settings))
+            {
+                Console.WriteLine("Saving frame to file: " + resultFile);
+                frame.Save(resultFile);
+            }
         }
         catch (Exception ex)
         {

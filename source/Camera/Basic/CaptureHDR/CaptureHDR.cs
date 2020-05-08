@@ -9,35 +9,26 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Setting up visualization");
-            var visualizer = new Zivid.NET.CloudVisualizer();
-            zivid.DefaultComputeDevice = visualizer.ComputeDevice;
+            var resultFile = "HDR.zdf";
 
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Recording HDR source images");
-            var frames = new List<Zivid.NET.Frame>();
-            foreach (var iris in new ulong[] { 10, 25, 35 })
+            Console.WriteLine("Creating settings");
+            var settings = new Zivid.NET.Settings();
+            foreach (var aperture in new double[] { 11.31, 5.66, 2.83 })
             {
-                Console.WriteLine("Measure with iris = " + iris);
-                camera.UpdateSettings(s =>
-                {
-                    s.Iris = iris;
-                });
-                frames.Add(camera.Capture());
+                Console.WriteLine("Adding acquisition with aperture = " + aperture);
+                var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
+                settings.Acquisitions.Add(acquisitionSettings);
             }
 
-            Console.WriteLine("Creating HDR frame");
-            var hdrFrame = Zivid.NET.HDR.CombineFrames(frames);
-
-            Console.WriteLine("Display the frame");
-            visualizer.ShowMaximized();
-            visualizer.Show(hdrFrame);
-            visualizer.ResetToFit();
-
-            Console.WriteLine("Run the visualizer. Block until window closes");
-            visualizer.Run();
+            Console.WriteLine("Capturing HDR frame");
+            using (var hdrFrame = camera.Capture(settings))
+            {
+                Console.WriteLine("Saving frame to file: " + hdrFrame);
+                hdrFrame.Save(resultFile);
+            }
         }
         catch (Exception ex)
         {

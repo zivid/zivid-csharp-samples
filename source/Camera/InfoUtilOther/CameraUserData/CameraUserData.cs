@@ -4,7 +4,12 @@ using System.Linq;
 
 class Program
 {
-    enum Mode { read, write, clear };
+    enum Mode
+    {
+        read,
+        write,
+        clear
+    }
 
     static void Main(string[] args)
     {
@@ -45,9 +50,8 @@ class Program
 
     static ArgumentException UsageException()
     {
-        return new ArgumentException("Usage: "
-            + System.Reflection.Assembly.GetEntryAssembly().Location
-            + " <read|write <string>|clear>");
+        return new ArgumentException("Usage: " + System.Reflection.Assembly.GetEntryAssembly().Location
+                                     + " <read|write <string>|clear>");
     }
 
     static Mode ParseMode(string[] args)
@@ -72,7 +76,7 @@ class Program
 
     static void CheckUserDataSupport(Zivid.NET.Camera camera)
     {
-        if (camera.UserDataMaxSizeBytes == 0)
+        if (camera.Info.UserData.MaxSizeBytes == 0)
         {
             throw new System.InvalidOperationException("This camera does not support user data");
         }
