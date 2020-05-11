@@ -34,7 +34,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
 ## Instructions
 
 1. [**Install Zivid Software**](https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/59080712/Zivid+Software+Installation).
-Note: The version tested with Zivid cameras is 1.8.0.
+Note: The version tested with Zivid cameras is 1.8.1.
 
 2. Launch Visual Studio 2017.
 
