@@ -68,26 +68,22 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-      <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
 if $(ConfigurationName) == Release GOTO Release
 goto Error
 
 :Debug
-mkdir "$(TargetDir)plugins"
 xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\*.dll" "$(TargetDir)" /Y
-xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\plugins\*" "$(TargetDir)plugins" /Y
 exit /B 0
 
 :Release
-mkdir "$(TargetDir)plugins"
 xcopy "$(ZIVID_INSTALL_FOLDER)\bin\*.dll" "$(TargetDir)" /Y
-xcopy "$(ZIVID_INSTALL_FOLDER)\bin\plugins\*" "$(TargetDir)plugins" /Y
 exit /B 0
 
 :Error
 echo Unsupported config
 exit /B 1
-    </PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

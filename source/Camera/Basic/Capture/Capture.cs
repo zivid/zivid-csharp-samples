@@ -9,7 +9,7 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var resultFile = "result.zdf";
+            var resultFile = "Result.zdf";
 
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();

@@ -26,10 +26,11 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>..\..\..\..\build\Release\x64\</OutputPath>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -62,9 +63,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)\Settings" "$(TargetDir)\Settings" /Y /E /H /C /I
-
-if $(ConfigurationName) == Debug GOTO Debug
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
 if $(ConfigurationName) == Release GOTO Release
 goto Error
 

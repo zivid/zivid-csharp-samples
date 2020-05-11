@@ -17,7 +17,7 @@ class Program
             var visualizer = new Zivid.NET.CloudVisualizer();
             zivid.DefaultComputeDevice = visualizer.ComputeDevice;
 
-            var Filename = "Zivid3D.zdf";
+            var Filename = Zivid.NET.Environment.DataPath + "/Zivid3D.zdf";
             Console.WriteLine("Reading " + Filename + " point cloud");
             var frame = new Zivid.NET.Frame(Filename);
 

@@ -42,7 +42,7 @@ class Program
                               byteArray[2],
                               byteArray[3]);
 
-            var resultFile = "image.png";
+            var resultFile = "Image.png";
             Console.WriteLine("Saving the image to {0}", resultFile);
             image.Save(resultFile);
         }

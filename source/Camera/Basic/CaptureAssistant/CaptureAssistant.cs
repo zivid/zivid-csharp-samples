@@ -25,7 +25,7 @@ class Program
             Console.WriteLine("Capture (and merge) frames using automatically suggested settings");
             var hdrFrame = Zivid.NET.HDR.Capture(camera, settingsList);
 
-            string resultFile = "result.zdf";
+            string resultFile = "Result.zdf";
             Console.WriteLine("Saving frame to file: " + resultFile);
             hdrFrame.Save(resultFile);
         }
