@@ -1,3 +1,7 @@
+/*
+This sample shows how to perform Multi-Camera calibration.
+*/
+
 using System;
 using System.Collections.Generic;
 
@@ -10,24 +14,23 @@ class Program
     {
         try
         {
-            // Find and connect all cameras
+            Console.WriteLine("Finding cameras");
             var zivid = new Zivid.NET.Application();
             var cameras = zivid.Cameras;
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
             foreach (var camera in cameras)
             {
-                Console.WriteLine("Connecting camera: {0}", camera.Info.SerialNumber);
+                Console.WriteLine("Connecting to camera: {0}", camera.Info.SerialNumber);
                 camera.Connect();
             }
 
-            // Capture and detect checkerboard feature points
             var detectionResults = new List<DetectionResult>();
             foreach (var camera in cameras)
             {
-                Console.WriteLine("Imaging from camera: {0}", camera.Info.SerialNumber);
+                Console.WriteLine("Capturing frame with camera: {0}", camera.Info.SerialNumber);
                 using (var frame = AssistedCapture(camera))
                 {
-                    Console.WriteLine("Detecting checkerboard in point cloud...");
+                    Console.WriteLine("Detecting checkerboard in point cloud");
                     var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
                     if (detectionResult)
                     {
@@ -41,7 +44,7 @@ class Program
                 }
             }
 
-            // Perform multi-camera calibration
+            Console.WriteLine("Performing Multi-camera calibration");
             var result = Calibrator.CalibrateMultiCamera(detectionResults);
             if (result)
             {

@@ -1,5 +1,5 @@
 ﻿/*
-This example shows how to acquire point clouds, with color, from the Zivid camera,
+This example shows how to capture point clouds, with color, from the Zivid camera,
 with settings from YML file.
 */
 

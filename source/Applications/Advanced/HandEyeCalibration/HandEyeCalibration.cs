@@ -1,3 +1,7 @@
+/*
+This example shows how to perform Hand-Eye calibration.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,20 +18,20 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Connecting to camera...");
+            Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
             var inputs = ReadInputs(camera);
 
-            Console.WriteLine("Performing hand-eye calibration ... ");
+            Console.WriteLine("Performing hand-eye calibration");
             var calibrationResult = Calibrator.CalibrateEyeToHand(inputs);
 
             if (calibrationResult)
             {
-                Console.WriteLine("{0}\n{1}\n{2}", "OK", "Result:", calibrationResult);
+                Console.WriteLine("{0}\n{1}\n{2}", "Hand-eye calibration OK", "Result:", calibrationResult);
             }
             else
             {
-                Console.WriteLine("Failed");
+                Console.WriteLine("Hand-eye calibration FAILED");
                 Environment.ExitCode = 1;
             }
         }
@@ -56,7 +60,7 @@ class Program
                         var robotPose = Interaction.EnterRobotPose(currentPoseId);
                         using (var frame = Interaction.AssistedCapture(camera))
                         {
-                            Console.Write("Detecting checkerboard square centers... ");
+                            Console.Write("Detecting checkerboard in point cloud");
                             var result = Detector.DetectFeaturePoints(frame.PointCloud);
 
                             if (result)

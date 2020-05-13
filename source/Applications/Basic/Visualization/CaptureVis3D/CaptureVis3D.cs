@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+This example shows how to capture point clouds, with color, from the Zivid camera, and visualize it.
+*/
+
+using System;
 
 class Program
 {
@@ -8,9 +12,6 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Setting up visualization");
-            var visualizer = new Zivid.NET.CloudVisualizer();
-
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
@@ -18,7 +19,7 @@ class Program
             var settings =
                 new Zivid.NET.Settings { Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66 } } };
 
-            Console.WriteLine("Capture a frame");
+            Console.WriteLine("Capturing frame");
             using (var frame = camera.Capture(settings))
             {
                 Console.WriteLine("Setting up visualization");

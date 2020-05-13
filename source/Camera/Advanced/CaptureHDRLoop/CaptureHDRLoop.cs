@@ -14,7 +14,7 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Connecting to the camera");
+            Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
             int captures = 3;
@@ -26,12 +26,12 @@ class Program
                 var settings = new Zivid.NET.Settings(settingsFile);
                 Console.WriteLine(settings.Acquisitions);
 
-                Console.WriteLine("Capturing HDR frame");
-                var hdrFrame = camera.Capture(settings);
+                Console.WriteLine("Capturing frame (HDR)");
+                var frame = camera.Capture(settings);
 
-                var hdrPath = "HDR_" + i + ".zdf";
-                Console.WriteLine("Saving the HDR to " + hdrPath);
-                hdrFrame.Save(hdrPath);
+                var dataFile = "Frame0" + i + ".zdf";
+                Console.WriteLine("Saving frame to file: " + dataFile);
+                frame.Save(dataFile);
             }
         }
         catch (Exception ex)

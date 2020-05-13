@@ -1,3 +1,7 @@
+/*
+This example shows how to capture 2D images from the Zivid camera.
+*/
+
 using System;
 using Duration = Zivid.NET.Duration;
 
@@ -26,10 +30,10 @@ class Program
             {
                 Console.WriteLine("Getting RGBA image");
                 var image = frame2D.ImageRGBA();
-
                 var pixelRow = 100;
                 var pixelCol = 50;
 
+                Console.WriteLine("Extracting 2D pixel array");
                 var pixelArray = image.ToArray();
                 Console.WriteLine("Height: {0}, Width: {1}", pixelArray.GetLength(0), pixelArray.GetLength(1));
                 Console.WriteLine("Color at pixel ({0},{1}):  R:{2}  G:{3}  B:{4}  A:{5}",
@@ -40,9 +44,9 @@ class Program
                                   pixelArray[pixelRow, pixelCol].b,
                                   pixelArray[pixelRow, pixelCol].a);
 
-                // Get 3D array of bytes
+                Console.WriteLine("Extracting 3D array of bytes");
                 var nativeArray = image.ToByteArray();
-                Console.WriteLine("Image Height: {0}, Image Width: {1}, Channels: {2}",
+                Console.WriteLine("Height: {0}, Width: {1}, Channels: {2}",
                                   nativeArray.GetLength(0),
                                   nativeArray.GetLength(1),
                                   nativeArray.GetLength(2));
@@ -54,9 +58,9 @@ class Program
                                   nativeArray[pixelRow, pixelCol, 2],
                                   nativeArray[pixelRow, pixelCol, 3]);
 
-                var resultFile = "image.png";
-                Console.WriteLine("Saving the image to {0}", resultFile);
-                image.Save(resultFile);
+                var imageFile = "Image.png";
+                Console.WriteLine("Saving image to file: {0}", imageFile);
+                image.Save(imageFile);
             }
         }
         catch (Exception ex)

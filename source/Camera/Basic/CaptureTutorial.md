@@ -58,7 +58,7 @@ foreach (var cam in zivid.Cameras)
 }
 ```
 
-### Connect - Virtual Camera
+### Connect - File Camera
 
 You may want to experiment with the SDK, without access to a physical camera. Minor changes are required to keep the sample working ([go to source][filecamera-url]).
 ```csharp

@@ -1,4 +1,7 @@
-﻿// Latest version of Zivid software (including samples) can be found at http://zivid.com/software/.
+﻿/*
+This example shows how to capture point clouds, with color, from the Zivid file camera,
+and visualize it. This example can be used without access to a physical camera.
+*/
 
 using System;
 
@@ -14,8 +17,8 @@ class Program
             var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                              + "/Zivid/FileCameraZividOne.zfc";
 
-            // This FileCamera (.zfc) file is available for download at zivid.com/downloads
-            var cameraFile = Zivid.NET.Environment.Paths.DataPath + "/FileCameraZividOne.zfc";
+            Console.WriteLine("Creating virtual camera using file: " + fileCamera);
+            var camera = zivid.CreateFileCamera(fileCamera);
 
             Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings

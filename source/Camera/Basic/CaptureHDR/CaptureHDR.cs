@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+This example shows how to capture point clouds, with color, from the Zivid camera.
+For scenes with high dynamic range we combine multiple acquisitions to get an HDR point cloud.
+*/
+
+using System;
 using System.Collections.Generic;
 
 class Program
@@ -9,12 +14,10 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var resultFile = "HDR.zdf";
-
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Creating settings");
+            Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings();
             foreach (var aperture in new double[] { 11.31, 5.66, 2.83 })
             {
@@ -23,11 +26,12 @@ class Program
                 settings.Acquisitions.Add(acquisitionSettings);
             }
 
-            Console.WriteLine("Capturing HDR frame");
-            using (var hdrFrame = camera.Capture(settings))
+            Console.WriteLine("Capturing frame (HDR)");
+            using (var frame = camera.Capture(settings))
             {
-                Console.WriteLine("Saving frame to file: " + hdrFrame);
-                hdrFrame.Save(resultFile);
+                var dataFile = "Frame.zdf";
+                Console.WriteLine("Saving frame to file: " + dataFile);
+                frame.Save(dataFile);
             }
         }
         catch (Exception ex)

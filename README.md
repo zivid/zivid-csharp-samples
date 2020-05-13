@@ -8,24 +8,24 @@ There are two main categories of samples: **Camera** and **Applications**. The s
 
 - **Camera**
   - **Basic** ([quick tutorial][QuickCaptureTutorial-url] / [complete tutorial][CompleteCaptureTutorial-url])
-    - [**Capture**][Capture-url] - Acquire point clouds, with color, from the Zivid camera.
-    - [**Capture2D**][Capture2D-url] - Acquire 2D images from the Zivid camera.
-    - [**CaptureAssistant**][CaptureAssistant-url] - Use Capture Assistant to acquire point clouds, with color, from the Zivid camera.
-    - [**CaptureFromFile**][CaptureFromFile-url] - Acquire point clouds, with color, from the virtual Zivid camera.
-    - [**CaptureWithSettingsFromYML**][CaptureWithSettingsFromYML-url] - Acquire point clouds, with color, from the Zivid camera, with settings from YML file.
-    - [**CaptureHDR**][CaptureHDR-url] - Acquire HDR point clouds, with color, from the Zivid camera.
-    - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Acquire point clouds, with color, from the Zivid camera with fully configured settings.
+    - [**Capture**][Capture-url] - Capture point clouds, with color, from the Zivid camera.
+    - [**Capture2D**][Capture2D-url] - Capture 2D images from the Zivid camera.
+    - [**CaptureAssistant**][CaptureAssistant-url] - Use Capture Assistant to capture point clouds, with color, from the Zivid camera.
+    - [**CaptureFromFile**][CaptureFromFile-url] - Capture point clouds, with color, from the Zivid file camera.
+    - [**CaptureWithSettingsFromYML**][CaptureWithSettingsFromYML-url] - Capture point clouds, with color, from the Zivid camera, with settings from YML file.
+    - [**CaptureHDR**][CaptureHDR-url] - Capture HDR point clouds, with color, from the Zivid camera.
+    - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Capture point clouds, with color, from the Zivid camera with fully configured settings.
   - **Advanced**
     - [**CaptureHDRLoop**][CaptureHDRLoop-url] - Cover the same dynamic range in a scene with different acquisition settings to optimize for quality, speed, or to find a compromise.
   - **InfoUtilOther**
-    - [**CameraUserData**][CameraUserData-url] - This example shows how to store user data on the Zivid camera.
-    - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - This example shows how to get camera intrinsics from the Zivid camera.
+    - [**CameraUserData**][CameraUserData-url] - Store user data on the Zivid camera.
+    - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - Read intrinsic parameters from the Zivid camera.
 
 - **Applications**
   - **Basic**
     - **Visualization**
-      - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - This example shows how capture a Zivid point cloud from file, and visualize it.
-      - [**CaptureVis3D**][CaptureVis3D-url] - This example shows how to capture a Zivid point cloud, and visualize it.
+      - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - Capture point clouds, with color, from the Zivid file camera, and visualize it.
+      - [**CaptureVis3D**][CaptureVis3D-url] - Capture point clouds, with color, from the Zivid camera, and visualize it.
     - **FileFormats**
       - [**ReadIterateZDF**][ReadIterateZDF-url] - Read point cloud data from a ZDF file, iterate through it, and extract individual points.
       - [**ZDF2PLY**][ZDF2PLY-url] - Convert point cloud from ZDF a file to a PLY file.

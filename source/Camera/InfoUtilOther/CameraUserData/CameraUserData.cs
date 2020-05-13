@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+This example shows how to store user data on the Zivid camera.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,11 +30,11 @@ class Program
             {
                 case Mode.read:
                     Console.WriteLine("Reading user data from camera");
-                    Console.WriteLine("Done. User data: '" + Read(camera) + "'");
+                    Console.WriteLine("User data: '" + Read(camera) + "'");
                     break;
                 case Mode.write:
                     var userData = ParseWriteData(args);
-                    Console.WriteLine("Writing '" + userData + "' to the camera");
+                    Console.WriteLine("Writing '" + userData + "' to camera");
                     Write(camera, userData);
                     Console.WriteLine("Done");
                     break;

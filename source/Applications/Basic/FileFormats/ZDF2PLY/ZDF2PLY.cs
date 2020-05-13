@@ -1,6 +1,5 @@
 /*
-This example shows how to convert a Zivid point cloud from a .ZDF file format
-to a .PLY file format.
+This example shows how to convert point cloud from ZDF file to PLY format.
 */
 
 using System;
@@ -17,10 +16,10 @@ class Program
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
             var pointCloudFile = "Zivid/Zivid3D.ply";
 
-            var frame = new Zivid.NET.Frame(FilenameZDF);
+            var frame = new Zivid.NET.Frame(dataFile);
 
-            Console.WriteLine("Saving the frame to " + FilenamePLY);
-            frame.Save(FilenamePLY);
+            Console.WriteLine("Saving point cloud to file: " + pointCloudFile);
+            frame.Save(pointCloudFile);
         }
         catch (Exception ex)
         {

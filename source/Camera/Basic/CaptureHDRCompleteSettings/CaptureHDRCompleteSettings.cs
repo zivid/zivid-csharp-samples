@@ -1,7 +1,8 @@
 /*
-This example shows how to acquire an HDR image from the Zivid camera with fully
-configured settings for each acquisition. In general, taking an HDR image is a lot
-simpler than this as the default settings work for most scenes. The purpose of
+This example shows how to capture point clouds, with color, from the Zivid camera.
+For scenes with high dynamic range we combine multiple acquisitions to get an HDR
+point cloud. This example shows how to fully configure settings for each acquisition.
+In general, capturing an HDR point cloud is a lot simpler than this. The purpose of
 this example is to demonstrate how to configure all the settings.
 */
 
@@ -16,12 +17,10 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var resultFile = "HDR.zdf";
-
-            Console.WriteLine("Connecting to the camera");
+            Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Creating settings same for all HDR acquisitions");
+            Console.WriteLine("Configuring global processing settings:");
             var settings = new Zivid.NET.Settings()
             {
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
@@ -34,6 +33,7 @@ class Program
                                                                                                Threshold = 0.5 } } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
             };
+            Console.WriteLine(settings.Processing);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
             var baseAcquisition =
@@ -59,11 +59,15 @@ class Program
                 settings.Acquisitions.Add(acquisitionSettings);
             }
 
-            Console.WriteLine("Capturing HDR frame");
-            using (var hdrFrame = camera.Capture(settings))
+            Console.WriteLine("Capturing frame (HDR)");
+            using (var frame = camera.Capture(settings))
             {
-                Console.WriteLine("Saving frame to file: " + hdrFrame);
-                hdrFrame.Save(resultFile);
+                Console.WriteLine("Complete settings used:");
+                Console.WriteLine(frame.Settings);
+
+                var dataFile = "Frame.zdf";
+                Console.WriteLine("Saving frame to file: " + dataFile);
+                frame.Save(dataFile);
             }
         }
         catch (Exception ex)

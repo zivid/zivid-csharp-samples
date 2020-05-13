@@ -1,6 +1,5 @@
 /*
-This example shows how to read the intrinsic calibration parameters of the
-Zivid camera (OpenCV model).
+This example shows how to read intrinsic parameters from the Zivid camera (OpenCV model).
 */
 
 using System;
@@ -13,7 +12,7 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Connecting to the camera");
+            Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Getting camera intrinsics");
@@ -21,16 +20,18 @@ class Program
 
             Console.WriteLine(intrinsics.ToString());
 
-            Console.WriteLine("CX = " + intrinsics.CameraMatrix.CX.ToString());
-            Console.WriteLine("CY = " + intrinsics.CameraMatrix.CY.ToString());
-            Console.WriteLine("FX = " + intrinsics.CameraMatrix.FX.ToString());
-            Console.WriteLine("FY = " + intrinsics.CameraMatrix.FY.ToString());
+            Console.WriteLine("Separated camera intrinsic parameters:");
 
-            Console.WriteLine("K1 = " + intrinsics.Distortion.K1.ToString());
-            Console.WriteLine("K2 = " + intrinsics.Distortion.K2.ToString());
-            Console.WriteLine("K3 = " + intrinsics.Distortion.K3.ToString());
-            Console.WriteLine("P1 = " + intrinsics.Distortion.K1.ToString());
-            Console.WriteLine("P2 = " + intrinsics.Distortion.K2.ToString());
+            Console.WriteLine("    CX = " + intrinsics.CameraMatrix.CX.ToString());
+            Console.WriteLine("    CY = " + intrinsics.CameraMatrix.CY.ToString());
+            Console.WriteLine("    FX = " + intrinsics.CameraMatrix.FX.ToString());
+            Console.WriteLine("    FY = " + intrinsics.CameraMatrix.FY.ToString());
+
+            Console.WriteLine("    K1 = " + intrinsics.Distortion.K1.ToString());
+            Console.WriteLine("    K2 = " + intrinsics.Distortion.K2.ToString());
+            Console.WriteLine("    K3 = " + intrinsics.Distortion.K3.ToString());
+            Console.WriteLine("    P1 = " + intrinsics.Distortion.K1.ToString());
+            Console.WriteLine("    P2 = " + intrinsics.Distortion.K2.ToString());
 
             var intrinsicsFile = "Intrinsics.yml";
             Console.WriteLine("Saving camera intrinsics to file: " + intrinsicsFile);

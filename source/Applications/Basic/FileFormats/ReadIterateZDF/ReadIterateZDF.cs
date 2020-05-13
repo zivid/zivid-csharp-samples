@@ -17,7 +17,7 @@ class Program
             Console.WriteLine("Reading ZDF frame from file: " + dataFile);
             var frame = new Zivid.NET.Frame(dataFile);
 
-            Console.WriteLine("Extracting point cloud data");
+            Console.WriteLine("Getting point cloud from frame");
             var pointCloud = frame.PointCloud;
             var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA();
             var pointCloudSNR = pointCloud.CopySNRs();
