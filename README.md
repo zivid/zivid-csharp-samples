@@ -12,7 +12,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - [**Capture2D**][Capture2D-url] - Acquire 2D images from the Zivid camera.
     - [**CaptureAssistant**][CaptureAssistant-url] - Use Capture Assistant to acquire point clouds, with color, from the Zivid camera.
     - [**CaptureFromFile**][CaptureFromFile-url] - Acquire point clouds, with color, from the virtual Zivid camera.
-    - [**CaptureFromYML**][CaptureFromYML-url] - Acquire point clouds, with color, from the Zivid camera, with settings from YML file.
+    - [**CaptureWithSettingsFromYML**][CaptureWithSettingsFromYML-url] - Acquire point clouds, with color, from the Zivid camera, with settings from YML file.
     - [**CaptureHDR**][CaptureHDR-url] - Acquire HDR point clouds, with color, from the Zivid camera.
     - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Acquire point clouds, with color, from the Zivid camera with fully configured settings.
   - **Advanced**
@@ -56,6 +56,7 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [Capture2D-url]: source/Camera/Basic/Capture2D/Capture2D.cs
 [CaptureAssistant-url]: source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs
 [CaptureFromFile-url]: source/Camera/Basic/CaptureFromFile/CaptureFromFile.cs
+[CaptureWithSettingsFromYML-url]: source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs
 [CaptureHDR-url]: source/Camera/Basic/CaptureHDR/CaptureHDR.cs
 [CaptureHDRCompleteSettings-url]: source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
 [CaptureHDRLoop-url]: source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs

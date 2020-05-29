@@ -202,7 +202,7 @@ This tutorial shows how to use the Zivid SDK to connect to, configure, capture, 
 [save2d-url]: Capture2D/Capture2D.cs#L62-L64
 [filecamera-url]: CaptureFromFile/CaptureFromFile.cs#L17-L18
 [settings-hdr-url]: CaptureHDR/CaptureHDR.cs#L21-L27
-[settingsFromFile-url]: CaptureFromYML/CaptureFromYML.cs#L21-L23
+[settingsFromFile-url]: CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L21-L23
 [settings-complete-hdr-url]: CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L24-L60
 [kb-camera_settings-url]: https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/450265335
 [kb-point_cloud-url]: https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/520061383
