@@ -52,11 +52,11 @@
     <Reference Include="ZividCoreNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
       <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividCoreNET.dll</HintPath>
     </Reference>
-    <Reference Include="ZividVis3DNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVis3DNET.dll</HintPath>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVisualizationNET.dll</HintPath>
     </Reference>
-    <Reference Include="ZividVis3DNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVis3DNET.dll</HintPath>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVisualizationNET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

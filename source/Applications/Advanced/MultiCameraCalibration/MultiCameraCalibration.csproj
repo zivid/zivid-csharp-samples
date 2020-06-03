@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}</ProjectGuid>
+    <ProjectGuid>{26F708E4-218E-4F17-8989-F5C42796C932}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ReadZDF</RootNamespace>
-    <AssemblyName>ReadZDF</AssemblyName>
+    <RootNamespace>MultiCameraCalibration</RootNamespace>
+    <AssemblyName>MultiCameraCalibration</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,11 +26,10 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,15 +46,9 @@
     <Reference Include="ZividCoreNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
       <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividCoreNET.dll</HintPath>
     </Reference>
-    <Reference Include="ZividVis3DNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVis3DNET.dll</HintPath>
-    </Reference>
-    <Reference Include="ZividVis3DNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVis3DNET.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReadZDF.cs" />
+    <Compile Include="MultiCameraCalibration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

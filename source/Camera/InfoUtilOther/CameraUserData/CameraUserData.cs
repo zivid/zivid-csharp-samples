@@ -1,10 +1,19 @@
-﻿using System;
+﻿/*
+This example shows how to store user data on the Zivid camera.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 class Program
 {
-    enum Mode { read, write, clear };
+    enum Mode
+    {
+        read,
+        write,
+        clear
+    }
 
     static void Main(string[] args)
     {
@@ -21,11 +30,11 @@ class Program
             {
                 case Mode.read:
                     Console.WriteLine("Reading user data from camera");
-                    Console.WriteLine("Done. User data: '" + Read(camera) + "'");
+                    Console.WriteLine("User data: '" + Read(camera) + "'");
                     break;
                 case Mode.write:
                     var userData = ParseWriteData(args);
-                    Console.WriteLine("Writing '" + userData + "' to the camera");
+                    Console.WriteLine("Writing '" + userData + "' to camera");
                     Write(camera, userData);
                     Console.WriteLine("Done");
                     break;
@@ -45,9 +54,8 @@ class Program
 
     static ArgumentException UsageException()
     {
-        return new ArgumentException("Usage: "
-            + System.Reflection.Assembly.GetEntryAssembly().Location
-            + " <read|write <string>|clear>");
+        return new ArgumentException("Usage: " + System.Reflection.Assembly.GetEntryAssembly().Location
+                                     + " <read|write <string>|clear>");
     }
 
     static Mode ParseMode(string[] args)
@@ -72,7 +80,7 @@ class Program
 
     static void CheckUserDataSupport(Zivid.NET.Camera camera)
     {
-        if (camera.UserDataMaxSizeBytes == 0)
+        if (camera.Info.UserData.MaxSizeBytes == 0)
         {
             throw new System.InvalidOperationException("This camera does not support user data");
         }

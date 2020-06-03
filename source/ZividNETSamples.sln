@@ -11,25 +11,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureAssistant", "Camera\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFile", "Camera\Basic\CaptureFromFile\CaptureFromFile.csproj", "{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWithSettingsFromYML", "Camera\Basic\CaptureWithSettingsFromYML\CaptureWithSettingsFromYML.csproj", "{F19339D7-0C30-471F-8E61-B86B895C440E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDR", "Camera\Basic\CaptureHDR\CaptureHDR.csproj", "{F09339D7-0C30-471F-8E61-B86B895C440E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings", "Camera\Basic\CaptureHDRCompleteSettings\CaptureHDRCompleteSettings.csproj", "{C0E744F5-0DDD-4E29-B899-101546A6CBEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Basic\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Advanced\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraUserData", "Camera\InfoUtilOther\CameraUserData\CameraUserData.csproj", "{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadZDF", "Applications\Basic\FileFormats\ReadZDF\ReadZDF.csproj", "{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadIterateZDF", "Applications\Basic\FileFormats\ReadIterateZDF\ReadIterateZDF.csproj", "{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZDF2PLY", "Applications\Basic\FileFormats\ZDF2PLY\ZDF2PLY.csproj", "{04599908-D437-435E-AE21-2DA7A91BF174}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileVis3D", "Applications\Basic\Visualization\CaptureFromFileVis3D\CaptureFromFileVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureLiveVis3D", "Applications\Basic\Visualization\CaptureLiveVis3D\CaptureLiveVis3D.csproj", "{29B70436-3CE0-42CF-A45C-F52B29A5020A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3D", "Applications\Basic\Visualization\CaptureVis3D\CaptureVis3D.csproj", "{68EB8781-17AA-42E9-9524-0C18A45278C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandEyeCalibration", "Applications\Advanced\HandEyeCalibration\HandEyeCalibration.csproj", "{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "Applications\Advanced\MultiCameraCalibration\MultiCameraCalibration.csproj", "{26F708E4-218E-4F17-8989-F5C42796C932}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +57,22 @@ Global
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Debug|x64.Build.0 = Debug|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Release|x64.ActiveCfg = Release|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Release|x64.Build.0 = Release|x64
+		{F19339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.ActiveCfg = Debug|x64
+		{F19339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
+		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
+		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
 		{F09339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.ActiveCfg = Debug|x64
 		{F09339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
 		{F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
 		{F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
+		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.ActiveCfg = Debug|x64
+		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.Build.0 = Debug|x64
+		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.ActiveCfg = Release|x64
+		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.Build.0 = Release|x64
+		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.ActiveCfg = Debug|x64
+		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.Build.0 = Debug|x64
+		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Release|x64.ActiveCfg = Release|x64
+		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Release|x64.Build.0 = Release|x64
 		{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}.Debug|x64.ActiveCfg = Debug|x64
 		{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}.Debug|x64.Build.0 = Debug|x64
 		{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}.Release|x64.ActiveCfg = Release|x64
@@ -77,22 +93,18 @@ Global
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Debug|x64.Build.0 = Debug|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Release|x64.ActiveCfg = Release|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Release|x64.Build.0 = Release|x64
-		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.ActiveCfg = Debug|x64
-		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.Build.0 = Debug|x64
-		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.ActiveCfg = Release|x64
-		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.Build.0 = Release|x64
-		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.ActiveCfg = Debug|x64
-		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.Build.0 = Debug|x64
-		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Release|x64.ActiveCfg = Release|x64
-		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Release|x64.Build.0 = Release|x64
-		{29B70436-3CE0-42CF-A45C-F52B29A5020A}.Debug|x64.ActiveCfg = Debug|x64
-		{29B70436-3CE0-42CF-A45C-F52B29A5020A}.Debug|x64.Build.0 = Debug|x64
-		{29B70436-3CE0-42CF-A45C-F52B29A5020A}.Release|x64.ActiveCfg = Release|x64
-		{29B70436-3CE0-42CF-A45C-F52B29A5020A}.Release|x64.Build.0 = Release|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Debug|x64.ActiveCfg = Debug|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Debug|x64.Build.0 = Debug|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Release|x64.ActiveCfg = Release|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Release|x64.Build.0 = Release|x64
+		{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}.Debug|x64.ActiveCfg = Debug|x64
+		{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}.Debug|x64.Build.0 = Debug|x64
+		{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}.Release|x64.ActiveCfg = Release|x64
+		{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}.Release|x64.Build.0 = Release|x64
+		{26F708E4-218E-4F17-8989-F5C42796C932}.Debug|x64.ActiveCfg = Debug|x64
+		{26F708E4-218E-4F17-8989-F5C42796C932}.Debug|x64.Build.0 = Debug|x64
+		{26F708E4-218E-4F17-8989-F5C42796C932}.Release|x64.ActiveCfg = Release|x64
+		{26F708E4-218E-4F17-8989-F5C42796C932}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

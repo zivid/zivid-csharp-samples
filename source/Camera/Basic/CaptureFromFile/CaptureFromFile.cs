@@ -1,5 +1,7 @@
-﻿// Please make sure that Zivid sample data has been selected during installation of Zivid software.
-// Latest version of Zivid software (including samples) can be found at http://zivid.com/software/.
+﻿/*
+This example shows how to capture point clouds, with color, from the Zivid file camera.
+This example can be used without access to a physical camera.
+*/
 
 using System;
 
@@ -11,17 +13,29 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            var zdfFile = Zivid.NET.Environment.DataPath + "/MiscObjects.zdf";
-            var resultFile = "Result.zdf";
+            // This FileCamera file is in Zivid Sample Data. See instructions in README.md.
+            var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                             + "/Zivid/FileCameraZividOne.zfc";
 
-            Console.WriteLine("Initializing camera emulation using file: " + zdfFile);
-            var camera = zivid.CreateFileCamera(zdfFile);
+            Console.WriteLine("Creating virtual camera using file: " + fileCamera);
+            var camera = zivid.CreateFileCamera(fileCamera);
 
-            Console.WriteLine("Capture a frame");
-            var frame = camera.Capture();
+            Console.WriteLine("Configuring settings");
+            var settings = new Zivid.NET.Settings
+            {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+                Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
+                                           Reflection = { Removal = { Enabled = true } } },
+                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+            };
 
-            Console.WriteLine("Saving frame to file: " + resultFile);
-            frame.Save(resultFile);
+            Console.WriteLine("Capturing frame");
+            using (var frame = camera.Capture(settings))
+            {
+                var dataFile = "Result.zdf";
+                Console.WriteLine("Saving frame to file: " + dataFile);
+                frame.Save(dataFile);
+            }
         }
         catch (Exception ex)
         {
