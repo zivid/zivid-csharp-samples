@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("CaptureHDRCompleteSettings")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright 2015-2020 (C) Zivid AS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
