@@ -36,8 +36,7 @@ class Program
             Console.WriteLine(settings.Processing);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
-            var baseAcquisition =
-                new Zivid.NET.Settings.Acquisition { Brightness = 1.8, Patterns = { Sine = { Bidirectional = false } } };
+            var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };
             Console.WriteLine(baseAcquisition);
 
             Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
