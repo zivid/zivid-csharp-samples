@@ -21,7 +21,7 @@ class Program
             for (int i = 1; i <= captures; i++)
             {
                 var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                                   + "/Settings/Settings0" + i + ".yml";
+                                   + "/Zivid/Settings/Settings0" + i + ".yml";
                 Console.WriteLine("Configuring settings from file: " + settingsFile);
                 var settings = new Zivid.NET.Settings(settingsFile);
                 Console.WriteLine(settings.Acquisitions);
