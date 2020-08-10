@@ -20,7 +20,7 @@ class Program
             var settings = new Zivid.NET.Settings
             {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition{ Aperture = 5.66,
-                                                                     ExposureTime = Duration.FromMicroseconds(8333) } },
+                                                                     ExposureTime = Duration.FromMicroseconds(6500) } },
                 Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
             };
 
