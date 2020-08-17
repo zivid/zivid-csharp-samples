@@ -21,7 +21,7 @@ class Program
             var settings2D = new Zivid.NET.Settings2D
             {
                 Acquisitions = { new Zivid.NET.Settings2D.Acquisition{
-                    Aperture = 2.83, ExposureTime = Duration.FromMicroseconds(10000), Gain = 1.0, Brightness = 1.0 } },
+                    Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80 } },
                 Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
             };
 
