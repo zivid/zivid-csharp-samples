@@ -51,6 +51,10 @@ There are two main categories of samples: **Camera** and **Applications**. The s
           - **Dependencies:** These will be installed automatically through NuGet.
             - [Math.NET Numerics](https://numerics.mathdotnet.com/#Math-NET-Numerics) version 4.12.0 or newer
             - [YamlDotNet](https://github.com/aaubry/YamlDotNet/wiki) version 8.1.2 or newer
+        - [**PoseConversions**][PoseConversions-url] -  Convert to/from Transformation Matrix (Rotation Matrix + Translation Vector).
+          - **Dependencies:** These will be installed automatically through NuGet.
+            - [Math.NET Numerics](https://numerics.mathdotnet.com/#Math-NET-Numerics) version 4.12.0 or newer
+            - [YamlDotNet](https://github.com/aaubry/YamlDotNet/wiki) version 8.1.2 or newer
     - [**MultiCameraCalibration**][MultiCameraCalibration-url] - Use captures of a calibration object to generate transformation matrices to a single coordinate frame.
     - [**Downsample**][Downsample-url] - Perform downsampling on a zivid point cloud.
 
@@ -105,6 +109,7 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [HandEyeCalibrationReadme-url]: source/Applications/Advanced/HandEyeCalibration/README.md
 [HandEyeCalibration-url]: source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration/HandEyeCalibration.cs
 [UtilizeEyeInHandCalibration-url]: source/Applications/Advanced/HandEyeCalibration/UtilizeEyeInHandCalibration/UtilizeEyeInHandCalibration.cs
+[PoseConversions-url]: source/Applications/Advanced/HandEyeCalibration/PoseConversions/PoseConversions.cs
 [MultiCameraCalibration-url]: source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs
 [Downsample-url]: source/Applications/Advanced/Downsample/Downsample.cs
 
