@@ -30,13 +30,13 @@ There are two main categories of samples: **Camera** and **Applications**. The s
       - [**ReadIterateZDF**][ReadIterateZDF-url] - Read point cloud data from a ZDF file, iterate through it, and extract individual points.
       - [**ZDF2PLY**][ZDF2PLY-url] - Convert point cloud from ZDF a file to a PLY file.
   - **Advanced**
-    - [**HandEyeCalibration**][HandEyeCalibration-url] - Perform Hand-Eye calibration
+    - [**HandEyeCalibration**][HandEyeCalibration-url] - Perform Hand-Eye calibration.
     - [**MultiCameraCalibration**][MultiCameraCalibration-url] - Use captures of a calibration object to generate transformation matrices to a single coordinate frame.
 
 ## Instructions
 
 1. [**Install Zivid Software**](https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/59080712/Zivid+Software+Installation).
-Note: The version tested with Zivid cameras is 2.0.0.
+Note: The version tested with Zivid cameras is 2.1.0.
 
 2. [**Download Zivid Sample Data**](https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/450363393/Sample+Data).
 
