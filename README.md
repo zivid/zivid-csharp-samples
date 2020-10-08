@@ -32,6 +32,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
   - **Advanced**
     - [**HandEyeCalibration**][HandEyeCalibration-url] - Perform Hand-Eye calibration.
     - [**MultiCameraCalibration**][MultiCameraCalibration-url] - Use captures of a calibration object to generate transformation matrices to a single coordinate frame.
+    - [**Downsample**][Downsample-url] - Perform downsampling on a zivid point cloud.
 
 ## Instructions
 
@@ -68,3 +69,4 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [ZDF2PLY-url]: source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
 [HandEyeCalibration-url]: source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration.cs
 [MultiCameraCalibration-url]: source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs
+[Downsample-url]: source/Applications/Advanced/Downsample/Downsample.cs
