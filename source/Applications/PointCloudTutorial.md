@@ -11,6 +11,7 @@ This tutorial describes how to use Zivid SDK to work with [Point Cloud][kb-point
     1. [Get handle](#get-handle)
     2. [Copy](#copy)
     3.  [Transform](#transform)
+    4. [Downsample](#downsample)
 
 ### Prerequisites
 
@@ -89,6 +90,22 @@ You may want to change the point cloud's origin from the camera to the robot bas
 pointCloud.Transform(transformationMatrix);
 ```
 
+## Downsample
+
+
+Sometimes you might not need as dense point cloud as given from the camera and you want to downsample the point cloud. Downsampling can be done in-place by using ```Zivid.NET.PointCloud.Downsample(Zivid.NET.PointCloud.Downsampling)``` ([go to source][downsample]).
+
+```csharp
+pointCloud.Downsample(Zivid.NET.PointCloud.Downsampling.By2x2);
+```
+Another way to downsample a point cloud is by using ```Zivid.NET.PointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling)```. This does not modify the current point cloud but returns the downsampled point cloud as a new point cloud instance. 
+
+```csharp
+downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
+```
+
+Supported downsampling rates are: by2x2, by3x3 and by4x4.
+
 ## Conclusion
 
 This tutorial shows how to use the Zivid SDK to extract the point cloud, manipulate it, transform it, and visualize it.
@@ -103,3 +120,4 @@ This tutorial shows how to use the Zivid SDK to extract the point cloud, manipul
 [copy]:Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L22-L23
 [visualize-point-cloud]:Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L34
 [kb-point_cloud-url]: https://zivid.atlassian.net/wiki/spaces/ZividKB/pages/520061383
+[downsample]:Advanced/Downsample/Downsample.cs#L26]
