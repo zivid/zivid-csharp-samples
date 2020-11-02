@@ -28,7 +28,6 @@ class Program
             Console.WriteLine("Number of points: " + pointCloud.Size + "\n" + "Height: " + height
                               + ", Width: " + width);
 
-            // Iterating over the point cloud and displaying X, Y, Z, R, G, B, and SNR for central 10 x 10 pixels
             const ulong pixelsToDisplay = 10;
             Console.WriteLine(
                 "Iterating over point cloud and extracting X, Y, Z, R, G, B, and SNR for central {0} x {1} pixels",
