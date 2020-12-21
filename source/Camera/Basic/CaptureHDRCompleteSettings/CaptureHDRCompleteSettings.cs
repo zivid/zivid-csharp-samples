@@ -23,6 +23,7 @@ class Program
             Console.WriteLine("Configuring global processing settings:");
             var settings = new Zivid.NET.Settings()
             {
+                Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
                                            Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
                                            Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
@@ -31,9 +32,9 @@ class Program
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
                                                                                                Threshold = 0.5 } } } },
-                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 }, Gamma = 1.0 } }
             };
-            Console.WriteLine(settings.Processing);
+            Console.WriteLine(settings);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
             var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };

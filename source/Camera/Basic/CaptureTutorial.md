@@ -144,7 +144,7 @@ var settings2D = new Zivid.NET.Settings2D
         ExposureTime = Duration.FromMicroseconds(10000),
         Gain = 1.0,
         Brightness = 1.0 } },
-    Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
+    Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 }, Gamma = 1.0 } }
 };
 ```
 

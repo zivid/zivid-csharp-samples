@@ -22,7 +22,7 @@ class Program
             {
                 Acquisitions = { new Zivid.NET.Settings2D.Acquisition{
                     Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80 } },
-                Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
+                Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 }, Gamma = 1.0 } }
             };
 
             Console.WriteLine("Capturing 2D frame");
