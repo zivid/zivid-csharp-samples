@@ -19,7 +19,7 @@ class Program
 
             Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings();
-            foreach (var aperture in new double[] { 11.31, 5.66, 2.83 })
+            foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
             {
                 Console.WriteLine("Adding acquisition with aperture = " + aperture);
                 var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };

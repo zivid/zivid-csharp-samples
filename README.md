@@ -23,7 +23,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - [**Capture**][Capture-url] - Capture point clouds, with color, from the Zivid camera.
     - [**Capture2D**][Capture2D-url] - Capture 2D images from the Zivid camera.
     - [**CaptureAssistant**][CaptureAssistant-url] - Use Capture Assistant to capture point clouds, with color, from the Zivid camera.
-    - [**CaptureFromFile**][CaptureFromFile-url] - Capture point clouds, with color, from the Zivid file camera.
+    - [**CaptureFromFile**][CaptureFromFile-url] - Capture point clouds, with color, from the Zivid file camera. Currently supported by Zivid One. 
     - [**CaptureWithSettingsFromYML**][CaptureWithSettingsFromYML-url] - Capture point clouds, with color, from the Zivid camera, with settings from YML file.
     - [**CaptureHDR**][CaptureHDR-url] - Capture HDR point clouds, with color, from the Zivid camera.
     - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Capture point clouds, with color, from the Zivid camera with fully configured settings.
@@ -36,7 +36,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
 - **Applications**
   - **Basic**
     - **Visualization**
-      - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - Capture point clouds, with color, from the Zivid file camera, and visualize it.
+      - [**CaptureFromFileVis3D**][CaptureFromFileVis3D-url] - Capture point clouds, with color, from the Zivid file camera, and visualize it. Currently supported by Zivid One.
       - [**CaptureVis3D**][CaptureVis3D-url] - Capture point clouds, with color, from the Zivid camera, and visualize it.
     - **FileFormats**
       - [**ReadIterateZDF**][ReadIterateZDF-url] - Read point cloud data from a ZDF file, iterate through it, and extract individual points.

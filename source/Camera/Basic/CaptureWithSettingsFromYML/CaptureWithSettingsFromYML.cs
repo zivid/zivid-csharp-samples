@@ -18,8 +18,9 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings from file");
+            var cameraModel = camera.Info.ModelName.Substring(0, 9);
             var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Zivid/Settings/Settings01.yml";
+                               + "/Zivid/Settings/" + cameraModel + "/Settings01.yml";
             var settings = new Zivid.NET.Settings(settingsFile);
 
             Console.WriteLine("Capturing frame");

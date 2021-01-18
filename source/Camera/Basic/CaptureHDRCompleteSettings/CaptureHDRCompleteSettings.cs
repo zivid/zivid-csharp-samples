@@ -41,9 +41,10 @@ class Program
             Console.WriteLine(baseAcquisition);
 
             Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
-            double[] aperture = { 8.0, 4.0, 4.0 };
-            int[] exposureTime = { 10000, 10000, 40000 };
-            double[] gain = { 1.0, 1.0, 2.0 };
+            Tuple<double[], int[], double[]> exposureValues = GetExposureValues(camera);
+            double[] aperture = exposureValues.Item1;
+            int[] exposureTime = exposureValues.Item2;
+            double[] gain = exposureValues.Item3;
             for (int i = 0; i < aperture.Length; i++)
             {
                 Console.WriteLine("Acquisition {0}:", i + 1);
@@ -75,5 +76,24 @@ class Program
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;
         }
+    }
+
+    static Tuple<double[], int[], double[]> GetExposureValues(Zivid.NET.Camera camera)
+    {
+        if (camera.Info.ModelName.Substring(0, 9) == "Zivid One")
+        {
+            double[] aperture = { 8.0, 4.0, 4.0 };
+            int[] exposureTime = { 10000, 10000, 40000 };
+            double[] gain = { 1.0, 1.0, 2.0 };
+            return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
+        }
+        if (camera.Info.ModelName.Substring(0, 9) == "Zivid Two")
+        {
+            double[] aperture = { 5.66, 2.38, 1.8 };
+            int[] exposureTime = { 1677, 5000, 100000 };
+            double[] gain = { 1.0, 1.0, 1.0 };
+            return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
+        }
+        throw new Exception("Unknown camera model, " + camera.Info.ModelName.Substring(0, 9));
     }
 }
