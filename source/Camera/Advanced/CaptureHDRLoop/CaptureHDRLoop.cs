@@ -17,11 +17,12 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
+            var cameraModel = camera.Info.ModelName.Substring(0, 9);
             int captures = 3;
             for (int i = 1; i <= captures; i++)
             {
                 var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                                   + "/Zivid/Settings/Settings0" + i + ".yml";
+                                   + "/Zivid/Settings/" + cameraModel + "/Settings0" + i + ".yml";
                 Console.WriteLine("Configuring settings from file: " + settingsFile);
                 var settings = new Zivid.NET.Settings(settingsFile);
                 Console.WriteLine(settings.Acquisitions);
