@@ -104,7 +104,7 @@ There are only two parameters to configure with Capture Assistant:
 
 ### Manual configuration
 
-We may choose to configure settings manually. For more information about what each settings does, please see [Zivid One Camera Settings][kb-camera_settings-url].
+We may choose to configure settings manually. For more information about what each settings does, please see [Zivid One+ Camera Settings][kb-camera_settings-url].
 
 #### Single Acquisition
 
