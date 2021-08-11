@@ -112,6 +112,7 @@ We can create settings for a single capture ([go to source][settings-url]).
 ```csharp
 var settings = new Zivid.NET.Settings
 {
+    Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
     Acquisitions = { new Zivid.NET.Settings.Acquisition{
                                            Aperture = 5.66,
                                            ExposureTime = Duration.FromMicroseconds(8333)
