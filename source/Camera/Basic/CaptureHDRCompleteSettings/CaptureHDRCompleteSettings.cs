@@ -8,6 +8,7 @@ this example is to demonstrate how to configure all the settings.
 
 using System;
 using Duration = Zivid.NET.Duration;
+using ToneMappingEnabledOption = Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ToneMappingGroup.EnabledOption;
 
 class Program
 {
@@ -32,7 +33,9 @@ class Program
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
                                                                                                Threshold = 0.5 } } } },
-                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 }, Gamma = 1.0 } }
+                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
+                                         Gamma = 1.0,
+                                         Experimental = { ToneMapping = { Enabled = ToneMappingEnabledOption.HdrOnly } } } }
             };
             Console.WriteLine(settings);
 
