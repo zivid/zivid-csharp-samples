@@ -19,6 +19,7 @@ class Program
             Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings
             {
+                Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
                 Acquisitions = { new Zivid.NET.Settings.Acquisition{ Aperture = 5.66,
                                                                      ExposureTime = Duration.FromMicroseconds(6500) } },
                 Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
