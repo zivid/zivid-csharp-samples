@@ -92,7 +92,7 @@ class Program
 
     static Zivid.NET.Calibration.HandEyeOutput performCalibration(List<HandEyeInput> handEyeInput)
     {
-        while(true)
+        while (true)
         {
             Console.WriteLine("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand):");
             var calibrationType = Console.ReadLine();
@@ -106,7 +106,7 @@ class Program
                 Console.WriteLine("Performing eye-in-hand calibration");
                 return Calibrator.CalibrateEyeInHand(handEyeInput);
             }
-            Console.WriteLine("Entered uknown method");
+            Console.WriteLine("Entered unknown method");
         }
     }
 }
