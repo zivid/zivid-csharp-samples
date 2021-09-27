@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraUserData", "Camera\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintVersionInfo", "Camera\InfoUtilOther\PrintVersionInfo\PrintVersionInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadIterateZDF", "Applications\Basic\FileFormats\ReadIterateZDF\ReadIterateZDF.csproj", "{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZDF2PLY", "Applications\Basic\FileFormats\ZDF2PLY\ZDF2PLY.csproj", "{04599908-D437-435E-AE21-2DA7A91BF174}"
@@ -85,6 +87,10 @@ Global
         {A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Debug|x64.Build.0 = Debug|x64
         {A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Release|x64.ActiveCfg = Release|x64
         {A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Release|x64.Build.0 = Release|x64
+        {6117292F-5426-48A7-91FB-B801126E576E}.Debug|x64.ActiveCfg = Debug|x64
+        {6117292F-5426-48A7-91FB-B801126E576E}.Debug|x64.Build.0 = Debug|x64
+        {6117292F-5426-48A7-91FB-B801126E576E}.Release|x64.ActiveCfg = Release|x64
+        {6117292F-5426-48A7-91FB-B801126E576E}.Release|x64.Build.0 = Release|x64
         {C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.ActiveCfg = Debug|x64
         {C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.Build.0 = Debug|x64
         {C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Release|x64.ActiveCfg = Release|x64

@@ -31,7 +31,8 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - [**CaptureHDRLoop**][CaptureHDRLoop-url] - Cover the same dynamic range in a scene with different acquisition settings to optimize for quality, speed, or to find a compromise.
   - **InfoUtilOther**
     - [**CameraUserData**][CameraUserData-url] - Store user data on the Zivid camera.
-    - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - Read intrinsic parameters from the Zivid camera.	
+    - [**GetCameraIntrinsics**][GetCameraIntrinsics-url] - Read intrinsic parameters from the Zivid camera.
+    - [**PrintVersionInfo**][PrintVersionInfo-url] - List connected cameras and print version information.
     - [**Warmup**][Warmup-url] - Warm up the Zivid camera.
 
 - **Applications**
@@ -93,6 +94,7 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [CaptureHDRLoop-url]: source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs
 [CameraUserData-url]: source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
 [GetCameraIntrinsics-url]: source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
+[PrintVersionInfo-url]: source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs
 [Warmup-url]: source/Camera/InfoUtilOther/Warmup/Warmup.cs
 [CaptureFromFileVis3D-url]: source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs
 [CaptureVis3D-url]: source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs
