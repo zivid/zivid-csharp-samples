@@ -32,7 +32,7 @@ class Program
 
             DateTime beforeWarmup = DateTime.Now;
 
-            Console.WriteLine("Starting warm up for: {0} minutes", warmupTime);
+            Console.WriteLine("Starting warm up for: {0} minutes", warmupTime.Minutes);
 
             while (DateTime.Now.Subtract(beforeWarmup) < warmupTime)
             {
