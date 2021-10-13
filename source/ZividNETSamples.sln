@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Advanced\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRPrintNormals", "Camera\Advanced\CaptureHDRPrintNormals\CaptureHDRPrintNormals.csproj", "{064AA724-CD81-462F-8A07-26440EA41103}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraUserData", "Camera\InfoUtilOther\CameraUserData\CameraUserData.csproj", "{A55DA9E4-9D9B-41B0-8B27-0FA2C2A8AC55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
@@ -71,6 +73,10 @@ Global
         {F09339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
         {F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
         {F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
+        {064AA724-CD81-462F-8A07-26440EA41103}.Debug|x64.ActiveCfg = Debug|x64
+        {064AA724-CD81-462F-8A07-26440EA41103}.Debug|x64.Build.0 = Debug|x64
+        {064AA724-CD81-462F-8A07-26440EA41103}.Release|x64.ActiveCfg = Release|x64
+        {064AA724-CD81-462F-8A07-26440EA41103}.Release|x64.Build.0 = Release|x64
         {C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.ActiveCfg = Debug|x64
         {C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.Build.0 = Debug|x64
         {C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.ActiveCfg = Release|x64
@@ -128,6 +134,9 @@ Global
         HideSolutionNode = FALSE
     EndGlobalSection
     GlobalSection(ExtensibilityGlobals) = postSolution
-        SolutionGuid = {FD0FDA0F-31E4-4397-822E-0F1A9A4AED50}
+                SolutionGuid = {9E66316D-4AD3-4484-9B7B-AB49ED8B124F}
+                                SolutionGuid = {FD0FDA0F-31E4-4397-822E-0F1A9A4AED50}
+                        SolutionGuid = {6A987731-82B5-4DE6-BA10-0FDBC10D36B3}
+        SolutionGuid = {3930545E-660B-4663-8C22-550BF09ACF38}
     EndGlobalSection
 EndGlobal

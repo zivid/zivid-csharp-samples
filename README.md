@@ -27,6 +27,7 @@ There are two main categories of samples: **Camera** and **Applications**. The s
     - [**CaptureWithSettingsFromYML**][CaptureWithSettingsFromYML-url] - Capture point clouds, with color, from the Zivid camera, with settings from YML file.
     - [**CaptureHDR**][CaptureHDR-url] - Capture HDR point clouds, with color, from the Zivid camera.
     - [**CaptureHDRCompleteSettings**][CaptureHDRCompleteSettings-url] - Capture point clouds, with color, from the Zivid camera with fully configured settings.
+    - [**CaptureHDRPrintNormals**][CaptureHDRPrintNormals-url] - Capture Zivid point clouds, calculate normals and print a subset.
   - **Advanced**
     - [**CaptureHDRLoop**][CaptureHDRLoop-url] - Cover the same dynamic range in a scene with different acquisition settings to optimize for quality, speed, or to find a compromise.
   - **InfoUtilOther**
@@ -92,6 +93,7 @@ Zivid Samples are distributed under the [BSD license](LICENSE).
 [CaptureHDR-url]: source/Camera/Basic/CaptureHDR/CaptureHDR.cs
 [CaptureHDRCompleteSettings-url]: source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
 [CaptureHDRLoop-url]: source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs
+[CaptureHDRPrintNormals-url]: source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs
 [CameraUserData-url]: source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
 [GetCameraIntrinsics-url]: source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
 [PrintVersionInfo-url]: source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs
