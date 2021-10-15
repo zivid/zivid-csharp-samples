@@ -83,14 +83,16 @@ class Program
 
     static Tuple<double[], int[], double[]> GetExposureValues(Zivid.NET.Camera camera)
     {
-        if (camera.Info.ModelName.Substring(0, 9) == "Zivid One")
+        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall ||
+            camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium ||
+            camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge)
         {
             double[] aperture = { 8.0, 4.0, 4.0 };
             int[] exposureTime = { 10000, 10000, 40000 };
             double[] gain = { 1.0, 1.0, 2.0 };
             return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
         }
-        if (camera.Info.ModelName.Substring(0, 9) == "Zivid Two")
+        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwo)
         {
             double[] aperture = { 5.66, 2.38, 1.8 };
             int[] exposureTime = { 1677, 5000, 100000 };

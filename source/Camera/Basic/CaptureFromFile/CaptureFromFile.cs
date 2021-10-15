@@ -32,7 +32,7 @@ class Program
             Console.WriteLine("Capturing frame");
             using (var frame = camera.Capture(settings))
             {
-                var dataFile = "Result.zdf";
+                var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
