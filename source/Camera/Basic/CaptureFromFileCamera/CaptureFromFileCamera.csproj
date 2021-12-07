@@ -7,8 +7,8 @@
     <ProjectGuid>{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CaptureFromFile</RootNamespace>
-    <AssemblyName>CaptureFromFile</AssemblyName>
+    <RootNamespace>CaptureFromFileCamera</RootNamespace>
+    <AssemblyName>CaptureFromFileCamera</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,7 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CaptureFromFile.cs" />
+    <Compile Include="CaptureFromFileCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

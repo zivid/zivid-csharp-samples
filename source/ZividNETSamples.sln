@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture2D", "Camera\Basic\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureAssistant", "Camera\Basic\CaptureAssistant\CaptureAssistant.csproj", "{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFile", "Camera\Basic\CaptureFromFile\CaptureFromFile.csproj", "{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCamera", "Camera\Basic\CaptureFromFileCamera\CaptureFromFileCamera.csproj", "{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWithSettingsFromYML", "Camera\Basic\CaptureWithSettingsFromYML\CaptureWithSettingsFromYML.csproj", "{F19339D7-0C30-471F-8E61-B86B895C440E}"
 EndProject
