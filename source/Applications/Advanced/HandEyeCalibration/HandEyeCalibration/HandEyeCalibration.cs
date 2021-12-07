@@ -1,5 +1,5 @@
 /*
-This example shows how to perform Hand-Eye calibration.
+Perform Hand-Eye calibration.
 */
 
 using System;
@@ -25,7 +25,7 @@ class Program
 
             var calibrationResult = performCalibration(inputs);
 
-            if (calibrationResult.Valid())
+            if(calibrationResult.Valid())
             {
                 Console.WriteLine("{0}\n{1}\n{2}", "Hand-eye calibration OK", "Result:", calibrationResult);
             }
@@ -35,7 +35,7 @@ class Program
                 Environment.ExitCode = 1;
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
             Environment.ExitCode = 1;
@@ -52,18 +52,18 @@ class Program
 
         do
         {
-            switch (Interaction.EnterCommand())
+            switch(Interaction.EnterCommand())
             {
                 case CommandType.AddPose:
                     try
                     {
                         var robotPose = Interaction.EnterRobotPose(currentPoseId);
-                        using (var frame = Interaction.AssistedCapture(camera))
+                        using(var frame = Interaction.AssistedCapture(camera))
                         {
                             Console.Write("Detecting checkerboard in point cloud: ");
                             var result = Detector.DetectFeaturePoints(frame.PointCloud);
 
-                            if (result)
+                            if(result)
                             {
                                 Console.WriteLine("OK");
                                 handEyeInput.Add(new HandEyeInput(robotPose, result));
@@ -75,7 +75,7 @@ class Program
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
                         Console.WriteLine("Error: {0}", ex.Message);
                         continue;
@@ -86,22 +86,22 @@ class Program
 
                 case CommandType.Unknown: Console.WriteLine("Error: Unknown command"); break;
             }
-        } while (beingInput);
+        } while(beingInput);
         return handEyeInput;
     }
 
     static Zivid.NET.Calibration.HandEyeOutput performCalibration(List<HandEyeInput> handEyeInput)
     {
-        while (true)
+        while(true)
         {
             Console.WriteLine("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand):");
             var calibrationType = Console.ReadLine();
-            if (calibrationType.Equals("eth", StringComparison.CurrentCultureIgnoreCase))
+            if(calibrationType.Equals("eth", StringComparison.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine("Performing eye-to-hand calibration");
                 return Calibrator.CalibrateEyeToHand(handEyeInput);
             }
-            if (calibrationType.Equals("eih", StringComparison.CurrentCultureIgnoreCase))
+            if(calibrationType.Equals("eih", StringComparison.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine("Performing eye-in-hand calibration");
                 return Calibrator.CalibrateEyeInHand(handEyeInput);
@@ -132,7 +132,7 @@ class Interaction
         Console.Write("Enter command, p (to add robot pose) or c (to perform calibration): ");
         var command = Console.ReadLine().ToLower();
 
-        switch (command)
+        switch(command)
         {
             case "p": return CommandType.AddPose;
             case "c": return CommandType.Calibrate;
@@ -151,15 +151,13 @@ class Interaction
 
         var elements = input.Split().Where(x => !string.IsNullOrEmpty(x.Trim())).Select(x => float.Parse(x)).ToArray();
 
-        var robotPose = new Pose(elements);
-        Console.WriteLine("The following pose was entered: \n{0}", robotPose);
-        return robotPose;
+        var robotPose = new Pose(elements); Console.WriteLine("The following pose was entered: \n{0}", robotPose);
+            return robotPose;
     }
 
     public static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
     {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-        {
+        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
             AmbientLightFrequency =
                 Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
             MaxCaptureTime = Duration.FromMilliseconds(800)

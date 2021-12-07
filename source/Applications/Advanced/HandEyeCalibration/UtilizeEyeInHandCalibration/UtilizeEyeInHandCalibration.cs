@@ -1,7 +1,8 @@
 ﻿/*
-This example shows how to utilize the result of Eye-in-Hand calibration to transform either a (picking) point
-coordinates or the entire point cloud from the camera frame to the robot base frame. The YAML files for this sample can
-be found under the main instructions for Zivid samples.
+Utilize the result of Eye-in-Hand calibration to transform either a (picking) point coordinates
+or the entire point cloud from the camera frame to the robot base frame.
+
+The YAML files for this sample can be found under the main instructions for Zivid samples.
 */
 
 using System;
@@ -18,19 +19,22 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            Console.WriteLine("Reading camera pose in end-effector frame (result of eye-in-hand calibration)");        
-            var eyeInHandTransformation = getTransformationMatrixFromYAML(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Zivid/EyeInHandTransform.yaml");
-                               
+            Console.WriteLine("Reading camera pose in end-effector frame (result of eye-in-hand calibration)");
+            var eyeInHandTransformation = getTransformationMatrixFromYAML(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                + "/Zivid/EyeInHandTransform.yaml");
+
             Console.WriteLine("Reading end-effector pose in robot base frame");
-            var endEffectorPose = getTransformationMatrixFromYAML(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Zivid/RobotTransform.yaml");
+            var endEffectorPose = getTransformationMatrixFromYAML(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                + "/Zivid/RobotTransform.yaml");
 
             // Converting to Math.NET matrices for easier computation
             Matrix<float> eyeInHandMatrix = zividToMathDotNet(eyeInHandTransformation);
             Matrix<float> endEffectorMatrix = zividToMathDotNet(endEffectorPose);
 
-            var dataFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/ZividGem.zdf";
+            var dataFile =
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/ZividGem.zdf";
             Console.WriteLine("Reading ZDF frame from file: " + dataFile);
             var frame = new Zivid.NET.Frame(dataFile);
             var pointCloud = frame.PointCloud;
@@ -38,7 +42,7 @@ class Program
             Console.WriteLine("Computing camera pose in robot base frame");
             Matrix<float> transformBaseToCamera = endEffectorMatrix * eyeInHandMatrix;
 
-            switch (Interaction.EnterCommand())
+            switch(Interaction.EnterCommand())
             {
                 case CommandType.TransformSinglePoint:
 
@@ -50,10 +54,10 @@ class Program
                     const int imageCoordinateY = 666;
                     var xyz = pointCloud.CopyPointsXYZW();
 
-                    var pickingPoint = new float[]{xyz[imageCoordinateY, imageCoordinateX, 0],
-                                                            xyz[imageCoordinateY, imageCoordinateX, 1],
-                                                            xyz[imageCoordinateY, imageCoordinateX, 2],
-                                                            xyz[imageCoordinateY, imageCoordinateX, 3]};
+                    var pickingPoint = new float[] { xyz[imageCoordinateY, imageCoordinateX, 0],
+                                                     xyz[imageCoordinateY, imageCoordinateX, 1],
+                                                     xyz[imageCoordinateY, imageCoordinateX, 2],
+                                                     xyz[imageCoordinateY, imageCoordinateX, 3] };
 
                     Vector<float> pointInCameraFrame = CreateVector.DenseOfArray(pickingPoint);
                     Console.WriteLine("Point coordinates in camera frame: " + pointInCameraFrame);
@@ -75,12 +79,10 @@ class Program
                     frame.Save(dataFileTransformed);
                     break;
 
-                case CommandType.Unknown:
-                    Console.WriteLine("Error: Unknown command");
-                    break;
+                case CommandType.Unknown: Console.WriteLine("Error: Unknown command"); break;
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
             Environment.ExitCode = 1;
@@ -88,13 +90,13 @@ class Program
     }
     static float[,] getTransformationMatrixFromYAML(string transformFile)
     {
-        using (var reader = new StreamReader(transformFile))
+        using(var reader = new StreamReader(transformFile))
         {
             // OpenCV writes yaml 1.0 with legacy first line
             // YamlDotNet does not support this legacy first line
             // so to work around we modify the first line if it is legacy
             var first_line = reader.ReadLine();
-            if (first_line.Contains("%YAML:1.0"))
+            if(first_line.Contains("%YAML:1.0"))
             {
                 first_line = first_line.Replace(":", " ");
             }
@@ -112,9 +114,9 @@ class Program
 
             float[,] zividMatrix = new float[rows, cols];
 
-            for (int i = 0; i < rows; i++)
+            for(int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for(int j = 0; j < cols; j++)
                 {
                     zividMatrix[i, j] = float.Parse(matrixAsString[i * rows + j]);
                 }
@@ -149,7 +151,7 @@ class Interaction
         Console.Write("Enter command, s (to transform single point) or p (to transform point cloud): ");
         var command = Console.ReadLine().ToLower();
 
-        switch (command)
+        switch(command)
         {
             case "s": return CommandType.TransformSinglePoint;
             case "p": return CommandType.TransformPointCloud;

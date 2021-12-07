@@ -1,5 +1,5 @@
 ﻿/*
-This example shows how to store user data on the Zivid camera.
+Store user data on the Zivid camera.
 */
 
 using System;
@@ -26,7 +26,7 @@ class Program
             var camera = zivid.ConnectCamera();
             CheckUserDataSupport(camera);
 
-            switch (mode)
+            switch(mode)
             {
                 case Mode.read:
                     Console.WriteLine("Reading user data from camera");
@@ -45,7 +45,7 @@ class Program
                     break;
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;
@@ -60,17 +60,17 @@ class Program
 
     static Mode ParseMode(string[] args)
     {
-        if (args.Length > 0)
+        if(args.Length > 0)
         {
-            if (args[0].Equals("read"))
+            if(args[0].Equals("read"))
             {
                 return Mode.read;
             }
-            else if (args[0].Equals("write"))
+            else if(args[0].Equals("write"))
             {
                 return Mode.write;
             }
-            else if (args[0].Equals("clear"))
+            else if(args[0].Equals("clear"))
             {
                 return Mode.clear;
             }
@@ -80,7 +80,7 @@ class Program
 
     static void CheckUserDataSupport(Zivid.NET.Camera camera)
     {
-        if (camera.Info.UserData.MaxSizeBytes == 0)
+        if(camera.Info.UserData.MaxSizeBytes == 0)
         {
             throw new System.InvalidOperationException("This camera does not support user data");
         }
@@ -103,7 +103,7 @@ class Program
 
     static string ParseWriteData(string[] args)
     {
-        if (args.Length > 1)
+        if(args.Length > 1)
         {
             return args[1];
         }

@@ -1,5 +1,5 @@
 /*
-This example shows how to read intrinsic parameters from the Zivid camera (OpenCV model).
+Read intrinsic parameters from the Zivid camera (OpenCV model).
 */
 
 using System;
@@ -37,7 +37,7 @@ class Program
             Console.WriteLine("Saving camera intrinsics to file: " + intrinsicsFile);
             intrinsics.Save(intrinsicsFile);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

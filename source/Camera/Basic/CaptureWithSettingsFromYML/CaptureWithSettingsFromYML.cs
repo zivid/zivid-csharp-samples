@@ -1,6 +1,5 @@
 ﻿/*
-This example shows how to capture point clouds, with color, from the Zivid camera,
-with settings from YML file.
+Capture point clouds, with color, from the Zivid camera, with settings from YML file.
 */
 
 using System;
@@ -24,14 +23,14 @@ class Program
             var settings = new Zivid.NET.Settings(settingsFile);
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using(var frame = camera.Capture(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;
