@@ -1,5 +1,5 @@
 /*
-This example shows how to read point cloud data from a ZDF file, iterate through it, and extract individual points.
+Read point cloud data from a ZDF file, iterate through it, and extract individual points.
 */
 
 using System;
@@ -37,9 +37,9 @@ class Program
             ulong iStop = (height + pixelsToDisplay) / 2;
             ulong jStart = (width - pixelsToDisplay) / 2;
             ulong jStop = (width + pixelsToDisplay) / 2;
-            for (ulong i = iStart; i < iStop; i++)
+            for(ulong i = iStart; i < iStop; i++)
             {
-                for (ulong j = jStart; j < jStop; j++)
+                for(ulong j = jStart; j < jStop; j++)
                 {
                     Console.WriteLine(string.Format(
                         "{0} {1} {2,-7} {3} {4,-7} {5} {6,-7} {7} {8,-7} {9} {10,-7} {11} {12,-7} {13} {14,-7}",
@@ -57,12 +57,11 @@ class Program
                         "B:",
                         pointCloudData[i, j].color.b.ToString(),
                         "SNR:",
-                        pointCloudSNR[i, j]
-                            .ToString("F1")));
+                        pointCloudSNR[i, j].ToString("F1")));
                 }
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

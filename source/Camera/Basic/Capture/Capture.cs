@@ -1,5 +1,5 @@
 ﻿/*
-This example shows how to capture point clouds, with color, from the Zivid camera.
+Capture point clouds, with color, from the Zivid camera.
 */
 
 using System;
@@ -17,23 +17,22 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings
-            {
-                Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
-                Acquisitions = { new Zivid.NET.Settings.Acquisition{ Aperture = 5.66,
-                                                                     ExposureTime = Duration.FromMicroseconds(6500) } },
+            var settings = new Zivid.NET.Settings {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
+                                                                      ExposureTime =
+                                                                          Duration.FromMicroseconds(6500) } },
                 Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
             };
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using(var frame = camera.Capture(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

@@ -1,5 +1,5 @@
 /*
-This example shows how to read intrinsic parameters from the Zivid camera (OpenCV model).
+List connected cameras and print version information.
 */
 
 using System;

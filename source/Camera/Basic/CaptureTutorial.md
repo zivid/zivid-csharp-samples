@@ -201,7 +201,7 @@ This tutorial shows how to use the Zivid SDK to connect to, configure, capture, 
 [settings2d-url]: Capture2D/Capture2D.cs#L21-L26
 [capture2d-url]: Capture2D/Capture2D.cs#L29
 [save2d-url]: Capture2D/Capture2D.cs#L62-L64
-[filecamera-url]: CaptureFromFile/CaptureFromFile.cs#L17-L18
+[filecamera-url]: CaptureFromFileCamera/CaptureFromFileCamera.cs#L17-L18
 [settings-hdr-url]: CaptureHDR/CaptureHDR.cs#L21-L27
 [settingsFromFile-url]: CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L21-L23
 [settings-complete-hdr-url]: CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L24-L60

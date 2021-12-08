@@ -1,5 +1,5 @@
 ﻿/*
-This example shows how to use Capture Assistant to capture point clouds, with color, from the Zivid camera.
+Use Capture Assistant to capture point clouds, with color, from the Zivid camera.
 */
 
 using System;
@@ -16,8 +16,7 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-            {
+            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
                 AmbientLightFrequency =
                     Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
                 MaxCaptureTime = Duration.FromMilliseconds(1200)
@@ -29,20 +28,21 @@ class Program
             Console.WriteLine("Settings suggested by Capture Assistant:");
             Console.WriteLine(settings.Acquisitions);
 
-            Console.WriteLine("Manually configuring processing settings (Capture Assistant only suggests acquisition settings)");
+            Console.WriteLine(
+                "Manually configuring processing settings (Capture Assistant only suggests acquisition settings)");
             settings.Processing.Filters.Reflection.Removal.Enabled = true;
             settings.Processing.Filters.Smoothing.Gaussian.Enabled = true;
             settings.Processing.Filters.Smoothing.Gaussian.Sigma = 1.5;
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using(var frame = camera.Capture(settings))
             {
                 string dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

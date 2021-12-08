@@ -1,5 +1,5 @@
 /*
-This sample shows how to downsample a zivid point cloud.
+Perform downsampling on a zivid point cloud.
 */
 
 using System;
@@ -38,7 +38,7 @@ class Program
             Console.WriteLine("Running visualizer. Blocking until window closes");
             visualizer.Run();
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

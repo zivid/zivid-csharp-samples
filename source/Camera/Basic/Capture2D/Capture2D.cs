@@ -1,5 +1,5 @@
 /*
-This example shows how to capture 2D images from the Zivid camera.
+Capture 2D images from the Zivid camera.
 */
 
 using System;
@@ -18,15 +18,15 @@ class Program
 
             Console.WriteLine("Configuring 2D settings");
             // Note: The Zivid SDK supports 2D captures with a single acquisition only
-            var settings2D = new Zivid.NET.Settings2D
-            {
-                Acquisitions = { new Zivid.NET.Settings2D.Acquisition{
-                    Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80 } },
-                Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 }, Gamma = 1.0 } }
+            var settings2D = new Zivid.NET.Settings2D {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition {
+                    Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80
+                } },
+                Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
             };
 
             Console.WriteLine("Capturing 2D frame");
-            using (var frame2D = camera.Capture(settings2D))
+            using(var frame2D = camera.Capture(settings2D))
             {
                 Console.WriteLine("Getting RGBA image");
                 var image = frame2D.ImageRGBA();
@@ -63,7 +63,7 @@ class Program
                 image.Save(imageFile);
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

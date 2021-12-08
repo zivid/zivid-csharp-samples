@@ -1,5 +1,6 @@
 ﻿/*
-This example shows how to capture point clouds, with color, from the Zivid file camera.
+Capture point clouds, with color, from the Zivid file camera.
+
 This example can be used without access to a physical camera.
 */
 
@@ -21,23 +22,22 @@ class Program
             var camera = zivid.CreateFileCamera(fileCamera);
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings
-            {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+            var settings = new Zivid.NET.Settings {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition {} },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
                                            Reflection = { Removal = { Enabled = true } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
             };
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using(var frame = camera.Capture(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;

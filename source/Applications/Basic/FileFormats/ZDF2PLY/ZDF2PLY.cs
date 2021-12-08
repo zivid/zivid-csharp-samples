@@ -1,5 +1,5 @@
 /*
-This example shows how to convert point cloud from ZDF file to PLY format.
+Convert point cloud from ZDF a file to a PLY file.
 */
 
 using System;
@@ -21,7 +21,7 @@ class Program
             Console.WriteLine("Saving point cloud to file: " + pointCloudFile);
             frame.Save(pointCloudFile);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             Environment.ExitCode = 1;
