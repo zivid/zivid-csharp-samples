@@ -17,7 +17,7 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var cameraModel = camera.Info.ModelName.Substring(0, 9);
+            var cameraModel = camera.Info.Model.ToString().Substring(0, 8);
             int captures = 3;
             for(int i = 1; i <= captures; i++)
             {
