@@ -31,7 +31,7 @@ image or other data from the camera. These samples shows how the data
 from the camera can be used.
 
   - **Camera**
-      - **Basic**
+      - **Basic** ([quick tutorial](source/Camera/Basic/QuickCaptureTutorial.md) / [complete tutorial](source/Camera/Basic/CaptureTutorial.md))
           - [CaptureHDRCompleteSettings](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs) - Capture point clouds, with color, from the Zivid camera
             with fully configured settings.
           - [CaptureAssistant](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs) - Use Capture Assistant to capture point clouds, with color,
