@@ -1,4 +1,5 @@
-﻿/*
+﻿// DOCTAG-START-ALL-1
+/*
 A basic warm-up method for a Zivid camera with specified time and capture cycle.
 */
 

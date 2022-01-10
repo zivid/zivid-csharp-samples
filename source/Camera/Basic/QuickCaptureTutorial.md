@@ -1,60 +1,103 @@
+# Quick Capture Tutorial
+
+
+
+---
+
+*Contents:*
+[**Introduction**](#Introduction) |
+[**Initialize**](#Initialize) |
+[**Connect**](#Connect) |
+[**Configure**](#Configure) |
+[**Capture**](#Capture) |
+[**Save**](#Save)
+
+---
 ## Introduction
 
-This tutorial shows how few API calls are required to capture a point cloud with Zivid SDK.
+This tutorial describes the most basic way to use the Zivid SDK to
+capture point clouds.
 
-1. [Connect](#connect)
-2. [Configure](#configure)
-3. [Capture](#capture)
-4. [Save](#save)
+For MATLAB see [Zivid Quick Capture Tutorial for
+MATLAB](https://github.com/zivid/zivid-matlab-samples/blob/master/source/Camera/Basic/QuickCaptureTutorial.md)
 
-### Prerequisites
+**Prerequisites**
 
-You should have installed Zivid SDK and cloned C# samples. For more details see [Instructions][installation-instructions-url].
+  - Install [Zivid
+    Software](https://support.zivid.com/latest//getting-started/software-installation.html).
+  - For Python: install
+    [zivid-python](https://github.com/zivid/zivid-python#installation)
 
-Before calling any of the APIs in the Zivid SDK, we have to start up the Zivid Application. This is done through a simple instantiation of the application ([go to source][start_app-url]).
-```csharp
+## Initialize
+
+Calling any of the APIs in the Zivid SDK requires initializing the Zivid
+application and keeping it alive while the program runs.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L14))
+
+``` sourceCode cs
 var zivid = new Zivid.NET.Application();
 ```
 
 ## Connect
 
-First we have to connect to the camera ([go to source][connect-url]).
-```csharp
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L18))
+
+``` sourceCode cs
 var camera = zivid.ConnectCamera();
 ```
 
 ## Configure
 
-Then we have to create settings ([go to source][settings-url]).
-```csharp
-var settings = new Zivid.NET.Settings { Acquisitions = { new Zivid.NET.Settings.Acquisition { } } };
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L19-L26))
+
+``` sourceCode cs
+var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
+	AmbientLightFrequency =
+		Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
+	MaxCaptureTime = Duration.FromMilliseconds(1200)
+};
+Console.WriteLine("Running Capture Assistant with parameters:\n{0}", suggestSettingsParameters);
+var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
 ```
 
 ## Capture
 
-Now we can capture a frame. The default capture is based on a single acquisition ([go to source][capture-url]).
-```csharp
-var frame = camera.Capture(settings);
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31))
+
+``` sourceCode cs
+using(var frame = camera.Capture(settings))
 ```
 
 ## Save
 
-We can now save our results. By default the 3D point cloud is saved in Zivid format `.zdf` ([go to source][save-url]).
-```csharp
-frame.Save("Frame.zdf");
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L34-L37))
+
+``` sourceCode cs
+var dataFile = "Frame.zdf";
+frame.Save(dataFile);
 ```
 
-## Conclusion
+The API detects which format to use. See [Point
+Cloud](https://support.zivid.com/latest//reference-articles/point-cloud-structure-and-output-formats.html)
+for a list of supported formats.
 
-This tutorial showed how few API calls are required to capture a point cloud with Zivid SDK.
+-----
 
-### Recommended further reading
+Tip:
 
-[The complete Capture Tutorial](CaptureTutorial.md)
+You can open and view `Frame.zdf` file in [Zivid
+Studio](https://support.zivid.com/latest//getting-started/studio-guide.html).
 
-[installation-instructions-url]: ../../../README.md#instructions
-[start_app-url]: Capture/Capture.cs#L14
-[connect-url]: Capture/Capture.cs#L17
-[settings-url]: Capture/Capture.cs#L20-L25
-[capture-url]: Capture/Capture.cs#L28
-[save-url]: Capture/Capture.cs#L30-L32
+**Conclusion**
+
+This tutorial shows the most basic way to use the Zivid SDK to connect
+to, capture, and save from the Zivid camera.
+
+For a more in-depth tutorial check out the complete
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Camera/Basic/CaptureTutorial).
