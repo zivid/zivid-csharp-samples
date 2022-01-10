@@ -5,23 +5,22 @@
 ---
 
 *Contents:*
-[**Introduction**](#Introduction) |
-[**Initialize**](#Initialize) |
-[**Connect**](#Connect) |
-[**Connect**](#Connect---Specific-Camera) |
-[**Connect**](#Connect---File-Camera) |
-[**Configure**](#Configure) |
-[**Capture**](#Capture-Assistant) |
-[**Manual**](#Manual-configuration) |
-[**Single**](#Single-Acquisition) |
-[**Multi**](#Multi-Acquisition-HDR) |
-[**2D**](#2D-Settings) |
-[**From**](#From-File) |
-[**Capture**](#Capture) |
-[**Capture2D**](#Capture2D) |
-[**Save**](#Save) |
-[**Save**](#Save-2D) |
-[**Conclusion**](#Conclusion)
+1. [Initialize](#initialize)
+2. [Connect](#connect)
+   1. [Specific Camera](#connect---specific-camera)
+   2. [File Camera](#connect---file-camera)
+3. [Configure](#configure)
+   1. [Capture Assistant](#capture-assistant)
+   2. [Manual Configuration](#manual-configuration)
+      1. [Single](#single-frame)
+      2. [HDR](#hdr-frame)
+      3. [2D](#2d-settings)
+   3. [From File](#from-file)
+4. [Capture](#capture)
+    1. [2D](#capture-2d)
+5. [Save](#save)
+    1. [2D](#save-2d)
+6. [Conclusion](#Conclusion)
 
 ---
 ## Introduction
