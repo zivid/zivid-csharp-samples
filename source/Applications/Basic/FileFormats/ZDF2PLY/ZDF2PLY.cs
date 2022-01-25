@@ -1,5 +1,5 @@
 /*
-Convert point cloud from ZDF a file to a PLY file.
+Convert point cloud from a ZDF file to a PLY file.
 */
 
 using System;

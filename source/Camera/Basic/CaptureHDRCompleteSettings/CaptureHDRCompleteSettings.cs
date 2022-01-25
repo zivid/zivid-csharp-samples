@@ -6,6 +6,8 @@ point cloud. This example shows how to fully configure settings for each acquisi
 In general, capturing an HDR point cloud is a lot simpler than this. The purpose of
 this example is to demonstrate how to configure all the settings.
 
+This sample also demonstrates how to save and load settings from file.
+
 Note: This example uses experimental SDK features, which may be modified, moved, or deleted in the future without notice.
 */
 
@@ -25,7 +27,7 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Configuring global processing settings:");
+            Console.WriteLine("Configuring processing settings for capture:");
             var settings = new Zivid.NET.Settings() {
                 Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
@@ -77,6 +79,14 @@ class Program
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
+
+                var settingsFile = "Settings.yml";
+                Console.WriteLine("Saving settings to file: " + settingsFile);
+                settings.Save(settingsFile);
+
+                Console.WriteLine("Loading settings from file: " + settingsFile);
+                var settingsFromFile = new Zivid.NET.Settings(settingsFile);
+                Console.WriteLine(settingsFromFile);
             }
         }
         catch(Exception ex)

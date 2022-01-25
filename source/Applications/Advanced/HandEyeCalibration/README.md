@@ -21,7 +21,7 @@ The following applications creates a **Transformation Matrix** from data provide
 -----------------
 The following applications assume that a **Transformation Matrix** has been found
 
-[**UtilizeEyeInHandCalibration**][UtilizeEyeInHandCalibration-url]:
+[**UtilizeHandEyeCalibration**][UtilizeHandEyeCalibration-url]:
 
 * Shows how to transform position and rotation (pose) in Camera co-ordinate system to Robot co-ordinate system.
 * Example use case - "Bin Picking":
@@ -30,6 +30,6 @@ The following applications assume that a **Transformation Matrix** has been foun
    3. Use transformed pose to calculate robot path and execute pick
 
 [HandEyeCalibration-url]: HandEyeCalibration/HandEyeCalibration.cs
-[UtilizeEyeInHandCalibration-url]: UtilizeEyeInHandCalibration/UtilizeEyeInHandCalibration.cs
+[UtilizeHandEyeCalibration-url]: UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs
 [ZividHandEyeCalibration-url]: https://support.zivid.com/academy/applications/hand-eye/zivid_CLI_tool_for_hand_eye_calibration.html
 [Tutorial-url]: https://support.zivid.com/academy/applications/hand-eye.html
