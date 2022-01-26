@@ -1,5 +1,7 @@
 ﻿/*
 Capture point clouds, with color, from the Zivid camera, with settings from YML file.
+
+The YML files for this sample can be found under the main Zivid sample instructions.
 */
 
 using System;
@@ -16,7 +18,7 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Configuring settings from file");
+            Console.WriteLine("Loading settings from file");
             var cameraModel = camera.Info.Model.ToString().Substring(0, 8);
             var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                                + "/Zivid/Settings/" + cameraModel + "/Settings01.yml";

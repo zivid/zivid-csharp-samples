@@ -23,7 +23,7 @@ class Program
             {
                 var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                                    + "/Zivid/Settings/" + cameraModel + "/Settings0" + i + ".yml";
-                Console.WriteLine("Configuring settings from file: " + settingsFile);
+                Console.WriteLine("Loading settings from file: " + settingsFile);
                 var settings = new Zivid.NET.Settings(settingsFile);
                 Console.WriteLine(settings.Acquisitions);
 

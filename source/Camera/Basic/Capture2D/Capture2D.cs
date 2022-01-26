@@ -59,7 +59,7 @@ class Program
                                   nativeArray[pixelRow, pixelCol, 3]);
 
                 var imageFile = "Image.png";
-                Console.WriteLine("Saving image to file: {0}", imageFile);
+                Console.WriteLine("Saving 2D color image to file: {0}", imageFile);
                 image.Save(imageFile);
             }
         }

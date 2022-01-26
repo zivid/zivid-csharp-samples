@@ -30,6 +30,10 @@ class Program
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
+
+                var dataFilePLY = "PointCloud.ply";
+                Console.WriteLine("Exporting point cloud to file: " + dataFilePLY);
+                frame.Save(dataFilePLY);
             }
         }
         catch(Exception ex)

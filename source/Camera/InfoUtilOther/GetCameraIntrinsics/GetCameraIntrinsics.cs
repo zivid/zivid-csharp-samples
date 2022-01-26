@@ -30,8 +30,8 @@ class Program
             Console.WriteLine("    K1 = " + intrinsics.Distortion.K1.ToString());
             Console.WriteLine("    K2 = " + intrinsics.Distortion.K2.ToString());
             Console.WriteLine("    K3 = " + intrinsics.Distortion.K3.ToString());
-            Console.WriteLine("    P1 = " + intrinsics.Distortion.K1.ToString());
-            Console.WriteLine("    P2 = " + intrinsics.Distortion.K2.ToString());
+            Console.WriteLine("    P1 = " + intrinsics.Distortion.P1.ToString());
+            Console.WriteLine("    P2 = " + intrinsics.Distortion.P2.ToString());
 
             var intrinsicsFile = "Intrinsics.yml";
             Console.WriteLine("Saving camera intrinsics to file: " + intrinsicsFile);
