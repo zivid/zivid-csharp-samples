@@ -5,23 +5,22 @@ matrix.
 This example shows how to utilize the result of Hand-Eye calibration to transform either (picking) point coordinates
 or the entire point cloud from the camera frame to the robot base frame.
 
-For both Eye-To-Hand and Eye-In-Hand, there is a Zivid gem placed approx. 500 mm away from the robot base (see below).
-The (picking) point is the Zivid gem centroid, defined as image coordinates in the camera frame and hard-coded
-in this code example. Open the ZDF files in Zivid Studio to inspect the gem's 2D and corresponding 3D coordinates.
+For both Eye-To-Hand and Eye-In-Hand, there is a Zivid gem placed approx. 500 mm away from the robot base in the y-axis.
+The (picking) point is the Zivid gem centroid, defined as image coordinates in the camera frame and hard-coded in this
+code example. Open the ZDF files in Zivid Studio to inspect the gem's 2D and corresponding 3D coordinates.
 
 Eye-To-Hand
 - ZDF file: ZividGemEyeToHand.zdf
 - 2D image coordinates: (1035,255)
-- Corresponding 3D coordinates: (37.77 -145.92 1227.1)
-- Corresponding 3D coordinates (robot base frame): (-12.4  514.37 -21.79)
+- Corresponding 3D coordinates: (37.8, -145.9, 1227.1)
 
 Eye-In-Hand:
 - ZDF file: ZividGemEyeInHand.zdf
-- 2D image coordinates: (1460,755)
-- Corresponding 3D coordinates (camera frame): (83.95  28.84 305.7)
-- Corresponding 3D coordinates (robot base frame): (531.03  -5.44 164.6)
+- 2D image coordinates: (1357,666)
+- Corresponding 3D coordinates: (82.4, 18.0, 595.9)
 
-For verification, check that the Zivid gem centroid 3D coordinates are the same as above after the transformation.
+For verification, check that after the transformation, the Zivid gem centroid 3D coordinates are near 0 in x and z,
+and approx. 500 mm in y.
 
 The YAML files for this sample can be found under the main instructions for Zivid samples.
 */
@@ -77,7 +76,7 @@ class Program
                         fileName = "ZividGemEyeInHand.zdf";
 
                         // The (picking) point is defined as image coordinates in camera frame. It is hard-coded for the
-                        // ZividGemEyeInHand.zdf (1460,755) X: 83.95 Y: 28.84 Z: 305.7
+                        // ZividGemEyeInHand.zdf (1357,666) X: 82.4 Y: 18.0 Z: 595.9,
                         imageCoordinateX = 1357;
                         imageCoordinateY = 666;
 

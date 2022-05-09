@@ -5,14 +5,22 @@
 ---
 
 *Contents:*
-1. [Introduction](#Introduction)
-2. [Initialize](#Initialize)
-3. [Connect](#Connect)
-4. [Configure](#Configure)
-5. [Capture](#Capture)
-6. [Save](#Save)
+[**Introduction**](#Introduction) |
+[**Initialize**](#Initialize) |
+[**Connect**](#Connect) |
+[**Configure**](#Configure) |
+[**Capture**](#Capture) |
+[**Save**](#Save)
 
 ---
+
+
+
+  - local
+
+  - depth  
+    1
+
 ## Introduction
 
 This tutorial describes the most basic way to use the Zivid SDK to

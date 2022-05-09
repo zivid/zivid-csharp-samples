@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains C# code samples for Zivid SDK v2.6.1. For
+This repository contains C++ code samples for Zivid SDK v2.7.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -31,18 +31,18 @@ image or other data from the camera. These samples shows how the data
 from the camera can be used.
 
   - **Camera**
-      - **Basic** ([quick tutorial](source/Camera/Basic/QuickCaptureTutorial.md) / [complete tutorial](source/Camera/Basic/CaptureTutorial.md))
+      - **Basic**
           - [Capture](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs) - Capture point clouds, with color, from the Zivid camera.
-          - [Capture2D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs) - Capture 2D images from the Zivid camera.
+          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture point clouds, with color, from the Zivid camera,
+            with settings from YML file.
           - [CaptureFromFileCamera](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs) - Capture point clouds, with color, from the Zivid file
             camera.
           - [CaptureAssistant](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs) - Use Capture Assistant to capture point clouds, with color,
             from the Zivid camera.
           - [CaptureHDR](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDR/CaptureHDR.cs) - Capture point clouds, with color, from the Zivid camera.
+          - [Capture2D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs) - Capture 2D images from the Zivid camera.
           - [CaptureHDRCompleteSettings](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs) - Capture point clouds, with color, from the Zivid camera
             with fully configured settings.
-          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture point clouds, with color, from the Zivid camera,
-            with settings from YML file.
       - **Advanced**
           - [CaptureHDRLoop](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs) - Cover the same dynamic range in a scene with different
             acquisition settings to optimize for quality, speed, or to
@@ -50,35 +50,35 @@ from the camera can be used.
           - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
             subset.
       - **InfoUtilOther**
-          - [PrintVersionInfo](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs) - List connected cameras and print version information.
-          - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
-            model).
           - [CaptureWithDiagnostics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CaptureWithDiagnostics/CaptureWithDiagnostics.cs) - Capture point clouds, with color, from the Zivid camera,
             with settings from YML file and diagnostics enabled.
-          - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
+          - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
+            model).
           - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/Warmup/Warmup.cs) - A basic warm-up method for a Zivid camera with specified
             time and capture cycle.
+          - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
+          - [PrintVersionInfo](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs) - List connected cameras and print version information.
   - **Applications**
       - **Basic**
           - **Visualization**
-              - [CaptureFromFileVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs) - Capture point clouds, with color, from the Zivid file
-                camera, and visualize them.
               - [CaptureVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs) - Capture point clouds, with color, from the Zivid
+                camera, and visualize them.
+              - [CaptureFromFileVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs) - Capture point clouds, with color, from the Zivid file
                 camera, and visualize them.
           - **FileFormats**
               - [ReadIterateZDF](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs) - Read point cloud data from a ZDF file, iterate through
                 it, and extract individual points.
               - [ZDF2PLY](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs) - Convert point cloud from a ZDF a file to a PLY file.
       - **Advanced**
-          - [Downsample](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs) - Downsample point cloud from a ZDF file.
+          - [MultiCameraCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs) - Use captures of a calibration object to generate
+            transformation matrices to a single coordinate frame.
           - [TransformPointCloudFromMillimetersToMeters](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/TransformPointCloudFromMillimetersToMeters/TransformPointCloudFromMillimetersToMeters.cs) - Transform point cloud data from millimeters to meters.
+          - [Downsample](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs) - Downsample point cloud from a ZDF file.
+          - [HandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration/HandEyeCalibration.cs) - Perform Hand-Eye calibration.
           - **HandEyeCalibration**
-              - [HandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration/HandEyeCalibration.cs) - Perform Hand-Eye calibration.
               - [UtilizeHandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs) - Transform single data point or entire point cloud from
                 camera frame to robot base frame using Hand-Eye
                 calibration
-          - [MultiCameraCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs) - Use captures of a calibration object to generate
-            transformation matrices to a single coordinate frame.
 
 ## Installation
 

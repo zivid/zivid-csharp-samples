@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAEF093E-9EEC-4CE5-87FE-D6FDB45CE700}</ProjectGuid>
+    <ProjectGuid>{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>HandEyeCalibration</RootNamespace>
     <AssemblyName>HandEyeCalibration</AssemblyName>
