@@ -1,123 +1,261 @@
+# Point Cloud Tutorial
+
+Note\! This tutorial has been generated for use on Github. For original
+tutorial see:
+[PointCloudTutorial](https://support.zivid.com/latest/rst/academy/applications/point-cloud-tutorial.html)
+
+
+
+---
+
+*Contents:*
+[**Introduction**](#Introduction) |
+[**Frame**](#Frame) |
+[**Point**](#Point-Cloud) |
+[**Transform**](#Transform) |
+[**Downsample**](#Downsample) |
+[**Normals**](#Normals) |
+[**Visualize**](#Visualize) |
+[**Conclusion**](#Conclusion)
+
+---
+
+
 
 ## Introduction
 
-This tutorial describes how to use Zivid SDK to work with [Point Cloud][kb-point_cloud-url] data.
+This tutorial describes how to use Zivid SDK to work with [Point
+Cloud](https://support.zivid.com/latest//reference-articles/point-cloud-structure-and-output-formats.html)
+data.
 
-1. [Frame](#frame)
-   1. [Capture](#capture)
-   2. [Load](#load)
-   3. [Visualize](#visualize)
-3.  [Point Cloud](#point-cloud)
-    1. [Get handle](#get-handle)
-    2. [Copy](#copy)
-    3.  [Transform](#transform)
-    4. [Downsample](#downsample)
+-----
 
-### Prerequisites
+Tip:
 
-You should have installed Zivid SDK and cloned C# samples. For more details see [Instructions][installation-instructions-url].
+If you prefer watching a video, our webinar [Getting your point cloud
+ready for your
+application](https://www.zivid.com/webinars-page?wchannelid=ffpqbqc7sg&wmediaid=h66zph71vo)
+covers the Point Cloud Tutorial. .. rubric:: Prerequisites
+
+  - Install [Zivid
+    Software](https://support.zivid.com/latest//getting-started/software-installation.html).
+  - For Python: install
+    [zivid-python](https://github.com/zivid/zivid-python#installation)
 
 ## Frame
 
+The `Zivid.NET.Frame` contains the point cloud and color image (stored
+on compute device memory) and the capture and camera information.
+
 ### Capture
 
-The ```Zivid.NET.Frame``` can be captured with a camera ([go to source][frame-capture]).
-```csharp
-var frame = camera.Capture(settings);
+When you capture with Zivid, you get a frame in return.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31))
+
+``` sourceCode cs
+using(var frame = camera.Capture(settings))
 ```
-Check [Capture Tutorial][capture-tutorial] for more details.
+
+Check
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md)
+for detailed instructions on how to capture.
 
 ### Load
-It can also be loaded from a ZDF file ([go to source][frame-from-file]).
-```csharp
-var frame = new Zivid.NET.Frame("/path/to/Zivid3D.zdf");
-```
-### Visualize
 
-Having the frame allows you to visualize the point cloud ([go to source][visualize-point-cloud]).
+The frame can also be loaded from a ZDF file.
 
-```csharp
-var visualizer = new Zivid.NET.Visualization.Visualizer();
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L15-L18))
 
-visualizer.Show(frame);
-visualizer.ShowMaximized();
-visualizer.ResetToFit();
-
-visualizer.Run();
+``` sourceCode cs
+var dataFile =
+	Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
+Console.WriteLine("Reading ZDF frame from file: " + dataFile);
+var frame = new Zivid.NET.Frame(dataFile);
 ```
 
 ## Point Cloud
 
-### Get handle
+### Get handle from Frame
 
-You can now get a handle to the point cloud data on the GPU ([go to source][point-cloud]).
-```csharp
+You can now get a handle to the point cloud data on the GPU.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L22))
+
+``` sourceCode cs
 var pointCloud = frame.PointCloud;
 ```
-Getting the property ```Zivid.NET.Frame.PointCloud``` does not perform any copying from GPU memory.
 
-Note: ```Zivid.NET.Camera.Capture()``` method returns as soon as the camera is done capturing. At that point the handle from ```Zivid.NET.Frame.PointCloud``` is available instantly as well. However, the actual point cloud data becomes available only after the GPU is finished processing. This processing will occur on the GPU in the background, and any calls to data-copy methods (see section [Copy](#copy) below) will wait for this to finish before proceeding with the requested copy operation.
+Point cloud contains XYZ, RGB, and SNR, laid out on a 2D grid.
 
-### Copy
+For more info check out [Point Cloud
+Structure](https://support.zivid.com/latest//reference-articles/point-cloud-structure-and-output-formats.html).
 
-You can now selectively copy data based on what is required. This is the complete list of output data formats and how to copy them from the GPU.
+Getting the property `Zivid.NET.Frame.PointCloud` does not perform any
+copying from GPU memory.
 
+-----
 
-|Return type|Methods for copying from GPU|Data per pixel|Total data copied|
-|-|-|-|-|
-|```float[height,width,3]```| ```PointCloud.CopyPointsXYZ()```| 12 bytes |28 MB |
-|```float[height,width,4]```| ```PointCloud.CopyPointsXYZW()```| 16 bytes |37 MB |
-|```float[height,width,1]```| ```PointCloud.CopyPointsZ()```| 4 bytes |9 MB |
-|```byte[height,width,4]```| ```PointCloud.CopyColorsRGBA()```| 4 bytes |9 MB |
-|```Zivid.NET.ImageRGBA```| ```PointCloud.CopyImageRGBA()```| 4 bytes |9 MB |
-|```Zivid.NET.PointXYZColorRGBA[height, width]```| ```PointCloud.CopyPointsXYZColorsRGBA()```| 16 bytes |37 MB |
-|```Zivid.NET.PointXYZColorBGRA[height, width]```| ```PointCloud.CopyPointsXYZColorsBGRA()```| 16 bytes |37 MB |
-|```float[height,width]```| ```PointCloud.CopySNRs()```| 4 bytes |9 MB |
+Note:
 
-#### Copy selected data from GPU to system memory (Zivid-allocated)
+The handle from `Zivid.NET.Frame.PointCloud` is available instantly.
+However, the actual point cloud data becomes available only after the
+processing on the GPU is finished. Any calls to data-copy methods
+(section below) will block and wait for processing to finish before
+proceeding with the requested copy operation.
 
-If you are only concerned about e.g. RGB color data of the point cloud, you can copy only that data to the system memory ([go to source][copy]).
-```csharp
-var colorsRGBA = frame.PointCloud.CopyColorsRGBA(); /* Colors are copied from the GPU and into a
-three-dimensional array of bytes (byte[height,width,4]), representing a 4-channel RGBA image. */
+For detailed explanation, see [Point Cloud Capture
+Process](https://support.zivid.com/latest/rst/academy/camera/point-cloud-capture-process.html).\]
+
+-----
+
+### Copy from GPU to CPU memory
+
+You can now selectively copy data based on what is required. This is the
+complete list of output data formats and how to copy them from the GPU.
+
+| Return type                                  | Copy methods                           | Data per pixel | Total data |
+| -------------------------------------------- | -------------------------------------- | -------------- | ---------- |
+| `float[height,width,3]`                      | `PointCloud.CopyPointsXYZ()`           | 12 bytes       | 28 MB      |
+| `float[height,width,4]`                      | `PointCloud.CopyPointsXYZW()`          | 16 bytes       | 37 MB      |
+| `float[height,width,1]`                      | `PointCloud.CopyPointsZ()`             | 4 bytes        | 9 MB       |
+| `byte[height,width,4]`                       | `PointCloud.CopyColorsRGBA()`          | 4 bytes        | 9 MB       |
+| `float[height,width]`                        | `PointCloud.CopySNRs()`                | 4 bytes        | 9 MB       |
+| `Zivid.NET.PointXYZColorRGBA[height, width]` | `PointCloud.CopyPointsXYZColorsRGBA()` | 16 bytes       | 37 MB      |
+| `Zivid.NET.PointXYZColorBGRA[height, width]` | `PointCloud.CopyPointsXYZColorsBGRA()` | 16 bytes       | 37 MB      |
+| `Zivid.NET.ImageRGBA`                        | `PointCloud.CopyImageRGBA()`           | 4 bytes        | 9 MB       |
+
+Here is an example of how to copy data.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L24))
+
+``` sourceCode cs
+var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA();
 ```
+
+#### Memory allocation options
+
+In terms of memory allocation, there are two ways to copy data:
+
+  - The Zivid SDK can allocate a memory buffer and copy data to it.
+  - A user can pass a pointer to a pre-allocated memory buffer, and the
+    Zivid SDK will copy the data to the pre-allocated memory buffer.
 
 ## Transform
 
-You may want to change the point cloud's origin from the camera to the robot base frame or scale the point cloud to e.g. change it from millimeters to meters. This can be done by transforming the point cloud using ```Zivid.NET.PointCloud.Transform(transformationMatrix)```.
+You may want to
+[transform](https://support.zivid.com/latest//academy/applications/transform.html)
+the point cloud to change its origin from the camera to the robot base
+frame or, e.g., [scale the point cloud by transforming it from mm to
+m](https://support.zivid.com/latest//academy/applications/transform/transform-millimeters-to-meters.html).
 
-```csharp
-pointCloud.Transform(transformationMatrix);
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs#L152))
+
+``` sourceCode cs
+pointCloud.Transform(transformBaseToCamera);
 ```
 
 ## Downsample
 
+Sometimes you might not need a point cloud with as `high spatial
+resolution (High spatial resolution means more detail and less distance
+between points)` as given from the camera. You may then
+[downsample](https://support.zivid.com/latest//academy/applications/downsampling.html)
+the point cloud.
 
-Sometimes you might not need as dense point cloud as given from the camera and you want to downsample the point cloud. Downsampling can be done in-place by using ```Zivid.NET.PointCloud.Downsample(Zivid.NET.PointCloud.Downsampling)``` ([go to source][downsample]).
+Downsampling can be done in-place, which modifies the current point
+cloud.
 
-```csharp
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L38))
+
+``` sourceCode cs
 pointCloud.Downsample(Zivid.NET.PointCloud.Downsampling.By2x2);
 ```
-Another way to downsample a point cloud is by using ```Zivid.NET.PointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling)```. This does not modify the current point cloud but returns the downsampled point cloud as a new point cloud instance. 
 
-```csharp
-downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
+It is also possible to get the downsampled point cloud as a new point
+cloud instance, which does not alter the existing point cloud.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L31))
+
+``` sourceCode cs
+var downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
 ```
 
-Supported downsampling rates are: by2x2, by3x3 and by4x4.
+Zivid SDK supports the following downsampling rates: `by2x2`, `by3x3`,
+and `by4x4`, with the possibility to perform downsampling multiple
+times.
+
+## Normals
+
+Some applications require computing
+[normals](https://support.zivid.com/latest//academy/applications/normals.html)
+from the point cloud.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L34-L35))
+
+``` sourceCode cs
+Console.WriteLine("Computing normals and copying them to CPU memory");
+var normals = pointCloud.CopyNormalsXYZ();
+```
+
+The Normals API computes the normal at each point in the point cloud and
+copies normals from the GPU memory to the CPU memory. The result is a
+matrix of normal vectors, one for each point in the input point cloud.
+The size of normals is equal to the size of the input point cloud.
+
+## Visualize
+
+Having the frame allows you to visualize the point cloud.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L34))
+
+``` sourceCode cs
+Console.WriteLine("Setting up visualization");
+var visualizer = new Zivid.NET.Visualization.Visualizer();
+Console.WriteLine("Visualizing point cloud");
+visualizer.Show(frame);
+visualizer.ShowMaximized();
+visualizer.ResetToFit();
+
+Console.WriteLine("Running visualizer. Blocking until window closes");
+visualizer.Run();
+```
+
+You can visualize the point cloud from the point cloud object as well.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L22-L52))
+
+``` sourceCode cs
+Console.WriteLine("Getting point cloud from frame");
+var pointCloud = frame.PointCloud;
+Console.WriteLine("Setting up visualization");
+var visualizer = new Zivid.NET.Visualization.Visualizer();
+
+Console.WriteLine("Visualizing point cloud");
+visualizer.Show(pointCloud);
+visualizer.ShowMaximized();
+visualizer.ResetToFit();
+
+Console.WriteLine("Running visualizer. Blocking until window closes");
+visualizer.Run();
+```
+
+For more information, check out [Visualization
+Tutorial](https://support.zivid.com/latest/rst/academy/applications/visualization-tutorial.html),
+where we cover point cloud, color image, depth map, and normals
+visualization, with implementations using third party libraries.
 
 ## Conclusion
 
-This tutorial shows how to use the Zivid SDK to extract the point cloud, manipulate it, transform it, and visualize it.
-
-[//]: ### "Recommended further reading"
-
-[installation-instructions-url]: ../../README.md#instructions
-[frame-from-file]:Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L15-L18
-[frame-capture]:../Camera/Basic/Capture/Capture.cs#L28
-[capture-tutorial]:../Camera/Basic/CaptureTutorial.md#L158
-[point-cloud]:Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L21
-[copy]:Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L22-L23
-[visualize-point-cloud]:Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L34
-[kb-point_cloud-url]: https://support.zivid.com/latest/reference-articles/zivid-3d-camera-technology/point-cloud-structure-and-output-formats.html
-[downsample]:Advanced/Downsample/Downsample.cs#L26]
+This tutorial shows how to use the Zivid SDK to extract the point cloud,
+manipulate it, transform it, and visualize it.
