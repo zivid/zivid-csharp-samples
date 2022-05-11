@@ -21,17 +21,17 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var inputs = readHandEyeInputs(camera);
+            var handEyeInput = readHandEyeInputs(camera);
 
-            var calibrationResult = performCalibration(inputs);
+            var calibrationResult = performCalibration(handEyeInput);
 
             if(calibrationResult.Valid())
             {
-                Console.WriteLine("{0}\n{1}\n{2}", "Hand-eye calibration OK", "Result:", calibrationResult);
+                Console.WriteLine("{0}\n{1}\n{2}", "Hand-Eye calibration OK", "Result:", calibrationResult);
             }
             else
             {
-                Console.WriteLine("Hand-eye calibration FAILED");
+                Console.WriteLine("Hand-Eye calibration FAILED");
                 Environment.ExitCode = 1;
             }
         }
@@ -61,12 +61,12 @@ class Program
                         using(var frame = Interaction.AssistedCapture(camera))
                         {
                             Console.Write("Detecting checkerboard in point cloud: ");
-                            var result = Detector.DetectFeaturePoints(frame.PointCloud);
+                            var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
 
-                            if(result)
+                            if(detectionResult)
                             {
                                 Console.WriteLine("OK");
-                                handEyeInput.Add(new HandEyeInput(robotPose, result));
+                                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
                                 ++currentPoseId;
                             }
                             else
@@ -129,7 +129,7 @@ class Interaction
 
     public static CommandType EnterCommand()
     {
-        Console.Write("Enter command, p (to add robot pose) or c (to perform calibration): ");
+        Console.Write("Enter command, p (to add robot pose) or c (to perform calibration):");
         var command = Console.ReadLine().ToLower();
 
         switch(command)
