@@ -16,7 +16,7 @@ The following applications creates a **Transformation Matrix** from data provide
 
 [ZividHandEyeCalibration][ZividHandEyeCalibration-url]
 
-* CLI application which takes a collection of pose pairs (e.g. output of steps i.-iii. in [HandEyeCalibration][HandEyeCalibration-url]) and returns a **Transformation Matrix**. This application comes with the Windows installer and is part of tool deb for Ubuntu.
+* [CLI application][CLI application-url] which takes a collection of pose pairs (e.g. output of steps i.-iii. in [HandEyeCalibration][HandEyeCalibration-url]) and returns a **Transformation Matrix**. This application comes with the Windows installer and is part of the tools deb for Ubuntu.
 
 -----------------
 The following applications assume that a **Transformation Matrix** has been found
@@ -31,5 +31,6 @@ The following applications assume that a **Transformation Matrix** has been foun
 
 [HandEyeCalibration-url]: HandEyeCalibration/HandEyeCalibration.cs
 [UtilizeHandEyeCalibration-url]: UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs
-[ZividHandEyeCalibration-url]: https://support.zivid.com/academy/applications/hand-eye/zivid_CLI_tool_for_hand_eye_calibration.html
+[ZividHandEyeCalibration-url]: https://support.zivid.com/latest/academy/applications/hand-eye/hand-eye-calibration-process.html
 [Tutorial-url]: https://support.zivid.com/academy/applications/hand-eye.html
+[CLI application-url]: https://support.zivid.com/latest/academy/applications/hand-eye/zivid_CLI_tool_for_hand_eye_calibration.html
