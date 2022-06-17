@@ -20,6 +20,7 @@ class Program
         try
         {
             Mode mode = ParseMode(args);
+
             var zivid = new Zivid.NET.Application();
 
             Console.WriteLine("Connecting to camera");
