@@ -114,7 +114,7 @@ You may want to experiment with the SDK, without access to a physical
 camera. Minor changes are required to keep the sample working.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L18-L23))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L19-L24))
 
 ``` sourceCode cs
 var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
@@ -143,7 +143,7 @@ the Capture Assistant. This is available in the Zivid SDK to help
 configure camera settings.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L19-L26))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L28))
 
 ``` sourceCode cs
 var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
@@ -217,7 +217,7 @@ foreach(var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L30-L73))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L73))
 
 ``` sourceCode cs
 Console.WriteLine("Configuring processing settings for capture:");
@@ -226,15 +226,14 @@ var settings = new Zivid.NET.Settings() {
 	Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
 							Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
 							Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
-							Reflection = { Removal = { Enabled = true } },
+							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
 							Experimental = { ContrastDistortion = { Correction = { Enabled = true,
 																					Strength = 0.4 },
 																	Removal = { Enabled = true,
 																				Threshold = 0.5 } } } },
 				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
 							Gamma = 1.0,
-							Experimental = { ToneMapping = { Enabled =
-																ToneMappingEnabledOption.HdrOnly } } } }
+							Experimental = { Mode = ColorModeOption.Automatic } } }
 };
 Console.WriteLine(settings.Processing);
 Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");

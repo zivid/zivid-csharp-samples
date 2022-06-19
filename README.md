@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains C# code samples for Zivid SDK v2.6.1. For
+This repository contains csharp code samples for Zivid SDK v2.7.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -12,6 +12,7 @@ releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releas
 ---
 
 *Contents:*
+[**Tutorials**](#Tutorials-list) |
 [**Samples**](#Samples-list) |
 [**Installation**](#Installation) |
 [**Support**](#Support) |
@@ -20,6 +21,12 @@ releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releas
 ---
 
 
+
+## Tutorials list
+
+  - [QuickCaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/QuickCaptureTutorial.md)
+  - [CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/CaptureTutorial.md)
+  - [PointCloudTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Applications/PointCloudTutorial.md)
 
 ## Samples list
 
@@ -44,16 +51,16 @@ from the camera can be used.
           - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture point clouds, with color, from the Zivid camera,
             with settings from YML file.
       - **Advanced**
-          - [CaptureHDRLoop](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs) - Cover the same dynamic range in a scene with different
-            acquisition settings to optimize for quality, speed, or to
-            find a compromise.
-          - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
-            subset.
           - [CaptureHalconViaGenICam](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHalconViaGenICam/CaptureHalconViaGenICam.cs) - Capture and save a point cloud, with colors, using GenICam
             interface and Halcon C++ SDK.
           - [CaptureHalconViaZivid](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHalconViaZivid/CaptureHalconViaZivid.cs) - Capture a point cloud, with colors, using Zivid SDK,
             transform it to a Halcon point cloud and save it using
             Halcon C++ SDK.
+          - [CaptureHDRLoop](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs) - Cover the same dynamic range in a scene with different
+            acquisition settings to optimize for quality, speed, or to
+            find a compromise.
+          - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
+            subset.
       - **InfoUtilOther**
           - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
           - [CaptureWithDiagnostics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CaptureWithDiagnostics/CaptureWithDiagnostics.cs) - Capture point clouds, with color, from the Zivid camera,

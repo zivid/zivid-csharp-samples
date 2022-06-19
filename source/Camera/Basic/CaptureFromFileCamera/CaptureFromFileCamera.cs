@@ -5,7 +5,8 @@ This example can be used without access to a physical camera.
 */
 
 using System;
-
+using ReflectionFilterModeOption = 
+    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 class Program
 {
     static void Main()
@@ -25,7 +26,7 @@ class Program
             var settings = new Zivid.NET.Settings {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition {} },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Reflection = { Removal = { Enabled = true } } },
+                                           Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
             };
 

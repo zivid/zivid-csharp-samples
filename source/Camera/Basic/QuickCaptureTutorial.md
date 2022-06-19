@@ -59,7 +59,7 @@ var camera = zivid.ConnectCamera();
 ## Configure
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L19-L26))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L28))
 
 ``` sourceCode cs
 var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
@@ -106,4 +106,4 @@ This tutorial shows the most basic way to use the Zivid SDK to connect
 to, capture, and save from the Zivid camera.
 
 For a more in-depth tutorial check out the complete
-[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md).
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/CaptureTutorial.md).
