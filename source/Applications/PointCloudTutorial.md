@@ -59,7 +59,7 @@ using(var frame = camera.Capture(settings))
 ```
 
 Check
-[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md)
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/CaptureTutorial.md)
 for detailed instructions on how to capture.
 
 ### Load

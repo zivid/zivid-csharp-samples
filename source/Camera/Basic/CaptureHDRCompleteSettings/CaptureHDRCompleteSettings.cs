@@ -13,9 +13,10 @@ Note: This example uses experimental SDK features, which may be modified, moved,
 
 using System;
 using Duration = Zivid.NET.Duration;
-using ToneMappingEnabledOption =
-    Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ToneMappingGroup.EnabledOption;
-
+using ColorModeOption =
+    Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption;
+using ReflectionFilterModeOption = 
+    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 class Program
 {
     static void Main()
@@ -33,15 +34,14 @@ class Program
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
                                            Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
                                            Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
-                                           Reflection = { Removal = { Enabled = true } },
+                                           Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
                                            Experimental = { ContrastDistortion = { Correction = { Enabled = true,
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
                                                                                                Threshold = 0.5 } } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
                                          Gamma = 1.0,
-                                         Experimental = { ToneMapping = { Enabled =
-                                                                              ToneMappingEnabledOption.HdrOnly } } } }
+                                         Experimental = { Mode = ColorModeOption.Automatic } } }
             };
             Console.WriteLine(settings.Processing);
 
