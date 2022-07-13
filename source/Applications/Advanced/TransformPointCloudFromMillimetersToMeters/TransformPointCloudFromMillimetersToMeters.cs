@@ -15,7 +15,7 @@ class Program
             var zivid = new Zivid.NET.Application();
 
             var dataFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                           + "/Zivid/ArucoMarkerInCameraOrigin.zdf";
+                           + "/Zivid/CalibrationBoardInCameraOrigin.zdf";
             Console.WriteLine("Reading " + dataFile + " point cloud");
             var frame = new Zivid.NET.Frame(dataFile);
             var pointCloud = frame.PointCloud;
