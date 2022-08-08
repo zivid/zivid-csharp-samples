@@ -10,7 +10,7 @@ using Duration = Zivid.NET.Duration;
 
 class Program
 {
-    static void Main()
+    static int Main()
     {
         try
         {
@@ -65,8 +65,9 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
 
     static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)

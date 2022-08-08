@@ -65,6 +65,7 @@ from the camera can be used.
           - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
           - [CaptureWithDiagnostics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CaptureWithDiagnostics/CaptureWithDiagnostics.cs) - Capture point clouds, with color, from the Zivid camera,
             with settings from YML file and diagnostics enabled.
+          - [FirmwareUpdater](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/FirmwareUpdater/FirmwareUpdater.cs) - Update firmware on the Zivid camera.
           - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
             model).
           - [PrintVersionInfo](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs) - List connected cameras and print version information.
@@ -87,6 +88,9 @@ from the camera can be used.
           - [MultiCameraCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs) - Use captures of a calibration object to generate
             transformation matrices to a single coordinate frame.
           - [TransformPointCloudFromMillimetersToMeters](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/TransformPointCloudFromMillimetersToMeters/TransformPointCloudFromMillimetersToMeters.cs) - Transform point cloud data from millimeters to meters.
+          - [TransformPointCloudViaCheckerboard](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/TransformPointCloudViaCheckerboard/TransformPointCloudViaCheckerboard.cs) - Transform a point cloud from camera to checkerboard (Zivid
+            Calibration Board) coordinate frame by getting checkerboard
+            pose from the API.
           - **HandEyeCalibration**
               - [UtilizeHandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs) - Transform single data point or entire point cloud from
                 camera frame to robot base frame using Hand-Eye
@@ -112,7 +116,7 @@ git clone https://github.com/zivid/zivid-csharp-samples
 Open ZividNETSamples.sln in Visual Studio, build it and run it. If you
 are uncertain about doing this, check out [Build C\# Samples using
 Visual
-Studio](https://support.zivid.com/latest/rst/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
+Studio](https://support.zivid.com/latest/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
 
 Some of the samples depend on external libraries, in particular
 `YamlDotNet` and `MathNet.Numerics`. These libraries will be installed
@@ -123,7 +127,7 @@ automatically through NuGet when building the sample.
 For more information about the Zivid cameras, please visit our
 [Knowledge Base](https://support.zivid.com/latest). If you run into any
 issues please check out
-[Troubleshooting](https://support.zivid.com/latest/rst/support/troubleshooting.html).
+[Troubleshooting](https://support.zivid.com/latest/support/troubleshooting.html).
 
 ## License
 

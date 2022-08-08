@@ -15,7 +15,7 @@ class Program
         clear
     }
 
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
         try
         {
@@ -49,8 +49,9 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
 
     static ArgumentException UsageException()

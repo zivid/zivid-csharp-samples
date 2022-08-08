@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraUserData", "Camera\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmup", "Camera\InfoUtilOther\Warmup\Warmup.csproj", "{B2F9FB41-99ED-4DD2-8683-02D325997619}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareUpdater", "Camera\InfoUtilOther\FirmwareUpdater\FirmwareUpdater.csproj", "{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileVis3D", "Applications\Basic\Visualization\CaptureFromFileVis3D\CaptureFromFileVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3D", "Applications\Basic\Visualization\CaptureVis3D\CaptureVis3D.csproj", "{68EB8781-17AA-42E9-9524-0C18A45278C3}"
@@ -48,6 +50,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilizeHandEyeCalibration", "Applications\Advanced\HandEyeCalibration\UtilizeHandEyeCalibration\UtilizeHandEyeCalibration.csproj", "{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "Applications\Advanced\MultiCameraCalibration\MultiCameraCalibration.csproj", "{26F708E4-218E-4F17-8989-F5C42796C932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaCheckerboard", "Applications\Advanced\TransformPointCloudViaCheckerboard\TransformPointCloudViaCheckerboard.csproj", "{05DAC246-781C-45B9-8E57-AC58D013522A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +115,10 @@ Global
 		{B2F9FB41-99ED-4DD2-8683-02D325997619}.Debug|x64.Build.0 = Debug|x64
 		{B2F9FB41-99ED-4DD2-8683-02D325997619}.Release|x64.ActiveCfg = Release|x64
 		{B2F9FB41-99ED-4DD2-8683-02D325997619}.Release|x64.Build.0 = Release|x64
+		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Debug|x64.ActiveCfg = Debug|x64
+		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Debug|x64.Build.0 = Debug|x64
+		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.ActiveCfg = Release|x64
+		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.Build.0 = Release|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Debug|x64.ActiveCfg = Debug|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Debug|x64.Build.0 = Debug|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Release|x64.ActiveCfg = Release|x64
@@ -147,6 +155,10 @@ Global
 		{26F708E4-218E-4F17-8989-F5C42796C932}.Debug|x64.Build.0 = Debug|x64
 		{26F708E4-218E-4F17-8989-F5C42796C932}.Release|x64.ActiveCfg = Release|x64
 		{26F708E4-218E-4F17-8989-F5C42796C932}.Release|x64.Build.0 = Release|x64
+		{05DAC246-781C-45B9-8E57-AC58D013522A}.Debug|x64.ActiveCfg = Debug|x64
+		{05DAC246-781C-45B9-8E57-AC58D013522A}.Debug|x64.Build.0 = Debug|x64
+		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.ActiveCfg = Release|x64
+		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

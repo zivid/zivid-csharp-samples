@@ -6,7 +6,7 @@ using System;
 
 class Program
 {
-    static void Main()
+    static int Main()
     {
         try
         {
@@ -64,7 +64,8 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
 }

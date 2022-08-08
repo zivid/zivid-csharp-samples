@@ -7,7 +7,7 @@ using Duration = Zivid.NET.Duration;
 
 class Program
 {
-    static void Main()
+    static int Main()
     {
         try
         {
@@ -38,8 +38,9 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
 
     private static void SaveHalconPointCloud(HalconDotNet.HObjectModel3D model, string fileName)
