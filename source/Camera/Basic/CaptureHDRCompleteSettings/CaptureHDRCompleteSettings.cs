@@ -19,7 +19,7 @@ using ReflectionFilterModeOption =
     Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 class Program
 {
-    static void Main()
+    static int Main()
     {
         try
         {
@@ -92,8 +92,9 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
 
     static Tuple<double[], int[], double[]> GetExposureValues(Zivid.NET.Camera camera)
