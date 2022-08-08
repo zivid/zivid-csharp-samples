@@ -34,7 +34,7 @@ using MathNet.Numerics.LinearAlgebra;
 
 class Program
 {
-    static void Main()
+    static int Main()
     {
         try
         {
@@ -165,8 +165,9 @@ class Program
         catch(Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
-            Environment.ExitCode = 1;
+            return 1;
         }
+        return 0;
     }
     static float[,] getTransformationMatrixFromYAML(string transformFile)
     {
