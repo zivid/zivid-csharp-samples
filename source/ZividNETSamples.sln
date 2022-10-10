@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWithSettingsFromYML", "Camera\Basic\CaptureWithSettingsFromYML\CaptureWithSettingsFromYML.csproj", "{F19339D7-0C30-471F-8E61-B86B895C440E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHalconViaGenICam", "Camera\Advanced\CaptureHalconViaGenICam\CaptureHalconViaGenICam.csproj", "{35493A59-15D7-4B66-ACCE-297CC252B392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHalconViaZivid", "Camera\Advanced\CaptureHalconViaZivid\CaptureHalconViaZivid.csproj", "{5B82D7B2-05FC-45AD-BB3D-30AE9EDFC93D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Advanced\CaptureHDRLoop\CaptureHDRLoop.csproj", "{A8F62944-766D-4809-97AF-97AAF7F1EB9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRPrintNormals", "Camera\Advanced\CaptureHDRPrintNormals\CaptureHDRPrintNormals.csproj", "{064AA724-CD81-462F-8A07-26440EA41103}"
@@ -33,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmup", "Camera\InfoUtilOt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareUpdater", "Camera\InfoUtilOther\FirmwareUpdater\FirmwareUpdater.csproj", "{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileVis3D", "Applications\Basic\Visualization\CaptureFromFileVis3D\CaptureFromFileVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCameraVis3D", "Applications\Basic\Visualization\CaptureFromFileCameraVis3D\CaptureFromFileCameraVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3D", "Applications\Basic\Visualization\CaptureVis3D\CaptureVis3D.csproj", "{68EB8781-17AA-42E9-9524-0C18A45278C3}"
 EndProject
@@ -87,6 +91,14 @@ Global
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
+		{35493A59-15D7-4B66-ACCE-297CC252B392}.Debug|x64.ActiveCfg = Debug|x64
+		{35493A59-15D7-4B66-ACCE-297CC252B392}.Debug|x64.Build.0 = Debug|x64
+		{35493A59-15D7-4B66-ACCE-297CC252B392}.Release|x64.ActiveCfg = Release|x64
+		{35493A59-15D7-4B66-ACCE-297CC252B392}.Release|x64.Build.0 = Release|x64
+		{5B82D7B2-05FC-45AD-BB3D-30AE9EDFC93D}.Debug|x64.ActiveCfg = Debug|x64
+		{5B82D7B2-05FC-45AD-BB3D-30AE9EDFC93D}.Debug|x64.Build.0 = Debug|x64
+		{5B82D7B2-05FC-45AD-BB3D-30AE9EDFC93D}.Release|x64.ActiveCfg = Release|x64
+		{5B82D7B2-05FC-45AD-BB3D-30AE9EDFC93D}.Release|x64.Build.0 = Release|x64
 		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.ActiveCfg = Debug|x64
 		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Debug|x64.Build.0 = Debug|x64
 		{A8F62944-766D-4809-97AF-97AAF7F1EB9E}.Release|x64.ActiveCfg = Release|x64

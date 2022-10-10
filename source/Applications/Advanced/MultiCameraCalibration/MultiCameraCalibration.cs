@@ -25,9 +25,11 @@ class Program
             }
 
             var detectionResults = new List<DetectionResult>();
-            foreach(var camera in cameras)
+            var serialNumbers = new List<string>();
+            foreach (var camera in cameras)
             {
-                Console.WriteLine("Capturing frame with camera: {0}", camera.Info.SerialNumber);
+                var serialNumber = camera.Info.SerialNumber.ToString();
+                Console.WriteLine("Capturing frame with camera: {0}", serialNumber);
                 using(var frame = AssistedCapture(camera))
                 {
                     Console.WriteLine("Detecting checkerboard in point cloud");
@@ -35,6 +37,7 @@ class Program
                     if(detectionResult)
                     {
                         detectionResults.Add(detectionResult);
+                        serialNumbers.Add(serialNumber);
                     }
                     else
                     {
@@ -46,6 +49,7 @@ class Program
 
             Console.WriteLine("Performing Multi-camera calibration");
             var result = Calibrator.CalibrateMultiCamera(detectionResults);
+            
             if(result)
             {
                 Console.WriteLine("Multi-camera calibration OK.");
@@ -55,6 +59,7 @@ class Program
                 {
                     PrintMatrix(transforms[i]);
                     Console.WriteLine(residuals[i].ToString());
+                    new Zivid.NET.Matrix4x4(transforms[i]).Save(serialNumbers[i] + ".yaml");
                 }
             }
             else

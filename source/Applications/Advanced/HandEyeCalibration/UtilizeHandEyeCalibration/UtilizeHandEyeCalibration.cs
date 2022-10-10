@@ -27,9 +27,7 @@ The YAML files for this sample can be found under the main instructions for Zivi
 */
 
 using System;
-using System.IO;
 
-using YamlDotNet.RepresentationModel;
 using MathNet.Numerics.LinearAlgebra;
 
 class Program
@@ -62,7 +60,7 @@ class Program
                         var eyeToHandTransformFile = "EyeToHandTransform.yaml";
 
                         Console.WriteLine("Reading camera pose in robot base frame (result of eye-to-hand calibration");
-                        var eyeToHandTransform = getTransformationMatrixFromYAML(
+                        var eyeToHandTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + eyeToHandTransformFile);
 
@@ -86,12 +84,12 @@ class Program
 
                         Console.WriteLine(
                             "Reading camera pose in end-effector frame (result of eye-in-hand calibration)");
-                        var eyeInHandTransform = getTransformationMatrixFromYAML(
+                        var eyeInHandTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + eyeInHandTransformFile);
 
                         Console.WriteLine("Reading end-effector pose in robot base frame");
-                        var robotTransform = getTransformationMatrixFromYAML(
+                        var robotTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + robotTransformFile);
 
@@ -169,51 +167,16 @@ class Program
         }
         return 0;
     }
-    static float[,] getTransformationMatrixFromYAML(string transformFile)
+
+    static Matrix<float> zividToMathDotNet(Zivid.NET.Matrix4x4 zividMatrix)
     {
-        using(var reader = new StreamReader(transformFile))
-        {
-            // OpenCV writes yaml 1.0 with legacy first line
-            // YamlDotNet does not support this legacy first line
-            // so to work around we modify the first line if it is legacy
-            var first_line = reader.ReadLine();
-            if(first_line.Contains("%YAML:1.0"))
-            {
-                first_line = first_line.Replace(":", " ");
-            }
-            var new_reader = new StringReader(first_line + "\n" + reader.ReadToEnd());
-
-            var yaml = new YamlStream();
-            yaml.Load(new_reader);
-
-            var poseStateNode = (YamlMappingNode)yaml.Documents[0].RootNode;
-            var poseStateData = poseStateNode["PoseState"]["data"].ToString();
-            var matrixAsString = poseStateData.Trim('[', ']').Split(',');
-
-            int rows = int.Parse(poseStateNode["PoseState"]["rows"].ToString());
-            int cols = int.Parse(poseStateNode["PoseState"]["cols"].ToString());
-
-            float[,] zividMatrix = new float[rows, cols];
-
-            for(int i = 0; i < rows; i++)
-            {
-                for(int j = 0; j < cols; j++)
-                {
-                    zividMatrix[i, j] = float.Parse(matrixAsString[i * rows + j]);
-                }
-            }
-            return zividMatrix;
-        }
-    }
-    static Matrix<float> zividToMathDotNet(float[,] zividMatrix)
-    {
-        var mathNetMatrix = CreateMatrix.DenseOfArray(zividMatrix);
+        var mathNetMatrix = CreateMatrix.DenseOfArray(zividMatrix.ToArray());
         return mathNetMatrix;
     }
 
-    static float[,] mathDotNetToZivid(Matrix<float> mathNetMatrix)
+    static Zivid.NET.Matrix4x4 mathDotNetToZivid(Matrix<float> mathNetMatrix)
     {
-        float[,] zividMatrix = mathNetMatrix.ToArray();
+        var zividMatrix = new Zivid.NET.Matrix4x4(mathNetMatrix.ToArray());
         return zividMatrix;
     }
 }
@@ -246,6 +209,7 @@ class Interaction
             default: return Command.Unknown;
         }
     }
+
     public static RobotCameraConfiguration EnterRobotCameraConfiguration()
     {
         Console.Write("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand): ");

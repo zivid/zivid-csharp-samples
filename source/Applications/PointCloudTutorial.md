@@ -59,7 +59,7 @@ using(var frame = camera.Capture(settings))
 ```
 
 Check
-[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/CaptureTutorial.md)
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md)
 for detailed instructions on how to capture.
 
 ### Load
@@ -108,7 +108,7 @@ processing on the GPU is finished. Any calls to data-copy methods
 proceeding with the requested copy operation.
 
 For detailed explanation, see [Point Cloud Capture
-Process](https://support.zivid.com/latest/academy/camera/point-cloud-capture-process.html).\]
+Process](https://support.zivid.com/latest/academy/camera/point-cloud-capture-process.html).
 
 -----
 
@@ -154,7 +154,7 @@ frame or, e.g., [scale the point cloud by transforming it from mm to
 m](https://support.zivid.com/latest//academy/applications/transform/transform-millimeters-to-meters.html).
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs#L152))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs#L150))
 
 ``` sourceCode cs
 pointCloud.Transform(transformBaseToCamera);

@@ -4,9 +4,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{232B04D3-A809-4FE2-AF9B-4EB9761F66AB}</ProjectGuid>
+    <ProjectGuid>{35493A59-15D7-4B66-ACCE-297CC252B392}</ProjectGuid>
     <OutputType>Exe</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CaptureHalconViaGenICam</RootNamespace>
     <AssemblyName>CaptureHalconViaGenICam</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -15,7 +15,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -26,7 +26,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -38,7 +38,7 @@
     <!--<TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="System" />
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,4 +67,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug GOTO Debug
+if $(ConfigurationName) == Release GOTO Release
+goto Error
+
+:Debug
+xcopy "$(ZIVID_INSTALL_FOLDER)\bin_debug\*.dll" "$(TargetDir)" /Y
+exit /B 0
+
+:Release
+xcopy "$(ZIVID_INSTALL_FOLDER)\bin\*.dll" "$(TargetDir)" /Y
+exit /B 0
+
+:Error
+echo Unsupported config
+exit /B 1
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

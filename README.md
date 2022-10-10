@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.7.0. For
+This repository contains csharp code samples for Zivid SDK v2.8.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -24,9 +24,9 @@ releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releas
 
 ## Tutorials list
 
-  - [QuickCaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/QuickCaptureTutorial.md)
-  - [CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Camera/Basic/CaptureTutorial.md)
-  - [PointCloudTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/Source/Applications/PointCloudTutorial.md)
+  - [QuickCaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/QuickCaptureTutorial.md)
+  - [CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md)
+  - [PointCloudTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/PointCloudTutorial.md)
 
 ## Samples list
 
@@ -74,7 +74,7 @@ from the camera can be used.
   - **Applications**
       - **Basic**
           - **Visualization**
-              - [CaptureFromFileVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileVis3D/CaptureFromFileVis3D.cs) - Capture point clouds, with color, from the Zivid file
+              - [CaptureFromFileCameraVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileCameraVis3D/CaptureFromFileCameraVis3D.cs) - Capture point clouds, with color, from the Zivid file
                 camera, and visualize them.
               - [CaptureVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs) - Capture point clouds, with color, from the Zivid
                 camera, and visualize them.
