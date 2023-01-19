@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}</ProjectGuid>
+    <ProjectGuid>{69416F6A-75DF-436E-85F2-3881CCBEAA9A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UtilizeHandEyeCalibration</RootNamespace>
-    <AssemblyName>UtilizeHandEyeCalibration</AssemblyName>
+    <RootNamespace>PoseConversions</RootNamespace>
+    <AssemblyName>PoseConversions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,15 +53,9 @@
     <Reference Include="ZividCoreNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
       <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividCoreNET.dll</HintPath>
     </Reference>
-    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVisualizationNET.dll</HintPath>
-    </Reference>
-    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVisualizationNET.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UtilizeHandEyeCalibration.cs" />
+    <Compile Include="PoseConversions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
