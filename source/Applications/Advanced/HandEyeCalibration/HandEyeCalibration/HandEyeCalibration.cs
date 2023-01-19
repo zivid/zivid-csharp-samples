@@ -64,15 +64,15 @@ class Program
                             Console.Write("Detecting checkerboard in point cloud: ");
                             var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
 
-                            if(detectionResult)
+                            if(detectionResult.Valid())
                             {
-                                Console.WriteLine("OK");
+                                Console.WriteLine("Calibration board detected");
                                 handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
                                 ++currentPoseId;
                             }
                             else
                             {
-                                Console.WriteLine("FAILED");
+                                Console.WriteLine("Failed to detect calibration board, ensure that the entire board is in the view of the camera");
                             }
                         }
                     }

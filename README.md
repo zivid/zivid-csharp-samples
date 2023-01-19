@@ -92,6 +92,8 @@ from the camera can be used.
             Calibration Board) coordinate frame by getting checkerboard
             pose from the API.
           - **HandEyeCalibration**
+              - [PoseConversions](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/PoseConversions/PoseConversions.cs) - Convert to/from Transformation Matrix (Rotation Matrix
+                + Translation Vector)
               - [UtilizeHandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs) - Transform single data point or entire point cloud from
                 camera frame to robot base frame using Hand-Eye
                 calibration
@@ -119,8 +121,8 @@ Visual
 Studio](https://support.zivid.com/latest/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
 
 Some of the samples depend on external libraries, in particular
-`YamlDotNet` and `MathNet.Numerics`. These libraries will be installed
-automatically through NuGet when building the sample.
+`MathNet.Numerics`. These libraries will be installed automatically
+through NuGet when building the sample.
 
 ## Support
 

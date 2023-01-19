@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaCheckerboard", "Applications\Advanced\TransformPointCloudViaCheckerboard\TransformPointCloudViaCheckerboard.csproj", "{05DAC246-781C-45B9-8E57-AC58D013522A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseConversions", "Applications\Advanced\HandEyeCalibration\PoseConversions\PoseConversions.csproj", "{69416F6A-75DF-436E-85F2-3881CCBEAA9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -171,6 +173,10 @@ Global
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Debug|x64.Build.0 = Debug|x64
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.ActiveCfg = Release|x64
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.Build.0 = Release|x64
+		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Debug|x64.ActiveCfg = Debug|x64
+		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Debug|x64.Build.0 = Debug|x64
+		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Release|x64.ActiveCfg = Release|x64
+		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
