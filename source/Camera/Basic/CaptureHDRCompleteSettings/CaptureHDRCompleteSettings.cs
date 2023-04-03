@@ -108,7 +108,8 @@ class Program
             double[] gain = { 1.0, 1.0, 2.0 };
             return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
         }
-        if(camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwo)
+        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwo
+            || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwoL100)
         {
             double[] aperture = { 5.66, 2.38, 1.8 };
             int[] exposureTime = { 1677, 5000, 100000 };
