@@ -17,7 +17,8 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings {
+            var settings = new Zivid.NET.Settings
+            {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
                                                                       ExposureTime =
                                                                           Duration.FromMicroseconds(6500) } },
@@ -25,7 +26,7 @@ class Program
             };
 
             Console.WriteLine("Capturing frame");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
@@ -36,7 +37,7 @@ class Program
                 frame.Save(dataFilePLY);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

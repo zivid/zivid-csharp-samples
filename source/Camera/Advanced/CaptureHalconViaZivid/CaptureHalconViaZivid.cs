@@ -17,7 +17,8 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings {
+            var settings = new Zivid.NET.Settings
+            {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
                                                                       ExposureTime =
                                                                           Duration.FromMicroseconds(10000) } },
@@ -35,7 +36,7 @@ class Program
             Console.WriteLine("Saving point cloud to: " + pointCloudFile);
             SaveHalconPointCloud(objectModel3D, pointCloudFile);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;
@@ -51,12 +52,12 @@ class Program
     private static int FindNumberOfValidPoints(float[,,] pointCloud, ulong height, ulong width)
     {
         var numberOfValidPoints = 0;
-        for(ulong i = 0; i < height; i++)
+        for (ulong i = 0; i < height; i++)
         {
-            for(ulong j = 0; j < width; j++)
+            for (ulong j = 0; j < width; j++)
             {
                 float x = pointCloud[i, j, 0];
-                if(!float.IsNaN(x))
+                if (!float.IsNaN(x))
                 {
                     numberOfValidPoints = numberOfValidPoints + 1;
                 }
@@ -109,14 +110,14 @@ class Program
         tupleXYZMapping[1] = (uint)height;
 
         var validPointIndex = 0;
-        for(uint i = 0; i < height; i++)
+        for (uint i = 0; i < height; i++)
         {
-            for(uint j = 0; j < width; j++)
+            for (uint j = 0; j < width; j++)
             {
                 float x = pointsXYZ[i, j, 0];
                 float normal = normalsXYZ[i, j, 0];
 
-                if(!float.IsNaN(x))
+                if (!float.IsNaN(x))
                 {
                     tuplePointsX[validPointIndex] = pointsXYZ[i, j, 0];
                     tuplePointsY[validPointIndex] = pointsXYZ[i, j, 1];
@@ -127,7 +128,7 @@ class Program
                     tupleXYZMapping[2 + validPointIndex] = i;
                     tupleXYZMapping[2 + numberOfValidPoints + validPointIndex] = j;
 
-                    if(!float.IsNaN(normal))
+                    if (!float.IsNaN(normal))
                     {
                         tupleNormalsX[validPointIndex] = normalsXYZ[i, j, 0];
                         tupleNormalsY[validPointIndex] = normalsXYZ[i, j, 1];

@@ -19,7 +19,7 @@ class Program
 
             Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings();
-            foreach(var aperture in new double[] { 9.57, 4.76, 2.59 })
+            foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
             {
                 Console.WriteLine("Adding acquisition with aperture = " + aperture);
                 var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
@@ -27,7 +27,7 @@ class Program
             }
 
             Console.WriteLine("Capturing frame (HDR)");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 var pointCloud = frame.PointCloud;
 
@@ -40,7 +40,7 @@ class Program
                 PrintNormals(radiusOfPixelsToPrint, normals);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;
@@ -54,9 +54,9 @@ class Program
         var numOfRows = normals.GetLength(0);
         var numOfCols = normals.GetLength(1);
         Console.WriteLine(lineSeparator);
-        for(int row = (numOfRows / 2 - radius); row < (numOfRows / 2 + radius); row++)
+        for (int row = (numOfRows / 2 - radius); row < (numOfRows / 2 + radius); row++)
         {
-            for(int col = (numOfCols / 2 - radius); col < (numOfCols / 2 + radius); col++)
+            for (int col = (numOfCols / 2 - radius); col < (numOfCols / 2 + radius); col++)
             {
                 Console.Write("Normals (" + row + "," + col + "): [");
                 Console.Write("x: {0,10:0.0000} ", normals[row, col, 0]);

@@ -45,10 +45,10 @@ class Program
             visualizer.ShowMaximized();
             visualizer.ResetToFit();
 
-            Console.WriteLine("Running visualizer. Blocking until window closes");
+            Console.WriteLine("Running visualizer. Blocking until window closes.");
             visualizer.Run();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

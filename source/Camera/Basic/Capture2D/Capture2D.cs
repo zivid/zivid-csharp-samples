@@ -18,7 +18,8 @@ class Program
 
             Console.WriteLine("Configuring 2D settings");
             // Note: The Zivid SDK supports 2D captures with a single acquisition only
-            var settings2D = new Zivid.NET.Settings2D {
+            var settings2D = new Zivid.NET.Settings2D
+            {
                 Acquisitions = { new Zivid.NET.Settings2D.Acquisition {
                     Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80
                 } },
@@ -26,7 +27,7 @@ class Program
             };
 
             Console.WriteLine("Capturing 2D frame");
-            using(var frame2D = camera.Capture(settings2D))
+            using (var frame2D = camera.Capture(settings2D))
             {
                 Console.WriteLine("Getting RGBA image");
                 var image = frame2D.ImageRGBA();
@@ -63,7 +64,7 @@ class Program
                 image.Save(imageFile);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

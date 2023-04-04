@@ -19,7 +19,7 @@ class Program
 
             var cameraModel = camera.Info.Model.ToString().Substring(0, 8);
             int captures = 3;
-            for(int i = 1; i <= captures; i++)
+            for (int i = 1; i <= captures; i++)
             {
                 var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                                    + "/Zivid/Settings/" + cameraModel + "/Settings0" + i + ".yml";
@@ -35,7 +35,7 @@ class Program
                 frame.Save(dataFile);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

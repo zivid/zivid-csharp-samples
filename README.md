@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.8.1. For
+This repository contains csharp code samples for Zivid SDK v2.9.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -43,7 +43,7 @@ from the camera can be used.
           - [Capture2D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs) - Capture 2D images from the Zivid camera.
           - [CaptureAssistant](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs) - Use Capture Assistant to capture point clouds, with color,
             from the Zivid camera.
-          - [CaptureFromFileCamera](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs) - Capture point clouds, with color, from the Zivid file
+          - [CaptureFromFileCamera](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs) - Capture point clouds, with color, with the Zivid file
             camera.
           - [CaptureHDR](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDR/CaptureHDR.cs) - Capture point clouds, with color, from the Zivid camera.
           - [CaptureHDRCompleteSettings](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs) - Capture point clouds, with color, from the Zivid camera
@@ -67,15 +67,15 @@ from the camera can be used.
             with settings from YML file and diagnostics enabled.
           - [FirmwareUpdater](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/FirmwareUpdater/FirmwareUpdater.cs) - Update firmware on the Zivid camera.
           - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
-            model).
+            model) or estimate them from the point cloud.
           - [PrintVersionInfo](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs) - List connected cameras and print version information.
           - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/Warmup/Warmup.cs) - A basic warm-up method for a Zivid camera with specified
             time and capture cycle.
   - **Applications**
       - **Basic**
           - **Visualization**
-              - [CaptureFromFileCameraVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileCameraVis3D/CaptureFromFileCameraVis3D.cs) - Capture point clouds, with color, from the Zivid file
-                camera, and visualize them.
+              - [CaptureFromFileCameraVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureFromFileCameraVis3D/CaptureFromFileCameraVis3D.cs) - Capture point clouds, with color, with the Zivid file
+                camera and visualize them.
               - [CaptureVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs) - Capture point clouds, with color, from the Zivid
                 camera, and visualize them.
           - **FileFormats**

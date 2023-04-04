@@ -14,6 +14,7 @@ tutorial see:
 [**Connect**](#Connect) |
 [**Configure**](#Configure) |
 [**Capture**](#Capture) |
+[**Multithreading**](#Multithreading) |
 [**Conclusion**](#Conclusion)
 
 ---
@@ -69,7 +70,7 @@ var zivid = new Zivid.NET.Application();
 Now we can connect to the camera.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L18))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L17))
 
 ``` sourceCode cs
 var camera = zivid.ConnectCamera();
@@ -102,7 +103,7 @@ source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera
 ``` sourceCode cs
 var cameras = zivid.Cameras;
 Console.WriteLine("Number of cameras found: {0}", cameras.Count);
-foreach(var camera in cameras)
+foreach (var camera in cameras)
 {
 	Console.WriteLine("Camera Info: {0}", camera.Info);
 }
@@ -110,26 +111,47 @@ foreach(var camera in cameras)
 
 ### File Camera
 
-You may want to experiment with the SDK, without access to a physical
-camera. Minor changes are required to keep the sample working.
+The file camera option allows you to experiment with the SDK without
+access to a physical camera. The file cameras can be found in [Sample
+Data](https://support.zivid.com/latest/api-reference/samples/sample-data.html)
+where there are multiple file cameras to choose from. Each file camera
+demonstrates a use case within one of the main applications of the
+respective camera model. The example below shows how to create a file
+camera using the Zivid Two M70 file camera from [Sample
+Data](https://support.zivid.com/latest/api-reference/samples/sample-data.html).
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L19-L24))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L30))
 
 ``` sourceCode cs
-var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-				+ "/Zivid/FileCameraZividOne.zfc";
+fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZividTwoM70.zfc";
+```
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L36))
+
+``` sourceCode cs
 var camera = zivid.CreateFileCamera(fileCamera);
 ```
 
------
+The acquisition settings should be initialized like shown below, but you
+are free to alter the processing settings.
 
-Note:
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L39-L45))
 
-The quality of the point cloud you get from `FileCameraZividOne.zfc` is
-not representative of the Zivid 3D cameras.
+``` sourceCode cs
+var settings = new Zivid.NET.Settings
+{
+	Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+	Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
+							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } } },
+				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+};
+```
 
------
+You can read more about the file camera option in [File
+Camera](https://support.zivid.com/latest/academy/camera/file-camera.html).
 
 ## Configure
 
@@ -143,10 +165,11 @@ the Capture Assistant. This is available in the Zivid SDK to help
 configure camera settings.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L28))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L29))
 
 ``` sourceCode cs
-var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
+var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+{
 	AmbientLightFrequency =
 		Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
 	MaxCaptureTime = Duration.FromMilliseconds(1200)
@@ -183,13 +206,14 @@ settings](https://support.zivid.com/latest//reference-articles/standard-acquisit
 
 #### Single Acquisition
 
-We can create settings for a single capture.
+We can create settings for a single acquisition capture.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L22-L27))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L20-L26))
 
 ``` sourceCode cs
-var settings = new Zivid.NET.Settings {
+var settings = new Zivid.NET.Settings
+{
 	Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
 														ExposureTime =
 															Duration.FromMicroseconds(6500) } },
@@ -199,14 +223,15 @@ var settings = new Zivid.NET.Settings {
 
 #### Multi Acquisition HDR
 
-We may also create settings to be used in an HDR capture.
+We may also create settings to be used in a multi-acquisition HDR
+capture.
 
 ([go to
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDR/CaptureHDR.cs#L22-L28))
 
 ``` sourceCode cs
 var settings = new Zivid.NET.Settings();
-foreach(var aperture in new double[] { 9.57, 4.76, 2.59 })
+foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
 {
 	Console.WriteLine("Adding acquisition with aperture = " + aperture);
 	var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
@@ -217,25 +242,43 @@ foreach(var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L73))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L89))
 
 ``` sourceCode cs
-Console.WriteLine("Configuring processing settings for capture:");
-var settings = new Zivid.NET.Settings() {
+Console.WriteLine("Configuring settings for capture:");
+var settings = new Zivid.NET.Settings()
+{
 	Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+	RegionOfInterest = { Box = {
+							Enabled = true,
+							PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
+							PointA = new Zivid.NET.PointXYZ{ x = 1000, y = -1000, z = 1000 },
+							PointB = new Zivid.NET.PointXYZ{ x = -1000, y = 1000, z = 1000 },
+							Extents = new Zivid.NET.Range<double>(-1000, 1000),
+						},
+						Depth =
+						{
+							Enabled = true,
+							Range = new Zivid.NET.Range<double>(200, 2000),
+						}
+	},
 	Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
 							Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
 							Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
 							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
+							Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
 							Experimental = { ContrastDistortion = { Correction = { Enabled = true,
 																					Strength = 0.4 },
 																	Removal = { Enabled = true,
-																				Threshold = 0.5 } } } },
+																				Threshold = 0.5 } },
+												HoleFilling = { Enabled = true,
+																HoleSize = 0.2,
+																Strictness = 1 } } },
 				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
 							Gamma = 1.0,
 							Experimental = { Mode = ColorModeOption.Automatic } } }
 };
-Console.WriteLine(settings.Processing);
+Console.WriteLine(settings);
 Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
 var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };
 Console.WriteLine(baseAcquisition);
@@ -245,7 +288,7 @@ Tuple<double[], int[], double[]> exposureValues = GetExposureValues(camera);
 double[] aperture = exposureValues.Item1;
 int[] exposureTime = exposureValues.Item2;
 double[] gain = exposureValues.Item3;
-for(int i = 0; i < aperture.Length; i++)
+for (int i = 0; i < aperture.Length; i++)
 {
 	Console.WriteLine("Acquisition {0}:", i + 1);
 	Console.WriteLine("  Exposure Time: {0}", exposureTime[i]);
@@ -268,10 +311,11 @@ It is possible to only capture a 2D image. This is faster than a 3D
 capture. 2D settings are configured as follows.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L21-L26))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L21-L27))
 
 ``` sourceCode cs
-var settings2D = new Zivid.NET.Settings2D {
+var settings2D = new Zivid.NET.Settings2D
+{
 	Acquisitions = { new Zivid.NET.Settings2D.Acquisition {
 		Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80
 	} },
@@ -286,7 +330,7 @@ read and applied in the API. You may find it easier to modify the
 settings in these (human-readable) yaml-files in your preferred editor.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L86-L93))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L101-L106))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -299,7 +343,7 @@ var settingsFromFile = new Zivid.NET.Settings(settingsFile);
 You can also save settings to .yml file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L86-L89))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L101-L103))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -320,10 +364,10 @@ multiple acquisitions (HDR) is given by the number of `acquisitions` in
 `settings`.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
 
 ``` sourceCode cs
-using(var frame = camera.Capture(settings))
+using (var frame = camera.Capture(settings))
 ```
 
 The `Zivid.NET.Frame` contains the point cloud and color image (stored
@@ -354,7 +398,7 @@ do so via the 2D API.
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L30))
 
 ``` sourceCode cs
-using(var frame2D = camera.Capture(settings2D))
+using (var frame2D = camera.Capture(settings2D))
 ```
 
 -----
@@ -371,7 +415,7 @@ Save ----
 We can now save our results.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L34-L37))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31-L33))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";
@@ -392,7 +436,7 @@ for a list of supported formats. For example, we can export the point
 cloud to .ply format.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L40-L43))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L35-L37))
 
 ``` sourceCode cs
 var dataFilePLY = "PointCloud.ply";
@@ -407,7 +451,7 @@ No source available for {language\_name} 2D captures also produce 2D
 color images.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L34))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L33))
 
 ``` sourceCode cs
 var image = frame2D.ImageRGBA();
@@ -416,13 +460,20 @@ var image = frame2D.ImageRGBA();
 Then, we can save the 2D image.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L64-L66))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L62-L64))
 
 ``` sourceCode cs
 var imageFile = "Image.png";
 Console.WriteLine("Saving 2D color image to file: {0}", imageFile);
 image.Save(imageFile);
 ```
+
+## Multithreading
+
+Operations on camera objects are thread-safe, but other operations like
+listing cameras and connecting to cameras should be executed in
+sequence. Find out more in
+[CaptureTutorial](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureTutorial.md).
 
 ## Conclusion
 

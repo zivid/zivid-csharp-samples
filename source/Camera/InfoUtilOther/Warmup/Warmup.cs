@@ -23,7 +23,8 @@ class Program
             var maxCaptureTime = Duration.FromMilliseconds(1000);
 
             Console.WriteLine("Getting camera settings");
-            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
+            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+            {
                 MaxCaptureTime = maxCaptureTime,
                 AmbientLightFrequency =
                     Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none
@@ -34,7 +35,7 @@ class Program
 
             Console.WriteLine("Starting warm up for: {0} minutes", warmupTime.Minutes);
 
-            while(DateTime.Now.Subtract(beforeWarmup) < warmupTime)
+            while (DateTime.Now.Subtract(beforeWarmup) < warmupTime)
             {
                 var beforeCapture = DateTime.Now;
                 camera.Capture(settings);
@@ -42,7 +43,7 @@ class Program
 
                 var captureTime = afterCapture.Subtract(beforeCapture);
 
-                if(captureTime < captureCycle)
+                if (captureTime < captureCycle)
                 {
                     Thread.Sleep(captureCycle.Subtract(captureTime));
                 }
@@ -60,7 +61,7 @@ class Program
 
             Console.WriteLine("Warm up completed");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

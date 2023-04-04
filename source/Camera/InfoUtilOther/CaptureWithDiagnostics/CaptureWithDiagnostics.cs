@@ -32,14 +32,14 @@ class Program
             settings.Diagnostics.Enabled = true;
 
             Console.WriteLine("Capturing frame");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 var dataFile = "FrameWithDiagnostics.zdf";
                 Console.WriteLine("Saving frame with diagnostic data to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

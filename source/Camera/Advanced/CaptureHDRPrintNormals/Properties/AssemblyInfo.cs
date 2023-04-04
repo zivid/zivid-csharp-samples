@@ -6,22 +6,22 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly:AssemblyTitle("CaptureHDRPrintNormals")]
-[assembly:AssemblyDescription("")]
-[assembly:AssemblyConfiguration("")]
-[assembly:AssemblyCompany("")]
-[assembly:AssemblyProduct("CaptureHDRPrintNormals")]
-[assembly:AssemblyCopyright("Copyright 2015-2022 (C) Zivid AS")]
-[assembly:AssemblyTrademark("")]
-[assembly:AssemblyCulture("")]
+[assembly: AssemblyTitle("CaptureHDRPrintNormals")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CaptureHDRPrintNormals")]
+[assembly: AssemblyCopyright("Copyright 2015-2022 (C) Zivid AS")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
-[assembly:ComVisible(false)]
+[assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly:Guid("DA2C45F5-258F-496C-B951-2E0AF4A14F6A")]
+[assembly: Guid("DA2C45F5-258F-496C-B951-2E0AF4A14F6A")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 
-[assembly:AssemblyVersion("1.0.0.0")]
-[assembly:AssemblyFileVersion("1.0.0.0")]
-[assembly:AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0")]
