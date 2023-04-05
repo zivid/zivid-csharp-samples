@@ -37,9 +37,9 @@ class Program
             ulong iStop = (height + pixelsToDisplay) / 2;
             ulong jStart = (width - pixelsToDisplay) / 2;
             ulong jStop = (width + pixelsToDisplay) / 2;
-            for(ulong i = iStart; i < iStop; i++)
+            for (ulong i = iStart; i < iStop; i++)
             {
-                for(ulong j = jStart; j < jStop; j++)
+                for (ulong j = jStart; j < jStop; j++)
                 {
                     Console.WriteLine(string.Format(
                         "{0} {1} {2,-7} {3} {4,-7} {5} {6,-7} {7} {8,-7} {9} {10,-7} {11} {12,-7} {13} {14,-7}",
@@ -61,7 +61,7 @@ class Program
                 }
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

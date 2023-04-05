@@ -15,7 +15,7 @@ using System;
 using Duration = Zivid.NET.Duration;
 using ColorModeOption =
     Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption;
-using ReflectionFilterModeOption = 
+using ReflectionFilterModeOption =
     Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 class Program
 {
@@ -28,22 +28,40 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Configuring processing settings for capture:");
-            var settings = new Zivid.NET.Settings() {
+            Console.WriteLine("Configuring settings for capture:");
+            var settings = new Zivid.NET.Settings()
+            {
                 Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+                RegionOfInterest = { Box = {
+                                        Enabled = true,
+                                        PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
+                                        PointA = new Zivid.NET.PointXYZ{ x = 1000, y = -1000, z = 1000 },
+                                        PointB = new Zivid.NET.PointXYZ{ x = -1000, y = 1000, z = 1000 },
+                                        Extents = new Zivid.NET.Range<double>(-1000, 1000),
+                                    },
+                                    Depth =
+                                    {
+                                        Enabled = true,
+                                        Range = new Zivid.NET.Range<double>(200, 2000),
+                                    }
+                },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
                                            Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
                                            Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
                                            Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
+                                           Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
                                            Experimental = { ContrastDistortion = { Correction = { Enabled = true,
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
-                                                                                               Threshold = 0.5 } } } },
+                                                                                               Threshold = 0.5 } },
+                                                            HoleFilling = { Enabled = true,
+                                                                            HoleSize = 0.2,
+                                                                            Strictness = 1 } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
                                          Gamma = 1.0,
                                          Experimental = { Mode = ColorModeOption.Automatic } } }
             };
-            Console.WriteLine(settings.Processing);
+            Console.WriteLine(settings);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
             var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };
@@ -54,7 +72,7 @@ class Program
             double[] aperture = exposureValues.Item1;
             int[] exposureTime = exposureValues.Item2;
             double[] gain = exposureValues.Item3;
-            for(int i = 0; i < aperture.Length; i++)
+            for (int i = 0; i < aperture.Length; i++)
             {
                 Console.WriteLine("Acquisition {0}:", i + 1);
                 Console.WriteLine("  Exposure Time: {0}", exposureTime[i]);
@@ -71,7 +89,7 @@ class Program
             }
 
             Console.WriteLine("Capturing frame (HDR)");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 Console.WriteLine("Complete settings used:");
                 Console.WriteLine(frame.Settings);
@@ -89,7 +107,7 @@ class Program
                 Console.WriteLine(settingsFromFile);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;
@@ -99,7 +117,7 @@ class Program
 
     static Tuple<double[], int[], double[]> GetExposureValues(Zivid.NET.Camera camera)
     {
-        if(camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall
+        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall
            || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium
            || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge)
         {

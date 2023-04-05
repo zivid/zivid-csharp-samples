@@ -18,7 +18,7 @@ class Program
             var zivid = new Zivid.NET.Application();
             var cameras = zivid.Cameras;
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
-            foreach(var camera in cameras)
+            foreach (var camera in cameras)
             {
                 Console.WriteLine("Connecting to camera: {0}", camera.Info.SerialNumber);
                 camera.Connect();
@@ -30,11 +30,11 @@ class Program
             {
                 var serialNumber = camera.Info.SerialNumber.ToString();
                 Console.WriteLine("Capturing frame with camera: {0}", serialNumber);
-                using(var frame = AssistedCapture(camera))
+                using (var frame = AssistedCapture(camera))
                 {
                     Console.WriteLine("Detecting checkerboard in point cloud");
                     var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
-                    if(detectionResult)
+                    if (detectionResult)
                     {
                         detectionResults.Add(detectionResult);
                         serialNumbers.Add(serialNumber);
@@ -49,13 +49,13 @@ class Program
 
             Console.WriteLine("Performing Multi-camera calibration");
             var result = Calibrator.CalibrateMultiCamera(detectionResults);
-            
-            if(result)
+
+            if (result)
             {
                 Console.WriteLine("Multi-camera calibration OK.");
                 var transforms = result.Transforms();
                 var residuals = result.Residuals();
-                for(int i = 0; i < transforms.Length; i++)
+                for (int i = 0; i < transforms.Length; i++)
                 {
                     PrintMatrix(transforms[i]);
                     Console.WriteLine(residuals[i].ToString());
@@ -67,7 +67,7 @@ class Program
                 Console.WriteLine("Multi-camera calibration FAILED.");
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
             return 1;
@@ -77,7 +77,8 @@ class Program
 
     static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
     {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
+        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+        {
             AmbientLightFrequency =
                 Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
             MaxCaptureTime = Duration.FromMilliseconds(800)
@@ -90,9 +91,9 @@ class Program
     {
         var lineSep = new String('-', 50);
         Console.WriteLine(lineSep);
-        for(int j = 0; j < matrix.GetLength(0); j++)
+        for (int j = 0; j < matrix.GetLength(0); j++)
         {
-            for(int i = 0; i < matrix.GetLength(1); i++)
+            for (int i = 0; i < matrix.GetLength(1); i++)
             {
                 Console.Write("{0,10:0.0000} ", matrix[j, i]);
             }

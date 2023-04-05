@@ -14,12 +14,12 @@ class Program
             Console.WriteLine("Zivid SDK: {0}", Zivid.NET.Version.CoreVersion.Full);
             var cameras = zivid.Cameras;
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
-            foreach(var camera in cameras)
+            foreach (var camera in cameras)
             {
                 Console.WriteLine("Camera Info: {0}", camera.Info);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

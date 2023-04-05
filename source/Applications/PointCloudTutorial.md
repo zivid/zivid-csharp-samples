@@ -52,10 +52,10 @@ on compute device memory) and the capture and camera information.
 When you capture with Zivid, you get a frame in return.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
 
 ``` sourceCode cs
-using(var frame = camera.Capture(settings))
+using (var frame = camera.Capture(settings))
 ```
 
 Check
@@ -83,7 +83,7 @@ var frame = new Zivid.NET.Frame(dataFile);
 You can now get a handle to the point cloud data on the GPU.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L22))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L21))
 
 ``` sourceCode cs
 var pointCloud = frame.PointCloud;
@@ -131,7 +131,7 @@ complete list of output data formats and how to copy them from the GPU.
 Here is an example of how to copy data.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L24))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L22))
 
 ``` sourceCode cs
 var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA();
@@ -172,7 +172,7 @@ Downsampling can be done in-place, which modifies the current point
 cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L38))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L36))
 
 ``` sourceCode cs
 pointCloud.Downsample(Zivid.NET.PointCloud.Downsampling.By2x2);
@@ -182,7 +182,7 @@ It is also possible to get the downsampled point cloud as a new point
 cloud instance, which does not alter the existing point cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L31))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L30))
 
 ``` sourceCode cs
 var downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
@@ -226,14 +226,14 @@ visualizer.Show(frame);
 visualizer.ShowMaximized();
 visualizer.ResetToFit();
 
-Console.WriteLine("Running visualizer. Blocking until window closes");
+Console.WriteLine("Running visualizer. Blocking until window closes.");
 visualizer.Run();
 ```
 
 You can visualize the point cloud from the point cloud object as well.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L22-L52))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Advanced/Downsample/Downsample.cs#L22-L49))
 
 ``` sourceCode cs
 Console.WriteLine("Getting point cloud from frame");
@@ -246,7 +246,7 @@ visualizer.Show(pointCloud);
 visualizer.ShowMaximized();
 visualizer.ResetToFit();
 
-Console.WriteLine("Running visualizer. Blocking until window closes");
+Console.WriteLine("Running visualizer. Blocking until window closes.");
 visualizer.Run();
 ```
 

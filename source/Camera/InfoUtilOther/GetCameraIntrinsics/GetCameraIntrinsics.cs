@@ -83,7 +83,7 @@ class Program
                 PrintIntrinsicParametersDelta(intrinsics, estimatedIntrinsics);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

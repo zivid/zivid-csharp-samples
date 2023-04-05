@@ -50,7 +50,7 @@ var zivid = new Zivid.NET.Application();
 ## Connect
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L18))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L17))
 
 ``` sourceCode cs
 var camera = zivid.ConnectCamera();
@@ -59,10 +59,11 @@ var camera = zivid.ConnectCamera();
 ## Configure
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L28))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L29))
 
 ``` sourceCode cs
-var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters {
+var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+{
 	AmbientLightFrequency =
 		Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
 	MaxCaptureTime = Duration.FromMilliseconds(1200)
@@ -74,16 +75,16 @@ var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, sugg
 ## Capture
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
 
 ``` sourceCode cs
-using(var frame = camera.Capture(settings))
+using (var frame = camera.Capture(settings))
 ```
 
 ## Save
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L34-L37))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31-L33))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";

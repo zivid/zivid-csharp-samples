@@ -20,7 +20,7 @@ class Program
                 new Zivid.NET.Settings { Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66 } } };
 
             Console.WriteLine("Capturing frame");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 Console.WriteLine("Setting up visualization");
                 var visualizer = new Zivid.NET.Visualization.Visualizer();
@@ -30,11 +30,11 @@ class Program
                 visualizer.ShowMaximized();
                 visualizer.ResetToFit();
 
-                Console.WriteLine("Running visualizer. Blocking until window closes");
+                Console.WriteLine("Running visualizer. Blocking until window closes.");
                 visualizer.Run();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

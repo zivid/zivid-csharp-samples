@@ -1,36 +1,49 @@
 ﻿/*
-Capture point clouds, with color, from the Zivid file camera, and visualize them.
-
+Capture point clouds, with color, with the Zivid file camera and visualize them.
 This example can be used without access to a physical camera.
+
+The file camera files are found in Zivid Sample Data with ZFC as the file extension.
+See the instructions in README.md to download the Zivid Sample Data.
+There are five available file cameras to choose from, one for each camera model.
+The default file camera used in this sample is the Zivid Two M70 file camera.
 */
 
 using System;
 
 class Program
 {
-    static int Main()
+    static int Main(string[] args)
     {
         try
         {
-            var zivid = new Zivid.NET.Application();
+            var userInput = ParseOptions(args);
 
-            // This FileCamera file is in Zivid Sample Data. See instructions in README.md.
-            var fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                             + "/Zivid/FileCameraZividOne.zfc";
+            string fileCamera;
+            if (userInput != null)
+            {
+                fileCamera = userInput;
+            }
+            else
+            {
+                fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZividTwoM70.zfc";
+            }
+
+            var zivid = new Zivid.NET.Application();
 
             Console.WriteLine("Creating virtual camera using file: " + fileCamera);
             var camera = zivid.CreateFileCamera(fileCamera);
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition {} },
+            var settings = new Zivid.NET.Settings
+            {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
                                            Reflection = { Removal = { Enabled = true } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
             };
 
             Console.WriteLine("Capturing frame");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 Console.WriteLine("Setting up visualization");
                 var visualizer = new Zivid.NET.Visualization.Visualizer();
@@ -40,15 +53,36 @@ class Program
                 visualizer.ShowMaximized();
                 visualizer.ResetToFit();
 
-                Console.WriteLine("Running visualizer. Blocking until window closes");
+                Console.WriteLine("Running visualizer. Blocking until window closes.");
                 visualizer.Run();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;
         }
         return 0;
+    }
+
+    static ArgumentException UsageException()
+    {
+        return new ArgumentException("Usage: --file-camera <Path to the file camera .zfc file>");
+    }
+
+    static string ParseOptions(string[] args)
+    {
+        if (args.Length == 0)
+        {
+            return null;
+        }
+        if (args.Length == 2)
+        {
+            if (args[0].Equals("--file-camera"))
+            {
+                return args[1];
+            }
+        }
+        throw UsageException();
     }
 }

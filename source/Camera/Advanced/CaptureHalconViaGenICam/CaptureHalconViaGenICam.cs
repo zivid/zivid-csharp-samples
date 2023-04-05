@@ -73,7 +73,7 @@ class Program
             Console.WriteLine("Saving point cloud to file: " + pointCloudFile);
             SaveHalconPointCloud(objectModel3D, pointCloudFile);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;
@@ -125,7 +125,7 @@ class Program
         HalconDotNet.HOperatorSet.InfoFramegrabber("GenICamTL", "device", out information, out devices);
 
         var zividDevices = devices.TupleRegexpSelect("Zivid");
-        if(zividDevices.Length == 0)
+        if (zividDevices.Length == 0)
         {
             throw new System.InvalidOperationException("No Zivid devices found. Please check your setup.");
         }

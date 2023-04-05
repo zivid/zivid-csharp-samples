@@ -30,7 +30,7 @@ class Program
             Console.WriteLine("Saving frame to file: " + transformedFile);
             frame.Save(transformedFile);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

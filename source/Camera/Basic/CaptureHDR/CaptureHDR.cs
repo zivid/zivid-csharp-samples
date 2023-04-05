@@ -20,7 +20,7 @@ class Program
 
             Console.WriteLine("Configuring settings");
             var settings = new Zivid.NET.Settings();
-            foreach(var aperture in new double[] { 9.57, 4.76, 2.59 })
+            foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
             {
                 Console.WriteLine("Adding acquisition with aperture = " + aperture);
                 var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
@@ -28,14 +28,14 @@ class Program
             }
 
             Console.WriteLine("Capturing frame (HDR)");
-            using(var frame = camera.Capture(settings))
+            using (var frame = camera.Capture(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: " + ex.Message);
             return 1;

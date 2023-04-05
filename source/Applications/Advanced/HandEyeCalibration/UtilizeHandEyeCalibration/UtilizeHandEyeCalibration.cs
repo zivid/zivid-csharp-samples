@@ -44,9 +44,9 @@ class Program
             var transformBaseToCameraMath = CreateMatrix.Diagonal<float>(4, 4);
 
             var loopContinue = true;
-            while(loopContinue)
+            while (loopContinue)
             {
-                switch(Interaction.EnterRobotCameraConfiguration())
+                switch (Interaction.EnterRobotCameraConfiguration())
                 {
                     case RobotCameraConfiguration.EyeToHand:
 
@@ -116,9 +116,9 @@ class Program
             var pointCloud = frame.PointCloud;
 
             loopContinue = true;
-            while(loopContinue)
+            while (loopContinue)
             {
-                switch(Interaction.EnterCommand())
+                switch (Interaction.EnterCommand())
                 {
                     case Command.TransformSinglePoint:
 
@@ -160,7 +160,7 @@ class Program
                 }
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Error: {0}", ex.Message);
             return 1;
@@ -202,7 +202,7 @@ class Interaction
         Console.Write("Enter command, s (to transform single point) or p (to transform point cloud): ");
         var command = Console.ReadLine().ToLower();
 
-        switch(command)
+        switch (command)
         {
             case "s": return Command.TransformSinglePoint;
             case "p": return Command.TransformPointCloud;
@@ -215,7 +215,7 @@ class Interaction
         Console.Write("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand): ");
         var command = Console.ReadLine().ToLower();
 
-        switch(command)
+        switch (command)
         {
             case "eth": return RobotCameraConfiguration.EyeToHand;
             case "eih": return RobotCameraConfiguration.EyeInHand;
