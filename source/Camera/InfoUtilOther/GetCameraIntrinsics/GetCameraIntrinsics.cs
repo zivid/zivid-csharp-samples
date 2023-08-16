@@ -82,6 +82,32 @@ class Program
                 Console.WriteLine($"\nAperture: {aperture,5:f2}, Lens Temperature: {temperature,5:f2}°C");
                 PrintIntrinsicParametersDelta(intrinsics, estimatedIntrinsics);
             }
+
+            if (camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall &&
+                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium &&
+                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge &&
+                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividTwo &&
+                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividTwoL100)
+            {
+                var settingsSubsampled = new Zivid.NET.Settings();
+                settingsSubsampled.Acquisitions.Add(new Zivid.NET.Settings.Acquisition { });
+                settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.Sampling.Pixel.blueSubsample2x2;
+                var fixedIntrinsicsForSubsampledSettingsPath = "FixedIntrinsicsSubsampledBlue2x2.yml";
+                Console.WriteLine("Saving camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
+                var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Intrinsics(camera, settingsSubsampled);
+                fixedIntrinsicsForSubsampledSettings.Save(fixedIntrinsicsForSubsampledSettingsPath);
+                var frame = camera.Capture(settingsSubsampled);
+                var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.EstimateIntrinsics(frame);
+                const std::string estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampledBlue2x2Capture.yml";
+                Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
+                estimatedIntrinsicsForSubsampledSettings.Save(estimatedIntrinsicsForSubsampledSettingsPath);
+                Console.WriteLine("\nDifference between fixed and estimated intrinsics for subsampled point cloud:");
+                PrintIntrinsicParametersDelta(fixedIntrinsicsForSubsampledSettings, estimatedIntrinsicsForSubsampledSettings);
+            }
+            else
+            {
+                Console.WriteLine(camera.Info.ModelName + " does not support sub-sampled mode.");
+            }
         }
         catch (Exception ex)
         {
