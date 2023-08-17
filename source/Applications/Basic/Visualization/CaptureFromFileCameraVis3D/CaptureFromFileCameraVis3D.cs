@@ -5,7 +5,7 @@ This example can be used without access to a physical camera.
 The file camera files are found in Zivid Sample Data with ZFC as the file extension.
 See the instructions in README.md to download the Zivid Sample Data.
 There are five available file cameras to choose from, one for each camera model.
-The default file camera used in this sample is the Zivid Two M70 file camera.
+The default file camera used in this sample is the Zivid 2 M70 file camera.
 */
 
 using System;
@@ -25,7 +25,7 @@ class Program
             }
             else
             {
-                fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZividTwoM70.zfc";
+                fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZivid2M70.zfc";
             }
 
             var zivid = new Zivid.NET.Application();

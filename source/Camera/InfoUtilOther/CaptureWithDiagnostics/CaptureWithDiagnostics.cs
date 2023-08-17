@@ -23,9 +23,8 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings from file");
-            var cameraModel = camera.Info.Model.ToString().Substring(0, 8);
             var settingsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Zivid/Settings/" + cameraModel + "/Settings01.yml";
+                               + "/Zivid/Settings/" + SettingsFolder(camera) + "/Settings01.yml";
             var settings = new Zivid.NET.Settings(settingsFile);
 
             Console.WriteLine("Enabling diagnostics");
@@ -45,5 +44,20 @@ class Program
             return 1;
         }
         return 0;
+    }
+
+    static string SettingsFolder(Zivid.NET.Camera camera)
+    {
+        var model = camera.Info.Model;
+        switch (model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall: return "zividOne";
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium: return "zividOne";
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge: return "zividOne";
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo: return "zividTwo";
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100: return "zivid2";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130: return "zivid2Plus";
+            default: throw new System.InvalidOperationException("Unhandled enum value " + model.ToString());
+        }
     }
 }

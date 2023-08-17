@@ -117,14 +117,14 @@ Data](https://support.zivid.com/latest/api-reference/samples/sample-data.html)
 where there are multiple file cameras to choose from. Each file camera
 demonstrates a use case within one of the main applications of the
 respective camera model. The example below shows how to create a file
-camera using the Zivid Two M70 file camera from [Sample
+camera using the Zivid 2 M70 file camera from [Sample
 Data](https://support.zivid.com/latest/api-reference/samples/sample-data.html).
 
 ([go to
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs#L30))
 
 ``` sourceCode cs
-fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZividTwoM70.zfc";
+fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZivid2M70.zfc";
 ```
 
 ([go to
@@ -155,8 +155,15 @@ Camera](https://support.zivid.com/latest/academy/camera/file-camera.html).
 
 ## Configure
 
-As with all cameras there are settings that can be configured. These may
-be set manually, or you use our Capture Assistant.
+As with all cameras there are settings that can be configured.
+
+### Presets
+
+The recommendation is to use [Zivid
+Presets](https://support.zivid.com/latest/reference-articles/presets-settings.html)
+available in Zivid Studio and as .yml files (see `load_yml_label`
+below). Alternatively, you can use our Capture Assistant, or you may
+configure the settings manually.
 
 ### Capture Assistant
 
@@ -201,7 +208,7 @@ There are only two parameters to configure with Capture Assistant:
 Another option is to configure settings manually. For more information
 about what each settings does, please see [Camera
 Settings](https://support.zivid.com/latest/reference-articles/camera-settings.html).
-Note that Zivid Two has a set of [standard
+Note that Zivid 2 has a set of [standard
 settings](https://support.zivid.com/latest//reference-articles/standard-acquisition-settings-zivid-two.html).
 
 #### Single Acquisition
@@ -242,13 +249,14 @@ foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L89))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L94))
 
 ``` sourceCode cs
 Console.WriteLine("Configuring settings for capture:");
 var settings = new Zivid.NET.Settings()
 {
 	Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
 	RegionOfInterest = { Box = {
 							Enabled = true,
 							PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -263,7 +271,9 @@ var settings = new Zivid.NET.Settings()
 						}
 	},
 	Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-							Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
+							Noise = { Removal = { Enabled = true, Threshold = 7.0 },
+										Suppression = { Enabled = true },
+										Repair ={ Enabled = true } },
 							Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
 							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
 							Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
@@ -280,26 +290,28 @@ var settings = new Zivid.NET.Settings()
 };
 Console.WriteLine(settings);
 Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
-var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };
+var baseAcquisition = new Zivid.NET.Settings.Acquisition { };
 Console.WriteLine(baseAcquisition);
 
 Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
-Tuple<double[], int[], double[]> exposureValues = GetExposureValues(camera);
+Tuple<double[], Duration[], double[], double[]> exposureValues = GetExposureValues(camera);
 double[] aperture = exposureValues.Item1;
-int[] exposureTime = exposureValues.Item2;
+Duration[] exposureTime = exposureValues.Item2;
 double[] gain = exposureValues.Item3;
+double[] brightness = exposureValues.Item4;
 for (int i = 0; i < aperture.Length; i++)
 {
 	Console.WriteLine("Acquisition {0}:", i + 1);
-	Console.WriteLine("  Exposure Time: {0}", exposureTime[i]);
+	Console.WriteLine("  Exposure Time: {0}", exposureTime[i].Microseconds);
 	Console.WriteLine("  Aperture: {0}", aperture[i]);
 	Console.WriteLine("  Gain: {0}", gain[i]);
+	Console.WriteLine("  Brightness: {0}", brightness[i]);
 	var acquisitionSettings = baseAcquisition.CopyWith(s =>
 													{
 														s.Aperture = aperture[i];
-														s.ExposureTime =
-															Duration.FromMicroseconds(exposureTime[i]);
+														s.ExposureTime = exposureTime[i];
 														s.Gain = gain[i];
+														s.Brightness = brightness[i];
 													});
 	settings.Acquisitions.Add(acquisitionSettings);
 }
@@ -328,9 +340,12 @@ var settings2D = new Zivid.NET.Settings2D
 Zivid Studio can store the current settings to .yml files. These can be
 read and applied in the API. You may find it easier to modify the
 settings in these (human-readable) yaml-files in your preferred editor.
+Check out [Zivid
+Presets](https://support.zivid.com/latest/reference-articles/presets-settings.html)
+for recommended .yml files tuned for your application.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L101-L106))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L111))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -343,7 +358,7 @@ var settingsFromFile = new Zivid.NET.Settings(settingsFile);
 You can also save settings to .yml file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L101-L103))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L108))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";

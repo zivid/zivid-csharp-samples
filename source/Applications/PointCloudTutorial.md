@@ -16,7 +16,8 @@ tutorial see:
 [**Downsample**](#Downsample) |
 [**Normals**](#Normals) |
 [**Visualize**](#Visualize) |
-[**Conclusion**](#Conclusion)
+[**Conclusion**](#Conclusion) |
+[**Version**](#Version-History)
 
 ---
 
@@ -168,6 +169,17 @@ between points)` as given from the camera. You may then
 [downsample](https://support.zivid.com/latest//academy/applications/downsampling.html)
 the point cloud.
 
+-----
+
+Note:
+
+[Monochrome
+Capture](https://support.zivid.com/latest/academy/camera/monochrome-capture.html)
+is a hardware-based subsample method that reduces the resolution of the
+point cloud during capture while also reducing the capture time.
+
+-----
+
 Downsampling can be done in-place, which modifies the current point
 cloud.
 
@@ -259,3 +271,9 @@ visualization, with implementations using third party libraries.
 
 This tutorial shows how to use the Zivid SDK to extract the point cloud,
 manipulate it, transform it, and visualize it.
+
+## Version History
+
+| SDK    | Changes                                                                                                                                                             |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.10.0 | [Monochrome Capture](https://support.zivid.com/latest/academy/camera/monochrome-capture.html) introduces a faster alternative to `downsample_point_cloud_tutorial`. |

@@ -32,6 +32,7 @@ class Program
             var settings = new Zivid.NET.Settings()
             {
                 Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
                 RegionOfInterest = { Box = {
                                         Enabled = true,
                                         PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -46,7 +47,9 @@ class Program
                                     }
                 },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Noise = { Removal = { Enabled = true, Threshold = 7.0 } },
+                                           Noise = { Removal = { Enabled = true, Threshold = 7.0 },
+                                                     Suppression = { Enabled = true },
+                                                     Repair ={ Enabled = true } },
                                            Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
                                            Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
                                            Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
@@ -64,26 +67,28 @@ class Program
             Console.WriteLine(settings);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
-            var baseAcquisition = new Zivid.NET.Settings.Acquisition { Brightness = 1.8 };
+            var baseAcquisition = new Zivid.NET.Settings.Acquisition { };
             Console.WriteLine(baseAcquisition);
 
             Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
-            Tuple<double[], int[], double[]> exposureValues = GetExposureValues(camera);
+            Tuple<double[], Duration[], double[], double[]> exposureValues = GetExposureValues(camera);
             double[] aperture = exposureValues.Item1;
-            int[] exposureTime = exposureValues.Item2;
+            Duration[] exposureTime = exposureValues.Item2;
             double[] gain = exposureValues.Item3;
+            double[] brightness = exposureValues.Item4;
             for (int i = 0; i < aperture.Length; i++)
             {
                 Console.WriteLine("Acquisition {0}:", i + 1);
-                Console.WriteLine("  Exposure Time: {0}", exposureTime[i]);
+                Console.WriteLine("  Exposure Time: {0}", exposureTime[i].Microseconds);
                 Console.WriteLine("  Aperture: {0}", aperture[i]);
                 Console.WriteLine("  Gain: {0}", gain[i]);
+                Console.WriteLine("  Brightness: {0}", brightness[i]);
                 var acquisitionSettings = baseAcquisition.CopyWith(s =>
                                                                    {
                                                                        s.Aperture = aperture[i];
-                                                                       s.ExposureTime =
-                                                                           Duration.FromMicroseconds(exposureTime[i]);
+                                                                       s.ExposureTime = exposureTime[i];
                                                                        s.Gain = gain[i];
+                                                                       s.Brightness = brightness[i];
                                                                    });
                 settings.Acquisitions.Add(acquisitionSettings);
             }
@@ -115,25 +120,39 @@ class Program
         return 0;
     }
 
-    static Tuple<double[], int[], double[]> GetExposureValues(Zivid.NET.Camera camera)
+    static Tuple<double[], Duration[], double[], double[]> GetExposureValues(Zivid.NET.Camera camera)
     {
-        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall
-           || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium
-           || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge)
+        var model = camera.Info.Model;
+        switch (model)
         {
-            double[] aperture = { 8.0, 4.0, 4.0 };
-            int[] exposureTime = { 10000, 10000, 40000 };
-            double[] gain = { 1.0, 1.0, 2.0 };
-            return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall:
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium:
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge:
+                {
+                    double[] aperture = { 8.0, 4.0, 1.4 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(6500), Duration.FromMicroseconds(10000), Duration.FromMicroseconds(40000) };
+                    double[] gain = { 1.0, 1.0, 2.0 };
+                    double[] brightness = { 1.8, 1.8, 1.8 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+                {
+                    double[] aperture = { 5.66, 2.38, 1.8 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(1677), Duration.FromMicroseconds(5000), Duration.FromMicroseconds(100000) };
+                    double[] gain = { 1.0, 1.0, 1.0 };
+                    double[] brightness = { 1.8, 1.8, 1.8 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+                {
+                    double[] aperture = { 5.66, 2.38, 2.1 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(1677), Duration.FromMicroseconds(5000), Duration.FromMicroseconds(100000) };
+                    double[] gain = { 1.0, 1.0, 1.0 };
+                    double[] brightness = { 2.5, 2.5, 2.5 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
+            default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
         }
-        if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwo
-            || camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.ZividTwoL100)
-        {
-            double[] aperture = { 5.66, 2.38, 1.8 };
-            int[] exposureTime = { 1677, 5000, 100000 };
-            double[] gain = { 1.0, 1.0, 1.0 };
-            return Tuple.Create<double[], int[], double[]>(aperture, exposureTime, gain);
-        }
-        throw new Exception("Unknown camera model, " + camera.Info.ModelName.Substring(0, 9));
     }
 }
