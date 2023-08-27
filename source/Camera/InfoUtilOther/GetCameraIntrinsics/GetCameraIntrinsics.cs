@@ -91,14 +91,14 @@ class Program
             {
                 var settingsSubsampled = new Zivid.NET.Settings();
                 settingsSubsampled.Acquisitions.Add(new Zivid.NET.Settings.Acquisition { });
-                settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.Sampling.Pixel.blueSubsample2x2;
+                settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
                 var fixedIntrinsicsForSubsampledSettingsPath = "FixedIntrinsicsSubsampledBlue2x2.yml";
                 Console.WriteLine("Saving camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
-                var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Intrinsics(camera, settingsSubsampled);
+                var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera, settingsSubsampled);
                 fixedIntrinsicsForSubsampledSettings.Save(fixedIntrinsicsForSubsampledSettingsPath);
                 var frame = camera.Capture(settingsSubsampled);
-                var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.EstimateIntrinsics(frame);
-                const std::string estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampledBlue2x2Capture.yml";
+                var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frame);
+                var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampledBlue2x2Capture.yml";
                 Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
                 estimatedIntrinsicsForSubsampledSettings.Save(estimatedIntrinsicsForSubsampledSettingsPath);
                 Console.WriteLine("\nDifference between fixed and estimated intrinsics for subsampled point cloud:");
