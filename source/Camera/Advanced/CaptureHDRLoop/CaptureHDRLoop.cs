@@ -53,6 +53,8 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.ZividTwo: return "zivid2";
             case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100: return "zivid2";
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130: return "zivid2Plus";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60: return "zivid2Plus";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110: return "zivid2Plus";
             default: throw new System.InvalidOperationException("Unhandled enum value " + model.ToString());
         }
     }

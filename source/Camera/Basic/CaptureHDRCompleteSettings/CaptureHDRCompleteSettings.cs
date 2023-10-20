@@ -145,11 +145,13 @@ class Program
                     return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
                 }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
                 {
-                    double[] aperture = { 5.66, 2.38, 2.1 };
+                    double[] aperture = { 5.66, 2.8, 2.37 };
                     Duration[] exposureTime = { Duration.FromMicroseconds(1677), Duration.FromMicroseconds(5000), Duration.FromMicroseconds(100000) };
                     double[] gain = { 1.0, 1.0, 1.0 };
-                    double[] brightness = { 2.5, 2.5, 2.5 };
+                    double[] brightness = { 2.2, 2.2, 2.2 };
                     return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
                 }
             default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
