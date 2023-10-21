@@ -85,9 +85,7 @@ class Program
 
             if (camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall &&
                  camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium &&
-                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge &&
-                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividTwo &&
-                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividTwoL100)
+                 camera.Info.Model != Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge)
             {
                 var settingsSubsampled = new Zivid.NET.Settings();
                 settingsSubsampled.Acquisitions.Add(new Zivid.NET.Settings.Acquisition { });
