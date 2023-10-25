@@ -16,6 +16,9 @@ class Program
             DateTime t02 = DateTime.Now; PrintTime(t01, t02, "Check license");
 
             var zivid = new Zivid.NET.Application();
+            //Console.WriteLine("GPU: {0}", zivid.ComputeDevice.ToString());
+            Console.WriteLine("OLD Pipeline");
+            Console.WriteLine("Intel");
 
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
@@ -30,7 +33,7 @@ class Program
             };
 
             Console.WriteLine("Capturing frame");
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var frame = camera.Capture(settings);
                 var pointCloud = frame.PointCloud;
