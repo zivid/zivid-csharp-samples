@@ -56,6 +56,19 @@ class Program
         Console.WriteLine("[time]: {0} took {1} ms", label, Math.Round((end - beg).TotalMilliseconds));
     }
 
+    private static HalconDotNet.HTuple arrayToHalconD(params double[] arr)
+    {
+        var htup = new HalconDotNet.HTuple((double)0);
+        htup.DArr = arr;
+        return htup;
+    }
+    private static HalconDotNet.HTuple arrayToHalconI(params int[] arr)
+    {
+        var htup = new HalconDotNet.HTuple((int)0);
+        htup.IArr = arr;
+        return htup;
+    }
+
     private static void SaveHalconPointCloud(HalconDotNet.HObjectModel3D model, string fileName)
     {
         model.WriteObjectModel3d("ply", fileName, "invert_normals", "false");
@@ -103,35 +116,22 @@ class Program
         // tupleXYZMapping is of shape [width, height, rows[], cols[]], and is used for creating xyz mapping.
         // See more at: https://www.mvtec.com/doc/halcon/13/en/set_object_model_3d_attrib.html
 
-        var tuplePointsX = new HalconDotNet.HTuple();
-        var tuplePointsY = new HalconDotNet.HTuple();
-        var tuplePointsZ = new HalconDotNet.HTuple();
+        var tuplePointsX = new double[numberOfValidPoints];
+        var tuplePointsY = new double[numberOfValidPoints];
+        var tuplePointsZ = new double[numberOfValidPoints];
 
-        var tupleNormalsX = new HalconDotNet.HTuple();
-        var tupleNormalsY = new HalconDotNet.HTuple();
-        var tupleNormalsZ = new HalconDotNet.HTuple();
+        var tupleNormalsX = new double[numberOfValidPoints];
+        var tupleNormalsY = new double[numberOfValidPoints];
+        var tupleNormalsZ = new double[numberOfValidPoints];
 
-        var tupleColorsR = new HalconDotNet.HTuple();
-        var tupleColorsG = new HalconDotNet.HTuple();
-        var tupleColorsB = new HalconDotNet.HTuple();
+        var tupleColorsR = new int[numberOfValidPoints];
+        var tupleColorsG = new int[numberOfValidPoints];
+        var tupleColorsB = new int[numberOfValidPoints];
 
-        var tupleXYZMapping = new HalconDotNet.HTuple();
+        var tupleXYZMapping = new int[2 * numberOfValidPoints + 2];
 
-        tuplePointsX[numberOfValidPoints - 1] = (float)0;
-        tuplePointsY[numberOfValidPoints - 1] = (float)0;
-        tuplePointsZ[numberOfValidPoints - 1] = (float)0;
-
-        tupleNormalsX[numberOfValidPoints - 1] = (float)0;
-        tupleNormalsY[numberOfValidPoints - 1] = (float)0;
-        tupleNormalsZ[numberOfValidPoints - 1] = (float)0;
-
-        tupleColorsR[numberOfValidPoints - 1] = (byte)0;
-        tupleColorsG[numberOfValidPoints - 1] = (byte)0;
-        tupleColorsB[numberOfValidPoints - 1] = (byte)0;
-
-        tupleXYZMapping[2 * numberOfValidPoints + 2 - 1] = (uint)0;
-        tupleXYZMapping[0] = (uint)width;
-        tupleXYZMapping[1] = (uint)height;
+        tupleXYZMapping[0] = (int)width;
+        tupleXYZMapping[1] = (int)height;
 
         DateTime t6 = DateTime.Now; //PrintTime(t5, t6, "Allocate memory for HALCON objects");
 
@@ -151,8 +151,8 @@ class Program
                     tupleColorsR[validPointIndex] = colorsRGBA[i, j, 0];
                     tupleColorsG[validPointIndex] = colorsRGBA[i, j, 1];
                     tupleColorsB[validPointIndex] = colorsRGBA[i, j, 2];
-                    tupleXYZMapping[2 + validPointIndex] = i;
-                    tupleXYZMapping[2 + numberOfValidPoints + validPointIndex] = j;
+                    tupleXYZMapping[2 + validPointIndex] = (int)i;
+                    tupleXYZMapping[2 + numberOfValidPoints + validPointIndex] = (int)j;
 
                     if (!float.IsNaN(normal))
                     {
@@ -167,29 +167,38 @@ class Program
 
         DateTime t7 = DateTime.Now; //PrintTime(t6, t7, "Convert Zivid PC to HALCON format");
 
+        var tuplePointsXH = arrayToHalconD(tuplePointsX);
+        var tuplePointsYH = arrayToHalconD(tuplePointsY);
+        var tuplePointsZH = arrayToHalconD(tuplePointsZ);
+        var tupleNormalsXH = arrayToHalconD(tupleNormalsX);
+        var tupleNormalsYH = arrayToHalconD(tupleNormalsY);
+        var tupleNormalsZH = arrayToHalconD(tupleNormalsZ);
+        var tupleColorsRH = arrayToHalconI(tupleColorsR);
+        var tupleColorsGH = arrayToHalconI(tupleColorsG);
+        var tupleColorsBH = arrayToHalconI(tupleColorsB);
+
+        DateTime t7a = DateTime.Now; //PrintTime(t7, t7a, "Moving arrays to HTuples");
+
 
         //Console.WriteLine("Constructing ObjectModel3D based on XYZ data");
-        var objectModel3D = new HalconDotNet.HObjectModel3D(tuplePointsX, tuplePointsY, tuplePointsZ);
-        DateTime t8 = DateTime.Now; //PrintTime(t7, t8, "Constructing ObjectModel3D based on XYZ HTuples data");
+        var objectModel3D = new HalconDotNet.HObjectModel3D(tuplePointsXH, tuplePointsYH, tuplePointsZH);
+        DateTime t8 = DateTime.Now; //PrintTime(t7a, t8, "Constructing ObjectModel3D based on XYZ HTuples data");
 
         //Console.WriteLine("Mapping ObjectModel3D data");
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "xyz_mapping", "object", tupleXYZMapping);
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "xyz_mapping", "object", arrayToHalconI(tupleXYZMapping));
         DateTime t9 = DateTime.Now; //PrintTime(t8, t9, "Mapping ObjectModel3D data");
 
 
         //Console.WriteLine("Adding normals to ObjectModel3D");
         var normalsAttribNames = new HalconDotNet.HTuple("point_normal_x", "point_normal_y", "point_normal_z");
-        var normalsAttribValues = new HalconDotNet.HTuple(tupleNormalsX, tupleNormalsY, tupleNormalsZ);
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D,
-                                                            normalsAttribNames,
-                                                            "points",
-                                                            normalsAttribValues);
+        var normalsAttribValues = new HalconDotNet.HTuple(tupleNormalsXH, tupleNormalsYH, tupleNormalsZH);
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, normalsAttribNames, "points", normalsAttribValues);
         DateTime t10 = DateTime.Now; //PrintTime(t9, t10, "Adding normals to ObjectModel3D");
 
         //Console.WriteLine("Adding RGB to ObjectModel3D");
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "red", "points", tupleColorsR);
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "green", "points", tupleColorsG);
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "blue", "points", tupleColorsB);
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "red", "points", tupleColorsRH);
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "green", "points", tupleColorsGH);
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "blue", "points", tupleColorsBH);
         DateTime t11 = DateTime.Now; //PrintTime(t10, t11, "Adding RGB to ObjectModel3D");
 
         PrintTime(t4, t11, "Total");
