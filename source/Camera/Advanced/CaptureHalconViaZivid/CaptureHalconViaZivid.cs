@@ -30,15 +30,18 @@ class Program
             };
 
             Console.WriteLine("Capturing frame");
-            var frame = camera.Capture(settings);
-            var pointCloud = frame.PointCloud;
+            for (int i = 0; i < 25; i++)
+            {
+                var frame = camera.Capture(settings);
+                var pointCloud = frame.PointCloud;
 
-            Console.WriteLine("Converting to Halcon point cloud");
-            HalconDotNet.HObjectModel3D objectModel3D = ZividToHalconPointCloud(pointCloud);
-
-            string pointCloudFile = "Zivid3D.ply";
-            Console.WriteLine("Saving point cloud to: " + pointCloudFile);
-            SaveHalconPointCloud(objectModel3D, pointCloudFile);
+                //Console.WriteLine("Converting to Halcon point cloud");
+                HalconDotNet.HObjectModel3D objectModel3D = ZividToHalconPointCloud(pointCloud);
+            
+                string pointCloudFile = "Zivid3D.ply";
+                //Console.WriteLine("Saving point cloud to: " + pointCloudFile);
+                SaveHalconPointCloud(objectModel3D, pointCloudFile);
+            }
         }
         catch (Exception ex)
         {
@@ -92,23 +95,23 @@ class Program
     {
         var height = pointCloud.Height;
         var width = pointCloud.Width;
-        Console.WriteLine("Image size: {0}x{1}", width, height);
-        Console.WriteLine("We have {0} number of points", width * height);
+        //Console.WriteLine("Image size: {0}x{1}", width, height);
+        //Console.WriteLine("We have {0} number of points", width * height);
 
         DateTime t01 = DateTime.Now;
         _ = new HalconDotNet.HObjectModel3D(); // exclude HALCON license check from time measurements
-        DateTime t02 = DateTime.Now; PrintTime(t01, t02, "First time halcon");
+        DateTime t02 = DateTime.Now; //PrintTime(t01, t02, "First time halcon");
 
         DateTime t1 = DateTime.Now;
         var pointsXYZ = pointCloud.CopyPointsXYZ();
-        DateTime t2 = DateTime.Now; PrintTime(t1, t2, "CopyPointsXYZ");
+        DateTime t2 = DateTime.Now; //PrintTime(t1, t2, "CopyPointsXYZ");
         var normalsXYZ = pointCloud.CopyNormalsXYZ();
-        DateTime t3 = DateTime.Now; PrintTime(t2, t3, "CopyNormalsXYZ");
+        DateTime t3 = DateTime.Now; //PrintTime(t2, t3, "CopyNormalsXYZ");
         var colorsRGBA = pointCloud.CopyColorsRGBA();
-        DateTime t4 = DateTime.Now; PrintTime(t3, t4, "CopyColorsRGBA");
+        DateTime t4 = DateTime.Now; //PrintTime(t3, t4, "CopyColorsRGBA");
 
         var numberOfValidPoints = FindNumberOfValidPoints(pointsXYZ, height, width);
-        DateTime t5 = DateTime.Now; PrintTime(t4, t5, "FindNumberOfValidPoints");
+        DateTime t5 = DateTime.Now; //PrintTime(t4, t5, "FindNumberOfValidPoints");
         // Initializing HTuples which are later filled with data from the Zivid point cloud.
         // tupleXYZMapping is of shape [width, height, rows[], cols[]], and is used for creating xyz mapping.
         // See more at: https://www.mvtec.com/doc/halcon/13/en/set_object_model_3d_attrib.html
@@ -130,7 +133,7 @@ class Program
         tupleXYZMapping[0] = (int)width;
         tupleXYZMapping[1] = (int)height;
 
-        DateTime t6 = DateTime.Now; PrintTime(t5, t6, "Allocate memory for HALCON objects");
+        DateTime t6 = DateTime.Now; //PrintTime(t5, t6, "Allocate memory for HALCON objects");
 
         var validPointIndex = 0;
         for (uint i = 0; i < height; i++)
@@ -162,7 +165,7 @@ class Program
             }
         }
 
-        DateTime t7 = DateTime.Now; PrintTime(t6, t7, "Convert Zivid PC to HALCON format");
+        DateTime t7 = DateTime.Now; //PrintTime(t6, t7, "Convert Zivid PC to HALCON format");
 
         var tuplePointsXH = arrayToHalconD(tuplePointsX);
         var tuplePointsYH = arrayToHalconD(tuplePointsY);
@@ -174,29 +177,29 @@ class Program
         var tupleColorsGH = arrayToHalconI(tupleColorsG);
         var tupleColorsBH = arrayToHalconI(tupleColorsB);
 
-        DateTime t7a = DateTime.Now; PrintTime(t7, t7a, "Moving arrays to HTuples");
+        DateTime t7a = DateTime.Now; //PrintTime(t7, t7a, "Moving arrays to HTuples");
 
 
         //Console.WriteLine("Constructing ObjectModel3D based on XYZ data");
         var objectModel3D = new HalconDotNet.HObjectModel3D(tuplePointsXH, tuplePointsYH, tuplePointsZH);
-        DateTime t8 = DateTime.Now; PrintTime(t7a, t8, "Constructing ObjectModel3D based on XYZ HTuples data");
+        DateTime t8 = DateTime.Now; //PrintTime(t7a, t8, "Constructing ObjectModel3D based on XYZ HTuples data");
 
         //Console.WriteLine("Mapping ObjectModel3D data");
         HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "xyz_mapping", "object", arrayToHalconI(tupleXYZMapping));
-        DateTime t9 = DateTime.Now; PrintTime(t8, t9, "Mapping ObjectModel3D data");
+        DateTime t9 = DateTime.Now; //PrintTime(t8, t9, "Mapping ObjectModel3D data");
 
 
         //Console.WriteLine("Adding normals to ObjectModel3D");
         var normalsAttribNames = new HalconDotNet.HTuple("point_normal_x", "point_normal_y", "point_normal_z");
         var normalsAttribValues = new HalconDotNet.HTuple(tupleNormalsXH, tupleNormalsYH, tupleNormalsZH);
         HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, normalsAttribNames, "points", normalsAttribValues);
-        DateTime t10 = DateTime.Now; PrintTime(t9, t10, "Adding normals to ObjectModel3D");
+        DateTime t10 = DateTime.Now; //PrintTime(t9, t10, "Adding normals to ObjectModel3D");
 
         //Console.WriteLine("Adding RGB to ObjectModel3D");
         HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "red", "points", tupleColorsRH);
         HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "green", "points", tupleColorsGH);
         HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "blue", "points", tupleColorsBH);
-        DateTime t11 = DateTime.Now; PrintTime(t10, t11, "Adding RGB to ObjectModel3D");
+        DateTime t11 = DateTime.Now; //PrintTime(t10, t11, "Adding RGB to ObjectModel3D");
 
         PrintTime(t4, t11, "Total");
 

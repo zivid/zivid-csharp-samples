@@ -1,0 +1,9 @@
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\build\Release\x64\CaptureHalconViaZivid.exe.config
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\build\Release\x64\CaptureHalconViaZivid.exe
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\build\Release\x64\CaptureHalconViaZivid.pdb
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\build\Release\x64\CaptureHalconViaZivid.exe.CodeAnalysisLog.xml
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\build\Release\x64\CaptureHalconViaZivid.exe.lastcodeanalysissucceeded
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\source\Camera\Advanced\CaptureHalconViaZivid\obj\x64\Release\CaptureHalconViaZivid.csproj.CoreCompileInputs.cache
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\source\Camera\Advanced\CaptureHalconViaZivid\obj\x64\Release\CaptureHalconViaZivid.csproj.CopyComplete
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\source\Camera\Advanced\CaptureHalconViaZivid\obj\x64\Release\CaptureHalconViaZivid.exe
+C:\Users\SatjaSivcev\Repos\zivid-csharp-samples\source\Camera\Advanced\CaptureHalconViaZivid\obj\x64\Release\CaptureHalconViaZivid.pdb
