@@ -23,15 +23,16 @@ class Program
             using (var frame = camera.Capture(settings))
             {
                 Console.WriteLine("Setting up visualization");
-                var visualizer = new Zivid.NET.Visualization.Visualizer();
+                using (var visualizer = new Zivid.NET.Visualization.Visualizer())
+                {
+                    Console.WriteLine("Visualizing point cloud");
+                    visualizer.Show(frame);
+                    visualizer.ShowMaximized();
+                    visualizer.ResetToFit();
 
-                Console.WriteLine("Visualizing point cloud");
-                visualizer.Show(frame);
-                visualizer.ShowMaximized();
-                visualizer.ResetToFit();
-
-                Console.WriteLine("Running visualizer. Blocking until window closes.");
-                visualizer.Run();
+                    Console.WriteLine("Running visualizer. Blocking until window closes.");
+                    visualizer.Run();
+                }
             }
         }
         catch (Exception ex)

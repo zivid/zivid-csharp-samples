@@ -98,7 +98,7 @@ You may also list all cameras connected to the computer, and view their
 serial numbers through
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/PrintVersionInfo/PrintVersionInfo.cs#L15-L20))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/InfoUtilOther/CameraInfo/CameraInfo.cs#L15-L21))
 
 ``` sourceCode cs
 var cameras = zivid.Cameras;
@@ -106,6 +106,7 @@ Console.WriteLine("Number of cameras found: {0}", cameras.Count);
 foreach (var camera in cameras)
 {
 	Console.WriteLine("Camera Info: {0}", camera.Info);
+	Console.WriteLine("Camera State: {0}", camera.State);
 }
 ```
 

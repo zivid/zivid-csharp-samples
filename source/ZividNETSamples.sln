@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Ad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRPrintNormals", "Camera\Advanced\CaptureHDRPrintNormals\CaptureHDRPrintNormals.csproj", "{064AA724-CD81-462F-8A07-26440EA41103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintVersionInfo", "Camera\InfoUtilOther\PrintVersionInfo\PrintVersionInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraInfo", "Camera\InfoUtilOther\CameraInfo\CameraInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
 EndProject
@@ -40,6 +40,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCameraVis3D", "Applications\Basic\Visualization\CaptureFromFileCameraVis3D\CaptureFromFileCameraVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3D", "Applications\Basic\Visualization\CaptureVis3D\CaptureVis3D.csproj", "{68EB8781-17AA-42E9-9524-0C18A45278C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectImageStartAndStop", "Applications\Basic\Visualization\ProjectImageStartAndStop\ProjectImageStartAndStop.csproj", "{629C1888-D739-48A8-AE10-AD8368EF9F8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadIterateZDF", "Applications\Basic\FileFormats\ReadIterateZDF\ReadIterateZDF.csproj", "{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}"
 EndProject
@@ -141,6 +143,10 @@ Global
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Debug|x64.Build.0 = Debug|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Release|x64.ActiveCfg = Release|x64
 		{68EB8781-17AA-42E9-9524-0C18A45278C3}.Release|x64.Build.0 = Release|x64
+		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Debug|x64.ActiveCfg = Debug|x64
+		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Debug|x64.Build.0 = Debug|x64
+		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Release|x64.ActiveCfg = Release|x64
+		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Release|x64.Build.0 = Release|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.ActiveCfg = Debug|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.Build.0 = Debug|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Release|x64.ActiveCfg = Release|x64

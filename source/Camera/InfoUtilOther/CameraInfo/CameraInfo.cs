@@ -1,5 +1,5 @@
 /*
-List connected cameras and print version information.
+List connected cameras and print camera version and state information for each connected camera.
 */
 
 using System;
@@ -17,6 +17,7 @@ class Program
             foreach (var camera in cameras)
             {
                 Console.WriteLine("Camera Info: {0}", camera.Info);
+                Console.WriteLine("Camera State: {0}", camera.State);
             }
         }
         catch (Exception ex)
