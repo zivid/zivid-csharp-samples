@@ -4,33 +4,37 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6117292F-5426-48A7-91FB-B801126E576E}</ProjectGuid>
+    <ProjectGuid>{629C1888-D739-48A8-AE10-AD8368EF9F8D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PrintVersionInfo</RootNamespace>
-    <AssemblyName>PrintVersionInfo</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectImageStartAndStop</RootNamespace>
+    <AssemblyName>ProjectImageStartAndStop</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -48,9 +52,15 @@
     <Reference Include="ZividCoreNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
       <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividCoreNET.dll</HintPath>
     </Reference>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVisualizationNET.dll</HintPath>
+    </Reference>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVisualizationNET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrintVersionInfo.cs" />
+    <Compile Include="ProjectImageStartAndStop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +82,7 @@ exit /B 0
 
 :Error
 echo Unsupported config
-exit /B 1</PostBuildEvent>
+exit /B 1
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

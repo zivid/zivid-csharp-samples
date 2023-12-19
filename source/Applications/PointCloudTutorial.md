@@ -128,6 +128,8 @@ complete list of output data formats and how to copy them from the GPU.
 | `Zivid.NET.PointXYZColorRGBA[height, width]` | `PointCloud.CopyPointsXYZColorsRGBA()` | 16 bytes       | 37 MB      |
 | `Zivid.NET.PointXYZColorBGRA[height, width]` | `PointCloud.CopyPointsXYZColorsBGRA()` | 16 bytes       | 37 MB      |
 | `Zivid.NET.ImageRGBA`                        | `PointCloud.CopyImageRGBA()`           | 4 bytes        | 9 MB       |
+| `Zivid.NET.ImageBGRA`                        | `PointCloud.CopyImageBGRA()`           | 4 bytes        | 9 MB       |
+| `Zivid.NET.ImageSRGB`                        | `PointCloud.CopyImageSRGB()`           | 4 bytes        | 9 MB       |
 
 Here is an example of how to copy data.
 
@@ -228,19 +230,21 @@ The size of normals is equal to the size of the input point cloud.
 Having the frame allows you to visualize the point cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L34))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L35))
 
 ``` sourceCode cs
 Console.WriteLine("Setting up visualization");
-var visualizer = new Zivid.NET.Visualization.Visualizer();
-Console.WriteLine("Visualizing point cloud");
-visualizer.Show(frame);
-visualizer.ShowMaximized();
-visualizer.ResetToFit();
-
+using (var visualizer = new Zivid.NET.Visualization.Visualizer())
+{
+	Console.WriteLine("Visualizing point cloud");
+	visualizer.Show(frame);
+	visualizer.ShowMaximized();
+	visualizer.ResetToFit();
 Console.WriteLine("Running visualizer. Blocking until window closes.");
 visualizer.Run();
 ```
+
+> }
 
 You can visualize the point cloud from the point cloud object as well.
 
