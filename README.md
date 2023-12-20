@@ -80,6 +80,8 @@ from the camera can be used.
               - [CaptureVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs) - Capture point clouds, with color, from the Zivid
                 camera, and visualize them.
               - [ProjectImageStartAndStop](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/ProjectImageStartAndStop/ProjectImageStartAndStop.cs) - Start the Image Projection and Stop it.
+              - [ReadAndProjectImage](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/ReadAndProjectImage/ReadAndProjectImage.cs) - Read a 2D image from file and project it using the
+                camera projector.
           - **FileFormats**
               - [ReadIterateZDF](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs) - Read point cloud data from a ZDF file, iterate through
                 it, and extract individual points.

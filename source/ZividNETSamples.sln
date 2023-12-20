@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3D", "Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectImageStartAndStop", "Applications\Basic\Visualization\ProjectImageStartAndStop\ProjectImageStartAndStop.csproj", "{629C1888-D739-48A8-AE10-AD8368EF9F8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadAndProjectImage", "Applications\Basic\Visualization\ReadAndProjectImage\ReadAndProjectImage.csproj", "{79BE4F01-8935-49FD-BD8F-551E62FF03CA}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadIterateZDF", "Applications\Basic\FileFormats\ReadIterateZDF\ReadIterateZDF.csproj", "{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZDF2PLY", "Applications\Basic\FileFormats\ZDF2PLY\ZDF2PLY.csproj", "{04599908-D437-435E-AE21-2DA7A91BF174}"
@@ -147,6 +149,10 @@ Global
 		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Debug|x64.Build.0 = Debug|x64
 		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Release|x64.ActiveCfg = Release|x64
 		{629C1888-D739-48A8-AE10-AD8368EF9F8D}.Release|x64.Build.0 = Release|x64
+		{79BE4F01-8935-49FD-BD8F-551E62FF03CA}.Debug|x64.ActiveCfg = Debug|x64
+		{79BE4F01-8935-49FD-BD8F-551E62FF03CA}.Debug|x64.Build.0 = Debug|x64
+		{79BE4F01-8935-49FD-BD8F-551E62FF03CA}.Release|x64.ActiveCfg = Release|x64
+		{79BE4F01-8935-49FD-BD8F-551E62FF03CA}.Release|x64.Build.0 = Release|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.ActiveCfg = Debug|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Debug|x64.Build.0 = Debug|x64
 		{C25D92EB-0C72-4A00-A8A1-7E459F1299A5}.Release|x64.ActiveCfg = Release|x64
