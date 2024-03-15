@@ -217,15 +217,12 @@ settings](https://support.zivid.com/latest//reference-articles/standard-acquisit
 We can create settings for a single acquisition capture.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L20-L26))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L20-L23))
 
 ``` sourceCode cs
 var settings = new Zivid.NET.Settings
 {
-	Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
-														ExposureTime =
-															Duration.FromMicroseconds(6500) } },
-	Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
+	Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
 };
 ```
 
@@ -380,7 +377,7 @@ multiple acquisitions (HDR) is given by the number of `acquisitions` in
 `settings`.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L26))
 
 ``` sourceCode cs
 using (var frame = camera.Capture(settings))
@@ -431,7 +428,7 @@ Save ----
 We can now save our results.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31-L33))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28-L30))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";
@@ -452,7 +449,7 @@ for a list of supported formats. For example, we can export the point
 cloud to .ply format.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L35-L37))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L32-L34))
 
 ``` sourceCode cs
 var dataFilePLY = "PointCloud.ply";
