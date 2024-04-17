@@ -75,7 +75,7 @@ var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, sugg
 ## Capture
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L26))
 
 ``` sourceCode cs
 using (var frame = camera.Capture(settings))
@@ -84,7 +84,7 @@ using (var frame = camera.Capture(settings))
 ## Save
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31-L33))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28-L30))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";

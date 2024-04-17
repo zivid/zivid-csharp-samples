@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.11.0. For
+This repository contains csharp code samples for Zivid SDK v2.12.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -72,6 +72,12 @@ from the camera can be used.
             model) or estimate them from the point cloud.
           - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/Warmup/Warmup.cs) - A basic warm-up method for a Zivid camera with specified
             time and capture cycle.
+      - **Maintenance**
+          - [CorrectCameraInField](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/CorrectCameraInField/CorrectCameraInField.cs) - Correct the dimension trueness of a Zivid camera.
+          - [ResetCameraInField](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/ResetCameraInField/ResetCameraInField.cs) - Reset infield correction on a camera.
+          - [VerifyCameraInField](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/VerifyCameraInField/VerifyCameraInField.cs) - Check the dimension trueness of a Zivid camera.
+          - [VerifyCameraInFieldFromZDF](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/VerifyCameraInFieldFromZDF/VerifyCameraInFieldFromZDF.cs) - Check the dimension trueness of a Zivid camera from a ZDF
+            file.
   - **Applications**
       - **Basic**
           - **Visualization**
@@ -99,7 +105,7 @@ from the camera can be used.
               - [PoseConversions](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/HandEyeCalibration/PoseConversions/PoseConversions.cs) - Convert to/from Transformation Matrix (Rotation Matrix
                 + Translation Vector)
               - [UtilizeHandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/HandEyeCalibration/UtilizeHandEyeCalibration/UtilizeHandEyeCalibration.cs) - Transform single data point or entire point cloud from
-                camera frame to robot base frame using Hand-Eye
+                camera to robot base reference frame using Hand-Eye
                 calibration
 
 ## Installation

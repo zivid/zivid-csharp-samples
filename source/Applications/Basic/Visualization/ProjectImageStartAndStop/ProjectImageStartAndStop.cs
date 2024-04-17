@@ -36,13 +36,13 @@ class Program
             using (var camera = zivid.ConnectCamera())
             {
                 Console.WriteLine("Retrieving the projector resolution that the camera supports");
-                var projectorResolution = Zivid.NET.Experimental.Projection.Projection.ProjectorResolution(camera);
+                var projectorResolution = Zivid.NET.Projection.Projection.ProjectorResolution(camera);
 
                 var redColor = new Zivid.NET.ColorBGRA { b = 0, g = 0, r = 255, a = 255 };
 
                 var projectorImage = CreateProjectorImage(projectorResolution, redColor);
 
-                var projectedImageHandle = Zivid.NET.Experimental.Projection.Projection.ShowImage(camera, projectorImage);
+                var projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImage);
 
                 Console.WriteLine("Press enter to stop projecting using the \".Stop()\" function");
                 Console.ReadLine();
@@ -50,7 +50,7 @@ class Program
 
                 var greenColor = new Zivid.NET.ColorBGRA { b = 0, g = 255, r = 0, a = 255 };
                 projectorImage = CreateProjectorImage(projectorResolution, greenColor);
-                using (projectedImageHandle = Zivid.NET.Experimental.Projection.Projection.ShowImage(camera, projectorImage))
+                using (projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImage))
                 {
                     Console.WriteLine("Press enter to stop projecting by leaving a local scope");
                     Console.ReadLine();
@@ -58,7 +58,7 @@ class Program
 
                 var zividPinkColor = new Zivid.NET.ColorBGRA { b = 114, g = 52, r = 237, a = 255 };
                 projectorImage = CreateProjectorImage(projectorResolution, zividPinkColor);
-                projectedImageHandle = Zivid.NET.Experimental.Projection.Projection.ShowImage(camera, projectorImage);
+                projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImage);
 
                 Console.WriteLine("Press enter to stop projecting by performing a 3D capture");
                 Console.ReadLine();
