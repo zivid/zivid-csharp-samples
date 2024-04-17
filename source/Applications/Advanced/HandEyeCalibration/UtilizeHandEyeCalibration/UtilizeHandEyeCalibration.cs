@@ -1,25 +1,25 @@
 ﻿/*
-Transform single data point or entire point cloud from camera frame to robot base frame using Hand-Eye calibration
+Transform single data point or entire point cloud from camera to robot base reference frame using Hand-Eye calibration
 matrix.
 
 This example shows how to utilize the result of Hand-Eye calibration to transform either (picking) point coordinates
-or the entire point cloud from the camera frame to the robot base frame.
+or the entire point cloud from the camera to the robot base reference frame.
 
 For both Eye-To-Hand and Eye-In-Hand, there is a Zivid gem placed approx. 500 mm away from the robot base (see below).
-The (picking) point is the Zivid gem centroid, defined as image coordinates in the camera frame and hard-coded
+The (picking) point is the Zivid gem centroid, defined as image coordinates in the camera reference frame and hard-coded
 in this code example. Open the ZDF files in Zivid Studio to inspect the gem's 2D and corresponding 3D coordinates.
 
 Eye-To-Hand
 - ZDF file: ZividGemEyeToHand.zdf
 - 2D image coordinates: (1035,255)
 - Corresponding 3D coordinates: (37.77 -145.92 1227.1)
-- Corresponding 3D coordinates (robot base frame): (-12.4  514.37 -21.79)
+- Corresponding 3D coordinates (robot base reference frame): (-12.4  514.37 -21.79)
 
 Eye-In-Hand:
 - ZDF file: ZividGemEyeInHand.zdf
 - 2D image coordinates: (1460,755)
-- Corresponding 3D coordinates (camera frame): (83.95  28.84 305.7)
-- Corresponding 3D coordinates (robot base frame): (531.03  -5.44 164.6)
+- Corresponding 3D coordinates (camera reference frame): (83.95  28.84 305.7)
+- Corresponding 3D coordinates (robot base reference frame): (531.03  -5.44 164.6)
 
 For verification, check that the Zivid gem centroid 3D coordinates are the same as above after the transformation.
 
@@ -52,14 +52,14 @@ class Program
 
                         fileName = "ZividGemEyeToHand.zdf";
 
-                        // The (picking) point is defined as image coordinates in camera frame. It is hard-coded for the
-                        // ZividGemEyeToHand.zdf (1035,255) X: 37.8 Y: -145.9 Z: 1227.1
+                        // The (picking) point is defined as image coordinates in camera reference frame. It is hard-coded
+                        // for the ZividGemEyeToHand.zdf (1035,255) X: 37.8 Y: -145.9 Z: 1227.1
                         imageCoordinateX = 1035;
                         imageCoordinateY = 255;
 
                         var eyeToHandTransformFile = "EyeToHandTransform.yaml";
 
-                        Console.WriteLine("Reading camera pose in robot base frame (result of eye-to-hand calibration");
+                        Console.WriteLine("Reading camera pose in robot base reference frame (result of eye-to-hand calibration");
                         var eyeToHandTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + eyeToHandTransformFile);
@@ -74,8 +74,8 @@ class Program
 
                         fileName = "ZividGemEyeInHand.zdf";
 
-                        // The (picking) point is defined as image coordinates in camera frame. It is hard-coded for the
-                        // ZividGemEyeInHand.zdf (1460,755) X: 83.95 Y: 28.84 Z: 305.7
+                        // The (picking) point is defined as image coordinates in camera reference frame. It is hard-coded
+                        // for the ZividGemEyeInHand.zdf (1460,755) X: 83.95 Y: 28.84 Z: 305.7
                         imageCoordinateX = 1357;
                         imageCoordinateY = 666;
 
@@ -83,12 +83,12 @@ class Program
                         var robotTransformFile = "RobotTransform.yaml";
 
                         Console.WriteLine(
-                            "Reading camera pose in end-effector frame (result of eye-in-hand calibration)");
+                            "Reading camera pose in end-effector reference frame (result of eye-in-hand calibration)");
                         var eyeInHandTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + eyeInHandTransformFile);
 
-                        Console.WriteLine("Reading end-effector pose in robot base frame");
+                        Console.WriteLine("Reading end-effector pose in robot base reference frame");
                         var robotTransform = new Zivid.NET.Matrix4x4(
                             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/"
                             + robotTransformFile);
@@ -97,7 +97,7 @@ class Program
                         Matrix<float> transformEndEffectorToCamera = zividToMathDotNet(eyeInHandTransform);
                         Matrix<float> transformBaseToEndEffector = zividToMathDotNet(robotTransform);
 
-                        Console.WriteLine("Computing camera pose in robot base frame");
+                        Console.WriteLine("Computing camera pose in robot base reference frame");
                         transformBaseToCameraMath = transformBaseToEndEffector * transformEndEffectorToCamera;
 
                         loopContinue = false;
@@ -111,7 +111,7 @@ class Program
 
             var dataFile =
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/" + fileName;
-            Console.WriteLine("Reading ZDF frame from file: " + dataFile);
+            Console.WriteLine("Reading point cloud from file: " + dataFile);
             var frame = new Zivid.NET.Frame(dataFile);
             var pointCloud = frame.PointCloud;
 
@@ -132,12 +132,12 @@ class Program
                                                          xyz[imageCoordinateY, imageCoordinateX, 3] };
 
                         Vector<float> pointInCameraFrame = CreateVector.DenseOfArray(pickingPoint);
-                        Console.WriteLine("Point coordinates in camera frame: " + pointInCameraFrame);
+                        Console.WriteLine("Point coordinates in camera reference frame: " + pointInCameraFrame);
 
-                        Console.WriteLine("Transforming (picking) point from camera to robot base frame");
+                        Console.WriteLine("Transforming (picking) point from camera to robot base reference frame");
                         Vector<float> pointInBaseFrame = transformBaseToCameraMath * pointInCameraFrame;
 
-                        Console.WriteLine("Point coordinates in robot base frame: " + pointInBaseFrame);
+                        Console.WriteLine("Point coordinates in robot base reference frame: " + pointInBaseFrame);
 
                         loopContinue = false;
                         break;
@@ -150,7 +150,7 @@ class Program
                         pointCloud.Transform(transformBaseToCamera);
 
                         var saveFile = "ZividGemTransformed.zdf";
-                        Console.WriteLine("Saving frame to file: " + saveFile);
+                        Console.WriteLine("Saving point cloud to file: " + saveFile);
                         frame.Save(saveFile);
 
                         loopContinue = false;

@@ -44,9 +44,6 @@ class Program
         var model = camera.Info.Model;
         switch (model)
         {
-            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall: return "zividOne";
-            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium: return "zividOne";
-            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge: return "zividOne";
             case Zivid.NET.CameraInfo.ModelOption.ZividTwo: return "zivid2";
             case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100: return "zivid2";
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130: return "zivid2Plus";

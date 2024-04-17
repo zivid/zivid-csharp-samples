@@ -18,15 +18,11 @@ class Program
             var zivid = new Zivid.NET.Application();
             var cameras = zivid.Cameras;
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
-            foreach (var camera in cameras)
-            {
-                Console.WriteLine("Connecting to camera: {0}", camera.Info.SerialNumber);
-                camera.Connect();
-            }
+            var connectedCameras = connectToAllAvailableCameras(cameras);
 
             var detectionResults = new List<DetectionResult>();
             var serialNumbers = new List<string>();
-            foreach (var camera in cameras)
+            foreach (var camera in connectedCameras)
             {
                 var serialNumber = camera.Info.SerialNumber.ToString();
                 Console.WriteLine("Capturing frame with camera: {0}", serialNumber);
@@ -85,6 +81,26 @@ class Program
         };
         var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
         return camera.Capture(settings);
+    }
+
+    static List<Zivid.NET.Camera> connectToAllAvailableCameras(IList<Zivid.NET.Camera> cameras)
+    {
+        var connectedCameras = new List<Zivid.NET.Camera>();
+        foreach (var camera in cameras)
+        {
+            if (camera.State.Status == Zivid.NET.CameraState.StatusOption.Available)
+            {
+                Console.WriteLine("Connecting to camera: {0}", camera.Info.SerialNumber);
+                camera.Connect();
+                connectedCameras.Add(camera);
+            }
+            else
+            {
+                Console.WriteLine("Unable to connect to camera: {0}. ", camera.Info.SerialNumber);
+                Console.WriteLine("Camera status: {0}.", camera.State.Status);
+            }
+        }
+        return connectedCameras;
     }
 
     static void PrintMatrix(float[,] matrix)

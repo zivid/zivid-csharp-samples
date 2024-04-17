@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.902
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture", "Camera\Basic\Capture\Capture.csproj", "{DD533F88-E34D-41A8-B734-1B94A5A4A31F}"
 EndProject
@@ -36,6 +35,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmup", "Camera\InfoUtilOther\Warmup\Warmup.csproj", "{B2F9FB41-99ED-4DD2-8683-02D325997619}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareUpdater", "Camera\InfoUtilOther\FirmwareUpdater\FirmwareUpdater.csproj", "{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorrectCameraInField", "Camera\Maintenance\CorrectCameraInField\CorrectCameraInField.csproj", "{8D35FE40-515E-416A-9C44-503B0D1B6674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResetCameraInField", "Camera\Maintenance\ResetCameraInField\ResetCameraInField.csproj", "{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyCameraInField", "Camera\Maintenance\VerifyCameraInField\VerifyCameraInField.csproj", "{471E7FCF-9689-460F-810C-B8C0EBC81EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyCameraInFieldFromZDF", "Camera\Maintenance\VerifyCameraInFieldFromZDF\VerifyCameraInFieldFromZDF.csproj", "{D8884156-1127-40ED-902A-7DD610786E5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCameraVis3D", "Applications\Basic\Visualization\CaptureFromFileCameraVis3D\CaptureFromFileCameraVis3D.csproj", "{8108F859-85B2-4063-9D6F-D7B852ADA83B}"
 EndProject
@@ -137,6 +144,22 @@ Global
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Debug|x64.Build.0 = Debug|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.ActiveCfg = Release|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.Build.0 = Release|x64
+		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Debug|x64.ActiveCfg = Debug|x64
+		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Debug|x64.Build.0 = Debug|x64
+		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Release|x64.ActiveCfg = Release|x64
+		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Release|x64.Build.0 = Release|x64
+		{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}.Debug|x64.ActiveCfg = Debug|x64
+		{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}.Debug|x64.Build.0 = Debug|x64
+		{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}.Release|x64.ActiveCfg = Release|x64
+		{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}.Release|x64.Build.0 = Release|x64
+		{471E7FCF-9689-460F-810C-B8C0EBC81EC3}.Debug|x64.ActiveCfg = Debug|x64
+		{471E7FCF-9689-460F-810C-B8C0EBC81EC3}.Debug|x64.Build.0 = Debug|x64
+		{471E7FCF-9689-460F-810C-B8C0EBC81EC3}.Release|x64.ActiveCfg = Release|x64
+		{471E7FCF-9689-460F-810C-B8C0EBC81EC3}.Release|x64.Build.0 = Release|x64
+		{D8884156-1127-40ED-902A-7DD610786E5A}.Debug|x64.ActiveCfg = Debug|x64
+		{D8884156-1127-40ED-902A-7DD610786E5A}.Debug|x64.Build.0 = Debug|x64
+		{D8884156-1127-40ED-902A-7DD610786E5A}.Release|x64.ActiveCfg = Release|x64
+		{D8884156-1127-40ED-902A-7DD610786E5A}.Release|x64.Build.0 = Release|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Debug|x64.ActiveCfg = Debug|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Debug|x64.Build.0 = Debug|x64
 		{8108F859-85B2-4063-9D6F-D7B852ADA83B}.Release|x64.ActiveCfg = Release|x64

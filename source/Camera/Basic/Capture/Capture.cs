@@ -16,13 +16,10 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Configuring settings");
+            Console.WriteLine("Creating default capture settings");
             var settings = new Zivid.NET.Settings
             {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
-                                                                      ExposureTime =
-                                                                          Duration.FromMicroseconds(6500) } },
-                Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
             };
 
             Console.WriteLine("Capturing frame");

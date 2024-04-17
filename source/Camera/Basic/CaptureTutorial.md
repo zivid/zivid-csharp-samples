@@ -14,6 +14,7 @@ tutorial see:
 [**Connect**](#Connect) |
 [**Configure**](#Configure) |
 [**Capture**](#Capture) |
+[**Save**](#Save) |
 [**Multithreading**](#Multithreading) |
 [**Conclusion**](#Conclusion)
 
@@ -33,11 +34,12 @@ MATLAB](https://github.com/zivid/zivid-matlab-samples/blob/master/source/Camera/
 
 Tip:
 
-If you prefer watching a video, our webinar [Making 3D captures easy - A
-tour of Zivid Studio and Zivid
-SDK](https://www.zivid.com/webinars-page?wchannelid=ffpqbqc7sg&wmediaid=ce68dbjldk)
-covers the same content as the Capture Tutorial. .. rubric::
-Prerequisites
+> If you prefer watching a video, our webinar [Making 3D captures easy -
+> A tour of Zivid Studio and Zivid
+> SDK](https://www.zivid.com/webinars-page?wchannelid=ffpqbqc7sg&wmediaid=ce68dbjldk)
+> covers the same content as the Capture Tutorial.
+
+**Prerequisites**
 
   - Install [Zivid
     Software](https://support.zivid.com/latest//getting-started/software-installation.html).
@@ -90,7 +92,7 @@ var camera = zivid.ConnectCamera(new Zivid.NET.CameraInfo.SerialNumber("2020C0DE
 
 Note:
 
-The serial number of your camera is shown in the Zivid Studio.
+> The serial number of your camera is shown in the Zivid Studio.
 
 -----
 
@@ -146,7 +148,7 @@ var settings = new Zivid.NET.Settings
 {
 	Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
 	Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } } },
+							Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} } },
 				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
 };
 ```
@@ -209,23 +211,20 @@ There are only two parameters to configure with Capture Assistant:
 Another option is to configure settings manually. For more information
 about what each settings does, please see [Camera
 Settings](https://support.zivid.com/latest/reference-articles/camera-settings.html).
-Note that Zivid 2 has a set of [standard
-settings](https://support.zivid.com/latest//reference-articles/standard-acquisition-settings-zivid-two.html).
+Then, the next step it's [Capturing High Quality Point
+Clouds](https://support.zivid.com/latest/academy/camera/capturing-high-quality-point-clouds.html)
 
 #### Single Acquisition
 
 We can create settings for a single acquisition capture.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L20-L26))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L20-L23))
 
 ``` sourceCode cs
 var settings = new Zivid.NET.Settings
 {
-	Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
-														ExposureTime =
-															Duration.FromMicroseconds(6500) } },
-	Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
+	Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
 };
 ```
 
@@ -250,13 +249,13 @@ foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L94))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L92))
 
 ``` sourceCode cs
 Console.WriteLine("Configuring settings for capture:");
 var settings = new Zivid.NET.Settings()
 {
-	Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+	Engine = Zivid.NET.Settings.EngineOption.Phase,
 	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
 	RegionOfInterest = { Box = {
 							Enabled = true,
@@ -276,15 +275,13 @@ var settings = new Zivid.NET.Settings()
 										Suppression = { Enabled = true },
 										Repair ={ Enabled = true } },
 							Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
-							Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
+							Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} },
 							Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
+							Hole = { Repair = { Enabled = true, HoleSize = 0.2, Strictness = 1 } },
 							Experimental = { ContrastDistortion = { Correction = { Enabled = true,
 																					Strength = 0.4 },
 																	Removal = { Enabled = true,
-																				Threshold = 0.5 } },
-												HoleFilling = { Enabled = true,
-																HoleSize = 0.2,
-																Strictness = 1 } } },
+																				Threshold = 0.5 } } } },
 				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
 							Gamma = 1.0,
 							Experimental = { Mode = ColorModeOption.Automatic } } }
@@ -346,7 +343,7 @@ Check out
 for recommended .yml files tuned for your application.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L111))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L104-L109))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -359,7 +356,7 @@ var settingsFromFile = new Zivid.NET.Settings(settingsFile);
 You can also save settings to .yml file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L108))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L104-L106))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -380,7 +377,7 @@ multiple acquisitions (HDR) is given by the number of `acquisitions` in
 `settings`.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L26))
 
 ``` sourceCode cs
 using (var frame = camera.Capture(settings))
@@ -417,21 +414,12 @@ source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera
 using (var frame2D = camera.Capture(settings2D))
 ```
 
------
-
-Caution\!:
-
-> Zivid One+ camera has a time penalty when changing the capture mode
-> (2D and 3D) if the 2D capture settings use brightness \> 0.
-
-You can read more about it in [2D and 3D switching
-limitation](https://support.zivid.com/latest//support/2d-3d-switching-limitation.html).
-Save ----
+## Save
 
 We can now save our results.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L31-L33))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28-L30))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";
@@ -442,9 +430,10 @@ frame.Save(dataFile);
 
 Tip:
 
-You can open and view `Frame.zdf` file in [Zivid
-Studio](https://support.zivid.com/latest//getting-started/studio-guide.html).
-Export ^^^^^^
+> You can open and view `Frame.zdf` file in [Zivid
+> Studio](https://support.zivid.com/latest//getting-started/studio-guide.html).
+
+### Export
 
 The API detects which format to use. See [Point
 Cloud](https://support.zivid.com/latest//reference-articles/point-cloud-structure-and-output-formats.html)
@@ -452,7 +441,7 @@ for a list of supported formats. For example, we can export the point
 cloud to .ply format.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L35-L37))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L32-L34))
 
 ``` sourceCode cs
 var dataFilePLY = "PointCloud.ply";
