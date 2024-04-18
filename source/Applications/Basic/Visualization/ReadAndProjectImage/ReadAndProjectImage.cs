@@ -23,7 +23,7 @@ class Program
                 Console.WriteLine("Reading 2D image (of resolution matching the Zivid camera projector resolution) from file: " + projectorImageFileForGivenCamera);
                 var projectorImageForGivenCamera = new Zivid.NET.ImageBGRA(projectorImageFileForGivenCamera);
 
-                using (var projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImageForGivenCamera))
+                using (var projectedImageHandle = Zivid.NET.Experimental.Projection.Projection.ShowImage(camera, projectorImageForGivenCamera))
                 { // A Local Scope to handle the projected image lifetime
 
                     var settings2D = new Zivid.NET.Settings2D

@@ -5,7 +5,7 @@ Use Capture Assistant to capture point clouds, with color, from the Zivid camera
 using System;
 using Duration = Zivid.NET.Duration;
 using ReflectionFilterModeOption =
-    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ModeOption;
+    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 
 class Program
 {
@@ -34,7 +34,7 @@ class Program
             Console.WriteLine(
                 "Manually configuring processing settings (Capture Assistant only suggests acquisition settings)");
             settings.Processing.Filters.Reflection.Removal.Enabled = true;
-            settings.Processing.Filters.Reflection.Removal.Mode = ReflectionFilterModeOption.Global;
+            settings.Processing.Filters.Reflection.Removal.Experimental.Mode = ReflectionFilterModeOption.Global;
             settings.Processing.Filters.Smoothing.Gaussian.Enabled = true;
             settings.Processing.Filters.Smoothing.Gaussian.Sigma = 1.5;
 
