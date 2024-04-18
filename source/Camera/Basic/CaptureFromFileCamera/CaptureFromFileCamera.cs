@@ -10,7 +10,7 @@ The default file camera used in this sample is the Zivid 2 M70 file camera.
 
 using System;
 using ReflectionFilterModeOption =
-    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ModeOption;
+    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 
 class Program
 {
@@ -40,7 +40,7 @@ class Program
             {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} } },
+                                           Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
             };
 

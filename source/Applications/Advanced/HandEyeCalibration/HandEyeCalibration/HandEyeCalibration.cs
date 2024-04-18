@@ -25,10 +25,6 @@ class Program
 
             var calibrationResult = performCalibration(handEyeInput);
 
-            Console.WriteLine("Zivid primarily operates with a (4x4) transformation matrix. To convert");
-            Console.WriteLine("to axis-angle, rotation vector, roll-pitch-yaw, or quaternion, check out");
-            Console.WriteLine("our PoseConversions sample.");
-
             if (calibrationResult.Valid())
             {
                 Console.WriteLine("{0}\n{1}\n{2}", "Hand-Eye calibration OK", "Result:", calibrationResult);
@@ -54,10 +50,6 @@ class Program
         var beingInput = true;
 
         Interaction.ExtendInputBuffer(2048);
-
-        Console.WriteLine("Zivid primarily operates with a (4x4) transformation matrix. To convert");
-        Console.WriteLine("from axis-angle, rotation vector, roll-pitch-yaw, or quaternion, check out");
-        Console.WriteLine("our PoseConversions sample.");
 
         do
         {
@@ -108,13 +100,11 @@ class Program
             if (calibrationType.Equals("eth", StringComparison.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine("Performing eye-to-hand calibration");
-                Console.WriteLine("The resulting transform is the camera pose in robot base frame");
                 return Calibrator.CalibrateEyeToHand(handEyeInput);
             }
             if (calibrationType.Equals("eih", StringComparison.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine("Performing eye-in-hand calibration");
-                Console.WriteLine("The resulting transform is the camera pose in flange (end-effector) frame");
                 return Calibrator.CalibrateEyeInHand(handEyeInput);
             }
             Console.WriteLine("Entered unknown method");
