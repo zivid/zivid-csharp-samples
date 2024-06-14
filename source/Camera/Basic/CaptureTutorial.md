@@ -249,14 +249,14 @@ foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L92))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L93))
 
 ``` sourceCode cs
 Console.WriteLine("Configuring settings for capture:");
 var settings = new Zivid.NET.Settings()
 {
 	Engine = Zivid.NET.Settings.EngineOption.Phase,
-	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
+	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2 },
 	RegionOfInterest = { Box = {
 							Enabled = true,
 							PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -282,6 +282,7 @@ var settings = new Zivid.NET.Settings()
 																					Strength = 0.4 },
 																	Removal = { Enabled = true,
 																				Threshold = 0.5 } } } },
+				Resampling = { Mode = Zivid.NET.Settings.ProcessingGroup.ResamplingGroup.ModeOption.Upsample2x2},
 				Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
 							Gamma = 1.0,
 							Experimental = { Mode = ColorModeOption.Automatic } } }
@@ -343,7 +344,7 @@ Check out
 for recommended .yml files tuned for your application.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L104-L109))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L105-L110))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -356,7 +357,7 @@ var settingsFromFile = new Zivid.NET.Settings(settingsFile);
 You can also save settings to .yml file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L104-L106))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L105-L107))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
