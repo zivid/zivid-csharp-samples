@@ -32,7 +32,7 @@ class Program
             var settings = new Zivid.NET.Settings()
             {
                 Engine = Zivid.NET.Settings.EngineOption.Phase,
-                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
+                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2 },
                 RegionOfInterest = { Box = {
                                         Enabled = true,
                                         PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -58,6 +58,7 @@ class Program
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
                                                                                                Threshold = 0.5 } } } },
+                               Resampling = { Mode = Zivid.NET.Settings.ProcessingGroup.ResamplingGroup.ModeOption.Upsample2x2},
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
                                          Gamma = 1.0,
                                          Experimental = { Mode = ColorModeOption.Automatic } } }
