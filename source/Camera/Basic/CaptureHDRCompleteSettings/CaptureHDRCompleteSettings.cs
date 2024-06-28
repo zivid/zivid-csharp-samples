@@ -16,7 +16,7 @@ using Duration = Zivid.NET.Duration;
 using ColorModeOption =
     Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption;
 using ReflectionFilterModeOption =
-    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ModeOption;
+    Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ExperimentalGroup.ModeOption;
 class Program
 {
     static int Main()
@@ -31,8 +31,8 @@ class Program
             Console.WriteLine("Configuring settings for capture:");
             var settings = new Zivid.NET.Settings()
             {
-                Engine = Zivid.NET.Settings.EngineOption.Phase,
-                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2 },
+                Experimental = { Engine = Zivid.NET.Settings.ExperimentalGroup.EngineOption.Phase },
+                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All },
                 RegionOfInterest = { Box = {
                                         Enabled = true,
                                         PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -51,14 +51,15 @@ class Program
                                                      Suppression = { Enabled = true },
                                                      Repair ={ Enabled = true } },
                                            Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
-                                           Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} },
+                                           Reflection = { Removal = { Enabled = true, Experimental = { Mode = ReflectionFilterModeOption.Global} } },
                                            Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
-                                           Hole = { Repair = { Enabled = true, HoleSize = 0.2, Strictness = 1 } },
                                            Experimental = { ContrastDistortion = { Correction = { Enabled = true,
                                                                                                   Strength = 0.4 },
                                                                                    Removal = { Enabled = true,
-                                                                                               Threshold = 0.5 } } } },
-                               Resampling = { Mode = Zivid.NET.Settings.ProcessingGroup.ResamplingGroup.ModeOption.Upsample2x2},
+                                                                                               Threshold = 0.5 } },
+                                                            HoleFilling = { Enabled = true,
+                                                                            HoleSize = 0.2,
+                                                                            Strictness = 1 } } },
                                Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
                                          Gamma = 1.0,
                                          Experimental = { Mode = ColorModeOption.Automatic } } }
@@ -124,6 +125,16 @@ class Program
         var model = camera.Info.Model;
         switch (model)
         {
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusSmall:
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusMedium:
+            case Zivid.NET.CameraInfo.ModelOption.ZividOnePlusLarge:
+                {
+                    double[] aperture = { 8.0, 4.0, 1.4 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(6500), Duration.FromMicroseconds(10000), Duration.FromMicroseconds(40000) };
+                    double[] gain = { 1.0, 1.0, 2.0 };
+                    double[] brightness = { 1.8, 1.8, 1.8 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
             case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
             case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
                 {
