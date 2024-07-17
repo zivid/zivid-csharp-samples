@@ -29,7 +29,7 @@ class Program
                 using (var frame = AssistedCapture(camera))
                 {
                     Console.WriteLine("Detecting checkerboard in point cloud");
-                    var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
+                    var detectionResult = Detector.DetectCalibrationBoard(frame);
                     if (detectionResult)
                     {
                         detectionResults.Add(detectionResult);

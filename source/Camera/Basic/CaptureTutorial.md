@@ -453,8 +453,11 @@ frame.Save(dataFilePLY);
 
 We can get 2D color image from a 3D capture.
 
-No source available for {language\_name} 2D captures also produce 2D
-color images.
+``` sourceCode csharp
+var image = PointCloud.CopyImageRGBA();
+```
+
+2D captures also produce 2D color images.
 
 ([go to
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L33))

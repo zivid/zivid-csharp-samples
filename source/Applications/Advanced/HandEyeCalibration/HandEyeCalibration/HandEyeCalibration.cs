@@ -70,7 +70,7 @@ class Program
                         using (var frame = Interaction.AssistedCapture(camera))
                         {
                             Console.Write("Detecting checkerboard in point cloud: ");
-                            var detectionResult = Detector.DetectFeaturePoints(frame.PointCloud);
+                            var detectionResult = Detector.DetectCalibrationBoard(frame);
 
                             if (detectionResult.Valid())
                             {

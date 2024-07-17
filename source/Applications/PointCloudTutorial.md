@@ -12,7 +12,6 @@ tutorial see:
 [**Introduction**](#Introduction) |
 [**Frame**](#Frame) |
 [**Point**](#Point-Cloud) |
-[**Transform**](#Transform) |
 [**Downsample**](#Downsample) |
 [**Normals**](#Normals) |
 [**Visualize**](#Visualize) |
@@ -152,7 +151,7 @@ In terms of memory allocation, there are two ways to copy data:
   - A user can pass a pointer to a pre-allocated memory buffer, and the
     Zivid SDK will copy the data to the pre-allocated memory buffer.
 
-## Transform
+-----
 
 You may want to
 [transform](https://support.zivid.com/latest//academy/applications/transform.html)
