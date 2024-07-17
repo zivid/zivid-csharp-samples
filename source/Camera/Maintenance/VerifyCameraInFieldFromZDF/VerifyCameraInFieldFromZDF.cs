@@ -35,7 +35,7 @@ class Program
             // offline infield verification
 
             Console.WriteLine("Capturing calibration board");
-            var frame = Zivid.NET.Experimental.Calibration.Detector.CaptureCalibrationBoard(camera);
+            var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera);
             var dataFile = "FrameWithCalibrationBoard.zdf";
             Console.WriteLine("Saving frame to file: " + dataFile + ", for later use in offline infield verification");
             frame.Save(dataFile);
@@ -47,7 +47,7 @@ class Program
             var loadedFrame = new Zivid.NET.Frame(dataFile);
 
             Console.WriteLine("Detecting calibration board");
-            var detectionResult = Zivid.NET.Experimental.Calibration.Detector.DetectFeaturePoints(loadedFrame);
+            var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(loadedFrame);
 
             var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
             if (!input.Valid)

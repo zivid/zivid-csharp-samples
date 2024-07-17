@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmup", "Camera\InfoUtilOt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareUpdater", "Camera\InfoUtilOther\FirmwareUpdater\FirmwareUpdater.csproj", "{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkConfiguration", "Camera\InfoUtilOther\NetworkConfiguration\NetworkConfiguration.csproj", "{121101E4-E682-4850-8638-6C47873A57EA}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorrectCameraInField", "Camera\Maintenance\CorrectCameraInField\CorrectCameraInField.csproj", "{8D35FE40-515E-416A-9C44-503B0D1B6674}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResetCameraInField", "Camera\Maintenance\ResetCameraInField\ResetCameraInField.csproj", "{007E5DE9-EB5C-4EAA-A609-FEA14196F3BD}"
@@ -67,6 +69,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "Applications\Advanced\MultiCameraCalibration\MultiCameraCalibration.csproj", "{26F708E4-218E-4F17-8989-F5C42796C932}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaCheckerboard", "Applications\Advanced\TransformPointCloudViaCheckerboard\TransformPointCloudViaCheckerboard.csproj", "{05DAC246-781C-45B9-8E57-AC58D013522A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaArucoMarker", "Applications\Advanced\TransformPointCloudViaArucoMarker\TransformPointCloudViaArucoMarker.csproj", "{2F721053-DE2A-4714-853C-CDDBB5828AB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaCheckerboard", "Applications\Advanced\ROIBoxViaCheckerboard\ROIBoxViaCheckerboard.csproj", "{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaArucoMarker", "Applications\Advanced\ROIBoxViaArucoMarker\ROIBoxViaArucoMarker.csproj", "{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseConversions", "Applications\Advanced\HandEyeCalibration\PoseConversions\PoseConversions.csproj", "{69416F6A-75DF-436E-85F2-3881CCBEAA9A}"
 EndProject
@@ -144,6 +152,10 @@ Global
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Debug|x64.Build.0 = Debug|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.ActiveCfg = Release|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.Build.0 = Release|x64
+		{121101E4-E682-4850-8638-6C47873A57EA}.Debug|x64.ActiveCfg = Debug|x64
+		{121101E4-E682-4850-8638-6C47873A57EA}.Debug|x64.Build.0 = Debug|x64
+		{121101E4-E682-4850-8638-6C47873A57EA}.Release|x64.ActiveCfg = Release|x64
+		{121101E4-E682-4850-8638-6C47873A57EA}.Release|x64.Build.0 = Release|x64
 		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Debug|x64.ActiveCfg = Debug|x64
 		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Debug|x64.Build.0 = Debug|x64
 		{8D35FE40-515E-416A-9C44-503B0D1B6674}.Release|x64.ActiveCfg = Release|x64
@@ -208,6 +220,18 @@ Global
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Debug|x64.Build.0 = Debug|x64
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.ActiveCfg = Release|x64
 		{05DAC246-781C-45B9-8E57-AC58D013522A}.Release|x64.Build.0 = Release|x64
+		{2F721053-DE2A-4714-853C-CDDBB5828AB0}.Debug|x64.ActiveCfg = Debug|x64
+		{2F721053-DE2A-4714-853C-CDDBB5828AB0}.Debug|x64.Build.0 = Debug|x64
+		{2F721053-DE2A-4714-853C-CDDBB5828AB0}.Release|x64.ActiveCfg = Release|x64
+		{2F721053-DE2A-4714-853C-CDDBB5828AB0}.Release|x64.Build.0 = Release|x64
+		{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}.Debug|x64.ActiveCfg = Debug|x64
+		{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}.Debug|x64.Build.0 = Debug|x64
+		{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}.Release|x64.ActiveCfg = Release|x64
+		{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}.Release|x64.Build.0 = Release|x64
+		{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}.Debug|x64.ActiveCfg = Debug|x64
+		{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}.Debug|x64.Build.0 = Debug|x64
+		{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}.Release|x64.ActiveCfg = Release|x64
+		{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}.Release|x64.Build.0 = Release|x64
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Debug|x64.ActiveCfg = Debug|x64
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Debug|x64.Build.0 = Debug|x64
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Release|x64.ActiveCfg = Release|x64

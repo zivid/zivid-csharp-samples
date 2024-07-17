@@ -46,7 +46,7 @@ class Program
             if (YesNoPrompt("Capture (y) or finish (n)?"))
             {
                 Console.WriteLine("Capturing calibration board");
-                var detectionResult = Zivid.NET.Experimental.Calibration.Detector.DetectFeaturePoints(camera);
+                var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(camera);
                 var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
 
                 if (input.Valid)

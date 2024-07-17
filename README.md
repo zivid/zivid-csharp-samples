@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.12.0. For
+This repository contains csharp code samples for Zivid SDK v2.13.1. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -70,6 +70,8 @@ from the camera can be used.
           - [FirmwareUpdater](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FirmwareUpdater/FirmwareUpdater.cs) - Update firmware on the Zivid camera.
           - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
             model) or estimate them from the point cloud.
+          - [NetworkConfiguration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/NetworkConfiguration/NetworkConfiguration.cs) - Uses Zivid API to change the IP address of the Zivid
+            camera.
           - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/Warmup/Warmup.cs) - A basic warm-up method for a Zivid camera with specified
             time and capture cycle.
       - **Maintenance**
@@ -97,7 +99,14 @@ from the camera can be used.
           - [HandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration/HandEyeCalibration.cs) - Perform Hand-Eye calibration.
           - [MultiCameraCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs) - Use captures of a calibration object to generate
             transformation matrices to a single coordinate frame.
+          - [ROIBoxViaArucoMarker](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ROIBoxViaArucoMarker/ROIBoxViaArucoMarker.cs) - Filter the point cloud based on a ROI box given relative
+            to the ArUco marker on a Zivid Calibration Board.
+          - [ROIBoxViaCheckerboard](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ROIBoxViaCheckerboard/ROIBoxViaCheckerboard.cs) - Filter the point cloud based on a ROI box given relative
+            to the Zivid Calibration Board.
           - [TransformPointCloudFromMillimetersToMeters](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/TransformPointCloudFromMillimetersToMeters/TransformPointCloudFromMillimetersToMeters.cs) - Transform point cloud data from millimeters to meters.
+          - [TransformPointCloudViaArucoMarker](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/TransformPointCloudViaArucoMarker/TransformPointCloudViaArucoMarker.cs) - Transform a point cloud from camera to ArUco marker
+            coordinate frame by estimating the marker's pose from the
+            point cloud.
           - [TransformPointCloudViaCheckerboard](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/TransformPointCloudViaCheckerboard/TransformPointCloudViaCheckerboard.cs) - Transform a point cloud from camera to checkerboard (Zivid
             Calibration Board) coordinate frame by getting checkerboard
             pose from the API.
