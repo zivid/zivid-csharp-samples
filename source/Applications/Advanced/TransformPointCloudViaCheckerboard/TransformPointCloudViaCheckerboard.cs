@@ -23,16 +23,12 @@ class Program
             var pointCloud = frame.PointCloud;
 
             Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
-            var detectionResult = Detector.DetectCalibrationBoard(frame);
+            var detectionResult = Detector.DetectFeaturePoints(pointCloud);
             var transformCameraToCheckerboard = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
             Console.WriteLine(transformCameraToCheckerboard);
             Console.WriteLine("Camera pose in checkerboard frame:");
             var transformCheckerboardToCamera = transformCameraToCheckerboard.Inverse();
             Console.WriteLine(transformCheckerboardToCamera);
-
-            var transformFile = "CheckerboardToCameraTransform.yaml";
-            Console.WriteLine("Saving a YAML file with Inverted checkerboard pose to file: " + transformFile);
-            transformCheckerboardToCamera.Save(transformFile);
 
             Console.WriteLine("Transforming point cloud from camera frame to Checkerboard frame");
             pointCloud.Transform(transformCheckerboardToCamera);
