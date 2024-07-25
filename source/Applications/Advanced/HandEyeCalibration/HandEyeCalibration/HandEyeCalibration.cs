@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using Zivid.NET.Calibration;
 using Duration = Zivid.NET.Duration;
 
@@ -31,7 +30,7 @@ class Program
 
             if (calibrationResult.Valid())
             {
-                Console.WriteLine("{0}\n{1}\n{2}", "Hand-Eye calibration OK", "Result:", calibrationResult);
+                Console.WriteLine("{0}\n{1}\n{2}", "Hand-Eye calibration OK", "Result: ", calibrationResult);
             }
             else
             {
@@ -53,6 +52,20 @@ class Program
         var currentPoseId = 0U;
         var beingInput = true;
 
+        var calibrationObject = "";
+        while (true)
+        {
+            Console.WriteLine("Enter calibration object you are using, m (for ArUco marker(s)) or c (for Zivid checkerboard): ");
+            calibrationObject = Console.ReadLine();
+
+            if (calibrationObject.Equals("m", StringComparison.CurrentCultureIgnoreCase) ||
+                calibrationObject.Equals("c", StringComparison.CurrentCultureIgnoreCase))
+            {
+                break;
+            }
+        }
+
+
         Interaction.ExtendInputBuffer(2048);
 
         Console.WriteLine("Zivid primarily operates with a (4x4) transformation matrix. To convert");
@@ -66,23 +79,7 @@ class Program
                 case CommandType.AddPose:
                     try
                     {
-                        var robotPose = Interaction.EnterRobotPose(currentPoseId);
-                        using (var frame = Interaction.AssistedCapture(camera))
-                        {
-                            Console.Write("Detecting checkerboard in point cloud: ");
-                            var detectionResult = Detector.DetectCalibrationBoard(frame);
-
-                            if (detectionResult.Valid())
-                            {
-                                Console.WriteLine("Calibration board detected");
-                                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
-                                ++currentPoseId;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Failed to detect calibration board, ensure that the entire board is in the view of the camera");
-                            }
-                        }
+                        HandleAddPose(ref currentPoseId, ref handEyeInput, camera, calibrationObject);
                     }
                     catch (Exception ex)
                     {
@@ -99,26 +96,81 @@ class Program
         return handEyeInput;
     }
 
+    public static void HandleAddPose(ref uint currentPoseId, ref List<HandEyeInput> handEyeInput, Zivid.NET.Camera camera, string calibrationObject)
+    {
+        var robotPose = Interaction.EnterRobotPose(currentPoseId);
+
+        Console.Write("Detecting calibration object in point cloud");
+        if (calibrationObject.Equals("c", StringComparison.CurrentCultureIgnoreCase))
+        {
+            var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera);
+            var detectionResult = Detector.DetectCalibrationBoard(frame);
+
+            if (detectionResult.Valid())
+            {
+                Console.WriteLine("Calibration board detected");
+                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
+                ++currentPoseId;
+            }
+            else
+            {
+                Console.WriteLine("Failed to detect calibration board, ensure that the entire board is in the view of the camera");
+            }
+        }
+        else if (calibrationObject.Equals("m", StringComparison.CurrentCultureIgnoreCase))
+        {
+            var frame = AssistedCapture(camera);
+
+            var markerDictionary = Zivid.NET.MarkerDictionary.Aruco4x4_50;
+            var markerIds = new List<int> { 1, 2, 3 };
+
+            Console.WriteLine("Detecting arUco marker IDs " + string.Join(", ", markerIds));
+            var detectionResult = Detector.DetectMarkers(frame, markerIds, markerDictionary);
+
+            if (detectionResult.Valid())
+            {
+                Console.WriteLine("ArUco marker(s) detected: " + detectionResult.DetectedMarkers().Length);
+                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
+                ++currentPoseId;
+            }
+            else
+            {
+                Console.WriteLine("Failed to detect any ArUco markers, ensure that at least one ArUco marker is in the view of the camera");
+            }
+        }
+    }
+
     static Zivid.NET.Calibration.HandEyeOutput performCalibration(List<HandEyeInput> handEyeInput)
     {
         while (true)
         {
-            Console.WriteLine("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand):");
+            Console.WriteLine("Enter type of calibration, eth (for eye-to-hand) or eih (for eye-in-hand): ");
             var calibrationType = Console.ReadLine();
             if (calibrationType.Equals("eth", StringComparison.CurrentCultureIgnoreCase))
             {
-                Console.WriteLine("Performing eye-to-hand calibration");
+                Console.WriteLine("Performing eye-to-hand calibration with " + handEyeInput.Count + " dataset pairs");
                 Console.WriteLine("The resulting transform is the camera pose in robot base frame");
                 return Calibrator.CalibrateEyeToHand(handEyeInput);
             }
             if (calibrationType.Equals("eih", StringComparison.CurrentCultureIgnoreCase))
             {
-                Console.WriteLine("Performing eye-in-hand calibration");
+                Console.WriteLine("Performing eye-in-hand calibration with " + handEyeInput.Count + " dataset pairs");
                 Console.WriteLine("The resulting transform is the camera pose in flange (end-effector) frame");
                 return Calibrator.CalibrateEyeInHand(handEyeInput);
             }
             Console.WriteLine("Entered unknown method");
         }
+    }
+    public static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
+    {
+        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+        {
+            AmbientLightFrequency =
+                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
+            MaxCaptureTime = Duration.FromMilliseconds(800)
+        };
+        var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+        return camera.Capture(settings);
     }
 }
 
@@ -140,7 +192,7 @@ class Interaction
 
     public static CommandType EnterCommand()
     {
-        Console.Write("Enter command, p (to add robot pose) or c (to perform calibration):");
+        Console.Write("Enter command, p (to add robot pose) or c (to perform calibration): ");
         var command = Console.ReadLine().ToLower();
 
         switch (command)
@@ -164,17 +216,5 @@ class Interaction
 
         var robotPose = new Pose(elements); Console.WriteLine("The following pose was entered: \n{0}", robotPose);
         return robotPose;
-    }
-
-    public static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
-    {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-        {
-            AmbientLightFrequency =
-                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
-            MaxCaptureTime = Duration.FromMilliseconds(800)
-        };
-        var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
-        return camera.Capture(settings);
     }
 }
