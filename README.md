@@ -62,6 +62,9 @@ from the camera can be used.
           - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
             subset.
       - **InfoUtilOther**
+          - [AutomaticNetworkConfigurationForCameras](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/AutomaticNetworkConfigurationForCameras/AutomaticNetworkConfigurationForCameras.cs) - Automatically set the IP addresses of any number of
+            cameras to be in the same subnet as the provided IP address
+            of the network interface.
           - [CameraInfo](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraInfo/CameraInfo.cs) - List connected cameras and print camera version and state
             information for each connected camera.
           - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
@@ -140,8 +143,8 @@ Visual
 Studio](https://support.zivid.com/latest/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
 
 Some of the samples depend on external libraries, in particular
-`MathNet.Numerics`. These libraries will be installed automatically
-through NuGet when building the sample.
+`MathNet.Numerics` and `System.ValueTuple`. These libraries will be
+installed automatically through NuGet when building the sample.
 
 ## Support
 
