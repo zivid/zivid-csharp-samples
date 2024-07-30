@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRLoop", "Camera\Ad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRPrintNormals", "Camera\Advanced\CaptureHDRPrintNormals\CaptureHDRPrintNormals.csproj", "{064AA724-CD81-462F-8A07-26440EA41103}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticNetworkConfigurationForCameras", "Camera\InfoUtilOther\AutomaticNetworkConfigurationForCameras\AutomaticNetworkConfigurationForCameras.csproj", "{FEE22B4E-A257-443B-8B29-E1C8124A18F4}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraInfo", "Camera\InfoUtilOther\CameraInfo\CameraInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
@@ -128,6 +130,10 @@ Global
 		{064AA724-CD81-462F-8A07-26440EA41103}.Debug|x64.Build.0 = Debug|x64
 		{064AA724-CD81-462F-8A07-26440EA41103}.Release|x64.ActiveCfg = Release|x64
 		{064AA724-CD81-462F-8A07-26440EA41103}.Release|x64.Build.0 = Release|x64
+		{FEE22B4E-A257-443B-8B29-E1C8124A18F4}.Debug|x64.ActiveCfg = Debug|x64
+		{FEE22B4E-A257-443B-8B29-E1C8124A18F4}.Debug|x64.Build.0 = Debug|x64
+		{FEE22B4E-A257-443B-8B29-E1C8124A18F4}.Release|x64.ActiveCfg = Release|x64
+		{FEE22B4E-A257-443B-8B29-E1C8124A18F4}.Release|x64.Build.0 = Release|x64
 		{6117292F-5426-48A7-91FB-B801126E576E}.Debug|x64.ActiveCfg = Debug|x64
 		{6117292F-5426-48A7-91FB-B801126E576E}.Debug|x64.Build.0 = Debug|x64
 		{6117292F-5426-48A7-91FB-B801126E576E}.Release|x64.ActiveCfg = Release|x64
