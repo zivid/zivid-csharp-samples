@@ -81,12 +81,12 @@ class Program
             }
 
             Console.WriteLine("Estimating pose of detected ArUco marker");
-            var transformCameraToMarker = new Zivid.NET.Matrix4x4(detectionResult.DetectedMarkers()[0].Pose().ToMatrix());
+            var cameraToMarkerTransform = new Zivid.NET.Matrix4x4(detectionResult.DetectedMarkers()[0].Pose().ToMatrix());
 
             Console.WriteLine("Transforming the ROI base frame points to the camera frame");
             var roiPointsInCameraFrame = TransformPoints(
                 new List<Zivid.NET.PointXYZ> { pointOInCheckerboardFrame, pointAInCheckerboardFrame, pointBInCheckerboardFrame },
-                transformCameraToMarker);
+                cameraToMarkerTransform);
 
             Console.WriteLine("Setting the ROI");
             settings.RegionOfInterest.Box.Enabled = true;
