@@ -30,19 +30,19 @@ class Program
             var detectionResult = Detector.DetectMarkers(frame, markerId, markerDictionary);
 
             Console.WriteLine("Estimating pose of detected ArUco marker");
-            var transformCameraToMarker = new Zivid.NET.Matrix4x4(detectionResult.DetectedMarkers()[0].Pose().ToMatrix());
+            var cameraToMarkerTransform = new Zivid.NET.Matrix4x4(detectionResult.DetectedMarkers()[0].Pose().ToMatrix());
             Console.WriteLine("ArUco marker pose in camera frame:");
-            Console.WriteLine(transformCameraToMarker);
+            Console.WriteLine(cameraToMarkerTransform);
             Console.WriteLine("Camera pose in ArUco marker frame:");
-            var transformMarkerToCamera = transformCameraToMarker.Inverse();
-            Console.WriteLine(transformMarkerToCamera);
+            var markerToCameraTransform = cameraToMarkerTransform.Inverse();
+            Console.WriteLine(markerToCameraTransform);
 
             var transformFile = "ArUcoMarkerToCameraTransform.yaml";
             Console.WriteLine("Saving a YAML file with Inverted ArUco marker pose to file: " + transformFile);
-            transformMarkerToCamera.Save(transformFile);
+            markerToCameraTransform.Save(transformFile);
 
             Console.WriteLine("Transforming point cloud from camera frame to ArUco marker frame");
-            pointCloud.Transform(transformMarkerToCamera);
+            pointCloud.Transform(markerToCameraTransform);
 
             var arucoMarkerTransformedFile = "CalibrationBoardInArucoMarkerOrigin.zdf";
             Console.WriteLine("Saving transformed point cloud to file: " + arucoMarkerTransformedFile);

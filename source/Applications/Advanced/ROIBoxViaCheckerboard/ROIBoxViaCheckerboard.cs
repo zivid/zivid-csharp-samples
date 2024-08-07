@@ -69,12 +69,12 @@ class Program
 
             Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
             var detectionResult = Detector.DetectCalibrationBoard(originalFrame);
-            var transformCameraToCheckerboard = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
+            var cameraToCheckerboardTransform = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
 
             Console.WriteLine("Transforming the ROI base frame points to the camera frame");
             var roiPointsInCameraFrame = TransformPoints(
                 new List<Zivid.NET.PointXYZ> { pointOInCheckerboardFrame, pointAInCheckerboardFrame, pointBInCheckerboardFrame },
-                transformCameraToCheckerboard);
+                cameraToCheckerboardTransform);
 
             Console.WriteLine("Setting the ROI");
             settings.RegionOfInterest.Box.Enabled = true;
