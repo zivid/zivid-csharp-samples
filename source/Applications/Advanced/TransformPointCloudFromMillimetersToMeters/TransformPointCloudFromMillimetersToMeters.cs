@@ -20,11 +20,11 @@ class Program
             var frame = new Zivid.NET.Frame(dataFile);
             var pointCloud = frame.PointCloud;
 
-            var millimetersToMetersTransform =
+            var transformMillimetersToMeters =
                 new float[,] { { 0.001F, 0, 0, 0 }, { 0, 0.001F, 0, 0 }, { 0, 0, 0.001F, 0 }, { 0, 0, 0, 1 } };
 
             Console.WriteLine("Transforming point cloud from mm to m");
-            pointCloud.Transform(millimetersToMetersTransform);
+            pointCloud.Transform(transformMillimetersToMeters);
 
             var transformedFile = "FrameInMeters.zdf";
             Console.WriteLine("Saving frame to file: " + transformedFile);
