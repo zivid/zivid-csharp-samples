@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmup", "Camera\InfoUtilOt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareUpdater", "Camera\InfoUtilOther\FirmwareUpdater\FirmwareUpdater.csproj", "{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameInfo", "Camera\InfoUtilOther\FrameInfo\FrameInfo.csproj", "{F1358A50-2897-466A-9EA9-1A29444DE0A9}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkConfiguration", "Camera\InfoUtilOther\NetworkConfiguration\NetworkConfiguration.csproj", "{121101E4-E682-4850-8638-6C47873A57EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorrectCameraInField", "Camera\Maintenance\CorrectCameraInField\CorrectCameraInField.csproj", "{8D35FE40-515E-416A-9C44-503B0D1B6674}"
@@ -158,6 +160,10 @@ Global
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Debug|x64.Build.0 = Debug|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.ActiveCfg = Release|x64
 		{E47CD88B-1A5D-4EFB-97A6-42AA81C5D722}.Release|x64.Build.0 = Release|x64
+		{F1358A50-2897-466A-9EA9-1A29444DE0A9}.Debug|x64.ActiveCfg = Debug|x64
+		{F1358A50-2897-466A-9EA9-1A29444DE0A9}.Debug|x64.Build.0 = Debug|x64
+		{F1358A50-2897-466A-9EA9-1A29444DE0A9}.Release|x64.ActiveCfg = Release|x64
+		{F1358A50-2897-466A-9EA9-1A29444DE0A9}.Release|x64.Build.0 = Release|x64
 		{121101E4-E682-4850-8638-6C47873A57EA}.Debug|x64.ActiveCfg = Debug|x64
 		{121101E4-E682-4850-8638-6C47873A57EA}.Debug|x64.Build.0 = Debug|x64
 		{121101E4-E682-4850-8638-6C47873A57EA}.Release|x64.ActiveCfg = Release|x64

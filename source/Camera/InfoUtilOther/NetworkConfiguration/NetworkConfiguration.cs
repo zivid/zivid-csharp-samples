@@ -101,7 +101,7 @@ class NetworkConfiguration
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;

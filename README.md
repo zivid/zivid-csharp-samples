@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.13.1. For
+This repository contains csharp code samples for Zivid SDK v2.14.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -71,6 +71,7 @@ from the camera can be used.
           - [CaptureWithDiagnostics](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CaptureWithDiagnostics/CaptureWithDiagnostics.cs) - Capture point clouds, with color, from the Zivid camera,
             with settings from YML file and diagnostics enabled.
           - [FirmwareUpdater](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FirmwareUpdater/FirmwareUpdater.cs) - Update firmware on the Zivid camera.
+          - [FrameInfo](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FrameInfo/FrameInfo.cs) - Read frame info from the Zivid camera.
           - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
             model) or estimate them from the point cloud.
           - [NetworkConfiguration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/NetworkConfiguration/NetworkConfiguration.cs) - Uses Zivid API to change the IP address of the Zivid
