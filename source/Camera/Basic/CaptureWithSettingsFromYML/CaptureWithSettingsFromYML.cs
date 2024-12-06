@@ -33,7 +33,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;
@@ -49,6 +49,9 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130: return "zivid2Plus";
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60: return "zivid2Plus";
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110: return "zivid2Plus";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130: return "zivid2Plus/R";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60: return "zivid2Plus/R";
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110: return "zivid2Plus/R";
             default: throw new System.InvalidOperationException("Unhandled enum value " + model.ToString());
         }
     }

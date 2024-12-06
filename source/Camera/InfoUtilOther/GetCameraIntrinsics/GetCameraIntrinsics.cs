@@ -50,6 +50,39 @@ class Program
         Console.WriteLine($"    P2 = {intrinsics.Distortion.P2,-7:f4}");
     }
 
+    static Zivid.NET.Settings SubsampledSettingsForCamera(Zivid.NET.Camera camera)
+    {
+        var settingsSubsampled = new Zivid.NET.Settings
+        {
+            Engine = Zivid.NET.Settings.EngineOption.Phase,
+            Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
+        };
+        var model = camera.Info.Model;
+        switch (model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                {
+                    settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
+                    break;
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+
+                    settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
+                    break;
+                }
+            default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
+        }
+
+        return settingsSubsampled;
+    }
+
     static int Main()
     {
         try
@@ -82,24 +115,33 @@ class Program
                 Console.WriteLine($"\nAperture: {aperture,5:f2}, Lens Temperature: {temperature,5:f2}°C");
                 PrintIntrinsicParametersDelta(intrinsics, estimatedIntrinsics);
             }
-            var settingsSubsampled = new Zivid.NET.Settings();
-            settingsSubsampled.Acquisitions.Add(new Zivid.NET.Settings.Acquisition { });
-            settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
-            var fixedIntrinsicsForSubsampledSettingsPath = "FixedIntrinsicsSubsampledBlue2x2.yml";
+            var settingsSubsampled = SubsampledSettingsForCamera(camera);
+            var fixedIntrinsicsForSubsampledSettingsPath = "FixedIntrinsicsSubsampled2x2.yml";
             Console.WriteLine("Saving camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
             var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera, settingsSubsampled);
             fixedIntrinsicsForSubsampledSettings.Save(fixedIntrinsicsForSubsampledSettingsPath);
             var frameSubsampled = camera.Capture(settingsSubsampled);
             var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frameSubsampled);
-            var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampledBlue2x2Capture.yml";
+            var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampled2x2Capture.yml";
             Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
             estimatedIntrinsicsForSubsampledSettings.Save(estimatedIntrinsicsForSubsampledSettingsPath);
             Console.WriteLine("\nDifference between fixed and estimated intrinsics for subsampled point cloud:");
             PrintIntrinsicParametersDelta(fixedIntrinsicsForSubsampledSettings, estimatedIntrinsicsForSubsampledSettings);
+
+            var settings2D = new Zivid.NET.Settings2D
+            {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } }
+            };
+            Console.WriteLine("Getting camera intrinsics for 2D settings");
+            var fixedIntrinsicsForSettings2D = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera, settings2D);
+            Console.WriteLine(fixedIntrinsicsForSettings2D.ToString());
+            var fixedIntrinsicsForSettings2DPath = "FixedIntrinsicsSettings2D.yml";
+            Console.WriteLine("Saving camera intrinsics for 2D settings to file: " + fixedIntrinsicsForSettings2DPath);
+            fixedIntrinsicsForSettings2D.Save(fixedIntrinsicsForSettings2DPath);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;

@@ -3,13 +3,49 @@
 A basic warm-up method for a Zivid camera with specified time and capture cycle.
 */
 
+using CommandLine;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Duration = Zivid.NET.Duration;
 
 class Program
 {
-    static int Main()
+    public class Options
+    {
+        [Option('s', "settings-path", Required = false, HelpText = "Path to the YML file that contains camera settings.")]
+        public string SettingsPath { get; set; }
+
+        [Option('c', "capture-cycle", Required = false, HelpText = "Capture cycle in seconds.")]
+        public int? CaptureCycle { get; set; }
+    }
+
+    static Zivid.NET.Settings LoadOrSuggestSettings(Zivid.NET.Camera camera, string settingsPath)
+    {
+        if (settingsPath != null)
+        {
+            Console.WriteLine("Loading settings from file");
+            return new Zivid.NET.Settings(settingsPath);
+        }
+        Console.WriteLine("Getting camera settings from capture assistant");
+        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+        {
+            MaxCaptureTime = Duration.FromMilliseconds(1000),
+            AmbientLightFrequency =
+                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none
+        };
+        return Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+    }
+
+    static int Main(string[] args)
+    {
+        return Parser.Default.ParseArguments<Options>(args)
+        .MapResult(
+            (Options opts) => RunWarmupWithOptionsAndReturnExitCode(opts),
+            errs => 1);
+    }
+
+    static int RunWarmupWithOptionsAndReturnExitCode(Options opts)
     {
         try
         {
@@ -19,17 +55,8 @@ class Program
             var camera = zivid.ConnectCamera();
 
             var warmupTime = TimeSpan.FromMinutes(10);
-            var captureCycle = TimeSpan.FromSeconds(5);
-            var maxCaptureTime = Duration.FromMilliseconds(1000);
-
-            Console.WriteLine("Getting camera settings");
-            var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-            {
-                MaxCaptureTime = maxCaptureTime,
-                AmbientLightFrequency =
-                    Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none
-            };
-            var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+            var captureCycle = opts.CaptureCycle.HasValue ? TimeSpan.FromSeconds(opts.CaptureCycle.Value) : TimeSpan.FromSeconds(5);
+            var settings = LoadOrSuggestSettings(camera, opts.SettingsPath);
 
             DateTime beforeWarmup = DateTime.Now;
 
@@ -63,7 +90,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;

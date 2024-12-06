@@ -249,14 +249,14 @@ foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
 Fully configured settings are demonstrated below.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L93))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L31-L94))
 
 ``` sourceCode cs
 Console.WriteLine("Configuring settings for capture:");
 var settings = new Zivid.NET.Settings()
 {
 	Engine = Zivid.NET.Settings.EngineOption.Phase,
-	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2 },
+	Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb },
 	RegionOfInterest = { Box = {
 							Enabled = true,
 							PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -287,6 +287,7 @@ var settings = new Zivid.NET.Settings()
 							Gamma = 1.0,
 							Experimental = { Mode = ColorModeOption.Automatic } } }
 };
+SetSamplingPixel(ref settings, camera);
 Console.WriteLine(settings);
 Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
 var baseAcquisition = new Zivid.NET.Settings.Acquisition { };
@@ -322,13 +323,13 @@ It is possible to only capture a 2D image. This is faster than a 3D
 capture. 2D settings are configured as follows.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L21-L27))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L37-L43))
 
 ``` sourceCode cs
 var settings2D = new Zivid.NET.Settings2D
 {
 	Acquisitions = { new Zivid.NET.Settings2D.Acquisition {
-		Aperture = 11.31, ExposureTime = Duration.FromMicroseconds(30000), Gain = 2.0, Brightness = 1.80
+		Aperture = 9.51, ExposureTime = Duration.FromMicroseconds(20000), Gain = 2.0, Brightness = 1.80
 	} },
 	Processing = { Color = { Balance = { Red = 1.0, Blue = 1.0, Green = 1.0 } } }
 };
@@ -344,7 +345,7 @@ Check out
 for recommended .yml files tuned for your application.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L105-L110))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L111))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -357,7 +358,7 @@ var settingsFromFile = new Zivid.NET.Settings(settingsFile);
 You can also save settings to .yml file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L105-L107))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs#L106-L108))
 
 ``` sourceCode cs
 var settingsFile = "Settings.yml";
@@ -409,7 +410,7 @@ If we only want to capture a 2D image, which is faster than 3D, we can
 do so via the 2D API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L30))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L46))
 
 ``` sourceCode cs
 using (var frame2D = camera.Capture(settings2D))
@@ -453,14 +454,16 @@ frame.Save(dataFilePLY);
 
 We can get 2D color image from a 3D capture.
 
-``` sourceCode csharp
-var image = PointCloud.CopyImageRGBA();
+([go to source]())
+
+``` sourceCode cs
+var image = pointCloud.CopyImageRGBA();
 ```
 
 2D captures also produce 2D color images.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L33))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L49))
 
 ``` sourceCode cs
 var image = frame2D.ImageRGBA();
@@ -469,11 +472,11 @@ var image = frame2D.ImageRGBA();
 Then, we can save the 2D image.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L62-L64))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture2D/Capture2D.cs#L78-L80))
 
 ``` sourceCode cs
-var imageFile = "Image.png";
-Console.WriteLine("Saving 2D color image to file: {0}", imageFile);
+var imageFile = "ImageRGB.png";
+Console.WriteLine("Saving 2D color image (linear RGB color space) to file: {0}", imageFile);
 image.Save(imageFile);
 ```
 

@@ -32,7 +32,7 @@ class Program
             var settings = new Zivid.NET.Settings()
             {
                 Engine = Zivid.NET.Settings.EngineOption.Phase,
-                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb, Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2 },
+                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb },
                 RegionOfInterest = { Box = {
                                         Enabled = true,
                                         PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
@@ -63,6 +63,7 @@ class Program
                                          Gamma = 1.0,
                                          Experimental = { Mode = ColorModeOption.Automatic } } }
             };
+            SetSamplingPixel(ref settings, camera);
             Console.WriteLine(settings);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
@@ -113,7 +114,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;
@@ -142,6 +143,42 @@ class Program
                     double[] gain = { 1.0, 1.0, 1.0 };
                     double[] brightness = { 2.2, 2.2, 2.2 };
                     return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+                    double[] aperture = { 5.66, 2.8, 2.37 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(900), Duration.FromMicroseconds(1500), Duration.FromMicroseconds(20000) };
+                    double[] gain = { 1.0, 1.0, 1.0 };
+                    double[] brightness = { 2.5, 2.5, 2.5 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
+            default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
+        }
+    }
+
+    static void SetSamplingPixel(ref Zivid.NET.Settings settings, Zivid.NET.Camera camera)
+    {
+        var model = camera.Info.Model;
+        switch (model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                {
+                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
+                    break;
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+
+                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
+                    break;
                 }
             default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
         }

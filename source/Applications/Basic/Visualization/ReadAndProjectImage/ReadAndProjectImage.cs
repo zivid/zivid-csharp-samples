@@ -26,11 +26,7 @@ class Program
                 using (var projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImageForGivenCamera))
                 { // A Local Scope to handle the projected image lifetime
 
-                    var settings2D = new Zivid.NET.Settings2D
-                    {
-                        Acquisitions = { new Zivid.NET.Settings2D.Acquisition {
-                            Aperture = 2.83, ExposureTime = Duration.FromMicroseconds(20000), Brightness = 0.0} }
-                    };
+                    var settings2D = MakeSettings2D(camera);
 
                     Console.WriteLine("Capturing a 2D image with the projected image");
                     using (var frame2D = projectedImageHandle.Capture(settings2D))
@@ -51,7 +47,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.WriteLine("Error: " + ex.ToString());
             return 1;
         }
         return 0;
@@ -78,5 +74,29 @@ class Program
                     throw new System.InvalidOperationException("Unhandled enum value " + model.ToString());
                 }
         }
+    }
+
+    static Zivid.NET.Settings2D MakeSettings2D(Zivid.NET.Camera camera)
+    {
+        var model = camera.Info.Model;
+        var colorMode = (model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130 ||
+                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110 ||
+                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60)
+                        ? Zivid.NET.Settings2D.SamplingGroup.ColorOption.Grayscale
+                        : Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb;
+
+        return new Zivid.NET.Settings2D
+        {
+            Acquisitions = { new Zivid.NET.Settings2D.Acquisition
+            {
+                Brightness = 0.0,
+                ExposureTime = Duration.FromMicroseconds(20000),
+                Aperture = 2.83
+            }},
+            Sampling = new Zivid.NET.Settings2D.SamplingGroup
+            {
+                Color = colorMode
+            }
+        };
     }
 }
