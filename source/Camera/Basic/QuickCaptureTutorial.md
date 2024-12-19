@@ -14,7 +14,8 @@ tutorial see:
 [**Connect**](#Connect) |
 [**Configure**](#Configure) |
 [**Capture**](#Capture) |
-[**Save**](#Save)
+[**Save**](#Save) |
+[**Utilize**](#Utilize)
 
 ---
 
@@ -24,9 +25,6 @@ tutorial see:
 
 This tutorial describes the most basic way to use the Zivid SDK to
 capture point clouds.
-
-For MATLAB see [Zivid Quick Capture Tutorial for
-MATLAB](https://github.com/zivid/zivid-matlab-samples/blob/master/source/Camera/Basic/QuickCaptureTutorial.md)
 
 **Prerequisites**
 
@@ -41,7 +39,7 @@ Calling any of the APIs in the Zivid SDK requires initializing the Zivid
 application and keeping it alive while the program runs.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L14))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L13))
 
 ``` sourceCode cs
 var zivid = new Zivid.NET.Application();
@@ -50,7 +48,7 @@ var zivid = new Zivid.NET.Application();
 ## Connect
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L17))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L16))
 
 ``` sourceCode cs
 var camera = zivid.ConnectCamera();
@@ -59,17 +57,10 @@ var camera = zivid.ConnectCamera();
 ## Configure
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs#L21-L29))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L25))
 
 ``` sourceCode cs
-var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-{
-	AmbientLightFrequency =
-		Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
-	MaxCaptureTime = Duration.FromMilliseconds(1200)
-};
-Console.WriteLine("Running Capture Assistant with parameters:\n{0}", suggestSettingsParameters);
-var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+var settings = new Zivid.NET.Settings(settingsFile);
 ```
 
 ## Capture
@@ -78,28 +69,50 @@ var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, sugg
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L26))
 
 ``` sourceCode cs
-using (var frame = camera.Capture(settings))
+using (var frame = camera.Capture2D3D(settings))
 ```
 
 ## Save
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28-L30))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L33-L35))
 
 ``` sourceCode cs
 var dataFile = "Frame.zdf";
 frame.Save(dataFile);
+.. tab-item:: Export
 ```
 
-The API detects which format to use. See [Point
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L37-L39))
+
+``` sourceCode cs
+var dataFilePLY = "PointCloud.ply";
+frame.Save(dataFilePLY);
+```
+
+For other exporting options, see [Point
 Cloud](https://support.zivid.com/latest//reference-articles/point-cloud-structure-and-output-formats.html)
-for a list of supported formats.
+for a list of supported formats
+
+## Utilize
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L21-L22))
+
+``` sourceCode cs
+var pointCloud = frame.PointCloud;
+var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA();
+```
 
 -----
 
 Tip:
 
-You can open and view `Frame.zdf` file in [Zivid
+1.  You can export Preset settings to YML from [Zivid
+    Studio](https://support.zivid.com/latest//getting-started/studio-guide.html)
+
+\#. You can open and view `Frame.zdf` file in [Zivid
 Studio](https://support.zivid.com/latest//getting-started/studio-guide.html).
 .. rubric:: Conclusion
 

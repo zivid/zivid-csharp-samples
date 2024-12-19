@@ -4,13 +4,7 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture", "Camera\Basic\Capture\Capture.csproj", "{DD533F88-E34D-41A8-B734-1B94A5A4A31F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture2D", "Camera\Basic\Capture2D\Capture2D.csproj", "{24B7F4D2-63DA-4BCF-9516-F0578118104A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCamera", "Camera\Basic\CaptureFromFileCamera\CaptureFromFileCamera.csproj", "{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureAssistant", "Camera\Basic\CaptureAssistant\CaptureAssistant.csproj", "{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDR", "Camera\Basic\CaptureHDR\CaptureHDR.csproj", "{F09339D7-0C30-471F-8E61-B86B895C440E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings", "Camera\Basic\CaptureHDRCompleteSettings\CaptureHDRCompleteSettings.csproj", "{C0E744F5-0DDD-4E29-B899-101546A6CBEA}"
 EndProject
@@ -92,22 +86,10 @@ Global
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Debug|x64.Build.0 = Debug|x64
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Release|x64.ActiveCfg = Release|x64
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Release|x64.Build.0 = Release|x64
-		{24B7F4D2-63DA-4BCF-9516-F0578118104A}.Debug|x64.ActiveCfg = Debug|x64
-		{24B7F4D2-63DA-4BCF-9516-F0578118104A}.Debug|x64.Build.0 = Debug|x64
-		{24B7F4D2-63DA-4BCF-9516-F0578118104A}.Release|x64.ActiveCfg = Release|x64
-		{24B7F4D2-63DA-4BCF-9516-F0578118104A}.Release|x64.Build.0 = Release|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Debug|x64.ActiveCfg = Debug|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Debug|x64.Build.0 = Debug|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Release|x64.ActiveCfg = Release|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Release|x64.Build.0 = Release|x64
-		{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}.Debug|x64.ActiveCfg = Debug|x64
-		{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}.Debug|x64.Build.0 = Debug|x64
-		{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}.Release|x64.ActiveCfg = Release|x64
-		{A6DD3CCA-66D4-48C6-BC59-474D7CCFA5CE}.Release|x64.Build.0 = Release|x64
-		{F09339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.ActiveCfg = Debug|x64
-		{F09339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
-		{F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
-		{F09339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
 		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.ActiveCfg = Debug|x64
 		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Debug|x64.Build.0 = Debug|x64
 		{C0E744F5-0DDD-4E29-B899-101546A6CBEA}.Release|x64.ActiveCfg = Release|x64

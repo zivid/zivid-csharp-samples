@@ -17,6 +17,7 @@ using ColorModeOption =
     Zivid.NET.Settings.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption;
 using ReflectionFilterModeOption =
     Zivid.NET.Settings.ProcessingGroup.FiltersGroup.ReflectionGroup.RemovalGroup.ModeOption;
+using System.Linq;
 class Program
 {
     static int Main()
@@ -29,46 +30,100 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings for capture:");
+            var settings2D = new Zivid.NET.Settings2D()
+            {
+                Sampling =
+                {
+                    Color = Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb,
+                    Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.All,
+                },
+                Processing =
+                {
+                    Color =
+                    {
+                        Balance =
+                        {
+                            Blue = 1.0,
+                            Green = 1.0,
+                            Red = 1.0,
+                        },
+                        Gamma = 1.0,
+                        Experimental = { Mode = Zivid.NET.Settings2D.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption.Automatic },
+                    },
+                },
+            };
             var settings = new Zivid.NET.Settings()
             {
                 Engine = Zivid.NET.Settings.EngineOption.Phase,
-                Sampling = { Color = Zivid.NET.Settings.SamplingGroup.ColorOption.Rgb },
-                RegionOfInterest = { Box = {
-                                        Enabled = true,
-                                        PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
-                                        PointA = new Zivid.NET.PointXYZ{ x = 1000, y = -1000, z = 1000 },
-                                        PointB = new Zivid.NET.PointXYZ{ x = -1000, y = 1000, z = 1000 },
-                                        Extents = new Zivid.NET.Range<double>(-1000, 1000),
-                                    },
-                                    Depth =
-                                    {
-                                        Enabled = true,
-                                        Range = new Zivid.NET.Range<double>(200, 2000),
-                                    }
+
+                RegionOfInterest =
+                {
+                    Box = {
+                        Enabled = true,
+                        PointO = new Zivid.NET.PointXYZ{ x = 1000, y = 1000, z = 1000 },
+                        PointA = new Zivid.NET.PointXYZ{ x = 1000, y = -1000, z = 1000 },
+                        PointB = new Zivid.NET.PointXYZ{ x = -1000, y = 1000, z = 1000 },
+                        Extents = new Zivid.NET.Range<double>(-1000, 1000),
+                    },
+                    Depth =
+                    {
+                        Enabled = true,
+                        Range = new Zivid.NET.Range<double>(200, 2000),
+                    },
                 },
-                Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Noise = { Removal = { Enabled = true, Threshold = 7.0 },
-                                                     Suppression = { Enabled = true },
-                                                     Repair ={ Enabled = true } },
-                                           Outlier = { Removal = { Enabled = true, Threshold = 5.0 } },
-                                           Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} },
-                                           Cluster = { Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100} },
-                                           Hole = { Repair = { Enabled = true, HoleSize = 0.2, Strictness = 1 } },
-                                           Experimental = { ContrastDistortion = { Correction = { Enabled = true,
-                                                                                                  Strength = 0.4 },
-                                                                                   Removal = { Enabled = true,
-                                                                                               Threshold = 0.5 } } } },
-                               Resampling = { Mode = Zivid.NET.Settings.ProcessingGroup.ResamplingGroup.ModeOption.Upsample2x2},
-                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 },
-                                         Gamma = 1.0,
-                                         Experimental = { Mode = ColorModeOption.Automatic } } }
+                Processing =
+                {
+                    Filters =
+                    {
+                        Cluster =
+                        {
+                            Removal = { Enabled = true, MaxNeighborDistance = 10, MinArea = 100}
+                        },
+                        Hole =
+                        {
+                            Repair = { Enabled = true, HoleSize = 0.2, Strictness = 1 },
+                        },
+                        Noise =
+                        {
+                            Removal = { Enabled = true, Threshold = 7.0 },
+                            Suppression = { Enabled = true },
+                            Repair = { Enabled = true },
+                        },
+                        Outlier =
+                        {
+                            Removal = { Enabled = true, Threshold = 5.0 },
+                        },
+                        Reflection =
+                        {
+                            Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global },
+                        },
+                        Smoothing =
+                        {
+                            Gaussian = { Enabled = true, Sigma = 1.5 },
+                        },
+                        Experimental =
+                        {
+                            ContrastDistortion =
+                            {
+                                Correction = { Enabled = true, Strength = 0.4 },
+                                Removal = { Enabled = true, Threshold = 0.5 },
+                            },
+                        },
+                    },
+                    Resampling = { Mode = Zivid.NET.Settings.ProcessingGroup.ResamplingGroup.ModeOption.Upsample2x2 },
+                },
+                Diagnostics = { Enabled = false },
             };
+
+            settings.Color = settings2D;
+
             SetSamplingPixel(ref settings, camera);
             Console.WriteLine(settings);
 
             Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
             var baseAcquisition = new Zivid.NET.Settings.Acquisition { };
             Console.WriteLine(baseAcquisition);
+            var baseAcquisition2D = new Zivid.NET.Settings2D.Acquisition { };
 
             Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
             Tuple<double[], Duration[], double[], double[]> exposureValues = GetExposureValues(camera);
@@ -84,17 +139,25 @@ class Program
                 Console.WriteLine("  Gain: {0}", gain[i]);
                 Console.WriteLine("  Brightness: {0}", brightness[i]);
                 var acquisitionSettings = baseAcquisition.CopyWith(s =>
-                                                                   {
-                                                                       s.Aperture = aperture[i];
-                                                                       s.ExposureTime = exposureTime[i];
-                                                                       s.Gain = gain[i];
-                                                                       s.Brightness = brightness[i];
-                                                                   });
+                {
+                    s.Aperture = aperture[i];
+                    s.ExposureTime = exposureTime[i];
+                    s.Gain = gain[i];
+                    s.Brightness = brightness[i];
+                });
                 settings.Acquisitions.Add(acquisitionSettings);
             }
+            var acquisitionSettings2D = baseAcquisition2D.CopyWith(s =>
+            {
+                s.Aperture = 2.83;
+                s.ExposureTime = Duration.FromMicroseconds(1000);
+                s.Gain = 1.0;
+                s.Brightness = 1.8;
+            });
+            settings.Color.Acquisitions.Add(acquisitionSettings2D);
 
             Console.WriteLine("Capturing frame (HDR)");
-            using (var frame = camera.Capture(settings))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 Console.WriteLine("Complete settings used:");
                 Console.WriteLine(frame.Settings);
