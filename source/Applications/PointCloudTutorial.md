@@ -57,7 +57,7 @@ When you capture with Zivid, you get a frame in return.
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L26))
 
 ``` sourceCode cs
-using (var frame = camera.Capture(settings))
+using (var frame = camera.Capture2D3D(settings))
 ```
 
 Check

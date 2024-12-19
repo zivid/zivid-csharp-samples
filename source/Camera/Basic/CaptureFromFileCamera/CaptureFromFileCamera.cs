@@ -27,7 +27,7 @@ class Program
             }
             else
             {
-                fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZivid2M70.zfc";
+                fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/FileCameraZivid2PlusMR60.zfc";
             }
 
             var zivid = new Zivid.NET.Application();
@@ -36,16 +36,39 @@ class Program
             var camera = zivid.CreateFileCamera(fileCamera);
 
             Console.WriteLine("Configuring settings");
+            var settings2D = new Zivid.NET.Settings2D
+            {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } },
+                Processing =
+                {
+                    Color =
+                    {
+                        Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 }
+                    }
+                }
+            };
             var settings = new Zivid.NET.Settings
             {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
-                Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Reflection = { Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global} } },
-                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+                Processing =
+                {
+                    Filters =
+                    {
+                        Smoothing =
+                        {
+                            Gaussian = { Enabled = true, Sigma = 1.5 }
+                        },
+                        Reflection =
+                        {
+                            Removal = { Enabled = true, Mode = ReflectionFilterModeOption.Global}
+                        }
+                    }
+                }
             };
+            settings.Color = settings2D;
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);

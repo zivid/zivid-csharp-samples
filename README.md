@@ -39,17 +39,14 @@ from the camera can be used.
 
   - **Camera**
       - **Basic**
-          - [Capture](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/Capture/Capture.cs) - Capture point clouds, with color, from the Zivid camera.
-          - [Capture2D](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/Capture2D/Capture2D.cs) - Capture 2D images from the Zivid camera.
-          - [CaptureAssistant](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureAssistant/CaptureAssistant.cs) - Use Capture Assistant to capture point clouds, with color,
-            from the Zivid camera.
+          - [Capture](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/Capture/Capture.cs) - Capture colored point cloud, save 2D image, save 3D ZDF,
+            and export PLY, using the Zivid camera.
           - [CaptureFromFileCamera](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs) - Capture point clouds, with color, with the Zivid file
             camera.
-          - [CaptureHDR](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureHDR/CaptureHDR.cs) - Capture point clouds, with color, from the Zivid camera.
           - [CaptureHDRCompleteSettings](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs) - Capture point clouds, with color, from the Zivid camera
             with fully configured settings.
-          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture point clouds, with color, from the Zivid camera,
-            with settings from YML file.
+          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture images and point clouds, with or without color,
+            from the Zivid camera with settings from YML file.
       - **Advanced**
           - [CaptureHalconViaGenICam](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaGenICam/CaptureHalconViaGenICam.cs) - Capture and save a point cloud, with colors, using GenICam
             interface and Halcon C++ SDK.

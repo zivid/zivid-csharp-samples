@@ -1,11 +1,12 @@
 ﻿/*
-Capture point clouds, with color, from the Zivid camera, with settings from YML file.
+Capture images and point clouds, with or without color, from the Zivid camera with settings from YML file.
 
 The YML files for this sample can be found under the main Zivid sample instructions.
 */
 
 using System;
 using System.Collections.Generic;
+using Zivid.NET;
 
 class Program
 {
@@ -23,12 +24,69 @@ class Program
                                + "/Zivid/Settings/" + SettingsFolder(camera) + "/Settings01.yml";
             var settings = new Zivid.NET.Settings(settingsFile);
 
-            Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            Console.WriteLine("Capturing 2D frame");
+            using (var frame2D = camera.Capture2D(settings))
+            {
+                var imageSRGB = frame2D.ImageSRGB();
+                var imageFile = "ImageSRGB.png";
+                Console.WriteLine("Saving 2D color image (sRGB color space) to file: " + imageFile);
+                imageSRGB.Save(imageFile);
+
+                // More information about linear RGB and sRGB color spaces is available at:
+                // https://support.zivid.com/en/latest/reference-articles/color-spaces-and-output-formats.html#color-spaces
+
+                var pixelRow = 100;
+                var pixelCol = 50;
+
+                Console.WriteLine("Extracting 2D pixel array");
+                var pixelArraySRGB = imageSRGB.ToArray();
+                Console.WriteLine("Height: {0}, Width: {1}", pixelArraySRGB.GetLength(0), pixelArraySRGB.GetLength(1));
+                Console.WriteLine("Color at pixel ({0},{1}):  R:{2}  G:{3}  B:{4}  A:{5}",
+                                  pixelRow,
+                                  pixelCol,
+                                  pixelArraySRGB[pixelRow, pixelCol].r,
+                                  pixelArraySRGB[pixelRow, pixelCol].g,
+                                  pixelArraySRGB[pixelRow, pixelCol].b,
+                                  pixelArraySRGB[pixelRow, pixelCol].a);
+
+                Console.WriteLine("Extracting 3D array of bytes");
+                var nativeArray = imageSRGB.ToByteArray();
+                Console.WriteLine("Height: {0}, Width: {1}, Channels: {2}",
+                                  nativeArray.GetLength(0),
+                                  nativeArray.GetLength(1),
+                                  nativeArray.GetLength(2));
+                Console.WriteLine("Color at pixel ({0},{1}):  R:{2}  G:{3}  B:{4}  A:{5}",
+                                  pixelRow,
+                                  pixelCol,
+                                  nativeArray[pixelRow, pixelCol, 0],
+                                  nativeArray[pixelRow, pixelCol, 1],
+                                  nativeArray[pixelRow, pixelCol, 2],
+                                  nativeArray[pixelRow, pixelCol, 3]);
+
+            }
+
+            Console.WriteLine("Capturing 3D frame");
+            using (var frame3D = camera.Capture3D(settings))
+            {
+                var dataFile = "Frame3D.zdf";
+                Console.WriteLine("Saving frame to file: " + dataFile);
+                frame3D.Save(dataFile);
+
+                var dataFilePly = "PointCloudWithoutColor.ply";
+                Console.WriteLine("Exporting point cloud (default pink colored points) to file: " + dataFilePly);
+                frame3D.Save(dataFilePly);
+            }
+
+            Console.WriteLine("Capturing 2D3D frame");
+            using (var frame = camera.Capture2D3D(settings))
             {
                 var dataFile = "Frame.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame.Save(dataFile);
+
+                var dataFilePly = "PointCloudWithColor.ply";
+                Console.WriteLine("Exporting point cloud to file: " + dataFilePly);
+                frame.Save(dataFilePly);
             }
         }
         catch (Exception ex)
