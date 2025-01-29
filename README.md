@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.14.0. For
+This repository contains csharp code samples for Zivid SDK v2.14.1. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -59,9 +59,8 @@ from the camera can be used.
           - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
             subset.
       - **InfoUtilOther**
-          - [AutomaticNetworkConfigurationForCameras](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/AutomaticNetworkConfigurationForCameras/AutomaticNetworkConfigurationForCameras.cs) - Automatically set the IP addresses of any number of
-            cameras to be in the same subnet as the provided IP address
-            of the network interface.
+          - [AutomaticNetworkConfigurationForCameras](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/AutomaticNetworkConfigurationForCameras/AutomaticNetworkConfigurationForCameras.cs) - \* Automatically configure the IP addresses of connected
+            cameras to match the network of the user's PC.
           - [CameraInfo](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraInfo/CameraInfo.cs) - List connected cameras and print camera version and state
             information for each connected camera.
           - [CameraUserData](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs) - Store user data on the Zivid camera.
