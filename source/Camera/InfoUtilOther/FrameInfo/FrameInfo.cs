@@ -21,7 +21,13 @@ class Program
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var frame = AssistedCapture(camera);
+            var settings = new Zivid.NET.Settings
+            {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+                Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
+            };
+
+            var frame = camera.Capture2D3D(settings);
 
             var frameInfo = frame.Info;
 
@@ -46,17 +52,5 @@ class Program
             return 1;
         }
         return 0;
-    }
-
-    static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
-    {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-        {
-            AmbientLightFrequency =
-                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
-            MaxCaptureTime = Duration.FromMilliseconds(800)
-        };
-        var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
-        return camera.Capture(settings);
     }
 }

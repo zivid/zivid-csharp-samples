@@ -1,6 +1,6 @@
 ﻿// DOCTAG-START-ALL-1
 /*
-A basic warm-up method for a Zivid camera with specified time and capture cycle.
+Short example of a basic way to warm up the camera with specified time and capture cycle.
 */
 
 using CommandLine;
@@ -20,21 +20,21 @@ class Program
         public int? CaptureCycle { get; set; }
     }
 
-    static Zivid.NET.Settings LoadOrSuggestSettings(Zivid.NET.Camera camera, string settingsPath)
+    static Zivid.NET.Settings LoadOrDefaultSettings(string settingsPath)
     {
         if (settingsPath != null)
         {
             Console.WriteLine("Loading settings from file");
             return new Zivid.NET.Settings(settingsPath);
         }
-        Console.WriteLine("Getting camera settings from capture assistant");
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
+
+        Console.WriteLine("Using default 3D settings");
+        var settings = new Zivid.NET.Settings
         {
-            MaxCaptureTime = Duration.FromMilliseconds(1000),
-            AmbientLightFrequency =
-                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none
+            Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
         };
-        return Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
+
+        return settings;
     }
 
     static int Main(string[] args)
@@ -56,7 +56,7 @@ class Program
 
             var warmupTime = TimeSpan.FromMinutes(10);
             var captureCycle = opts.CaptureCycle.HasValue ? TimeSpan.FromSeconds(opts.CaptureCycle.Value) : TimeSpan.FromSeconds(5);
-            var settings = LoadOrSuggestSettings(camera, opts.SettingsPath);
+            var settings = LoadOrDefaultSettings(opts.SettingsPath);
 
             DateTime beforeWarmup = DateTime.Now;
 
@@ -65,7 +65,11 @@ class Program
             while (DateTime.Now.Subtract(beforeWarmup) < warmupTime)
             {
                 var beforeCapture = DateTime.Now;
-                camera.Capture(settings);
+
+                // Use the same capture method as you would use in production
+                // to get the most accurate results from warmup
+                camera.Capture3D(settings);
+
                 var afterCapture = DateTime.Now;
 
                 var captureTime = afterCapture.Subtract(beforeCapture);

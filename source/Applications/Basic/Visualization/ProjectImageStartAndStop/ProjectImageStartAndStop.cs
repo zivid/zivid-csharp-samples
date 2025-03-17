@@ -66,7 +66,7 @@ class Program
                 {
                     Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
                 };
-                using (var frame3D = camera.Capture(settings)) { }
+                using (var frame3D = camera.Capture3D(settings)) { }
             }
 
             Console.WriteLine("Press enter to exit");

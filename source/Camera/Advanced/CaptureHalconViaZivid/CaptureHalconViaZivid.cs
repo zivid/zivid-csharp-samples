@@ -17,24 +17,18 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings
-            {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66,
-                                                                      ExposureTime =
-                                                                          Duration.FromMicroseconds(10000) } },
-                Processing = { Filters = { Outlier = { Removal = { Enabled = true, Threshold = 5.0 } } } }
-            };
+            var settings = Get2DAnd3DSettings(camera);
 
             Console.WriteLine("Capturing frame");
-            var frame = camera.Capture(settings);
-            var pointCloud = frame.PointCloud;
+            using (var frame = camera.Capture2D3D(settings))
+            {
+                Console.WriteLine("Converting to Halcon point cloud");
+                HalconDotNet.HObjectModel3D objectModel3D = ZividToHalconPointCloud(frame);
 
-            Console.WriteLine("Converting to Halcon point cloud");
-            HalconDotNet.HObjectModel3D objectModel3D = ZividToHalconPointCloud(pointCloud);
-
-            string pointCloudFile = "Zivid3D.ply";
-            Console.WriteLine("Saving point cloud to: " + pointCloudFile);
-            SaveHalconPointCloud(objectModel3D, pointCloudFile);
+                string pointCloudFile = "Zivid3D.ply";
+                Console.WriteLine("Saving point cloud to: " + pointCloudFile);
+                SaveHalconPointCloud(objectModel3D, pointCloudFile);
+            }
         }
         catch (Exception ex)
         {
@@ -44,12 +38,52 @@ class Program
         return 0;
     }
 
+    private static Zivid.NET.Settings Get2DAnd3DSettings(Zivid.NET.Camera camera)
+    {
+        var settings = new Zivid.NET.Settings
+        {
+            Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+            Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
+        };
+
+        var model = camera.Info.Model;
+        switch (model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+                {
+                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All;
+                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.All;
+                    break;
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                {
+                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
+                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.BlueSubsample2x2;
+                    break;
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
+                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.By2x2;
+                    break;
+                }
+            default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
+        }
+        return settings;
+    }
+
     private static HalconDotNet.HTuple arrayToHalconDouble(params double[] arr)
     {
         var htup = new HalconDotNet.HTuple((double)0);
         htup.DArr = arr;
         return htup;
     }
+
     private static HalconDotNet.HTuple arrayToHalconInt(params int[] arr)
     {
         var htup = new HalconDotNet.HTuple((int)0);
@@ -79,13 +113,20 @@ class Program
         return numberOfValidPoints;
     }
 
-    private static HalconDotNet.HObjectModel3D ZividToHalconPointCloud(Zivid.NET.PointCloud pointCloud)
+    private static HalconDotNet.HObjectModel3D ZividToHalconPointCloud(Zivid.NET.Frame frame)
     {
+        var pointCloud = frame.PointCloud;
         var height = pointCloud.Height;
         var width = pointCloud.Width;
+
         var pointsXYZ = pointCloud.CopyPointsXYZ();
         var normalsXYZ = pointCloud.CopyNormalsXYZ();
-        var colorsRGBA = pointCloud.CopyColorsRGBA();
+        var colorsRGBA = frame.Frame2D.ImageRGBA().ToByteArray();
+
+        if ((ulong)pointsXYZ.GetLength(0) != height || (ulong)pointsXYZ.GetLength(1) != width)
+        {
+            throw new System.InvalidOperationException("Color image size does not match point cloud size");
+        }
 
         var numberOfValidPoints = FindNumberOfValidPoints(pointsXYZ, height, width);
         // Initializing HTuples which are later filled with data from the Zivid point cloud.

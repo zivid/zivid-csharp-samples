@@ -54,8 +54,8 @@ class Program
     {
         var settingsSubsampled = new Zivid.NET.Settings
         {
-            Engine = Zivid.NET.Settings.EngineOption.Phase,
-            Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
+            Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+            Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
         };
         var model = camera.Info.Model;
         switch (model)
@@ -67,6 +67,7 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
                 {
                     settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
+                    settingsSubsampled.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.BlueSubsample2x2;
                     break;
                 }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
@@ -75,6 +76,7 @@ class Program
                 {
 
                     settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
+                    settingsSubsampled.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.By2x2;
                     break;
                 }
             default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
@@ -105,11 +107,14 @@ class Program
 
             Console.WriteLine("\nDifference between fixed intrinsics and estimated intrinsics for different apertures and temperatures:");
 
-            foreach (var aperture in new double[] { 11.31, 5.66, 2.83 })
+            foreach (var aperture in new double[] { 5.66, 4.00, 2.83 })
             {
-                var settings = new Zivid.NET.Settings();
-                settings.Acquisitions.Add(new Zivid.NET.Settings.Acquisition { Aperture = aperture });
-                var frame = camera.Capture(settings);
+                var settings = new Zivid.NET.Settings
+                {
+                    Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = aperture } },
+                    Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { Aperture = aperture } } }
+                };
+                var frame = camera.Capture2D3D(settings);
                 var estimatedIntrinsics = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frame);
                 var temperature = frame.State.Temperature.Lens;
                 Console.WriteLine($"\nAperture: {aperture,5:f2}, Lens Temperature: {temperature,5:f2}°C");
@@ -120,7 +125,7 @@ class Program
             Console.WriteLine("Saving camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
             var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera, settingsSubsampled);
             fixedIntrinsicsForSubsampledSettings.Save(fixedIntrinsicsForSubsampledSettingsPath);
-            var frameSubsampled = camera.Capture(settingsSubsampled);
+            var frameSubsampled = camera.Capture2D3D(settingsSubsampled);
             var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frameSubsampled);
             var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampled2x2Capture.yml";
             Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);

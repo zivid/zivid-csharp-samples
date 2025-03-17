@@ -34,16 +34,21 @@ class Program
             var camera = zivid.CreateFileCamera(fileCamera);
 
             Console.WriteLine("Configuring settings");
+            var settings2D = new Zivid.NET.Settings2D
+            {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } },
+                Processing = { Color = { Balance = { Blue = 1.0, Green = 1.0, Red = 1.0 } } }
+            };
             var settings = new Zivid.NET.Settings
             {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
                 Processing = { Filters = { Smoothing = { Gaussian = { Enabled = true, Sigma = 1.5 } },
-                                           Reflection = { Removal = { Enabled = true } } },
-                               Color = { Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 } } }
+                                           Reflection = { Removal = { Enabled = true } } } }
             };
+            settings.Color = settings2D;
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 Console.WriteLine("Setting up visualization");
                 var visualizer = new Zivid.NET.Visualization.Visualizer();

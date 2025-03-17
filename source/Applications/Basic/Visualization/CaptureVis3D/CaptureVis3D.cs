@@ -16,11 +16,18 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings =
-                new Zivid.NET.Settings { Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66 } } };
+            var settings2D = new Zivid.NET.Settings2D
+            {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } }
+            };
+            var settings = new Zivid.NET.Settings
+            {
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66 } }
+            };
+            settings.Color = settings2D;
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 Console.WriteLine("Setting up visualization");
                 using (var visualizer = new Zivid.NET.Visualization.Visualizer())

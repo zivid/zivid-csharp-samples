@@ -31,7 +31,7 @@ class Program
             settings.Diagnostics.Enabled = true;
 
             Console.WriteLine("Capturing frame");
-            using (var frame = camera.Capture(settings))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 var dataFile = "FrameWithDiagnostics.zdf";
                 Console.WriteLine("Saving frame with diagnostic data to file: " + dataFile);

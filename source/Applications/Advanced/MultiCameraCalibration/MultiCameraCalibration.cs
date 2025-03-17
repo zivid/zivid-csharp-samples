@@ -80,7 +80,7 @@ class Program
             MaxCaptureTime = Duration.FromMilliseconds(800)
         };
         var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
-        return camera.Capture(settings);
+        return camera.Capture2D3D(settings);
     }
 
     static List<Zivid.NET.Camera> connectToAllAvailableCameras(IList<Zivid.NET.Camera> cameras)

@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.14.1. For
+This repository contains csharp code samples for Zivid SDK v2.14.2. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -72,8 +72,8 @@ from the camera can be used.
             model) or estimate them from the point cloud.
           - [NetworkConfiguration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/NetworkConfiguration/NetworkConfiguration.cs) - Uses Zivid API to change the IP address of the Zivid
             camera.
-          - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/Warmup/Warmup.cs) - A basic warm-up method for a Zivid camera with specified
-            time and capture cycle.
+          - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/Warmup/Warmup.cs) - Short example of a basic way to warm up the camera with
+            specified time and capture cycle.
       - **Maintenance**
           - [CorrectCameraInField](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/CorrectCameraInField/CorrectCameraInField.cs) - Correct the dimension trueness of a Zivid camera.
           - [ResetCameraInField](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Maintenance/ResetCameraInField/ResetCameraInField.cs) - Reset infield correction on a camera.

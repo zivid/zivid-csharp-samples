@@ -217,7 +217,7 @@ Some applications require computing
 from the point cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L34-L35))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L35-L36))
 
 ``` sourceCode cs
 Console.WriteLine("Computing normals and copying them to CPU memory");
@@ -234,7 +234,7 @@ The size of normals is equal to the size of the input point cloud.
 Having the frame allows you to visualize the point cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L25-L35))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs#L32-L42))
 
 ``` sourceCode cs
 Console.WriteLine("Setting up visualization");

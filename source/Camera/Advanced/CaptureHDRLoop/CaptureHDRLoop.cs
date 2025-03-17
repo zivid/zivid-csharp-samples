@@ -27,11 +27,12 @@ class Program
                 Console.WriteLine(settings.Acquisitions);
 
                 Console.WriteLine("Capturing frame (HDR)");
-                var frame = camera.Capture(settings);
-
-                var dataFile = "Frame0" + i + ".zdf";
-                Console.WriteLine("Saving frame to file: " + dataFile);
-                frame.Save(dataFile);
+                using (var frame = camera.Capture2D3D(settings))
+                {
+                    var dataFile = "Frame0" + i + ".zdf";
+                    Console.WriteLine("Saving frame to file: " + dataFile);
+                    frame.Save(dataFile);
+                }
             }
         }
         catch (Exception ex)
