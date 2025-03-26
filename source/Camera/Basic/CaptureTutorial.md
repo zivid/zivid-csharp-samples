@@ -237,16 +237,17 @@ We may also create settings to be used in a multi-acquisition HDR
 capture.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L21-L27))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L21-L28))
 
 ``` sourceCode cs
 var settings = new Zivid.NET.Settings();
-foreach (var aperture in new double[] { 9.57, 4.76, 2.59 })
+foreach (var aperture in new double[] { 5.66, 4.00, 2.59 })
 {
 	Console.WriteLine("Adding acquisition with aperture = " + aperture);
 	var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
 	settings.Acquisitions.Add(acquisitionSettings);
 }
+settings.Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } };
 ```
 
 Fully configured settings are demonstrated below.

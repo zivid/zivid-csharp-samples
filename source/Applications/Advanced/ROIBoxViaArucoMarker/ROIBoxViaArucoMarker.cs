@@ -25,12 +25,17 @@ class Program
             Console.WriteLine("Creating virtual camera using file: " + fileCamera);
             var camera = zivid.CreateFileCamera(fileCamera);
 
+            var settings2D = new Zivid.NET.Settings2D
+            {
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } }
+            };
             var settings = new Zivid.NET.Settings
             {
                 Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
             };
+            settings.Color = settings2D;
 
-            var originalFrame = camera.Capture(settings);
+            var originalFrame = camera.Capture2D3D(settings);
             var pointCloud = originalFrame.PointCloud;
 
             Console.WriteLine("Displaying the original point cloud");
@@ -95,7 +100,7 @@ class Program
             settings.RegionOfInterest.Box.PointB = roiPointsInCameraFrame[2];
             settings.RegionOfInterest.Box.Extents = new Zivid.NET.Range<double>(-10, roiBoxHeight);
 
-            var roiFrame = camera.Capture(settings);
+            var roiFrame = camera.Capture2D3D(settings);
 
             Console.WriteLine("Displaying the ROI-filtered point cloud");
             VisualizeZividPointCloud(roiFrame);

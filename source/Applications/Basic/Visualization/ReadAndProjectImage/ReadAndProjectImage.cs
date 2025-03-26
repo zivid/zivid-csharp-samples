@@ -66,6 +66,9 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
                 {
                     return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/ZividLogoZivid2PlusProjectorResolution.png";
                 }
@@ -79,9 +82,9 @@ class Program
     static Zivid.NET.Settings2D MakeSettings2D(Zivid.NET.Camera camera)
     {
         var model = camera.Info.Model;
-        var colorMode = (model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130 ||
-                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110 ||
-                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60)
+        var colorMode = (model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130 ||
+                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110 ||
+                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60)
                         ? Zivid.NET.Settings2D.SamplingGroup.ColorOption.Grayscale
                         : Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb;
 

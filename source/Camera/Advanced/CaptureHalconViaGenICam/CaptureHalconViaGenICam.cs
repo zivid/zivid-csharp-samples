@@ -37,11 +37,10 @@ class Program
             HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "AcquisitionMode", "SingleFrame");
 
             Console.WriteLine("Configuring camera settings");
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Aperture", 5.66);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "ExposureTime", 8333);
+            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Aperture", 2.83);
+            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "ExposureTime", 5000);
             HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Gain", 1);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "ProcessingFiltersOutlierRemovalEnabled", 1);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "ProcessingFiltersOutlierRemovalThreshold", 5);
+            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Brightness", 1.8);
 
             Console.WriteLine("Capturing frame");
             var frame = new HalconDotNet.HObject();
