@@ -35,63 +35,66 @@ class Program
             };
             settings.Color = settings2D;
 
-            var originalFrame = camera.Capture2D3D(settings);
-            var pointCloud = originalFrame.PointCloud;
-
-            Console.WriteLine("Displaying the original point cloud");
-            VisualizeZividPointCloud(originalFrame);
-
-            Console.WriteLine("Configuring ROI box based on bin size and checkerboard placement");
-            float roiBoxLength = 545F;
-            float roiBoxWidth = 345F;
-            float roiBoxHeight = 150F;
-
-            // Coordinates are relative to the checkerboard origin which lies in the intersection between the four checkers
-            // in the top-left corner of the checkerboard: Positive x-axis is "East", y-axis is "South" and z-axis is "Down"
-            var roiBoxLowerRightCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
+            using (var originalFrame = camera.Capture2D3D(settings))
             {
-                x = 240F,
-                y = 260F,
-                z = 5F
-            };
-            var roiBoxUpperRightCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
-            {
-                x = roiBoxLowerRightCornerInCheckerboardFrame.x,
-                y = roiBoxLowerRightCornerInCheckerboardFrame.y - roiBoxWidth,
-                z = roiBoxLowerRightCornerInCheckerboardFrame.z
-            };
-            var roiBoxLowerLeftCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
-            {
-                x = roiBoxLowerRightCornerInCheckerboardFrame.x - roiBoxLength,
-                y = roiBoxLowerRightCornerInCheckerboardFrame.y,
-                z = roiBoxLowerRightCornerInCheckerboardFrame.z
+                var pointCloud = originalFrame.PointCloud;
 
-            };
+                Console.WriteLine("Displaying the original point cloud");
+                VisualizeZividPointCloud(originalFrame);
 
-            var pointOInCheckerboardFrame = roiBoxLowerRightCornerInCheckerboardFrame;
-            var pointAInCheckerboardFrame = roiBoxUpperRightCornerInCheckerboardFrame;
-            var pointBInCheckerboardFrame = roiBoxLowerLeftCornerInCheckerboardFrame;
+                Console.WriteLine("Configuring ROI box based on bin size and checkerboard placement");
+                float roiBoxLength = 545F;
+                float roiBoxWidth = 345F;
+                float roiBoxHeight = 150F;
 
-            Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
-            var detectionResult = Detector.DetectCalibrationBoard(originalFrame);
-            var cameraToCheckerboardTransform = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
+                // Coordinates are relative to the checkerboard origin which lies in the intersection between the four checkers
+                // in the top-left corner of the checkerboard: Positive x-axis is "East", y-axis is "South" and z-axis is "Down"
+                var roiBoxLowerRightCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
+                {
+                    x = 240F,
+                    y = 260F,
+                    z = 5F
+                };
+                var roiBoxUpperRightCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
+                {
+                    x = roiBoxLowerRightCornerInCheckerboardFrame.x,
+                    y = roiBoxLowerRightCornerInCheckerboardFrame.y - roiBoxWidth,
+                    z = roiBoxLowerRightCornerInCheckerboardFrame.z
+                };
+                var roiBoxLowerLeftCornerInCheckerboardFrame = new Zivid.NET.PointXYZ
+                {
+                    x = roiBoxLowerRightCornerInCheckerboardFrame.x - roiBoxLength,
+                    y = roiBoxLowerRightCornerInCheckerboardFrame.y,
+                    z = roiBoxLowerRightCornerInCheckerboardFrame.z
 
-            Console.WriteLine("Transforming the ROI base frame points to the camera frame");
-            var roiPointsInCameraFrame = TransformPoints(
-                new List<Zivid.NET.PointXYZ> { pointOInCheckerboardFrame, pointAInCheckerboardFrame, pointBInCheckerboardFrame },
-                cameraToCheckerboardTransform);
+                };
 
-            Console.WriteLine("Setting the ROI");
-            settings.RegionOfInterest.Box.Enabled = true;
-            settings.RegionOfInterest.Box.PointO = roiPointsInCameraFrame[0];
-            settings.RegionOfInterest.Box.PointA = roiPointsInCameraFrame[1];
-            settings.RegionOfInterest.Box.PointB = roiPointsInCameraFrame[2];
-            settings.RegionOfInterest.Box.Extents = new Zivid.NET.Range<double>(-10, roiBoxHeight);
+                var pointOInCheckerboardFrame = roiBoxLowerRightCornerInCheckerboardFrame;
+                var pointAInCheckerboardFrame = roiBoxUpperRightCornerInCheckerboardFrame;
+                var pointBInCheckerboardFrame = roiBoxLowerLeftCornerInCheckerboardFrame;
 
-            var roiFrame = camera.Capture2D3D(settings);
+                Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
+                var detectionResult = Detector.DetectCalibrationBoard(originalFrame);
+                var cameraToCheckerboardTransform = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
 
-            Console.WriteLine("Displaying the ROI-filtered point cloud");
-            VisualizeZividPointCloud(roiFrame);
+                Console.WriteLine("Transforming the ROI base frame points to the camera frame");
+                var roiPointsInCameraFrame = TransformPoints(
+                    new List<Zivid.NET.PointXYZ> { pointOInCheckerboardFrame, pointAInCheckerboardFrame, pointBInCheckerboardFrame },
+                    cameraToCheckerboardTransform);
+
+                Console.WriteLine("Setting the ROI");
+                settings.RegionOfInterest.Box.Enabled = true;
+                settings.RegionOfInterest.Box.PointO = roiPointsInCameraFrame[0];
+                settings.RegionOfInterest.Box.PointA = roiPointsInCameraFrame[1];
+                settings.RegionOfInterest.Box.PointB = roiPointsInCameraFrame[2];
+                settings.RegionOfInterest.Box.Extents = new Zivid.NET.Range<double>(-10, roiBoxHeight);
+
+                using (var roiFrame = camera.Capture2D3D(settings))
+                {
+                    Console.WriteLine("Displaying the ROI-filtered point cloud");
+                    VisualizeZividPointCloud(roiFrame);
+                }
+            }
         }
         catch (Exception ex)
         {

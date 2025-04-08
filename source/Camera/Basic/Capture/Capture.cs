@@ -25,9 +25,9 @@ class Program
             Console.WriteLine("Capturing frame");
             using (var frame = camera.Capture2D3D(settings))
             {
-                var imageRGBA = frame.Frame2D.ImageRGBA();
+                var imageRGBA = frame.Frame2D.ImageRGBA_SRGB();
                 var imageFile = "ImageRGB.png";
-                Console.WriteLine("Saving 2D color image (linear RGB color space) to file: " + imageFile);
+                Console.WriteLine("Saving 2D color image (sRGB color space) to file: " + imageFile);
                 imageRGBA.Save(imageFile);
 
                 var dataFile = "Frame.zdf";

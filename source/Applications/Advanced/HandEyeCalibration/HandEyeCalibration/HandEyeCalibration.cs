@@ -103,39 +103,42 @@ class Program
         Console.Write("Detecting calibration object in point cloud");
         if (calibrationObject.Equals("c", StringComparison.CurrentCultureIgnoreCase))
         {
-            var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera);
-            var detectionResult = Detector.DetectCalibrationBoard(frame);
+            using (var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera))
+            {
+                var detectionResult = Detector.DetectCalibrationBoard(frame);
 
-            if (detectionResult.Valid())
-            {
-                Console.WriteLine("Calibration board detected");
-                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
-                ++currentPoseId;
-            }
-            else
-            {
-                Console.WriteLine("Failed to detect calibration board, ensure that the entire board is in the view of the camera");
+                if (detectionResult.Valid())
+                {
+                    Console.WriteLine("Calibration board detected");
+                    handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
+                    ++currentPoseId;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to detect calibration board, ensure that the entire board is in the view of the camera");
+                }
             }
         }
         else if (calibrationObject.Equals("m", StringComparison.CurrentCultureIgnoreCase))
         {
-            var frame = AssistedCapture(camera);
-
-            var markerDictionary = Zivid.NET.MarkerDictionary.Aruco4x4_50;
-            var markerIds = new List<int> { 1, 2, 3 };
-
-            Console.WriteLine("Detecting arUco marker IDs " + string.Join(", ", markerIds));
-            var detectionResult = Detector.DetectMarkers(frame, markerIds, markerDictionary);
-
-            if (detectionResult.Valid())
+            using (var frame = AssistedCapture(camera))
             {
-                Console.WriteLine("ArUco marker(s) detected: " + detectionResult.DetectedMarkers().Length);
-                handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
-                ++currentPoseId;
-            }
-            else
-            {
-                Console.WriteLine("Failed to detect any ArUco markers, ensure that at least one ArUco marker is in the view of the camera");
+                var markerDictionary = Zivid.NET.MarkerDictionary.Aruco4x4_50;
+                var markerIds = new List<int> { 1, 2, 3 };
+
+                Console.WriteLine("Detecting arUco marker IDs " + string.Join(", ", markerIds));
+                var detectionResult = Detector.DetectMarkers(frame, markerIds, markerDictionary);
+
+                if (detectionResult.Valid())
+                {
+                    Console.WriteLine("ArUco marker(s) detected: " + detectionResult.DetectedMarkers().Length);
+                    handEyeInput.Add(new HandEyeInput(robotPose, detectionResult));
+                    ++currentPoseId;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to detect any ArUco markers, ensure that at least one ArUco marker is in the view of the camera");
+                }
             }
         }
     }

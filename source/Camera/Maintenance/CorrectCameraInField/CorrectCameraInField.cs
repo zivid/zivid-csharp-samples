@@ -47,17 +47,25 @@ class Program
             {
                 Console.WriteLine("Capturing calibration board");
                 var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(camera);
-                var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
-
-                if (input.Valid)
+                if (detectionResult.Valid())
                 {
-                    dataset.Add(input);
-                    Console.WriteLine("Valid measurement at: " + input.DetectionResult.Centroid().ToString());
+                    var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
+
+                    if (input.Valid)
+                    {
+                        dataset.Add(input);
+                        Console.WriteLine("Valid measurement at: " + input.DetectionResult.Centroid().ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("****Invalid Input****");
+                        Console.WriteLine("Feedback: " + input.StatusDescription());
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("****INVALID****");
-                    Console.WriteLine("Feedback: " + input.StatusDescription());
+                    Console.WriteLine("****Failed Detection****");
+                    Console.WriteLine("Feedback: " + detectionResult.StatusDescription());
                 }
                 Console.WriteLine(printLine);
             }

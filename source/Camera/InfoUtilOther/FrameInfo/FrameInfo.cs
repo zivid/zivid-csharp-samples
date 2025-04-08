@@ -27,24 +27,26 @@ class Program
                 Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
             };
 
-            var frame = camera.Capture2D3D(settings);
+            using (var frame = camera.Capture2D3D(settings))
+            {
 
-            var frameInfo = frame.Info;
+                var frameInfo = frame.Info;
 
-            Console.WriteLine("The version information for installed software at the time of image capture:");
-            Console.WriteLine(frameInfo.SoftwareVersion);
+                Console.WriteLine("The version information for installed software at the time of image capture:");
+                Console.WriteLine(frameInfo.SoftwareVersion);
 
-            Console.WriteLine("Information about the system that captured this frame:");
-            Console.WriteLine(frameInfo.SystemInfo);
+                Console.WriteLine("Information about the system that captured this frame:");
+                Console.WriteLine(frameInfo.SystemInfo);
 
-            Console.WriteLine("The time of frame capture:");
-            Console.WriteLine(frameInfo.TimeStamp);
+                Console.WriteLine("The time of frame capture:");
+                Console.WriteLine(frameInfo.TimeStamp);
 
-            Console.WriteLine("Acquisition time:");
-            Console.WriteLine(frameInfo.Metrics.AcquisitionTime.Milliseconds + " ms");
+                Console.WriteLine("Acquisition time:");
+                Console.WriteLine(frameInfo.Metrics.AcquisitionTime.Milliseconds + " ms");
 
-            Console.WriteLine("Capture time:");
-            Console.WriteLine(frameInfo.Metrics.CaptureTime.Milliseconds + " ms");
+                Console.WriteLine("Capture time:");
+                Console.WriteLine(frameInfo.Metrics.CaptureTime.Milliseconds + " ms");
+            }
         }
         catch (Exception ex)
         {

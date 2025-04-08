@@ -395,7 +395,7 @@ If we only want to capture 3D, the points cloud without color, we can do
 so via the `capture3D` API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L69))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L71))
 
 ``` sourceCode cs
 using (var frame3D = camera.Capture3D(settings))
@@ -452,13 +452,14 @@ frame.Save(dataFilePLY);
 Once saved, the frame can be loaded from a ZDF file.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L15-L18))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs#L15-L20))
 
 ``` sourceCode cs
 var dataFile =
 	Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
 Console.WriteLine("Reading ZDF frame from file: " + dataFile);
-var frame = new Zivid.NET.Frame(dataFile);
+using (var frame = new Zivid.NET.Frame(dataFile))
+{
 ```
 
 ### Save 2D
@@ -469,7 +470,7 @@ We can get the 2D color image from `Frame2D`, which is part of the
 ([go to source]())
 
 ``` sourceCode cs
-var image2D = frame.Frame2D.ImageBGRA();
+var image2D = frame.Frame2D.ImageBGRA_SRGB();
 ```
 
 We can get 2D color image directly from the point cloud. This image will
@@ -479,7 +480,7 @@ have the same resolution as the point cloud.
 
 ``` sourceCode cs
 var pointCloud = frame.PointCloud;
-var image2DInPointCloudResolution = pointCloud.CopyImageRGBA();
+var image2DInPointCloudResolution = pointCloud.CopyImageRGBA_SRGB();
 ```
 
 2D captures also produce 2D color images in linear RGB and sRGB color
@@ -489,7 +490,7 @@ space.
 source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28))
 
 ``` sourceCode cs
-var imageRGBA = frame.Frame2D.ImageRGBA();
+var imageRGBA = frame.Frame2D.ImageRGBA_SRGB();
 .. tab-item:: sRGB
 ```
 
@@ -507,7 +508,7 @@ source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera
 
 ``` sourceCode cs
 var imageFile = "ImageRGB.png";
-Console.WriteLine("Saving 2D color image (linear RGB color space) to file: " + imageFile);
+Console.WriteLine("Saving 2D color image (sRGB color space) to file: " + imageFile);
 imageRGBA.Save(imageFile);
 .. tab-item:: sRGB
 ```

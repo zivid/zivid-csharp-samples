@@ -17,18 +17,21 @@ class Program
             var dataFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                            + "/Zivid/CalibrationBoardInCameraOrigin.zdf";
             Console.WriteLine("Reading " + dataFile + " point cloud");
-            var frame = new Zivid.NET.Frame(dataFile);
-            var pointCloud = frame.PointCloud;
 
-            var millimetersToMetersTransform =
-                new float[,] { { 0.001F, 0, 0, 0 }, { 0, 0.001F, 0, 0 }, { 0, 0, 0.001F, 0 }, { 0, 0, 0, 1 } };
+            using (var frame = new Zivid.NET.Frame(dataFile))
+            {
+                var pointCloud = frame.PointCloud;
 
-            Console.WriteLine("Transforming point cloud from mm to m");
-            pointCloud.Transform(millimetersToMetersTransform);
+                var millimetersToMetersTransform =
+                    new float[,] { { 0.001F, 0, 0, 0 }, { 0, 0.001F, 0, 0 }, { 0, 0, 0.001F, 0 }, { 0, 0, 0, 1 } };
 
-            var transformedFile = "FrameInMeters.zdf";
-            Console.WriteLine("Saving frame to file: " + transformedFile);
-            frame.Save(transformedFile);
+                Console.WriteLine("Transforming point cloud from mm to m");
+                pointCloud.Transform(millimetersToMetersTransform);
+
+                var transformedFile = "FrameInMeters.zdf";
+                Console.WriteLine("Saving frame to file: " + transformedFile);
+                frame.Save(transformedFile);
+            }
         }
         catch (Exception ex)
         {

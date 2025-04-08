@@ -114,24 +114,29 @@ class Program
                     Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = aperture } },
                     Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { Aperture = aperture } } }
                 };
-                var frame = camera.Capture2D3D(settings);
-                var estimatedIntrinsics = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frame);
-                var temperature = frame.State.Temperature.Lens;
-                Console.WriteLine($"\nAperture: {aperture,5:f2}, Lens Temperature: {temperature,5:f2}°C");
-                PrintIntrinsicParametersDelta(intrinsics, estimatedIntrinsics);
+                using (var frame = camera.Capture2D3D(settings))
+                {
+                    var estimatedIntrinsics = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frame);
+                    var temperature = frame.State.Temperature.Lens;
+                    Console.WriteLine($"\nAperture: {aperture,5:f2}, Lens Temperature: {temperature,5:f2}°C");
+                    PrintIntrinsicParametersDelta(intrinsics, estimatedIntrinsics);
+                }
             }
             var settingsSubsampled = SubsampledSettingsForCamera(camera);
             var fixedIntrinsicsForSubsampledSettingsPath = "FixedIntrinsicsSubsampled2x2.yml";
             Console.WriteLine("Saving camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
             var fixedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.Intrinsics(camera, settingsSubsampled);
             fixedIntrinsicsForSubsampledSettings.Save(fixedIntrinsicsForSubsampledSettingsPath);
-            var frameSubsampled = camera.Capture2D3D(settingsSubsampled);
-            var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frameSubsampled);
-            var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampled2x2Capture.yml";
-            Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
-            estimatedIntrinsicsForSubsampledSettings.Save(estimatedIntrinsicsForSubsampledSettingsPath);
-            Console.WriteLine("\nDifference between fixed and estimated intrinsics for subsampled point cloud:");
-            PrintIntrinsicParametersDelta(fixedIntrinsicsForSubsampledSettings, estimatedIntrinsicsForSubsampledSettings);
+
+            using (var frameSubsampled = camera.Capture2D3D(settingsSubsampled))
+            {
+                var estimatedIntrinsicsForSubsampledSettings = Zivid.NET.Experimental.Calibration.Calibrator.EstimateIntrinsics(frameSubsampled);
+                var estimatedIntrinsicsForSubsampledSettingsPath = "EstimatedIntrinsicsFromSubsampled2x2Capture.yml";
+                Console.WriteLine("Saving estimated camera intrinsics for subsampled capture to file: " + fixedIntrinsicsForSubsampledSettingsPath);
+                estimatedIntrinsicsForSubsampledSettings.Save(estimatedIntrinsicsForSubsampledSettingsPath);
+                Console.WriteLine("\nDifference between fixed and estimated intrinsics for subsampled point cloud:");
+                PrintIntrinsicParametersDelta(fixedIntrinsicsForSubsampledSettings, estimatedIntrinsicsForSubsampledSettings);
+            }
 
             var settings2D = new Zivid.NET.Settings2D
             {

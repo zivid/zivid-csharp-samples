@@ -35,6 +35,10 @@ class Program
             // Gather data
             Console.WriteLine("Capturing calibration board");
             var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(camera);
+            if (!detectionResult.Valid())
+            {
+                throw new Exception("Detection failed! Feedback: " + detectionResult.StatusDescription());
+            }
 
             // Prepare data and check that it is appropriate for infield verification
             var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);

@@ -29,11 +29,11 @@ class Program
                     var settings2D = MakeSettings2D(camera);
 
                     Console.WriteLine("Capturing a 2D image with the projected image");
-                    using (var frame2D = projectedImageHandle.Capture(settings2D))
+                    using (var frame2D = projectedImageHandle.Capture2D(settings2D))
                     {
                         var capturedImageFile = "CapturedImage.png";
                         Console.WriteLine("Saving the captured image: {0}", capturedImageFile);
-                        frame2D.ImageRGBA().Save(capturedImageFile);
+                        frame2D.ImageRGBA_SRGB().Save(capturedImageFile);
                     }
 
                     Console.WriteLine("Press enter to stop projecting...");

@@ -112,51 +112,54 @@ class Program
             var dataFile =
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/" + fileName;
             Console.WriteLine("Reading point cloud from file: " + dataFile);
-            var frame = new Zivid.NET.Frame(dataFile);
-            var pointCloud = frame.PointCloud;
 
-            loopContinue = true;
-            while (loopContinue)
+            using (var frame = new Zivid.NET.Frame(dataFile))
             {
-                switch (Interaction.EnterCommand())
+                var pointCloud = frame.PointCloud;
+
+                loopContinue = true;
+                while (loopContinue)
                 {
-                    case Command.TransformSinglePoint:
+                    switch (Interaction.EnterCommand())
+                    {
+                        case Command.TransformSinglePoint:
 
-                        Console.WriteLine("Transforming single point");
+                            Console.WriteLine("Transforming single point");
 
-                        var xyz = pointCloud.CopyPointsXYZW();
+                            var xyz = pointCloud.CopyPointsXYZW();
 
-                        var pickingPoint = new float[] { xyz[imageCoordinateY, imageCoordinateX, 0],
-                                                         xyz[imageCoordinateY, imageCoordinateX, 1],
-                                                         xyz[imageCoordinateY, imageCoordinateX, 2],
-                                                         xyz[imageCoordinateY, imageCoordinateX, 3] };
+                            var pickingPoint = new float[] { xyz[imageCoordinateY, imageCoordinateX, 0],
+                                                             xyz[imageCoordinateY, imageCoordinateX, 1],
+                                                             xyz[imageCoordinateY, imageCoordinateX, 2],
+                                                             xyz[imageCoordinateY, imageCoordinateX, 3] };
 
-                        Vector<float> pointInCameraFrame = CreateVector.DenseOfArray(pickingPoint);
-                        Console.WriteLine("Point coordinates in camera reference frame: " + pointInCameraFrame);
+                            Vector<float> pointInCameraFrame = CreateVector.DenseOfArray(pickingPoint);
+                            Console.WriteLine("Point coordinates in camera reference frame: " + pointInCameraFrame);
 
-                        Console.WriteLine("Transforming (picking) point from camera to robot base reference frame");
-                        Vector<float> pointInBaseFrame = transformBaseToCameraMath * pointInCameraFrame;
+                            Console.WriteLine("Transforming (picking) point from camera to robot base reference frame");
+                            Vector<float> pointInBaseFrame = transformBaseToCameraMath * pointInCameraFrame;
 
-                        Console.WriteLine("Point coordinates in robot base reference frame: " + pointInBaseFrame);
+                            Console.WriteLine("Point coordinates in robot base reference frame: " + pointInBaseFrame);
 
-                        loopContinue = false;
-                        break;
+                            loopContinue = false;
+                            break;
 
-                    case Command.TransformPointCloud:
+                        case Command.TransformPointCloud:
 
-                        Console.WriteLine("Transforming point cloud");
+                            Console.WriteLine("Transforming point cloud");
 
-                        var transformBaseToCamera = mathDotNetToZivid(transformBaseToCameraMath);
-                        pointCloud.Transform(transformBaseToCamera);
+                            var transformBaseToCamera = mathDotNetToZivid(transformBaseToCameraMath);
+                            pointCloud.Transform(transformBaseToCamera);
 
-                        var saveFile = "ZividGemTransformed.zdf";
-                        Console.WriteLine("Saving point cloud to file: " + saveFile);
-                        frame.Save(saveFile);
+                            var saveFile = "ZividGemTransformed.zdf";
+                            Console.WriteLine("Saving point cloud to file: " + saveFile);
+                            frame.Save(saveFile);
 
-                        loopContinue = false;
-                        break;
+                            loopContinue = false;
+                            break;
 
-                    case Command.Unknown: Console.WriteLine("Entered unknown command"); break;
+                        case Command.Unknown: Console.WriteLine("Entered unknown command"); break;
+                    }
                 }
             }
         }
