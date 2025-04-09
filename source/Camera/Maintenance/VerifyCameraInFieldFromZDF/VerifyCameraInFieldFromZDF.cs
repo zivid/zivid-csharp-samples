@@ -35,29 +35,36 @@ class Program
             // offline infield verification
 
             Console.WriteLine("Capturing calibration board");
-            var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera);
+
             var dataFile = "FrameWithCalibrationBoard.zdf";
-            Console.WriteLine("Saving frame to file: " + dataFile + ", for later use in offline infield verification");
-            frame.Save(dataFile);
+
+            using (var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera))
+            {
+                Console.WriteLine("Saving frame to file: " + dataFile + ", for later use in offline infield verification");
+                frame.Save(dataFile);
+            }
 
             // The ZDF captured with captureCalibrationBoard(camera) that contains the calibration board can be loaded for
             // offline infield verification
 
             Console.WriteLine("Reading ZDF frame from file: " + dataFile + ", for offline infield verification");
-            var loadedFrame = new Zivid.NET.Frame(dataFile);
 
-            Console.WriteLine("Detecting calibration board");
-            var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(loadedFrame);
-
-            var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
-            if (!input.Valid)
+            using (var loadedFrame = new Zivid.NET.Frame(dataFile))
             {
-                throw new Exception("Capture not valid for infield verification! Feedback: " + input.StatusDescription());
-            }
 
-            Console.WriteLine("Successful measurement at " + detectionResult.Centroid().ToString());
-            var verification = Zivid.NET.Experimental.Calibration.Calibrator.VerifyCamera(input);
-            Console.WriteLine("Estimated dimension trueness error at measured position: " + (verification.LocalDimensionTrueness * 100).ToString("0.00") + "%");
+                Console.WriteLine("Detecting calibration board");
+                var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(loadedFrame);
+
+                var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
+                if (!input.Valid)
+                {
+                    throw new Exception("Capture not valid for infield verification! Feedback: " + input.StatusDescription());
+                }
+
+                Console.WriteLine("Successful measurement at " + detectionResult.Centroid().ToString());
+                var verification = Zivid.NET.Experimental.Calibration.Calibrator.VerifyCamera(input);
+                Console.WriteLine("Estimated dimension trueness error at measured position: " + (verification.LocalDimensionTrueness * 100).ToString("0.00") + "%");
+            }
         }
         catch (Exception ex)
         {

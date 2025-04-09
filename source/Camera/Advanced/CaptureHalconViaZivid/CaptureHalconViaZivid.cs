@@ -121,7 +121,7 @@ class Program
 
         var pointsXYZ = pointCloud.CopyPointsXYZ();
         var normalsXYZ = pointCloud.CopyNormalsXYZ();
-        var colorsRGBA = frame.Frame2D.ImageRGBA().ToByteArray();
+        var colorsRGBA = frame.Frame2D.ImageRGBA_SRGB().ToByteArray();
 
         if ((ulong)pointsXYZ.GetLength(0) != height || (ulong)pointsXYZ.GetLength(1) != width)
         {

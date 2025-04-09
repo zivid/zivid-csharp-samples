@@ -17,36 +17,38 @@ class Program
             var dataFile =
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
             Console.WriteLine("Reading ZDF frame from file: " + dataFile);
-            var frame = new Zivid.NET.Frame(dataFile);
 
-            Console.WriteLine("Getting point cloud from frame");
-            var pointCloud = frame.PointCloud;
+            using (var frame = new Zivid.NET.Frame(dataFile))
+            {
+                Console.WriteLine("Getting point cloud from frame");
+                var pointCloud = frame.PointCloud;
 
-            Console.WriteLine("Size of point cloud before downsampling: " + pointCloud.Size + " data point");
+                Console.WriteLine("Size of point cloud before downsampling: " + pointCloud.Size + " data point");
 
-            Console.WriteLine("Downsampling point cloud");
-            Console.WriteLine("This does not modify the current point cloud but returns");
-            Console.WriteLine("the downsampled point cloud as a new point cloud instance.");
-            var downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
+                Console.WriteLine("Downsampling point cloud");
+                Console.WriteLine("This does not modify the current point cloud but returns");
+                Console.WriteLine("the downsampled point cloud as a new point cloud instance.");
+                var downsampledPointCloud = pointCloud.Downsampled(Zivid.NET.PointCloud.Downsampling.By2x2);
 
-            Console.WriteLine("Size of point cloud after downsampling: " + downsampledPointCloud.Size + " data points");
+                Console.WriteLine("Size of point cloud after downsampling: " + downsampledPointCloud.Size + " data points");
 
-            Console.WriteLine("Downsampling point cloud (in-place)");
-            Console.WriteLine("This modifies the current point cloud.");
-            pointCloud.Downsample(Zivid.NET.PointCloud.Downsampling.By2x2);
+                Console.WriteLine("Downsampling point cloud (in-place)");
+                Console.WriteLine("This modifies the current point cloud.");
+                pointCloud.Downsample(Zivid.NET.PointCloud.Downsampling.By2x2);
 
-            Console.WriteLine("Size of point cloud after downsampling: " + pointCloud.Size + " data points");
+                Console.WriteLine("Size of point cloud after downsampling: " + pointCloud.Size + " data points");
 
-            Console.WriteLine("Setting up visualization");
-            var visualizer = new Zivid.NET.Visualization.Visualizer();
+                Console.WriteLine("Setting up visualization");
+                var visualizer = new Zivid.NET.Visualization.Visualizer();
 
-            Console.WriteLine("Visualizing point cloud");
-            visualizer.Show(pointCloud);
-            visualizer.ShowMaximized();
-            visualizer.ResetToFit();
+                Console.WriteLine("Visualizing point cloud");
+                visualizer.Show(pointCloud);
+                visualizer.ShowMaximized();
+                visualizer.ResetToFit();
 
-            Console.WriteLine("Running visualizer. Blocking until window closes.");
-            visualizer.Run();
+                Console.WriteLine("Running visualizer. Blocking until window closes.");
+                visualizer.Run();
+            }
         }
         catch (Exception ex)
         {

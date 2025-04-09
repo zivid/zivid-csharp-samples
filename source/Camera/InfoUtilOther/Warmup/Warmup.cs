@@ -68,7 +68,7 @@ class Program
 
                 // Use the same capture method as you would use in production
                 // to get the most accurate results from warmup
-                camera.Capture3D(settings);
+                using (camera.Capture3D(settings)) { }
 
                 var afterCapture = DateTime.Now;
 

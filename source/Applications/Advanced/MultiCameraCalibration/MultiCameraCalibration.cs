@@ -30,7 +30,7 @@ class Program
                 {
                     Console.WriteLine("Detecting checkerboard in point cloud");
                     var detectionResult = Detector.DetectCalibrationBoard(frame);
-                    if (detectionResult)
+                    if (detectionResult.Valid())
                     {
                         detectionResults.Add(detectionResult);
                         serialNumbers.Add(serialNumber);
@@ -38,7 +38,7 @@ class Program
                     else
                     {
                         throw new System.InvalidOperationException(
-                            "Could not detect checkerboard. Please ensure it is visible from all cameras.");
+                            "Could not detect checkerboard. Please ensure it is visible from all cameras. " + detectionResult.StatusDescription());
                     }
                 }
             }

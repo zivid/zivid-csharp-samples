@@ -16,10 +16,12 @@ class Program
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/Zivid3D.zdf";
             var pointCloudFile = "Zivid3D.ply";
 
-            var frame = new Zivid.NET.Frame(dataFile);
+            using (var frame = new Zivid.NET.Frame(dataFile))
+            {
 
-            Console.WriteLine("Saving point cloud to file: " + pointCloudFile);
-            frame.Save(pointCloudFile);
+                Console.WriteLine("Saving point cloud to file: " + pointCloudFile);
+                frame.Save(pointCloudFile);
+            }
         }
         catch (Exception ex)
         {

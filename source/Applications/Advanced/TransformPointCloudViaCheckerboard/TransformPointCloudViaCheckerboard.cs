@@ -19,27 +19,34 @@ class Program
             var calibrationBoardFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
                            + "/Zivid/CalibrationBoardInCameraOrigin.zdf";
             Console.WriteLine("Reading ZDF frame from file: " + calibrationBoardFile);
-            var frame = new Zivid.NET.Frame(calibrationBoardFile);
-            var pointCloud = frame.PointCloud;
 
-            Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
-            var detectionResult = Detector.DetectCalibrationBoard(frame);
-            var cameraToCheckerboardTransform = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
-            Console.WriteLine(cameraToCheckerboardTransform);
-            Console.WriteLine("Camera pose in checkerboard frame:");
-            var checkerboardToCameraTransform = cameraToCheckerboardTransform.Inverse();
-            Console.WriteLine(checkerboardToCameraTransform);
+            using (var frame = new Zivid.NET.Frame(calibrationBoardFile))
+            {
+                var pointCloud = frame.PointCloud;
 
-            var transformFile = "CheckerboardToCameraTransform.yaml";
-            Console.WriteLine("Saving a YAML file with Inverted checkerboard pose to file: " + transformFile);
-            checkerboardToCameraTransform.Save(transformFile);
+                Console.WriteLine("Detecting and estimating pose of the Zivid checkerboard in the camera frame");
+                var detectionResult = Detector.DetectCalibrationBoard(frame);
+                var cameraToCheckerboardTransform = new Zivid.NET.Matrix4x4(detectionResult.Pose().ToMatrix());
+                Console.WriteLine(cameraToCheckerboardTransform);
+                Console.WriteLine("Camera pose in checkerboard frame:");
+                var checkerboardToCameraTransform = cameraToCheckerboardTransform.Inverse();
+                Console.WriteLine(checkerboardToCameraTransform);
 
-            Console.WriteLine("Transforming point cloud from camera frame to Checkerboard frame");
-            pointCloud.Transform(checkerboardToCameraTransform);
+                var transformFile = "CheckerboardToCameraTransform.yaml";
+                Console.WriteLine("Saving camera pose in checkerboard frame to file: " + transformFile);
+                checkerboardToCameraTransform.Save(transformFile);
 
-            var checkerboardTransformedFile = "CalibrationBoardInCheckerboardOrigin.zdf";
-            Console.WriteLine("Saving transformed point cloud to file: " + checkerboardTransformedFile);
-            frame.Save(checkerboardTransformedFile);
+                Console.WriteLine("Transforming point cloud from camera frame to checkerboard frame");
+                pointCloud.Transform(checkerboardToCameraTransform);
+
+                var checkerboardTransformedFile = "CalibrationBoardInCheckerboardOrigin.zdf";
+                Console.WriteLine("Saving transformed point cloud to file: " + checkerboardTransformedFile);
+                frame.Save(checkerboardTransformedFile);
+
+                Console.WriteLine("Reading applied transformation matrix to the point cloud:");
+                var transformationMatrix = pointCloud.TransformationMatrix;
+                Console.WriteLine(transformationMatrix);
+            }
         }
         catch (Exception ex)
         {
