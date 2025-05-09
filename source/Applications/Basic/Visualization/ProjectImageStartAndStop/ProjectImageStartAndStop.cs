@@ -12,20 +12,6 @@ using System;
 
 class Program
 {
-    static Zivid.NET.ImageBGRA CreateProjectorImage(Zivid.NET.Resolution resolution, Zivid.NET.ColorBGRA color)
-    {
-        var pixelArray = new Zivid.NET.ColorBGRA[resolution.Height, resolution.Width];
-        for (ulong y = 0; y < resolution.Height; y++)
-        {
-            for (ulong x = 0; x < resolution.Width; x++)
-            {
-                pixelArray[y, x] = color;
-            }
-        }
-        var projectorImage = new Zivid.NET.ImageBGRA(pixelArray);
-        return projectorImage;
-    }
-
     static int Main()
     {
         try
@@ -78,5 +64,19 @@ class Program
             return 1;
         }
         return 0;
+    }
+
+    static Zivid.NET.ImageBGRA CreateProjectorImage(Zivid.NET.Resolution resolution, Zivid.NET.ColorBGRA color)
+    {
+        var pixelArray = new Zivid.NET.ColorBGRA[resolution.Height, resolution.Width];
+        for (ulong y = 0; y < resolution.Height; y++)
+        {
+            for (ulong x = 0; x < resolution.Width; x++)
+            {
+                pixelArray[y, x] = color;
+            }
+        }
+        var projectorImage = new Zivid.NET.ImageBGRA(pixelArray);
+        return projectorImage;
     }
 }
