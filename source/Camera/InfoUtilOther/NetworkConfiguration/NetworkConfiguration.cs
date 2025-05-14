@@ -7,29 +7,6 @@ using System.Net.NetworkInformation;
 
 class NetworkConfiguration
 {
-    static bool Confirm(string message)
-    {
-        while (true)
-        {
-            Console.Write(message + " [Y/n] ");
-            string input = Console.ReadLine();
-            if (input.Equals("y", StringComparison.OrdinalIgnoreCase) ||
-                input.Equals("yes", StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-            else if (input.Equals("n", StringComparison.OrdinalIgnoreCase) ||
-                     input.Equals("no", StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter 'Y' or 'n'.");
-            }
-        }
-    }
-
     static int Main()
     {
         try
@@ -105,6 +82,29 @@ class NetworkConfiguration
             return 1;
         }
         return 0;
+    }
+
+    static bool Confirm(string message)
+    {
+        while (true)
+        {
+            Console.Write(message + " [Y/n] ");
+            string input = Console.ReadLine();
+            if (input.Equals("y", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("yes", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+            else if (input.Equals("n", StringComparison.OrdinalIgnoreCase) ||
+                     input.Equals("no", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter 'Y' or 'n'.");
+            }
+        }
     }
 }
 

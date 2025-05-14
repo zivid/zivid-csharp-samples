@@ -20,23 +20,6 @@ class Program
         public int? CaptureCycle { get; set; }
     }
 
-    static Zivid.NET.Settings LoadOrDefaultSettings(string settingsPath)
-    {
-        if (settingsPath != null)
-        {
-            Console.WriteLine("Loading settings from file");
-            return new Zivid.NET.Settings(settingsPath);
-        }
-
-        Console.WriteLine("Using default 3D settings");
-        var settings = new Zivid.NET.Settings
-        {
-            Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
-        };
-
-        return settings;
-    }
-
     static int Main(string[] args)
     {
         return Parser.Default.ParseArguments<Options>(args)
@@ -99,4 +82,21 @@ class Program
         }
         return 0;
     }
+    static Zivid.NET.Settings LoadOrDefaultSettings(string settingsPath)
+    {
+        if (settingsPath != null)
+        {
+            Console.WriteLine("Loading settings from file");
+            return new Zivid.NET.Settings(settingsPath);
+        }
+
+        Console.WriteLine("Using default 3D settings");
+        var settings = new Zivid.NET.Settings
+        {
+            Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
+        };
+
+        return settings;
+    }
+
 }
