@@ -395,7 +395,7 @@ If we only want to capture 3D, the points cloud without color, we can do
 so via the `capture3D` API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L71))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L86))
 
 ``` sourceCode cs
 using (var frame3D = camera.Capture3D(settings))
@@ -407,7 +407,7 @@ If we only want to capture a 2D image, which is faster than 3D, we can
 do so via the `capture2D` API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L28))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L42))
 
 ``` sourceCode cs
 using (var frame2D = camera.Capture2D(settings))
@@ -464,17 +464,51 @@ using (var frame = new Zivid.NET.Frame(dataFile))
 
 ### Save 2D
 
-We can get the 2D color image from `Frame2D`, which is part of the
-`Frame` object, obtained from `capture2D3D()`.
+From a `capture2D()` you get a `Frame2D`. There are two color spaces
+available for 2D images: linear RGB and sRGB. The `imageRGBA()` will
+return an image in the linear RGB color space. If you append `_SRGB` to
+the function name then the returned image will be in the sRGB color
+space
 
-([go to source]())
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L49))
 
 ``` sourceCode cs
-var image2D = frame.Frame2D.ImageBGRA_SRGB();
+var imageRGBA = frame2D.ImageRGBA();
+.. tab-item:: sRGB
+```
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L67))
+
+``` sourceCode cs
+var imageSRGB = frame2D.ImageRGBA_SRGB();
+```
+
+Then, we can save the 2D image in linear RGB or sRGB color space.
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L50-L52))
+
+``` sourceCode cs
+var imageFile = "ImageRGBA_linear.png";
+Console.WriteLine($"Saving 2D color image (Linear RGB) to file: {imageFile}");
+imageRGBA.Save(imageFile);
+.. tab-item:: sRGB
+```
+
+([go to
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L68-L70))
+
+``` sourceCode cs
+var imageFile = "ImageRGBA_sRGB.png";
+Console.WriteLine($"Saving 2D color image (sRGB color space) to file: {imageFile}");
+imageSRGB.Save(imageFile);
 ```
 
 We can get 2D color image directly from the point cloud. This image will
-have the same resolution as the point cloud.
+have the same resolution as the point cloud and it will be in the sRGB
+color space.
 
 ([go to source]())
 
@@ -483,43 +517,14 @@ var pointCloud = frame.PointCloud;
 var image2DInPointCloudResolution = pointCloud.CopyImageRGBA_SRGB();
 ```
 
-2D captures also produce 2D color images in linear RGB and sRGB color
-space.
+We can get the 2D color image from `Frame2D`, which is part of the
+`Frame` object, obtained from `capture2D3D()`. This image will have the
+resolution given by the 2D settings inside the 2D3D settings.
 
-([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L28))
-
-``` sourceCode cs
-var imageRGBA = frame.Frame2D.ImageRGBA_SRGB();
-.. tab-item:: sRGB
-```
-
-([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L30))
+([go to source]())
 
 ``` sourceCode cs
-var imageSRGB = frame2D.ImageSRGB();
-```
-
-Then, we can save the 2D image in linear RGB or sRGB color space.
-
-([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/Capture/Capture.cs#L29-L31))
-
-``` sourceCode cs
-var imageFile = "ImageRGB.png";
-Console.WriteLine("Saving 2D color image (sRGB color space) to file: " + imageFile);
-imageRGBA.Save(imageFile);
-.. tab-item:: sRGB
-```
-
-([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L31-L33))
-
-``` sourceCode cs
-var imageFile = "ImageSRGB.png";
-Console.WriteLine("Saving 2D color image (sRGB color space) to file: " + imageFile);
-imageSRGB.Save(imageFile);
+var image2D = frame.Frame2D.ImageBGRA_SRGB();
 ```
 
 ## Multithreading

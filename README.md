@@ -45,7 +45,7 @@ from the camera can be used.
             camera.
           - [CaptureHDRCompleteSettings](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs) - Capture point clouds, with color, from the Zivid camera
             with fully configured settings.
-          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture images and point clouds, with or without color,
+          - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture images and point clouds, with and without color,
             from the Zivid camera with settings from YML file.
       - **Advanced**
           - [CaptureHalconViaGenICam](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaGenICam/CaptureHalconViaGenICam.cs) - Capture and save a point cloud, with colors, using GenICam
