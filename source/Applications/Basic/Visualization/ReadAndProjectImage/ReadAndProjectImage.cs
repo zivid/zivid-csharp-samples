@@ -5,6 +5,9 @@ The image for this sample can be found under the main instructions for Zivid sam
 */
 
 using System;
+using System.Reflection;
+using System.Runtime;
+using Zivid.NET;
 using Duration = Zivid.NET.Duration;
 
 class Program
@@ -26,7 +29,12 @@ class Program
                 using (var projectedImageHandle = Zivid.NET.Projection.Projection.ShowImage(camera, projectorImageForGivenCamera))
                 { // A Local Scope to handle the projected image lifetime
 
-                    var settings2D = MakeSettings2D(camera);
+                    var settings2D = MakeSettings2D();
+                    if (!cameraSupportsProjectionBrightnessBoost(camera))
+                    {
+                        settings2D.Acquisitions[0].Brightness = 0.0;
+                        settings2D.Sampling.Color = Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb;
+                    }
 
                     Console.WriteLine("Capturing a 2D image with the projected image");
                     using (var frame2D = projectedImageHandle.Capture2D(settings2D))
@@ -40,7 +48,6 @@ class Program
                     Console.ReadLine();
 
                 } // projectedImageHandle now goes out of scope, thereby stopping the projection
-
             }
 
             Console.WriteLine("Done");
@@ -78,28 +85,28 @@ class Program
                 }
         }
     }
-
-    static Zivid.NET.Settings2D MakeSettings2D(Zivid.NET.Camera camera)
+    static Zivid.NET.Settings2D MakeSettings2D()
     {
-        var model = camera.Info.Model;
-        var colorMode = (model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130 ||
-                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110 ||
-                         model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60)
-                        ? Zivid.NET.Settings2D.SamplingGroup.ColorOption.Grayscale
-                        : Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb;
-
         return new Zivid.NET.Settings2D
         {
             Acquisitions = { new Zivid.NET.Settings2D.Acquisition
             {
-                Brightness = 0.0,
+                Brightness = 2.5,
                 ExposureTime = Duration.FromMicroseconds(20000),
                 Aperture = 2.83
             }},
             Sampling = new Zivid.NET.Settings2D.SamplingGroup
             {
-                Color = colorMode
+                Color = Zivid.NET.Settings2D.SamplingGroup.ColorOption.Grayscale
             }
         };
+    }
+
+    static bool cameraSupportsProjectionBrightnessBoost(Zivid.NET.Camera camera)
+    {
+        var model = camera.Info.Model;
+        return model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130 ||
+               model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110 ||
+               model == Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60;
     }
 }

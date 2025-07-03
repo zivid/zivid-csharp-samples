@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.15.0. For
+This repository contains csharp code samples for Zivid SDK v2.16.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -70,6 +70,9 @@ from the camera can be used.
           - [FrameInfo](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FrameInfo/FrameInfo.cs) - Read frame info from the Zivid camera.
           - [GetCameraIntrinsics](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs) - Read intrinsic parameters from the Zivid camera (OpenCV
             model) or estimate them from the point cloud.
+          - [MeasureSceneConditions](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/MeasureSceneConditions/MeasureSceneConditions.cs) - Measure ambient light conditions in the scene and output
+            the measured flickering frequency of the ambient light if
+            flickering is detected.
           - [NetworkConfiguration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/NetworkConfiguration/NetworkConfiguration.cs) - Uses Zivid API to change the IP address of the Zivid
             camera.
           - [Warmup](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/Warmup/Warmup.cs) - Short example of a basic way to warm up the camera with
