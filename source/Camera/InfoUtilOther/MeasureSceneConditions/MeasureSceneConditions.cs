@@ -43,14 +43,14 @@ class Program
             {
                 Console.WriteLine("Found flickering corresponding to 50 Hz frequency in the scene, applying compensated preset:");
                 var Settings50HzPath = new Zivid.NET.Settings(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Settings/" + SanitizedModelName(camera) + "_ConsumerGoodsFast.yml");
+                               + "/Settings/" + SanitizedModelName(camera) + "_ConsumerGoodsFast_50Hz.yml");
                 Console.WriteLine(Settings50HzPath);
             }
             else if (FlickerClassification == "Grid60hz")
             {
                 Console.WriteLine("Found flickering corresponding to 60 Hz frequency in the scene, applying compensated preset:");
                 var Settings60HzPath = new Zivid.NET.Settings(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                               + "/Settings/" + SanitizedModelName(camera) + "_ConsumerGoodsFast.yml");
+                               + "/Settings/" + SanitizedModelName(camera) + "_ConsumerGoodsFast_60Hz.yml");
                 Console.WriteLine(Settings60HzPath);
             }
 
