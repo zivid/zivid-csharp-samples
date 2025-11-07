@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{064AA724-CD81-462F-8A07-26440EA41103}</ProjectGuid>
+    <ProjectGuid>{79BE4F01-8935-49FD-BD8F-551E62FF03CA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CaptureHDRPrintNormals</RootNamespace>
-    <AssemblyName>CaptureHDRPrintNormals</AssemblyName>
+    <RootNamespace>ReadProjectAndCaptureImage</RootNamespace>
+    <AssemblyName>ReadProjectAndCaptureImage</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -26,7 +26,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CaptureHDRPrintNormals.cs" />
+    <Compile Include="ReadProjectAndCaptureImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

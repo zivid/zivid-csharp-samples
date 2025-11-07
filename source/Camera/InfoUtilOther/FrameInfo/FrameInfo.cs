@@ -46,6 +46,9 @@ class Program
 
                 Console.WriteLine("Capture time:");
                 Console.WriteLine(frameInfo.Metrics.CaptureTime.Milliseconds + " ms");
+
+                Console.WriteLine("Thermal throttling time:");
+                Console.WriteLine(frameInfo.Metrics.ThrottlingTime.Milliseconds + " ms");
             }
         }
         catch (Exception ex)

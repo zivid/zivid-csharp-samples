@@ -55,14 +55,14 @@ class Program
                 Console.WriteLine("Detecting calibration board");
                 var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(loadedFrame);
 
-                var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
+                var input = new Zivid.NET.Calibration.InfieldCorrectionInput(detectionResult);
                 if (!input.Valid)
                 {
                     throw new Exception("Capture not valid for infield verification! Feedback: " + input.StatusDescription());
                 }
 
                 Console.WriteLine("Successful measurement at " + detectionResult.Centroid().ToString());
-                var verification = Zivid.NET.Experimental.Calibration.Calibrator.VerifyCamera(input);
+                var verification = Zivid.NET.Calibration.Calibrator.VerifyCamera(input);
                 Console.WriteLine("Estimated dimension trueness error at measured position: " + (verification.LocalDimensionTrueness * 100).ToString("0.00") + "%");
             }
         }

@@ -30,7 +30,13 @@ class Program
 
             Console.WriteLine("\nDifference between fixed intrinsics and estimated intrinsics for different apertures and temperatures:");
 
-            foreach (var aperture in new double[] { 5.66, 4.00, 2.83 })
+            var apertures = new double[] { 5.66, 4.00, 2.83 };
+            if (camera.Info.Model == Zivid.NET.CameraInfo.ModelOption.Zivid3XL250)
+            {
+                apertures = new double[] { 3.00, 3.00, 3.00 };
+            }
+
+            foreach (var aperture in apertures)
             {
                 var settings = new Zivid.NET.Settings
                 {
@@ -145,6 +151,7 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
                 {
 
                     settingsSubsampled.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;

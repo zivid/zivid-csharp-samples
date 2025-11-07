@@ -22,9 +22,9 @@ class Program
             var camera = zivid.ConnectCamera();
 
             // For convenience, print the timestamp of the latest correction
-            if (Zivid.NET.Experimental.Calibration.Calibrator.HasCameraCorrection(camera))
+            if (Zivid.NET.Calibration.Calibrator.HasCameraCorrection(camera))
             {
-                var timestamp = Zivid.NET.Experimental.Calibration.Calibrator.CameraCorrectionTimestamp(camera);
+                var timestamp = Zivid.NET.Calibration.Calibrator.CameraCorrectionTimestamp(camera);
                 Console.WriteLine("Timestamp of curent camera correction: " + timestamp.ToString());
             }
             else
@@ -41,7 +41,7 @@ class Program
             }
 
             // Prepare data and check that it is appropriate for infield verification
-            var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
+            var input = new Zivid.NET.Calibration.InfieldCorrectionInput(detectionResult);
             if (!input.Valid)
             {
                 throw new Exception("Capture not valid for infield verification! Feedback: " + input.StatusDescription());
@@ -49,7 +49,7 @@ class Program
 
             // Show results
             Console.WriteLine("Successful measurement at " + detectionResult.Centroid().ToString());
-            var verification = Zivid.NET.Experimental.Calibration.Calibrator.VerifyCamera(input);
+            var verification = Zivid.NET.Calibration.Calibrator.VerifyCamera(input);
             Console.WriteLine("Estimated dimenstion trueness error at measured position: " + (verification.LocalDimensionTrueness * 100).ToString("0.00") + "%");
         }
         catch (Exception ex)

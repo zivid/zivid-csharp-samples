@@ -1,6 +1,6 @@
 # C\# samples
 
-This repository contains csharp code samples for Zivid SDK v2.16.0. For
+This repository contains csharp code samples for Zivid SDK v2.17.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying
 releases](https://github.com/zivid/zivid-csharp-samples/tree/master/../../releases).
@@ -48,16 +48,13 @@ from the camera can be used.
           - [CaptureWithSettingsFromYML](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs) - Capture images and point clouds, with and without color,
             from the Zivid camera with settings from YML file.
       - **Advanced**
+          - [CaptureAndPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureAndPrintNormals/CaptureAndPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
+            subset.
           - [CaptureHalconViaGenICam](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaGenICam/CaptureHalconViaGenICam.cs) - Capture and save a point cloud, with colors, using GenICam
             interface and Halcon C++ SDK.
           - [CaptureHalconViaZivid](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaZivid/CaptureHalconViaZivid.cs) - Capture a point cloud, with colors, using Zivid SDK,
             transform it to a Halcon point cloud and save it using
             Halcon C++ SDK.
-          - [CaptureHDRLoop](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHDRLoop/CaptureHDRLoop.cs) - Cover the same dynamic range in a scene with different
-            acquisition settings to optimize for quality, speed, or to
-            find a compromise.
-          - [CaptureHDRPrintNormals](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs) - Capture Zivid point clouds, compute normals and print a
-            subset.
       - **InfoUtilOther**
           - [AutomaticNetworkConfigurationForCameras](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/AutomaticNetworkConfigurationForCameras/AutomaticNetworkConfigurationForCameras.cs) - \* Automatically configure the IP addresses of connected
             cameras to match the network of the user's PC.
@@ -91,8 +88,6 @@ from the camera can be used.
               - [CaptureVis3D](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/CaptureVis3D/CaptureVis3D.cs) - Capture point clouds, with color, from the Zivid
                 camera, and visualize them.
               - [ProjectImageStartAndStop](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/ProjectImageStartAndStop/ProjectImageStartAndStop.cs) - Start the Image Projection and Stop it.
-              - [ReadAndProjectImage](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/Visualization/ReadAndProjectImage/ReadAndProjectImage.cs) - Read a 2D image from file and project it using the
-                camera projector.
           - **FileFormats**
               - [ReadIterateZDF](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs) - Read point cloud data from a ZDF file, iterate through
                 it, and extract individual points.
@@ -102,6 +97,8 @@ from the camera can be used.
           - [HandEyeCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/HandEyeCalibration/HandEyeCalibration/HandEyeCalibration.cs) - Perform Hand-Eye calibration.
           - [MultiCameraCalibration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/MultiCameraCalibration/MultiCameraCalibration.cs) - Use captures of a calibration object to generate
             transformation matrices to a single coordinate frame.
+          - [ReadProjectAndCaptureImage](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ReadProjectAndCaptureImage/ReadProjectAndCaptureImage.cs) - Read a 2D image from file and project it using the camera
+            projector.
           - [ROIBoxViaArucoMarker](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ROIBoxViaArucoMarker/ROIBoxViaArucoMarker.cs) - Filter the point cloud based on a ROI box given relative
             to the ArUco marker on a Zivid Calibration Board.
           - [ROIBoxViaCheckerboard](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ROIBoxViaCheckerboard/ROIBoxViaCheckerboard.cs) - Filter the point cloud based on a ROI box given relative

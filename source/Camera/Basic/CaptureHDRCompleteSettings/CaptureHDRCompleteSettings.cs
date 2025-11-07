@@ -36,6 +36,11 @@ class Program
                 {
                     Color = Zivid.NET.Settings2D.SamplingGroup.ColorOption.Rgb,
                     Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.All,
+                    Interval =
+                    {
+                        Enabled = false,
+                        Duration = Duration.FromMicroseconds(10000),
+                    },
                 },
                 Processing =
                 {
@@ -54,7 +59,7 @@ class Program
             };
             var settings = new Zivid.NET.Settings()
             {
-                Engine = Zivid.NET.Settings.EngineOption.Phase,
+                Engine = Zivid.NET.Settings.EngineOption.Stripe,
 
                 RegionOfInterest =
                 {
@@ -120,12 +125,10 @@ class Program
             SetSamplingPixel(ref settings, camera);
             Console.WriteLine(settings);
 
-            Console.WriteLine("Configuring base acquisition with settings same for all HDR acquisitions:");
+            Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
             var baseAcquisition = new Zivid.NET.Settings.Acquisition { };
             Console.WriteLine(baseAcquisition);
             var baseAcquisition2D = new Zivid.NET.Settings2D.Acquisition { };
-
-            Console.WriteLine("Configuring acquisition settings different for all HDR acquisitions:");
             Tuple<double[], Duration[], double[], double[]> exposureValues = GetExposureValues(camera);
             double[] aperture = exposureValues.Item1;
             Duration[] exposureTime = exposureValues.Item2;
@@ -147,15 +150,8 @@ class Program
                 });
                 settings.Acquisitions.Add(acquisitionSettings);
             }
-            var acquisitionSettings2D = baseAcquisition2D.CopyWith(s =>
-            {
-                s.Aperture = 2.83;
-                s.ExposureTime = Duration.FromMicroseconds(1000);
-                s.Gain = 1.0;
-                s.Brightness = 1.8;
-            });
-            settings.Color.Acquisitions.Add(acquisitionSettings2D);
-
+            var aquisitionSettings2D = MakeSettings2D(camera);
+            settings.Color.Acquisitions = aquisitionSettings2D.Acquisitions;
             Console.WriteLine("Capturing frame (HDR)");
             using (var frame = camera.Capture2D3D(settings))
             {
@@ -217,6 +213,14 @@ class Program
                     double[] brightness = { 2.5, 2.5, 2.5 };
                     return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
                 }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
+                {
+                    double[] aperture = { 3.00, 3.00 };
+                    Duration[] exposureTime = { Duration.FromMicroseconds(1000), Duration.FromMicroseconds(7000) };
+                    double[] gain = { 1.0, 1.0 };
+                    double[] brightness = { 3.0, 3.0 };
+                    return Tuple.Create<double[], Duration[], double[], double[]>(aperture, exposureTime, gain, brightness);
+                }
             default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
         }
     }
@@ -238,12 +242,89 @@ class Program
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
                 {
-
                     settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
                     break;
                 }
             default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
+        }
+    }
+
+    private static Zivid.NET.Settings2D MakeSettings2D(Zivid.NET.Camera camera)
+    {
+        var model = camera.Info.Model;
+        switch (model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+                return new Zivid.NET.Settings2D
+                {
+                    Acquisitions =
+                    {
+                        new Zivid.NET.Settings2D.Acquisition
+                        {
+                            Brightness = 1.8,
+                            ExposureTime = Duration.FromMicroseconds(20000),
+                            Aperture = 2.38,
+                            Gain = 1.0
+                        }
+                    },
+                };
+
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                return new Zivid.NET.Settings2D
+                {
+                    Acquisitions =
+                    {
+                        new Zivid.NET.Settings2D.Acquisition
+                        {
+                            Brightness = 2.2,
+                            ExposureTime = Duration.FromMicroseconds(20000),
+                            Aperture = 2.59,
+                            Gain = 1.0
+                        }
+                    },
+                };
+
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                return new Zivid.NET.Settings2D
+                {
+                    Acquisitions =
+                    {
+                        new Zivid.NET.Settings2D.Acquisition
+                        {
+                            Brightness = 2.5,
+                            ExposureTime = Duration.FromMicroseconds(20000),
+                            Aperture = 2.83,
+                            Gain = 1.0
+                        }
+                    },
+                };
+
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
+                return new Zivid.NET.Settings2D
+                {
+                    Acquisitions =
+                    {
+                        new Zivid.NET.Settings2D.Acquisition
+                        {
+                            Brightness = 3.0,
+                            ExposureTime = Duration.FromMicroseconds(5000),
+                            Aperture = 3.00,
+                            Gain  = 1.0
+                        }
+                    },
+                };
+
+            default:
+                {
+                    throw new System.InvalidOperationException("Unhandled enum value " + model.ToString());
+                }
         }
     }
 }
