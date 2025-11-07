@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("CaptureHDRPrintNormals")]
+[assembly: AssemblyTitle("CaptureAndPrintNormals")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CaptureHDRPrintNormals")]
+[assembly: AssemblyProduct("CaptureAndPrintNormals")]
 [assembly: AssemblyCopyright("Copyright 2015-2022 (C) Zivid AS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

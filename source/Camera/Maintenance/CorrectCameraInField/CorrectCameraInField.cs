@@ -32,7 +32,7 @@ class Program
             // Calculate infield correction
             Console.WriteLine("Collected " + dataset.Count + " valid measurements.");
             Console.WriteLine("Computing new camera correction...");
-            var correction = Zivid.NET.Experimental.Calibration.Calibrator.ComputeCameraCorrection(dataset);
+            var correction = Zivid.NET.Calibration.Calibrator.ComputeCameraCorrection(dataset);
             var accuracyEstimate = correction.AccuracyEstimate;
             Console.WriteLine("If written to the camera, this correction can be expected to yield a dimension accuracy error of "
                     + (accuracyEstimate.DimensionAccuracy * 100).ToString("0.00") + "% or better in the range of z=["
@@ -43,7 +43,7 @@ class Program
             if (YesNoPrompt("Save to camera?"))
             {
                 Console.WriteLine("Writing camera correction...");
-                Zivid.NET.Experimental.Calibration.Calibrator.WriteCameraCorrection(camera, correction);
+                Zivid.NET.Calibration.Calibrator.WriteCameraCorrection(camera, correction);
                 Console.WriteLine("Success");
             }
 
@@ -73,9 +73,9 @@ class Program
         }
     }
 
-    static List<Zivid.NET.Experimental.Calibration.InfieldCorrectionInput> CollectDataset(Zivid.NET.Camera camera)
+    static List<Zivid.NET.Calibration.InfieldCorrectionInput> CollectDataset(Zivid.NET.Camera camera)
     {
-        var dataset = new List<Zivid.NET.Experimental.Calibration.InfieldCorrectionInput>();
+        var dataset = new List<Zivid.NET.Calibration.InfieldCorrectionInput>();
         Console.WriteLine("Please point the camera at a Zivid infield calibration board.");
 
         const string printLine = "------------------------------------------------------------------------";
@@ -88,7 +88,7 @@ class Program
                 var detectionResult = Zivid.NET.Calibration.Detector.DetectCalibrationBoard(camera);
                 if (detectionResult.Valid())
                 {
-                    var input = new Zivid.NET.Experimental.Calibration.InfieldCorrectionInput(detectionResult);
+                    var input = new Zivid.NET.Calibration.InfieldCorrectionInput(detectionResult);
 
                     if (input.Valid)
                     {

@@ -18,7 +18,7 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Reset infield correction on the camera");
-            Zivid.NET.Experimental.Calibration.Calibrator.ResetCameraCorrection(camera);
+            Zivid.NET.Calibration.Calibrator.ResetCameraCorrection(camera);
         }
         catch (Exception ex)
         {

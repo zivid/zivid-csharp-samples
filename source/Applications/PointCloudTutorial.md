@@ -310,7 +310,7 @@ Some applications require computing
 from the point cloud.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureHDRPrintNormals/CaptureHDRPrintNormals.cs#L35-L36))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Advanced/CaptureAndPrintNormals/CaptureAndPrintNormals.cs#L31-L32))
 
 ``` sourceCode cs
 Console.WriteLine("Computing normals and copying them to CPU memory");

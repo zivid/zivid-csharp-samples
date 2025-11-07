@@ -22,7 +22,7 @@ class Program
             };
             var settings = new Zivid.NET.Settings
             {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition { Aperture = 5.66 } }
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
             };
             settings.Color = settings2D;
 

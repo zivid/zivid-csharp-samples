@@ -1,7 +1,6 @@
 ﻿/*
 Capture Zivid point clouds, compute normals and print a subset.
 
-For scenes with high dynamic range we combine multiple acquisitions to get an HDR point cloud.
 */
 
 using System;
@@ -18,16 +17,13 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = new Zivid.NET.Settings();
-            foreach (var aperture in new double[] { 5.66, 4.00, 2.59 })
+            var settings = new Zivid.NET.Settings
             {
-                Console.WriteLine("Adding acquisition with aperture = " + aperture);
-                var acquisitionSettings = new Zivid.NET.Settings.Acquisition { Aperture = aperture };
-                settings.Acquisitions.Add(acquisitionSettings);
-            }
-            settings.Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } };
+                Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
+                Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
+            };
 
-            Console.WriteLine("Capturing frame (HDR)");
+            Console.WriteLine("Capturing frame");
             using (var frame = camera.Capture2D3D(settings))
             {
                 var pointCloud = frame.PointCloud;

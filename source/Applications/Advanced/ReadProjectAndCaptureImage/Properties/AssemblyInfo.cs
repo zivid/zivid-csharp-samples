@@ -1,17 +1,16 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-
-[assembly: AssemblyTitle("CaptureHDRLoop")]
+[assembly: AssemblyTitle("ReadProjectAndCaptureImage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CaptureHDRLoop")]
-[assembly: AssemblyCopyright("Copyright 2015-2022 (C) Zivid AS")]
+[assembly: AssemblyProduct("ReadProjectAndCaptureImage")]
+[assembly: AssemblyCopyright("Copyright 2015-2023 (C) Zivid AS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("19BF568F-F30F-4C0C-951F-E83375777D0D")]
+[assembly: Guid("79BE4F01-8935-49FD-BD8F-551E62FF03CA")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,7 +28,9 @@ using System.Runtime.InteropServices;
 //      Minor Version
 //      Build Number
 //      Revision
-
+//
+// You can specify all the values or you can default the Build and Revision Numbers
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
