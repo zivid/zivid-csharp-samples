@@ -76,6 +76,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaArucoMarker", "App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseConversions", "Applications\Advanced\HandEyeCalibration\PoseConversions\PoseConversions.csproj", "{69416F6A-75DF-436E-85F2-3881CCBEAA9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchViaLocalPointCloudRegistration", "Applications\Advanced\StitchViaLocalPointCloudRegistration\StitchViaLocalPointCloudRegistration.csproj", "{9AB87321-B692-4F5F-894B-1CE81F374AFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchContinuouslyRotatingObject", "Applications\Advanced\StitchContinuouslyRotatingObject\StitchContinuouslyRotatingObject.csproj", "{EA4A898B-9A41-4357-A638-78587EFCB4DD}"
+EndProject
+Project("{844EFF6C-E988-43D5-813D-3E1B47579DCC}") = "StitchUsingRobotMountedCamera", "Applications\Advanced\StitchUsingRobotMountedCamera\StitchUsingRobotMountedCamera.csproj", "{844EFF6C-E988-43D5-813D-3E1B47579DCC}"
+
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -230,6 +237,18 @@ Global
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Debug|x64.Build.0 = Debug|x64
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Release|x64.ActiveCfg = Release|x64
 		{69416F6A-75DF-436E-85F2-3881CCBEAA9A}.Release|x64.Build.0 = Release|x64
+		{9AB87321-B692-4F5F-894B-1CE81F374AFB}.Debug|x64.ActiveCfg = Debug|x64
+		{9AB87321-B692-4F5F-894B-1CE81F374AFB}.Debug|x64.Build.0 = Debug|x64
+		{9AB87321-B692-4F5F-894B-1CE81F374AFB}.Release|x64.ActiveCfg = Release|x64
+		{9AB87321-B692-4F5F-894B-1CE81F374AFB}.Release|x64.Build.0 = Release|x64
+		{EA4A898B-9A41-4357-A638-78587EFCB4DD}.Debug|x64.ActiveCfg = Debug|x64
+		{EA4A898B-9A41-4357-A638-78587EFCB4DD}.Debug|x64.Build.0 = Debug|x64
+		{EA4A898B-9A41-4357-A638-78587EFCB4DD}.Release|x64.ActiveCfg = Release|x64
+		{EA4A898B-9A41-4357-A638-78587EFCB4DD}.Release|x64.Build.0 = Release|x64
+		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Debug|x64.ActiveCfg = Debug|x64
+		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Debug|x64.Build.0 = Debug|x64
+		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.ActiveCfg = Release|x64
+		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

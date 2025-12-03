@@ -57,7 +57,7 @@ var camera = zivid.ConnectCamera();
 ## Configure
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L39))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L37))
 
 ``` sourceCode cs
 var settings = new Zivid.NET.Settings(settingsFile);

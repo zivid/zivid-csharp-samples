@@ -103,6 +103,14 @@ from the camera can be used.
             to the ArUco marker on a Zivid Calibration Board.
           - [ROIBoxViaCheckerboard](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/ROIBoxViaCheckerboard/ROIBoxViaCheckerboard.cs) - Filter the point cloud based on a ROI box given relative
             to the Zivid Calibration Board.
+          - [StitchContinuouslyRotatingObject](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/StitchContinuouslyRotatingObject/StitchContinuouslyRotatingObject.cs) - Stitch point clouds from a continuously rotating object
+            without pre-alignment using Local Point Cloud Registration
+            and apply Voxel Downsample.
+          - [StitchUsingRobotMountedCamera](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/StitchUsingRobotMountedCamera/StitchUsingRobotMountedCamera.cs) - Stitch multiple point clouds captured with a robot mounted
+            camera.
+          - [StitchViaLocalPointCloudRegistration](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/StitchViaLocalPointCloudRegistration/StitchViaLocalPointCloudRegistration.cs) - Stitch two point clouds using a transformation estimated
+            by Local Point Cloud Registration and apply Voxel
+            Downsample.
           - [TransformPointCloudFromMillimetersToMeters](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/TransformPointCloudFromMillimetersToMeters/TransformPointCloudFromMillimetersToMeters.cs) - Transform point cloud data from millimeters to meters.
           - [TransformPointCloudViaArucoMarker](https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/TransformPointCloudViaArucoMarker/TransformPointCloudViaArucoMarker.cs) - Transform a point cloud from camera to ArUco marker
             coordinate frame by estimating the marker's pose from the

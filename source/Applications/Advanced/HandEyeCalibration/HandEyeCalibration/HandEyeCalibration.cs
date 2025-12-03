@@ -11,16 +11,30 @@ using Duration = Zivid.NET.Duration;
 
 class Program
 {
-    static int Main()
+    static int Main(string[] args)
     {
         try
         {
+            var userOptions = ParseOptions(args);
+            if (userOptions.ShowHelp)
+            {
+                ShowHelp();
+                return 0;
+            }
+
             var zivid = new Zivid.NET.Application();
 
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            var handEyeInput = readHandEyeInputs(camera);
+            var settingsPath = userOptions.SettingsPath;
+            if (string.IsNullOrEmpty(settingsPath))
+            {
+                settingsPath = PresetPath(camera);
+            }
+            var settings = new Zivid.NET.Settings(settingsPath);
+
+            var handEyeInput = readHandEyeInputs(camera, settings);
 
             var calibrationResult = performCalibration(handEyeInput);
 
@@ -46,7 +60,26 @@ class Program
         return 0;
     }
 
-    static List<HandEyeInput> readHandEyeInputs(Zivid.NET.Camera camera)
+    static (string SettingsPath, bool ShowHelp) ParseOptions(string[] args)
+    {
+        string settingsPath = "";
+        bool showHelp = false;
+        foreach (var arg in args)
+        {
+            if (arg.StartsWith("--settings-path="))
+            {
+                settingsPath = arg.Substring("--settings-path=".Length);
+            }
+            else if (arg.StartsWith("-h") || arg.StartsWith("--help"))
+            {
+                showHelp = true;
+            }
+        }
+
+        return (settingsPath, showHelp);
+    }
+
+    static List<HandEyeInput> readHandEyeInputs(Zivid.NET.Camera camera, Zivid.NET.Settings settings)
     {
         var handEyeInput = new List<HandEyeInput>();
         var currentPoseId = 0U;
@@ -79,7 +112,7 @@ class Program
                 case CommandType.AddPose:
                     try
                     {
-                        HandleAddPose(ref currentPoseId, ref handEyeInput, camera, calibrationObject);
+                        HandleAddPose(ref currentPoseId, ref handEyeInput, camera, calibrationObject, settings);
                     }
                     catch (Exception ex)
                     {
@@ -96,14 +129,14 @@ class Program
         return handEyeInput;
     }
 
-    public static void HandleAddPose(ref uint currentPoseId, ref List<HandEyeInput> handEyeInput, Zivid.NET.Camera camera, string calibrationObject)
+    public static void HandleAddPose(ref uint currentPoseId, ref List<HandEyeInput> handEyeInput, Zivid.NET.Camera camera, string calibrationObject, Zivid.NET.Settings settings)
     {
         var robotPose = Interaction.EnterRobotPose(currentPoseId);
 
         Console.Write("Detecting calibration object in point cloud");
         if (calibrationObject.Equals("c", StringComparison.CurrentCultureIgnoreCase))
         {
-            using (var frame = Zivid.NET.Calibration.Detector.CaptureCalibrationBoard(camera))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 var detectionResult = Detector.DetectCalibrationBoard(frame);
 
@@ -121,7 +154,7 @@ class Program
         }
         else if (calibrationObject.Equals("m", StringComparison.CurrentCultureIgnoreCase))
         {
-            using (var frame = AssistedCapture(camera))
+            using (var frame = camera.Capture2D3D(settings))
             {
                 var markerDictionary = Zivid.NET.MarkerDictionary.Aruco4x4_50;
                 var markerIds = new List<int> { 1, 2, 3 };
@@ -141,6 +174,54 @@ class Program
                 }
             }
         }
+    }
+
+    static string PresetPath(Zivid.NET.Camera camera)
+    {
+        var presetsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            + "/Zivid/Settings/";
+
+        switch (camera.Info.Model)
+        {
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+                {
+                    return presetsPath + "Zivid_Two_M70_ManufacturingSpecular.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+                {
+                    return presetsPath + "Zivid_Two_L100_ManufacturingSpecular.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M130_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M60_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                {
+                    return presetsPath + "Zivid_Two_Plus_L110_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR130_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR60_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+                    return presetsPath + "Zivid_Two_Plus_LR110_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
+                {
+                    return presetsPath + "Zivid_Three_XL250_DepalletizationQuality.yml";
+                }
+            default: throw new System.InvalidOperationException("Unhandled camera model: " + camera.Info.Model.ToString());
+        }
+        throw new System.InvalidOperationException("Invalid camera model");
     }
 
     static Zivid.NET.Calibration.HandEyeOutput performCalibration(List<HandEyeInput> handEyeInput)
@@ -164,16 +245,13 @@ class Program
             Console.WriteLine("Entered unknown method");
         }
     }
-    public static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
+
+    static void ShowHelp()
     {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-        {
-            AmbientLightFrequency =
-                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
-            MaxCaptureTime = Duration.FromMilliseconds(800)
-        };
-        var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
-        return camera.Capture2D3D(settings);
+        Console.WriteLine("Usage: HandEyeCalibration.exe [options]");
+        Console.WriteLine("Options:");
+        Console.WriteLine("  --settings-path=<path>   Path to the camera settings YML file (default: based on camera model)");
+        Console.WriteLine("  -h, --help               Show this help message");
     }
 }
 

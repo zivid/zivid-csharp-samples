@@ -4,7 +4,7 @@ Use captures of a calibration object to generate transformation matrices to a si
 
 using System;
 using System.Collections.Generic;
-
+using System.Net;
 using Zivid.NET.Calibration;
 using Duration = Zivid.NET.Duration;
 
@@ -26,7 +26,7 @@ class Program
             {
                 var serialNumber = camera.Info.SerialNumber.ToString();
                 Console.WriteLine("Capturing frame with camera: {0}", serialNumber);
-                using (var frame = AssistedCapture(camera))
+                using (var frame = Detector.CaptureCalibrationBoard(camera))
                 {
                     Console.WriteLine("Detecting checkerboard in point cloud");
                     var detectionResult = Detector.DetectCalibrationBoard(frame);
@@ -71,18 +71,6 @@ class Program
         return 0;
     }
 
-    static Zivid.NET.Frame AssistedCapture(Zivid.NET.Camera camera)
-    {
-        var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters
-        {
-            AmbientLightFrequency =
-                Zivid.NET.CaptureAssistant.SuggestSettingsParameters.AmbientLightFrequencyOption.none,
-            MaxCaptureTime = Duration.FromMilliseconds(800)
-        };
-        var settings = Zivid.NET.CaptureAssistant.Assistant.SuggestSettings(camera, suggestSettingsParameters);
-        return camera.Capture2D3D(settings);
-    }
-
     static List<Zivid.NET.Camera> connectToAllAvailableCameras(IList<Zivid.NET.Camera> cameras)
     {
         var connectedCameras = new List<Zivid.NET.Camera>();
@@ -101,6 +89,77 @@ class Program
             }
         }
         return connectedCameras;
+    }
+
+    public struct Detection
+    {
+        public string serialNumber { get; }
+        public DetectionResult detectionResult { get; }
+
+        public Detection(string serial, DetectionResult result)
+        {
+            serialNumber = serial;
+            detectionResult = result;
+        }
+    }
+
+    static List<Detection> GetDetections(IList<Zivid.NET.Camera> connectedCameras)
+    {
+        var detectionList = new List<Detection>();
+        foreach (var camera in connectedCameras)
+        {
+            var serial = camera.Info.SerialNumber.ToString();
+            Console.WriteLine("Capturing frame with camera: {0}", serial);
+
+            using (var frame = Detector.CaptureCalibrationBoard(camera))
+            {
+                Console.WriteLine("Detecting checkerboard in point cloud");
+                var detectionResult = Detector.DetectCalibrationBoard(frame);
+                if (detectionResult.Valid())
+                {
+                    var currenDetection = new Detection(serial, detectionResult);
+                    detectionList.Add(currenDetection);
+                }
+                else
+                {
+                    throw new System.InvalidOperationException(
+                        "Could not detect checkerboard. Please ensure it is visible from all cameras. " + detectionResult.StatusDescription());
+                }
+            }
+        }
+
+        return detectionList;
+    }
+
+    static void RunMultiCameraCalibration(List<Detection> detectionsList, string transformationMatricesSavePath)
+    {
+        var detectionResults = new List<DetectionResult>();
+        foreach (var detection in detectionsList)
+        {
+            detectionResults.Add(detection.detectionResult);
+        }
+
+        var results = Calibrator.CalibrateMultiCamera(detectionResults);
+
+        if (results)
+        {
+            Console.WriteLine("Multi-camera calibration OK.");
+            var transforms = results.Transforms();
+            var residuals = results.Residuals();
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                new Zivid.NET.Matrix4x4(transforms[i]).Save(transformationMatricesSavePath + "/" + detectionsList[i].serialNumber + ".yaml");
+
+                Console.WriteLine("Pose of camera {0} in first camera {1} frame", detectionsList[i].serialNumber, detectionsList[0].serialNumber);
+                PrintMatrix(transforms[i]);
+
+                Console.WriteLine(residuals[i].ToString());
+            }
+        }
+        else
+        {
+            Console.WriteLine("Multi-camera calibration FAILED.");
+        }
     }
 
     static void PrintMatrix(float[,] matrix)
