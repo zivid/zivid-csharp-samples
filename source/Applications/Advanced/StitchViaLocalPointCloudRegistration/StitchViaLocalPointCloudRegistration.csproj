@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAEF093E-9EEC-4CE5-87FE-D6FDB45CE700}</ProjectGuid>
+    <ProjectGuid>{9AB87321-B692-4F5F-894B-1CE81F374AFB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HandEyeCalibration</RootNamespace>
-    <AssemblyName>HandEyeCalibration</AssemblyName>
+    <RootNamespace>StitchViaLocalPointCloudRegistration</RootNamespace>
+    <AssemblyName>StitchViaLocalPointCloudRegistration</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,16 +27,13 @@
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>..\..\..\..\build\$(Configuration)\$(Platform)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.ValueTuple">
-      <HintPath>..\..\..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,9 +48,15 @@
     <Reference Include="ZividCoreNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
       <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividCoreNET.dll</HintPath>
     </Reference>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin\ZividVisualizationNET.dll</HintPath>
+    </Reference>
+    <Reference Include="ZividVisualizationNET" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+      <HintPath>$(ZIVID_INSTALL_FOLDER)\bin_debug\ZividVisualizationNET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandEyeCalibration.cs" />
+    <Compile Include="StitchViaLocalPointCloudRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

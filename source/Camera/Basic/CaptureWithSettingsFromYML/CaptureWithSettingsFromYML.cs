@@ -16,26 +16,24 @@ class Program
     {
         try
         {
-            if (Array.Exists(args, arg => arg == "-h" || arg == "--help"))
+            var userOptions = ParseOptions(args);
+            if (userOptions.ShowHelp)
             {
                 ShowHelp();
                 return 0;
             }
 
-            var userOptions = ParseOptions(args);
-
             var zivid = new Zivid.NET.Application();
             Console.WriteLine("Connecting to camera");
             var camera = zivid.ConnectCamera();
 
-            Console.WriteLine("Loading settings from file");
+            string settingsFile = userOptions.SettingsPath;
             if (string.IsNullOrEmpty(userOptions.SettingsPath))
             {
-                userOptions.SettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-                    + "/Zivid/Settings/" + SettingsFolder(camera) + "/Settings01.yml";
+                settingsFile = PresetPath(camera);
             }
 
-            string settingsFile = userOptions.SettingsPath;
+            Console.WriteLine("Loading settings from file");
             var settings = new Zivid.NET.Settings(settingsFile);
 
             Console.WriteLine("Capturing 2D frame");
@@ -114,10 +112,11 @@ class Program
         return 0;
     }
 
-    static (string SettingsPath, bool LinearRgb) ParseOptions(string[] args)
+    static (string SettingsPath, bool LinearRgb, bool ShowHelp) ParseOptions(string[] args)
     {
         string settingsPath = "";
         bool linearRgb = false;
+        bool showHelp = false;
 
         foreach (var arg in args)
         {
@@ -129,27 +128,64 @@ class Program
             {
                 linearRgb = true;
             }
+            else if (arg.StartsWith("-h") || arg.StartsWith("--help"))
+            {
+                showHelp = true;
+            }
         }
 
-        return (settingsPath, linearRgb);
+        return (settingsPath, linearRgb, showHelp);
     }
 
-    static string SettingsFolder(Zivid.NET.Camera camera)
+
+    static string PresetPath(Zivid.NET.Camera camera)
     {
-        var model = camera.Info.Model;
-        switch (model)
+        var presetsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            + "/Zivid/Settings/";
+
+        switch (camera.Info.Model)
         {
-            case Zivid.NET.CameraInfo.ModelOption.ZividTwo: return "zivid2";
-            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100: return "zivid2";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130: return "zivid2Plus";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60: return "zivid2Plus";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110: return "zivid2Plus";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130: return "zivid2Plus/R";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60: return "zivid2Plus/R";
-            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110: return "zivid2Plus/R";
-            default: throw new InvalidOperationException("Unhandled enum value " + model.ToString());
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+                {
+                    return presetsPath + "Zivid_Two_M70_ManufacturingSpecular.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
+                {
+                    return presetsPath + "Zivid_Two_L100_ManufacturingSpecular.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M130_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M60_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
+                {
+                    return presetsPath + "Zivid_Two_Plus_L110_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR130_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR60_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
+                {
+                    return presetsPath + "Zivid_Two_Plus_LR110_ConsumerGoodsQuality.yml";
+                }
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
+                {
+                    return presetsPath + "Zivid_Three_XL250_DepalletizationQuality.yml";
+                }
+            default: throw new System.InvalidOperationException("Unhandled camera model: " + camera.Info.Model.ToString());
         }
+        throw new System.InvalidOperationException("Invalid camera model");
     }
+
 
     static void ShowHelp()
     {

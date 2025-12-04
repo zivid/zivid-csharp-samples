@@ -354,7 +354,7 @@ If we only want to capture 3D, the points cloud without color, we can do
 so via the `capture3D` API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L86))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L84))
 
 ``` sourceCode cs
 using (var frame3D = camera.Capture3D(settings))
@@ -366,7 +366,7 @@ If we only want to capture a 2D image, which is faster than 3D, we can
 do so via the `capture2D` API.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L42))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L40))
 
 ``` sourceCode cs
 using (var frame2D = camera.Capture2D(settings))
@@ -430,7 +430,7 @@ the function name then the returned image will be in the sRGB color
 space
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L49))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L47))
 
 ``` sourceCode cs
 var imageRGBA = frame2D.ImageRGBA();
@@ -438,7 +438,7 @@ var imageRGBA = frame2D.ImageRGBA();
 ```
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L67))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L65))
 
 ``` sourceCode cs
 var imageSRGB = frame2D.ImageRGBA_SRGB();
@@ -447,7 +447,7 @@ var imageSRGB = frame2D.ImageRGBA_SRGB();
 Then, we can save the 2D image in linear RGB or sRGB color space.
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L50-L52))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L48-L50))
 
 ``` sourceCode cs
 var imageFile = "ImageRGBA_linear.png";
@@ -457,7 +457,7 @@ imageRGBA.Save(imageFile);
 ```
 
 ([go to
-source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L68-L70))
+source](https://github.com/zivid/zivid-csharp-samples/tree/master//source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs#L66-L68))
 
 ``` sourceCode cs
 var imageFile = "ImageRGBA_sRGB.png";
