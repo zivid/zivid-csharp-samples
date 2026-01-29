@@ -3,6 +3,9 @@ Capture and save a point cloud, with colors, using GenICam interface and Halcon 
 */
 
 using System;
+using System.IO;
+using HalconDotNet;
+using Zivid.NET;
 
 class Program
 {
@@ -34,13 +37,12 @@ class Program
             Console.WriteLine("Configuring 3D-settings");
             HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "create_objectmodel3d", "enable");
             HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "add_objectmodel3d_overlay_attrib", "enable");
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "AcquisitionMode", "SingleFrame");
 
-            Console.WriteLine("Configuring camera settings");
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Aperture", 2.83);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "ExposureTime", 5000);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Gain", 1);
-            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "Brightness", 1.8);
+            HalconDotNet.HTuple modelTuple;
+            HalconDotNet.HOperatorSet.GetFramegrabberParam(framegrabber, "CameraInfoModel", out modelTuple);
+            var settingFile = PresetPath(modelTuple.ToString());
+
+            HalconDotNet.HOperatorSet.SetFramegrabberParam(framegrabber, "LoadSettingsFromFile", settingFile);
 
             Console.WriteLine("Capturing frame");
             var frame = new HalconDotNet.HObject();
@@ -80,6 +82,24 @@ class Program
         return 0;
     }
 
+    private static string PresetPath(string model)
+    {
+        var presetsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+                    + "/Zivid/Settings/";
+
+        if (model.Contains("zividTwoL100")) return presetsPath + "Zivid_Two_L100_ManufacturingSpecular.yml";
+        if (model.Contains("zividTwo")) return presetsPath + "Zivid_Two_M70_ManufacturingSpecular.yml";
+        if (model.Contains("zivid2PlusM130")) return presetsPath + "Zivid_Two_Plus_M130_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid2PlusM60")) return presetsPath + "Zivid_Two_Plus_M60_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid2PlusL110")) return presetsPath + "Zivid_Two_Plus_L110_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid2PlusMR130")) return presetsPath + "Zivid_Two_Plus_MR130_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid2PlusMR60")) return presetsPath + "Zivid_Two_Plus_MR60_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid2PlusLR110")) return presetsPath + "Zivid_Two_Plus_LR110_ConsumerGoodsQuality.yml";
+        if (model.Contains("zivid3XL250")) return presetsPath + "Zivid_Three_XL250_DepalletizationQuality.yml";
+        if (model.Contains("zividOnePlus")) throw new NotSupportedException($"Unsupported Zivid One+ model: {model}");
+        throw new ArgumentException($"Invalid camera model: {model}");
+    }
+
     private static void SaveHalconPointCloud(HalconDotNet.HTuple model, string fileName)
     {
         HalconDotNet.HOperatorSet.WriteObjectModel3d(model, "ply", fileName, "invert_normals", "false");
@@ -101,8 +121,8 @@ class Program
         var objectBlue = new HalconDotNet.HObject();
 
         HalconDotNet.HOperatorSet.AccessChannel(RGB, out objectRed, 1);
-        HalconDotNet.HOperatorSet.AccessChannel(RGB, out objectGreen, 1);
-        HalconDotNet.HOperatorSet.AccessChannel(RGB, out objectBlue, 1);
+        HalconDotNet.HOperatorSet.AccessChannel(RGB, out objectGreen, 2);
+        HalconDotNet.HOperatorSet.AccessChannel(RGB, out objectBlue, 3);
 
         var tupleRed = new HalconDotNet.HTuple();
         var tupleGreen = new HalconDotNet.HTuple();

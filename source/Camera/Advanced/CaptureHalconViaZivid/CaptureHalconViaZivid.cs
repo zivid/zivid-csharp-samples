@@ -17,7 +17,8 @@ class Program
             var camera = zivid.ConnectCamera();
 
             Console.WriteLine("Configuring settings");
-            var settings = Get2DAnd3DSettings(camera);
+            var settingsPath = PresetPath(camera);
+            var settings = new Zivid.NET.Settings(settingsPath);
 
             Console.WriteLine("Capturing frame");
             using (var frame = camera.Capture2D3D(settings))
@@ -38,43 +39,52 @@ class Program
         return 0;
     }
 
-    private static Zivid.NET.Settings Get2DAnd3DSettings(Zivid.NET.Camera camera)
+    static string PresetPath(Zivid.NET.Camera camera)
     {
-        var settings = new Zivid.NET.Settings
-        {
-            Acquisitions = { new Zivid.NET.Settings.Acquisition { } },
-            Color = new Zivid.NET.Settings2D { Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } } }
-        };
+        var presetsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            + "/Zivid/Settings/";
 
-        var model = camera.Info.Model;
-        switch (model)
+        switch (camera.Info.Model)
         {
             case Zivid.NET.CameraInfo.ModelOption.ZividTwo:
+                {
+                    return presetsPath + "Zivid_Two_M70_ManufacturingSpecular.yml";
+                }
             case Zivid.NET.CameraInfo.ModelOption.ZividTwoL100:
                 {
-                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.All;
-                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.All;
-                    break;
+                    return presetsPath + "Zivid_Two_L100_ManufacturingSpecular.yml";
                 }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M130_ConsumerGoodsQuality.yml";
+                }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusM60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_M60_ConsumerGoodsQuality.yml";
+                }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusL110:
                 {
-                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.BlueSubsample2x2;
-                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.BlueSubsample2x2;
-                    break;
+                    return presetsPath + "Zivid_Two_Plus_L110_ConsumerGoodsQuality.yml";
                 }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR130:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR130_ConsumerGoodsQuality.yml";
+                }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusMR60:
+                {
+                    return presetsPath + "Zivid_Two_Plus_MR60_ConsumerGoodsQuality.yml";
+                }
             case Zivid.NET.CameraInfo.ModelOption.Zivid2PlusLR110:
                 {
-                    settings.Sampling.Pixel = Zivid.NET.Settings.SamplingGroup.PixelOption.By2x2;
-                    settings.Color.Sampling.Pixel = Zivid.NET.Settings2D.SamplingGroup.PixelOption.By2x2;
-                    break;
+                    return presetsPath + "Zivid_Two_Plus_LR110_ConsumerGoodsQuality.yml";
                 }
-            default: throw new System.InvalidOperationException("Unhandled enum value " + camera.Info.Model.ToString());
+            case Zivid.NET.CameraInfo.ModelOption.Zivid3XL250:
+                {
+                    return presetsPath + "Zivid_Three_XL250_DepalletizationQuality.yml";
+                }
+            default: throw new System.InvalidOperationException("Unhandled camera model: " + camera.Info.Model.ToString());
         }
-        return settings;
+        throw new System.InvalidOperationException("Invalid camera model");
     }
 
     private static HalconDotNet.HTuple arrayToHalconDouble(params double[] arr)
