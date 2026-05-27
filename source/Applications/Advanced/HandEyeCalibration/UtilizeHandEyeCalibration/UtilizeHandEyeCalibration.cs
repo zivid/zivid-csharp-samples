@@ -65,7 +65,7 @@ class Program
                             + eyeToHandTransformFile);
 
                         // Converting to Math.NET matrices for easier computation
-                        transformBaseToCameraMath = zividToMathDotNet(eyeToHandTransform);
+                        transformBaseToCameraMath = ZividToMathDotNet(eyeToHandTransform);
 
                         loopContinue = false;
                         break;
@@ -94,8 +94,8 @@ class Program
                             + robotTransformFile);
 
                         // Converting to Math.NET matrices for easier computation
-                        Matrix<float> transformEndEffectorToCamera = zividToMathDotNet(eyeInHandTransform);
-                        Matrix<float> transformBaseToEndEffector = zividToMathDotNet(robotTransform);
+                        Matrix<float> transformEndEffectorToCamera = ZividToMathDotNet(eyeInHandTransform);
+                        Matrix<float> transformBaseToEndEffector = ZividToMathDotNet(robotTransform);
 
                         Console.WriteLine("Computing camera pose in robot base reference frame");
                         transformBaseToCameraMath = transformBaseToEndEffector * transformEndEffectorToCamera;
@@ -148,7 +148,7 @@ class Program
 
                             Console.WriteLine("Transforming point cloud");
 
-                            var transformBaseToCamera = mathDotNetToZivid(transformBaseToCameraMath);
+                            var transformBaseToCamera = MathDotNetToZivid(transformBaseToCameraMath);
                             pointCloud.Transform(transformBaseToCamera);
 
                             var saveFile = "ZividGemTransformed.zdf";
@@ -171,13 +171,13 @@ class Program
         return 0;
     }
 
-    static Matrix<float> zividToMathDotNet(Zivid.NET.Matrix4x4 zividMatrix)
+    static Matrix<float> ZividToMathDotNet(Zivid.NET.Matrix4x4 zividMatrix)
     {
         var mathNetMatrix = CreateMatrix.DenseOfArray(zividMatrix.ToArray());
         return mathNetMatrix;
     }
 
-    static Zivid.NET.Matrix4x4 mathDotNetToZivid(Matrix<float> mathNetMatrix)
+    static Zivid.NET.Matrix4x4 MathDotNetToZivid(Matrix<float> mathNetMatrix)
     {
         var zividMatrix = new Zivid.NET.Matrix4x4(mathNetMatrix.ToArray());
         return zividMatrix;
