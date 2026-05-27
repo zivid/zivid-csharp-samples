@@ -34,9 +34,9 @@ class Program
             }
             var settings = new Zivid.NET.Settings(settingsPath);
 
-            var handEyeInput = readHandEyeInputs(camera, settings);
+            var handEyeInput = ReadHandEyeInputs(camera, settings);
 
-            var calibrationResult = performCalibration(handEyeInput);
+            var calibrationResult = PerformCalibration(handEyeInput);
 
             Console.WriteLine("Zivid primarily operates with a (4x4) transformation matrix. To convert");
             Console.WriteLine("to axis-angle, rotation vector, roll-pitch-yaw, or quaternion, check out");
@@ -79,7 +79,7 @@ class Program
         return (settingsPath, showHelp);
     }
 
-    static List<HandEyeInput> readHandEyeInputs(Zivid.NET.Camera camera, Zivid.NET.Settings settings)
+    static List<HandEyeInput> ReadHandEyeInputs(Zivid.NET.Camera camera, Zivid.NET.Settings settings)
     {
         var handEyeInput = new List<HandEyeInput>();
         var currentPoseId = 0U;
@@ -224,7 +224,7 @@ class Program
         throw new System.InvalidOperationException("Invalid camera model");
     }
 
-    static Zivid.NET.Calibration.HandEyeOutput performCalibration(List<HandEyeInput> handEyeInput)
+    static Zivid.NET.Calibration.HandEyeOutput PerformCalibration(List<HandEyeInput> handEyeInput)
     {
         while (true)
         {

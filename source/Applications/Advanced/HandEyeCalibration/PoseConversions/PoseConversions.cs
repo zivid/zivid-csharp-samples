@@ -1,4 +1,5 @@
-﻿/*
+﻿// DOCTAG-START-ALL-1
+/*
 Convert to/from Transformation Matrix (Rotation Matrix + Translation Vector)
 
 Zivid primarily operate with a (4x4) transformation matrix. This example implements functions to convert to and from:
@@ -20,47 +21,47 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            printHeader("This example shows conversions to/from Transformation Matrix");
+            PrintHeader("This example shows conversions to/from Transformation Matrix");
 
             var transformationMatrixZivid = new Zivid.NET.Matrix4x4(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/RobotTransform.yaml");
-            var transformationMatrix = zividToMathDotNet(transformationMatrixZivid);
-            Console.WriteLine(matrixToString(transformationMatrix));
+            var transformationMatrix = ZividToMathDotNet(transformationMatrixZivid);
+            Console.WriteLine(MatrixToString(transformationMatrix));
 
             // Extract Rotation Matrix and Translation Vector from Transformation Matrix
             var rotationMatrix = transformationMatrix.SubMatrix(0, 3, 0, 3);
             var translationVector = transformationMatrix.SubMatrix(0, 3, 3, 1);
-            Console.WriteLine("RotationMatrix:\n" + matrixToString(rotationMatrix));
-            Console.WriteLine("TranslationVector:\n" + matrixToString(translationVector.Transpose()));
+            Console.WriteLine("RotationMatrix:\n" + MatrixToString(rotationMatrix));
+            Console.WriteLine("TranslationVector:\n" + MatrixToString(translationVector.Transpose()));
 
             /*
              * Convert from Rotation Matrix (Zivid) to other representations of orientation (Robot)
              */
-            printHeader("Convert from Zivid (Rotation Matrix) to Robot");
-            var axisAngle = rotationMatrixToAxisAngle(rotationMatrix);
-            Console.WriteLine("AxisAngle:\n" + matrixToString(axisAngle.Axis.Transpose()) + ", " + String.Format(" {0:G4} ", axisAngle.Angle));
+            PrintHeader("Convert from Zivid (Rotation Matrix) to Robot");
+            var axisAngle = RotationMatrixToAxisAngle(rotationMatrix);
+            Console.WriteLine("AxisAngle:\n" + MatrixToString(axisAngle.Axis.Transpose()) + ", " + String.Format(" {0:G4} ", axisAngle.Angle));
             var rotationVector = axisAngle.Axis * axisAngle.Angle;
-            Console.WriteLine("Rotation Vector:\n" + matrixToString(rotationVector.Transpose()));
-            var quaternion = rotationMatrixToQuaternion(rotationMatrix);
-            Console.WriteLine("Quaternion:\n" + matrixToString(quaternion.Transpose()));
-            var rpyList = rotationMatrixToRollPitchYawList(rotationMatrix);
+            Console.WriteLine("Rotation Vector:\n" + MatrixToString(rotationVector.Transpose()));
+            var quaternion = RotationMatrixToQuaternion(rotationMatrix);
+            Console.WriteLine("Quaternion:\n" + MatrixToString(quaternion.Transpose()));
+            var rpyList = RotationMatrixToRollPitchYawList(rotationMatrix);
 
             /*
              * Convert to Rotation Matrix (Zivid) from other representations of orientation (Robot)
              */
-            printHeader("Convert from Robot to Zivid (Rotation matrix)");
-            var rotationMatrixFromAxisAngle = axisAngleToRotationMatrix(axisAngle);
-            Console.WriteLine("Rotation Matrix from Axis Angle:\n" + matrixToString(rotationMatrixFromAxisAngle));
-            var rotationMatrixFromRotationVector = rotationVectorToRotationMatrix(rotationVector);
-            Console.WriteLine("Rotation Matrix from Rotation Vector:\n" + matrixToString(rotationMatrixFromRotationVector));
-            var rotationMatrixFromQuaternion = quaternionToRotationMatrix(quaternion);
-            Console.WriteLine("Rotation Matrix from Quaternion:\n" + matrixToString(rotationMatrixFromQuaternion));
-            rollPitchYawListToRotationMatrix(rpyList);
+            PrintHeader("Convert from Robot to Zivid (Rotation matrix)");
+            var rotationMatrixFromAxisAngle = AxisAngleToRotationMatrix(axisAngle);
+            Console.WriteLine("Rotation Matrix from Axis Angle:\n" + MatrixToString(rotationMatrixFromAxisAngle));
+            var rotationMatrixFromRotationVector = RotationVectorToRotationMatrix(rotationVector);
+            Console.WriteLine("Rotation Matrix from Rotation Vector:\n" + MatrixToString(rotationMatrixFromRotationVector));
+            var rotationMatrixFromQuaternion = QuaternionToRotationMatrix(quaternion);
+            Console.WriteLine("Rotation Matrix from Quaternion:\n" + MatrixToString(rotationMatrixFromQuaternion));
+            RollPitchYawListToRotationMatrix(rpyList);
 
             // Combine Rotation Matrix with Translation Vector to form Transformation Matrix
             var transformationMatrixFromQuaternion = Matrix<double>.Build.Dense(4, 4);
             transformationMatrixFromQuaternion.SetSubMatrix(0, 3, 0, 3, rotationMatrixFromQuaternion);
             transformationMatrixFromQuaternion.SetSubMatrix(0, 3, 3, 1, translationVector);
-            var transformationMatrixFromQuaternionZivid = mathDotNetToZivid(transformationMatrixFromQuaternion);
+            var transformationMatrixFromQuaternionZivid = MathDotNetToZivid(transformationMatrixFromQuaternion);
             transformationMatrixFromQuaternionZivid.Save("RobotTransformOut.yaml");
         }
         catch (Exception ex)
@@ -91,7 +92,7 @@ class Program
         public double Angle { get; set; }
     }
 
-    static Matrix<double> skew(Matrix<double> vector)
+    static Matrix<double> Skew(Matrix<double> vector)
     // Assumes vector to be [3x1]
     {
         return CreateMatrix.DenseOfArray<double>(new double[,]
@@ -102,9 +103,9 @@ class Program
         });
     }
 
-    static AxisAngle rotationMatrixToAxisAngle(Matrix<double> rotationMatrix)
+    static AxisAngle RotationMatrixToAxisAngle(Matrix<double> rotationMatrix)
     {
-        // See Rodrigues' formula or skew-symmetric method
+        // See Rodrigues' formula or Skew-symmetric method
         var skewSymmetricMatrix = (rotationMatrix - rotationMatrix.Transpose()) / 2;
         Matrix<double> skewElements = CreateMatrix.DenseOfArray<double>(new double[,] { { skewSymmetricMatrix[2, 1] }, { skewSymmetricMatrix[0, 2] }, { skewSymmetricMatrix[1, 0] } });
         var skewNorm = skewElements.Column(0, 0, 3).L2Norm();
@@ -114,23 +115,23 @@ class Program
         return new AxisAngle(u, theta);
     }
 
-    static Matrix<double> axisAngleToRotationMatrix(AxisAngle axisAngle)
+    static Matrix<double> AxisAngleToRotationMatrix(AxisAngle axisAngle)
     {
-        //See Rodrigues' formula or skew-symmetric method
+        //See Rodrigues' formula or Skew-symmetric method
         var u = axisAngle.Axis;
         var firstTerm = CreateMatrix.DenseIdentity<double>(3) * Math.Cos(axisAngle.Angle);
         var secondTerm = u.Multiply(u.Transpose()) * (1 - Math.Cos(axisAngle.Angle));
-        var thirdTerm = skew(u) * Math.Sin(axisAngle.Angle);
+        var thirdTerm = Skew(u) * Math.Sin(axisAngle.Angle);
         return firstTerm + secondTerm + thirdTerm;
     }
 
-    static Matrix<double> rotationVectorToRotationMatrix(Matrix<double> rotationVector)
+    static Matrix<double> RotationVectorToRotationMatrix(Matrix<double> rotationVector)
     {
         double theta = rotationVector.L2Norm();
-        return axisAngleToRotationMatrix(new AxisAngle(rotationVector / theta, theta));
+        return AxisAngleToRotationMatrix(new AxisAngle(rotationVector / theta, theta));
     }
 
-    static Matrix<double> rotationMatrixToQuaternion(Matrix<double> rotationMatrix)
+    static Matrix<double> RotationMatrixToQuaternion(Matrix<double> rotationMatrix)
     {
         var qw = (Math.Sqrt(1 + rotationMatrix[0, 0] + rotationMatrix[1, 1] + rotationMatrix[2, 2])) / 2;
         Matrix<double> quaternion = CreateMatrix.DenseOfArray<double>(new double[,]
@@ -144,18 +145,18 @@ class Program
         return quaternion;
     }
 
-    static Matrix<double> quaternionToRotationMatrix(Matrix<double> quaternion)
+    static Matrix<double> QuaternionToRotationMatrix(Matrix<double> quaternion)
     {
         // Normalize quaternion
         var nQ = quaternion / quaternion.L2Norm();
         var firstTerm = CreateMatrix.DenseIdentity<double>(3);
-        var secondTerm = 2 * skew(nQ.SubMatrix(0, 3, 0, 1)) * skew(nQ.SubMatrix(0, 3, 0, 1));
-        var thirdTerm = 2 * nQ[3, 0] * skew(nQ.SubMatrix(0, 3, 0, 1));
+        var secondTerm = 2 * Skew(nQ.SubMatrix(0, 3, 0, 1)) * Skew(nQ.SubMatrix(0, 3, 0, 1));
+        var thirdTerm = 2 * nQ[3, 0] * Skew(nQ.SubMatrix(0, 3, 0, 1));
 
         return firstTerm + secondTerm + thirdTerm;
     }
 
-    static Matrix createRotationMatrix(string axis, double angle)
+    static Matrix CreateRotationMatrix(string axis, double angle)
     {
         var matrix = DenseMatrix.CreateIdentity(3);
         var cosAngle = Math.Cos(angle);
@@ -185,22 +186,22 @@ class Program
         return matrix;
     }
 
-    static Matrix createXRotation(double angle)
+    static Matrix CreateXRotation(double angle)
     {
-        return createRotationMatrix("x", angle);
+        return CreateRotationMatrix("x", angle);
     }
 
-    static Matrix createYRotation(double angle)
+    static Matrix CreateYRotation(double angle)
     {
-        return createRotationMatrix("y", angle);
+        return CreateRotationMatrix("y", angle);
     }
 
-    static Matrix createZRotation(double angle)
+    static Matrix CreateZRotation(double angle)
     {
-        return createRotationMatrix("z", angle);
+        return CreateRotationMatrix("z", angle);
     }
 
-    static Vector<double> rotationMatrixToRollPitchYaw(Matrix<double> rotationMatrix, RotationConvention convention)
+    static Vector<double> RotationMatrixToRollPitchYaw(Matrix<double> rotationMatrix, RotationConvention convention)
     {
         double roll = -1;
         double pitch = -1;
@@ -277,61 +278,61 @@ class Program
         throw new ArgumentException("Invalid RotationConvention");
     }
 
-    static Vector<double>[] rotationMatrixToRollPitchYawList(Matrix<double> rotationMatrix)
+    static Vector<double>[] RotationMatrixToRollPitchYawList(Matrix<double> rotationMatrix)
     {
         Vector<double>[] rpyList = new Vector<double>[Enum.GetValues(typeof(RotationConvention)).Length];
         foreach (int i in Enum.GetValues(typeof(RotationConvention)))
         {
             RotationConvention convention = (RotationConvention)i;
             Console.WriteLine("Roll-Pitch-Yaw angles (" + convention + "):");
-            rpyList[i] = rotationMatrixToRollPitchYaw(rotationMatrix, convention);
-            Console.WriteLine(vectorToString(rpyList[i]));
+            rpyList[i] = RotationMatrixToRollPitchYaw(rotationMatrix, convention);
+            Console.WriteLine(VectorToString(rpyList[i]));
         }
         return rpyList;
     }
 
-    static Matrix<double> rollPitchYawToRotationMatrix(Vector<double> rollPitchYaw, RotationConvention convention)
+    static Matrix<double> RollPitchYawToRotationMatrix(Vector<double> rollPitchYaw, RotationConvention convention)
     {
         switch (convention)
         {
             case RotationConvention.xyzIntrinsic:
-                return createXRotation(rollPitchYaw[0]) * createYRotation(rollPitchYaw[1]) * createZRotation(rollPitchYaw[2]);
+                return CreateXRotation(rollPitchYaw[0]) * CreateYRotation(rollPitchYaw[1]) * CreateZRotation(rollPitchYaw[2]);
             case RotationConvention.zyxIntrinsic:
-                return createZRotation(rollPitchYaw[0]) * createYRotation(rollPitchYaw[1]) * createXRotation(rollPitchYaw[2]);
+                return CreateZRotation(rollPitchYaw[0]) * CreateYRotation(rollPitchYaw[1]) * CreateXRotation(rollPitchYaw[2]);
             case RotationConvention.zyxExtrinsic:
-                return createXRotation(rollPitchYaw[2]) * createYRotation(rollPitchYaw[1]) * createZRotation(rollPitchYaw[0]);
+                return CreateXRotation(rollPitchYaw[2]) * CreateYRotation(rollPitchYaw[1]) * CreateZRotation(rollPitchYaw[0]);
             case RotationConvention.xyzExtrinsic:
-                return createZRotation(rollPitchYaw[2]) * createYRotation(rollPitchYaw[1]) * createXRotation(rollPitchYaw[0]);
+                return CreateZRotation(rollPitchYaw[2]) * CreateYRotation(rollPitchYaw[1]) * CreateXRotation(rollPitchYaw[0]);
             default: throw new ArgumentException("Invalid RotationConvention");
         }
     }
 
-    static void rollPitchYawListToRotationMatrix(Vector<double>[] rpyList)
+    static void RollPitchYawListToRotationMatrix(Vector<double>[] rpyList)
     {
         foreach (int i in Enum.GetValues(typeof(RotationConvention)))
         {
             RotationConvention convention = (RotationConvention)i;
             Console.WriteLine("Rotation Matrix from Roll-Pitch-Yaw angles (" + convention + "):");
-            Console.WriteLine(matrixToString(rollPitchYawToRotationMatrix(rpyList[i], convention)));
+            Console.WriteLine(MatrixToString(RollPitchYawToRotationMatrix(rpyList[i], convention)));
         }
     }
 
-    static Matrix<double> zividToMathDotNet(Zivid.NET.Matrix4x4 zividMatrix)
+    static Matrix<double> ZividToMathDotNet(Zivid.NET.Matrix4x4 zividMatrix)
     {
         return CreateMatrix.DenseOfArray(zividMatrix.ToArray()).ToDouble();
     }
-    static Zivid.NET.Matrix4x4 mathDotNetToZivid(Matrix<double> mathNetMatrix)
+    static Zivid.NET.Matrix4x4 MathDotNetToZivid(Matrix<double> mathNetMatrix)
     {
         return new Zivid.NET.Matrix4x4(mathNetMatrix.ToSingle().ToArray());
     }
 
-    static void printHeader(string text)
+    static void PrintHeader(string text)
     {
         string asterixLine = "****************************************************************";
         Console.WriteLine(asterixLine + "\n* " + text + "\n" + asterixLine);
     }
 
-    static string matrixToString(Matrix<double> matrix)
+    static string MatrixToString(Matrix<double> matrix)
     {
         string matrixString = "";
         if (matrix.RowCount != 1)
@@ -356,7 +357,7 @@ class Program
         return matrixString;
     }
 
-    static string vectorToString(Vector<double> vector)
+    static string VectorToString(Vector<double> vector)
     {
         string vectorString = "[";
         for (var i = 0; i < vector.Count; i++)

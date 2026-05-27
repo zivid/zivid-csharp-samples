@@ -128,9 +128,9 @@ from the camera can be used.
 ## Installation
 
 1.  [Install Zivid
-    Software](https://support.zivid.com/latest//getting-started/software-installation.html)
+    Software](https://support.zivid.com/en/latest//camera/getting-started/software-installation.html)
 2.  [Download Zivid Sample
-    Data](https://support.zivid.com/latest//api-reference/samples/sample-data.html)
+    Data](https://support.zivid.com/en/latest//camera/api-reference/samples/sample-data.html)
 
 Launch the Command Prompt by pressing `Win` + `R` keys on the keyboard,
 then type `cmd` and press `Enter`.
@@ -145,7 +145,7 @@ git clone https://github.com/zivid/zivid-csharp-samples
 Open ZividNETSamples.sln in Visual Studio, build it and run it. If you
 are uncertain about doing this, check out [Build C\# Samples using
 Visual
-Studio](https://support.zivid.com/latest/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
+Studio](https://support.zivid.com/en/latest/camera/api-reference/samples/csharp/build-c-sharp-samples-using-visual-studio.html).
 
 Some of the samples depend on external libraries, in particular
 `MathNet.Numerics` and `System.ValueTuple`. These libraries will be
@@ -154,9 +154,9 @@ installed automatically through NuGet when building the sample.
 ## Support
 
 For more information about the Zivid cameras, please visit our
-[Knowledge Base](https://support.zivid.com/latest). If you run into any
-issues please check out
-[Troubleshooting](https://support.zivid.com/latest/support/troubleshooting.html).
+[Knowledge Base](https://support.zivid.com/en/latest). If you run into
+any issues please check out
+[Troubleshooting](https://support.zivid.com/en/latest/camera/support/troubleshooting.html).
 
 ## License
 

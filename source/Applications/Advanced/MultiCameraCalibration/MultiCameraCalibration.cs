@@ -18,7 +18,7 @@ class Program
             var zivid = new Zivid.NET.Application();
             var cameras = zivid.Cameras;
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
-            var connectedCameras = connectToAllAvailableCameras(cameras);
+            var connectedCameras = ConnectToAllAvailableCameras(cameras);
 
             var detectionResults = new List<DetectionResult>();
             var serialNumbers = new List<string>();
@@ -71,7 +71,7 @@ class Program
         return 0;
     }
 
-    static List<Zivid.NET.Camera> connectToAllAvailableCameras(IList<Zivid.NET.Camera> cameras)
+    static List<Zivid.NET.Camera> ConnectToAllAvailableCameras(IList<Zivid.NET.Camera> cameras)
     {
         var connectedCameras = new List<Zivid.NET.Camera>();
         foreach (var camera in cameras)

@@ -87,14 +87,14 @@ class Program
         throw new System.InvalidOperationException("Invalid camera model");
     }
 
-    private static HalconDotNet.HTuple arrayToHalconDouble(params double[] arr)
+    private static HalconDotNet.HTuple ArrayToHalconDouble(params double[] arr)
     {
         var htup = new HalconDotNet.HTuple((double)0);
         htup.DArr = arr;
         return htup;
     }
 
-    private static HalconDotNet.HTuple arrayToHalconInt(params int[] arr)
+    private static HalconDotNet.HTuple ArrayToHalconInt(params int[] arr)
     {
         var htup = new HalconDotNet.HTuple((int)0);
         htup.IArr = arr;
@@ -190,21 +190,21 @@ class Program
             }
         }
 
-        var tuplePointsXH = arrayToHalconDouble(tuplePointsX);
-        var tuplePointsYH = arrayToHalconDouble(tuplePointsY);
-        var tuplePointsZH = arrayToHalconDouble(tuplePointsZ);
-        var tupleNormalsXH = arrayToHalconDouble(tupleNormalsX);
-        var tupleNormalsYH = arrayToHalconDouble(tupleNormalsY);
-        var tupleNormalsZH = arrayToHalconDouble(tupleNormalsZ);
-        var tupleColorsRH = arrayToHalconInt(tupleColorsR);
-        var tupleColorsGH = arrayToHalconInt(tupleColorsG);
-        var tupleColorsBH = arrayToHalconInt(tupleColorsB);
+        var tuplePointsXH = ArrayToHalconDouble(tuplePointsX);
+        var tuplePointsYH = ArrayToHalconDouble(tuplePointsY);
+        var tuplePointsZH = ArrayToHalconDouble(tuplePointsZ);
+        var tupleNormalsXH = ArrayToHalconDouble(tupleNormalsX);
+        var tupleNormalsYH = ArrayToHalconDouble(tupleNormalsY);
+        var tupleNormalsZH = ArrayToHalconDouble(tupleNormalsZ);
+        var tupleColorsRH = ArrayToHalconInt(tupleColorsR);
+        var tupleColorsGH = ArrayToHalconInt(tupleColorsG);
+        var tupleColorsBH = ArrayToHalconInt(tupleColorsB);
 
         Console.WriteLine("Constructing ObjectModel3D based on XYZ data");
         var objectModel3D = new HalconDotNet.HObjectModel3D(tuplePointsXH, tuplePointsYH, tuplePointsZH);
 
         Console.WriteLine("Mapping ObjectModel3D data");
-        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "xyz_mapping", "object", arrayToHalconInt(tupleXYZMapping));
+        HalconDotNet.HOperatorSet.SetObjectModel3dAttribMod(objectModel3D, "xyz_mapping", "object", ArrayToHalconInt(tupleXYZMapping));
 
         Console.WriteLine("Adding normals to ObjectModel3D");
         var normalsAttribNames = new HalconDotNet.HTuple("point_normal_x", "point_normal_y", "point_normal_z");
