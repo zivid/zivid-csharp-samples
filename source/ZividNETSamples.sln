@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHalconViaZivid", "Ca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureAndPrintNormals", "Camera\Advanced\CaptureAndPrintNormals\CaptureAndPrintNormals.csproj", "{064AA724-CD81-462F-8A07-26440EA41103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticNetworkConfigurationForCameras", "Camera\InfoUtilOther\AutomaticNetworkConfigurationForCameras\AutomaticNetworkConfigurationForCameras.csproj", "{FEE22B4E-A257-443B-8B29-E1C8124A18F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticNetworkConfigurationForCameras", "Camera\InfoUtilOther\Network\AutomaticNetworkConfigurationForCameras\AutomaticNetworkConfigurationForCameras.csproj", "{FEE22B4E-A257-443B-8B29-E1C8124A18F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraInfo", "Camera\InfoUtilOther\CameraInfo\CameraInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
 EndProject
@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasureSceneConditions", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameInfo", "Camera\InfoUtilOther\FrameInfo\FrameInfo.csproj", "{F1358A50-2897-466A-9EA9-1A29444DE0A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkConfiguration", "Camera\InfoUtilOther\NetworkConfiguration\NetworkConfiguration.csproj", "{121101E4-E682-4850-8638-6C47873A57EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkConfiguration", "Camera\InfoUtilOther\Network\NetworkConfiguration\NetworkConfiguration.csproj", "{121101E4-E682-4850-8638-6C47873A57EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorrectCameraInField", "Camera\Maintenance\CorrectCameraInField\CorrectCameraInField.csproj", "{8D35FE40-515E-416A-9C44-503B0D1B6674}"
 EndProject
@@ -56,31 +56,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZDF2PLY", "Applications\Bas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Downsample", "Applications\Advanced\Downsample\Downsample.csproj", "{E23AED49-2EC2-47E4-83D4-F5A45F9949D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudFromMillimetersToMeters", "Applications\Advanced\TransformPointCloudFromMillimetersToMeters\TransformPointCloudFromMillimetersToMeters.csproj", "{AA43EF9A-D191-4374-B5F9-0D096D941846}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudFromMillimetersToMeters", "Applications\Advanced\Transform\TransformPointCloudFromMillimetersToMeters\TransformPointCloudFromMillimetersToMeters.csproj", "{AA43EF9A-D191-4374-B5F9-0D096D941846}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandEyeCalibration", "Applications\Advanced\HandEyeCalibration\HandEyeCalibration\HandEyeCalibration.csproj", "{FAEF093E-9EEC-4CE5-87FE-D6FDB45CE700}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilizeHandEyeCalibration", "Applications\Advanced\HandEyeCalibration\UtilizeHandEyeCalibration\UtilizeHandEyeCalibration.csproj", "{8ACFFEC6-34E5-4E14-B08C-60051B1CFD2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "Applications\Advanced\MultiCameraCalibration\MultiCameraCalibration.csproj", "{26F708E4-218E-4F17-8989-F5C42796C932}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiCameraCalibration", "Applications\Advanced\MultiCamera\MultiCameraCalibration\MultiCameraCalibration.csproj", "{26F708E4-218E-4F17-8989-F5C42796C932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaCheckerboard", "Applications\Advanced\TransformPointCloudViaCheckerboard\TransformPointCloudViaCheckerboard.csproj", "{05DAC246-781C-45B9-8E57-AC58D013522A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaCheckerboard", "Applications\Advanced\Transform\TransformPointCloudViaCheckerboard\TransformPointCloudViaCheckerboard.csproj", "{05DAC246-781C-45B9-8E57-AC58D013522A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaArucoMarker", "Applications\Advanced\TransformPointCloudViaArucoMarker\TransformPointCloudViaArucoMarker.csproj", "{2F721053-DE2A-4714-853C-CDDBB5828AB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformPointCloudViaArucoMarker", "Applications\Advanced\Transform\TransformPointCloudViaArucoMarker\TransformPointCloudViaArucoMarker.csproj", "{2F721053-DE2A-4714-853C-CDDBB5828AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadProjectAndCaptureImage", "Applications\Advanced\ReadProjectAndCaptureImage\ReadProjectAndCaptureImage.csproj", "{79BE4F01-8935-49FD-BD8F-551E62FF03CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadProjectAndCaptureImage", "Applications\Advanced\Projector\ReadProjectAndCaptureImage\ReadProjectAndCaptureImage.csproj", "{79BE4F01-8935-49FD-BD8F-551E62FF03CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaCheckerboard", "Applications\Advanced\ROIBoxViaCheckerboard\ROIBoxViaCheckerboard.csproj", "{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaCheckerboard", "Applications\Advanced\ROI\ROIBoxViaCheckerboard\ROIBoxViaCheckerboard.csproj", "{FDAE54C3-5924-462B-BCE9-E8C51CB637B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaArucoMarker", "Applications\Advanced\ROIBoxViaArucoMarker\ROIBoxViaArucoMarker.csproj", "{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaArucoMarker", "Applications\Advanced\ROI\ROIBoxViaArucoMarker\ROIBoxViaArucoMarker.csproj", "{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3DInLoop", "Applications\Advanced\Visualization\CaptureVis3DInLoop\CaptureVis3DInLoop.csproj", "{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3DInLoopWithKeypressExit", "Applications\Advanced\Visualization\CaptureVis3DInLoopWithKeypressExit\CaptureVis3DInLoopWithKeypressExit.csproj", "{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseConversions", "Applications\Advanced\HandEyeCalibration\PoseConversions\PoseConversions.csproj", "{69416F6A-75DF-436E-85F2-3881CCBEAA9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchViaLocalPointCloudRegistration", "Applications\Advanced\StitchViaLocalPointCloudRegistration\StitchViaLocalPointCloudRegistration.csproj", "{9AB87321-B692-4F5F-894B-1CE81F374AFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchViaLocalPointCloudRegistration", "Applications\Advanced\Stitching\StitchViaLocalPointCloudRegistration\StitchViaLocalPointCloudRegistration.csproj", "{9AB87321-B692-4F5F-894B-1CE81F374AFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchContinuouslyRotatingObject", "Applications\Advanced\StitchContinuouslyRotatingObject\StitchContinuouslyRotatingObject.csproj", "{EA4A898B-9A41-4357-A638-78587EFCB4DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StitchContinuouslyRotatingObject", "Applications\Advanced\Stitching\StitchContinuouslyRotatingObject\StitchContinuouslyRotatingObject.csproj", "{EA4A898B-9A41-4357-A638-78587EFCB4DD}"
 EndProject
-Project("{844EFF6C-E988-43D5-813D-3E1B47579DCC}") = "StitchUsingRobotMountedCamera", "Applications\Advanced\StitchUsingRobotMountedCamera\StitchUsingRobotMountedCamera.csproj", "{844EFF6C-E988-43D5-813D-3E1B47579DCC}"
+Project("{844EFF6C-E988-43D5-813D-3E1B47579DCC}") = "StitchUsingRobotMountedCamera", "Applications\Advanced\Stitching\StitchUsingRobotMountedCamera\StitchUsingRobotMountedCamera.csproj", "{844EFF6C-E988-43D5-813D-3E1B47579DCC}"
 
 EndProject
 Global
@@ -249,6 +253,14 @@ Global
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Debug|x64.Build.0 = Debug|x64
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.ActiveCfg = Release|x64
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.Build.0 = Release|x64
+		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Debug|x64.ActiveCfg = Debug|x64
+		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Debug|x64.Build.0 = Debug|x64
+		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Release|x64.ActiveCfg = Release|x64
+		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Release|x64.Build.0 = Release|x64
+		{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}.Debug|x64.ActiveCfg = Debug|x64
+		{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}.Debug|x64.Build.0 = Debug|x64
+		{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}.Release|x64.ActiveCfg = Release|x64
+		{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
