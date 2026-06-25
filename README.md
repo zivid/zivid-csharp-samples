@@ -94,7 +94,7 @@ from the camera can be used.
     - [Warmup] - Short example of a basic way to warm up the camera with
       specified time and capture cycle.
     - **Network**
-      - [AutomaticNetworkConfigurationForCameras] - \* Automatically
+      - [AutomaticNetworkConfigurationForCameras] - Automatically
         configure the IP addresses of connected cameras to match the
         network of the user's PC.
       - [NetworkConfiguration] - Uses Zivid API to change the IP address

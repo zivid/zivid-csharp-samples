@@ -1,5 +1,8 @@
 /*
 Read point cloud data from a ZDF file, iterate through it, and extract individual points.
+
+For more information on supported formats and options, check out this article:
+https://support.zivid.com/en/latest/camera/reference-articles/point-cloud-structure-and-output-formats.html
 */
 
 using System;
@@ -21,7 +24,7 @@ class Program
 
                 Console.WriteLine("Getting point cloud from frame");
                 var pointCloud = frame.PointCloud;
-                var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA();
+                var pointCloudData = pointCloud.CopyPointsXYZColorsRGBA_SRGB();
                 var pointCloudSNR = pointCloud.CopySNRs();
 
                 var height = pointCloud.Height;

@@ -1,5 +1,8 @@
 /*
 Convert point cloud from a ZDF file to a PLY file.
+
+For more information on supported formats and options, check out this article:
+https://support.zivid.com/en/latest/camera/reference-articles/point-cloud-structure-and-output-formats.html
 */
 
 using System;
