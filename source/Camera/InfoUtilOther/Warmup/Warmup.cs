@@ -1,6 +1,9 @@
 ﻿// DOCTAG-START-ALL-1
 /*
 Short example of a basic way to warm up the camera with specified time and capture cycle.
+
+For more information on warming up the camera, check out this tutorial:
+https://support.zivid.com/en/latest/camera/academy/camera/warmup.html
 */
 
 using CommandLine;

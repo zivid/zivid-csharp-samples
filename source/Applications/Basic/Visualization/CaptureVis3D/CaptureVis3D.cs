@@ -1,5 +1,8 @@
 ﻿/*
 Capture point clouds, with color, from the Zivid camera, and visualize them.
+
+For more information on visualization, check out this tutorial:
+https://support.zivid.com/en/latest/camera/academy/applications/visualization-tutorial.html
 */
 
 using System;
