@@ -3,6 +3,9 @@ Capture images and point clouds, with and without color, from the Zivid camera w
 
 Choose whether to get the image in the linear RGB or the sRGB color space.
 
+Demonstrates saving and loading a 2D frame to and from a ZDF file, and using ReadFrameFileType to determine
+whether a ZDF file contains a 3D Frame or a Frame2D.
+
 The YML files for this sample can be found under the main Zivid sample instructions.
 
 For more information about camera settings, check out this article:
@@ -81,6 +84,19 @@ class Program
                                       pixelArraySRGB[pixelRow, pixelCol].b,
                                       pixelArraySRGB[pixelRow, pixelCol].a);
                 }
+
+                var dataFile2D = "Frame2D.zdf";
+                Console.WriteLine("Saving 2D frame to file: " + dataFile2D);
+                frame2D.Save(dataFile2D);
+
+                var frameFileType2D = Zivid.NET.FrameFile.ReadFrameFileType(dataFile2D);
+                Console.WriteLine("Frame file type: " + frameFileType2D);
+
+                Console.WriteLine("Loading 2D frame from file: " + dataFile2D);
+                using (var loadedFrame2D = new Zivid.NET.Frame2D(dataFile2D))
+                {
+                    Console.WriteLine("Loaded 2D frame");
+                }
             }
 
             Console.WriteLine("Capturing 3D frame");
@@ -89,6 +105,9 @@ class Program
                 var dataFile = "Frame3D.zdf";
                 Console.WriteLine("Saving frame to file: " + dataFile);
                 frame3D.Save(dataFile);
+
+                var frameFileType = Zivid.NET.FrameFile.ReadFrameFileType(dataFile);
+                Console.WriteLine("Frame file type: " + frameFileType);
 
                 var dataFilePly = "PointCloudWithoutColor.ply";
                 Console.WriteLine("Exporting point cloud (default pink colored points) to file: " + dataFilePly);

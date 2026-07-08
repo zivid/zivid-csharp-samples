@@ -16,8 +16,19 @@ class Program
             Console.WriteLine("Number of cameras found: {0}", cameras.Count);
             foreach (var camera in cameras)
             {
-                Console.WriteLine("Camera Info: {0}", camera.Info);
-                Console.WriteLine("Camera State: {0}", camera.State);
+                Console.WriteLine(camera.Info);
+                Console.WriteLine(camera.State);
+            }
+
+            foreach (var camera in cameras)
+            {
+                var temperature = camera.State.Temperature;
+                Console.WriteLine("Temperatures:");
+                Console.WriteLine("  DMD:     {0} °C", temperature.DMD);
+                Console.WriteLine("  LED:     {0} °C", temperature.LED);
+                Console.WriteLine("  Lens:    {0} °C", temperature.Lens);
+                Console.WriteLine("  PCB:     {0} °C", temperature.PCB);
+                Console.WriteLine("  General: {0} °C", temperature.General);
             }
         }
         catch (Exception ex)

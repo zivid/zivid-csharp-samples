@@ -4,7 +4,8 @@ Automatically configure the IP addresses of connected cameras to match the netwo
 Usage:
 - By default, the program applies the new configuration directly to the cameras.
 - Use the [--display-only] argument to simulate the configuration and display the
-  proposed IP addresses without making actual changes.
+  proposed IP addresses without making actual changes. Note: camera-side Ethernet
+  link speed will also be skipped, as it requires connecting to the camera.
 
 For more information on network configuration, check out this tutorial:
 https://support.zivid.com/en/latest/camera/getting-started/software-installation/zivid-two-network-configuration.html
@@ -38,7 +39,7 @@ class Program
             {
                 try
                 {
-                    var (localInterfaceIpAddress, localInterfaceSubnetMask) = getUsersLocalInterfaceNetworkConfiguration(camera);
+                    var (localInterfaceIpAddress, localInterfaceSubnetMask) = GetUsersLocalInterfaceNetworkConfiguration(camera);
 
                     var ipAddressOctets = IPAddress.Parse(localInterfaceIpAddress).GetAddressBytes();
 
@@ -93,6 +94,23 @@ class Program
                     return 1;
                 }
             }
+
+            foreach (var camera in cameras)
+            {
+                try
+                {
+                    PrintHostSideEthernetLinkSpeed(camera);
+                    if (!displayOnly)
+                    {
+                        PrintCameraSideEthernetLinkSpeed(camera);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error when reading Ethernet link speed for camera : " + camera.Info.SerialNumber + " " + ex.ToString());
+                    return 1;
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -102,7 +120,7 @@ class Program
         return 0;
     }
 
-    static (string, string) getUsersLocalInterfaceNetworkConfiguration(Zivid.NET.Camera camera)
+    static Zivid.NET.CameraState.NetworkGroup.LocalInterface GetUsersLocalInterface(Zivid.NET.Camera camera)
     {
         var localInterfaces = camera.State.Network.LocalInterfaces;
 
@@ -116,17 +134,51 @@ class Program
             throw new Exception("More than one local interface detected from the camera " + camera.Info.SerialNumber + ". Please, reorganize your network.");
         }
 
-        if (localInterfaces.ElementAt(0).IPV4.Subnets.Count == 0)
+        return localInterfaces.ElementAt(0);
+    }
+
+    static void PrintHostSideEthernetLinkSpeed(Zivid.NET.Camera camera)
+    {
+        // Reading the host-side (local interface) Ethernet link speed does not require a connection to the camera.
+        var localInterfaceLinkSpeed = GetUsersLocalInterface(camera).Ethernet.LinkSpeed;
+
+        Console.WriteLine("Camera {0}: local interface Ethernet link speed={1}",
+            camera.Info.SerialNumber,
+            localInterfaceLinkSpeed);
+    }
+
+    static void PrintCameraSideEthernetLinkSpeed(Zivid.NET.Camera camera)
+    {
+        // Reading the camera-side Ethernet link speed requires being connected to the camera.
+        camera.Connect();
+        try
+        {
+            var cameraLinkSpeed = camera.State.Network.Ethernet.LinkSpeed;
+            Console.WriteLine("Camera {0}: camera Ethernet link speed={1}",
+                camera.Info.SerialNumber,
+                cameraLinkSpeed);
+        }
+        finally
+        {
+            camera.Disconnect();
+        }
+    }
+
+    static (string, string) GetUsersLocalInterfaceNetworkConfiguration(Zivid.NET.Camera camera)
+    {
+        var localInterface = GetUsersLocalInterface(camera);
+
+        if (localInterface.IPV4.Subnets.Count == 0)
         {
             throw new Exception("No valid subnets found for camera " + camera.Info.SerialNumber);
         }
 
-        if (localInterfaces.ElementAt(0).IPV4.Subnets.Count > 1)
+        if (localInterface.IPV4.Subnets.Count > 1)
         {
             throw new Exception("More than one ip address found for the local interface from the camera " + camera.Info.SerialNumber);
         }
 
-        var subnet = localInterfaces.ElementAt(0).IPV4.Subnets.First();
+        var subnet = localInterface.IPV4.Subnets.First();
         return (subnet.Address, subnet.Mask);
     }
 
