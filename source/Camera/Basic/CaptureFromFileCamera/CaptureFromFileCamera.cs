@@ -41,14 +41,7 @@ class Program
             Console.WriteLine("Configuring settings");
             var settings2D = new Zivid.NET.Settings2D
             {
-                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } },
-                Processing =
-                {
-                    Color =
-                    {
-                        Balance = { Red = 1.0, Green = 1.0, Blue = 1.0 }
-                    }
-                }
+                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } }
             };
             var settings = new Zivid.NET.Settings
             {
@@ -68,6 +61,15 @@ class Program
                     }
                 }
             };
+            var roiBox = new Zivid.NET.Settings.RegionOfInterestGroup.BoxGroup
+            {
+                Enabled = true,
+                PointO = new Zivid.NET.PointXYZ { x = -266, y = 190, z = 771 },
+                PointA = new Zivid.NET.PointXYZ { x = 203, y = 207, z = 771 },
+                PointB = new Zivid.NET.PointXYZ { x = -255, y = -131, z = 771 }
+            };
+            roiBox.Extents = new Zivid.NET.Range<double>(0, 298);
+            settings.RegionOfInterest.Box = roiBox;
             settings.Color = settings2D;
 
             Console.WriteLine("Capturing frame");

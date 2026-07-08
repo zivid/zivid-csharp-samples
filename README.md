@@ -1,6 +1,6 @@
 # C# samples
 
-This repository contains csharp code samples for Zivid SDK v2.17.2. For
+This repository contains csharp code samples for Zivid SDK v2.18.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying releases].
 
@@ -27,12 +27,13 @@ tested compatibility with earlier SDK versions, please check out
   - **Capture**
     - [Quick Capture Tutorial]
     - [Capture Tutorial]
+    - [GPU Access Tutorial]
     - [Point Cloud Capture Process]
     - [2D Image Capture Process]
     - [2D + 3D Capture Strategy]
     - [File Camera]
     - [Projector]
-  - **Maintenance**
+  - **Maintenance and Prevention**
     - [Infield Correction]
     - [Warm-up]
     - [Firmware Update]
@@ -69,6 +70,10 @@ from the camera can be used.
     - [CaptureWithSettingsFromYML] - Capture images and point clouds,
       with and without color, from the Zivid camera with settings from
       YML file.
+    - [Connect] - Connect to a Zivid camera using the different
+      available methods.
+    - [CreateFileCameraFromZDFWithDiagnostics] - Capture a frame with
+      diagnostics enabled and create a file camera from it.
   - **Advanced**
     - [CaptureAndPrintNormals] - Capture Zivid point clouds, compute
       normals and print a subset.
@@ -81,9 +86,11 @@ from the camera can be used.
     - [CameraInfo] - List connected cameras and print camera version and
       state information for each connected camera.
     - [CameraUserData] - Store user data on the Zivid camera.
-    - [CaptureWithDiagnostics] - Capture point clouds, with color, from
-      the Zivid camera, with settings from YML file and diagnostics
-      enabled.
+    - [CaptureWithDiagnostics] - Capture a 2D+3D frame and a 2D frame
+      from the Zivid camera with diagnostics enabled.
+    - [CheckHealth] - Poll the camera health check from a separate
+      thread while capturing in the main thread, printing the statuses
+      and values every second.
     - [FirmwareUpdater] - Update firmware on the Zivid camera.
     - [FrameInfo] - Read frame info from the Zivid camera.
     - [GetCameraIntrinsics] - Read intrinsic parameters from the Zivid
@@ -122,6 +129,8 @@ from the camera can be used.
       - [ZDF2PLY] - Convert point cloud from a ZDF file to a PLY file.
   - **Advanced**
     - [Downsample][1] - Downsample point cloud from a ZDF file.
+    - [MaskPointCloud] - Mask point cloud from a ZDF file using the Mask
+      API and visualize it with Zivid.NET Visualizer.
     - **Visualization**
       - [CaptureVis3DInLoop] - Capture point clouds, with color, from
         the Zivid camera, and visualize them in a loop.
@@ -204,6 +213,7 @@ Zivid Samples are distributed under the [BSD license].
   [image]: https://www.zivid.com/hubfs/softwarefiles/images/zivid-generic-github-header.png
   [Quick Capture Tutorial]: https://support.zivid.com/en/latest/camera/getting-started/quick-capture-tutorial.html
   [Capture Tutorial]: https://support.zivid.com/en/latest/camera/academy/camera/capture-tutorial.html
+  [GPU Access Tutorial]: https://support.zivid.com/en/latest/camera/academy/camera/gpu-access-tutorial.html
   [Point Cloud Capture Process]: https://support.zivid.com/en/latest/camera/academy/camera/point-cloud-capture-process.html
   [2D Image Capture Process]: https://support.zivid.com/en/latest/camera/academy/camera/2d-image-capture-process.html
   [2D + 3D Capture Strategy]: https://support.zivid.com/en/latest/camera/academy/camera/2d3d-capture-strategy.html
@@ -225,12 +235,15 @@ Zivid Samples are distributed under the [BSD license].
   [CaptureFromFileCamera]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureFromFileCamera/CaptureFromFileCamera.cs
   [CaptureHDRCompleteSettings]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureHDRCompleteSettings/CaptureHDRCompleteSettings.cs
   [CaptureWithSettingsFromYML]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CaptureWithSettingsFromYML/CaptureWithSettingsFromYML.cs
+  [Connect]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/Connect/Connect.cs
+  [CreateFileCameraFromZDFWithDiagnostics]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Basic/CreateFileCameraFromZDFWithDiagnostics/CreateFileCameraFromZDFWithDiagnostics.cs
   [CaptureAndPrintNormals]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureAndPrintNormals/CaptureAndPrintNormals.cs
   [CaptureHalconViaGenICam]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaGenICam/CaptureHalconViaGenICam.cs
   [CaptureHalconViaZivid]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/Advanced/CaptureHalconViaZivid/CaptureHalconViaZivid.cs
   [CameraInfo]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraInfo/CameraInfo.cs
   [CameraUserData]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CameraUserData/CameraUserData.cs
   [CaptureWithDiagnostics]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CaptureWithDiagnostics/CaptureWithDiagnostics.cs
+  [CheckHealth]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/CheckHealth/CheckHealth.cs
   [FirmwareUpdater]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FirmwareUpdater/FirmwareUpdater.cs
   [FrameInfo]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/FrameInfo/FrameInfo.cs
   [GetCameraIntrinsics]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Camera/InfoUtilOther/GetCameraIntrinsics/GetCameraIntrinsics.cs
@@ -248,6 +261,7 @@ Zivid Samples are distributed under the [BSD license].
   [ReadIterateZDF]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/FileFormats/ReadIterateZDF/ReadIterateZDF.cs
   [ZDF2PLY]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Basic/FileFormats/ZDF2PLY/ZDF2PLY.cs
   [1]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/Downsample/Downsample.cs
+  [MaskPointCloud]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/MaskPointCloud/MaskPointCloud.cs
   [CaptureVis3DInLoop]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/Visualization/CaptureVis3DInLoop/CaptureVis3DInLoop.cs
   [CaptureVis3DInLoopWithKeypressExit]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/Visualization/CaptureVis3DInLoopWithKeypressExit/CaptureVis3DInLoopWithKeypressExit.cs
   [TransformPointCloudFromMillimetersToMeters]: https://github.com/zivid/zivid-csharp-samples/tree/master/source/Applications/Advanced/Transform/TransformPointCloudFromMillimetersToMeters/TransformPointCloudFromMillimetersToMeters.cs

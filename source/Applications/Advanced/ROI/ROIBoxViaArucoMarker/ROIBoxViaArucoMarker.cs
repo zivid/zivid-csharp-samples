@@ -1,7 +1,8 @@
 /*
 Filter the point cloud based on a ROI box given relative to the ArUco marker on a Zivid Calibration Board.
 
-The ZFC file for this sample can be downloaded from https://support.zivid.com/en/latest/api-reference/samples/sample-data.html.
+The ZDF file for this sample can be found in Zivid Sample Data.
+See the instructions in README.md to download the Zivid Sample Data.
 
 For more information on Region-Of-Interest (ROI) and how to use it, check out this tutorial:
 https://support.zivid.com/en/latest/camera/academy/applications/roi.html
@@ -23,20 +24,13 @@ class Program
         {
             var zivid = new Zivid.NET.Application();
 
-            string fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/BinWithCalibrationBoard.zfc";
+            string fileCamera = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Zivid/BinWithCalibrationBoard.zdf";
+            var loadedFrameWithDiagnostics = new Zivid.NET.Frame(fileCamera);
 
             Console.WriteLine("Creating virtual camera using file: " + fileCamera);
-            var camera = zivid.CreateFileCamera(fileCamera);
+            var camera = zivid.CreateFileCamera(loadedFrameWithDiagnostics);
 
-            var settings2D = new Zivid.NET.Settings2D
-            {
-                Acquisitions = { new Zivid.NET.Settings2D.Acquisition { } }
-            };
-            var settings = new Zivid.NET.Settings
-            {
-                Acquisitions = { new Zivid.NET.Settings.Acquisition { } }
-            };
-            settings.Color = settings2D;
+            var settings = loadedFrameWithDiagnostics.Settings;
 
             using (var originalFrame = camera.Capture2D3D(settings))
             {
@@ -98,16 +92,27 @@ class Program
                     cameraToMarkerTransform);
 
                 Console.WriteLine("Setting the ROI");
-                settings.RegionOfInterest.Box.Enabled = true;
-                settings.RegionOfInterest.Box.PointO = roiPointsInCameraFrame[0];
-                settings.RegionOfInterest.Box.PointA = roiPointsInCameraFrame[1];
-                settings.RegionOfInterest.Box.PointB = roiPointsInCameraFrame[2];
-                settings.RegionOfInterest.Box.Extents = new Zivid.NET.Range<double>(-10, roiBoxHeight);
+                var roiSettings = new Zivid.NET.Settings.RegionOfInterestGroup.BoxGroup
+                {
+                    Enabled = true,
+                    PointO = roiPointsInCameraFrame[0],
+                    PointA = roiPointsInCameraFrame[1],
+                    PointB = roiPointsInCameraFrame[2]
+                };
+                roiSettings.Extents = new Zivid.NET.Range<double>(-10, roiBoxHeight);
+
+                using (var roiPointCloud = pointCloud.MaskedByRegionOfInterest(roiSettings))
+                {
+                    Console.WriteLine("Displaying the ROI-filtered point cloud");
+                    VisualizeZividPointCloud(roiPointCloud);
+                }
+
+                Console.WriteLine("Adding the ROI box to the capture settings and capturing again");
+                settings.RegionOfInterest.Box = roiSettings;
 
                 using (var roiFrame = camera.Capture2D3D(settings))
                 {
-
-                    Console.WriteLine("Displaying the ROI-filtered point cloud");
+                    Console.WriteLine("Displaying the ROI-filtered point cloud from the new capture");
                     VisualizeZividPointCloud(roiFrame);
                 }
             }
@@ -124,6 +129,17 @@ class Program
         using (var visualizer = new Zivid.NET.Visualization.Visualizer())
         {
             visualizer.Show(frame);
+            visualizer.ShowMaximized();
+            visualizer.ResetToFit();
+            Console.WriteLine("Running visualizer. Blocking until window closes.");
+            visualizer.Run();
+        }
+    }
+    static void VisualizeZividPointCloud(Zivid.NET.PointCloud pointCloud)
+    {
+        using (var visualizer = new Zivid.NET.Visualization.Visualizer())
+        {
+            visualizer.Show(pointCloud);
             visualizer.ShowMaximized();
             visualizer.ResetToFit();
             Console.WriteLine("Running visualizer. Blocking until window closes.");
