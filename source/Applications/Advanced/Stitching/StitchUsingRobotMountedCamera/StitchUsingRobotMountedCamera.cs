@@ -11,6 +11,11 @@ point cloud of the object, seen from different angles, i.e, from the front, back
 The big object does not fit within the camera's field of view, so the stitching is done to extend the
 field of view of the camera, and see the object in full.
 
+Before stitching, each point cloud is transformed to the robot base frame and cropped using a
+region-of-interest (ROI) box defined in that frame. Because the ROI is applied as a post-capture
+re-processing step, a single workspace volume relative to the robot base filters out background
+from every viewpoint.
+
 The resulting stitched point cloud is voxel downsampled if the `--full-resolution` flag is not set.
 
 Dataset: https://support.zivid.com/en/latest/api-reference/samples/sample-data.html
@@ -127,7 +132,10 @@ class Program
         poseFilePaths.Sort((a, b) => String.Compare(a.FullName, b.FullName, StringComparison.Ordinal));
     }
 
-    private static Zivid.NET.UnorganizedPointCloud StitchPointClouds(DirectoryInfo directory, bool fullResolution)
+    private static Zivid.NET.UnorganizedPointCloud StitchPointClouds(
+        DirectoryInfo directory,
+        bool fullResolution,
+        Zivid.NET.Settings.RegionOfInterestGroup.BoxGroup workspaceRoiBox)
     {
         var zdfFilePaths = new List<FileInfo>();
         var poseFilePaths = new List<FileInfo>();
@@ -150,8 +158,11 @@ class Program
             using (var frame = new Zivid.NET.Frame(zdfFilePaths[index].FullName))
             {
                 var baseToCameraTransform = MathDotNetToZivid(ZividToMathDotNet(robotPose) * ZividToMathDotNet(handEyeTransform));
+                var pointCloud = frame.PointCloud;
+                pointCloud.Transform(baseToCameraTransform);
+                pointCloud.MaskByRegionOfInterest(workspaceRoiBox);
                 var organizedPointCloudInBaseFrame =
-                    frame.PointCloud.ToUnorganizedPointCloud().VoxelDownsampled(1.0f, 2).Transform(baseToCameraTransform);
+                    pointCloud.ToUnorganizedPointCloud().VoxelDownsampled(1.0f, 2);
 
                 if (index != 0)
                 {
@@ -196,9 +207,11 @@ class Program
                 using (var frame = new Zivid.NET.Frame(zdfFilePaths[index].FullName))
                 {
                     var registrationResult = poseTransforms[index];
-                    frame.PointCloud.Transform(registrationResult.baseToCameraTransform);
+                    var pointCloud = frame.PointCloud;
+                    pointCloud.Transform(registrationResult.baseToCameraTransform);
+                    pointCloud.MaskByRegionOfInterest(workspaceRoiBox);
                     finalPointCloud.Transform(registrationResult.previousToCurrentTransform.Inverse());
-                    finalPointCloud.Extend(frame.PointCloud.ToUnorganizedPointCloud());
+                    finalPointCloud.Extend(pointCloud.ToUnorganizedPointCloud());
                     if (index > 0)
                     {
                         Console.WriteLine((index + 1) + " out of " + zdfFilePaths.Count + " point clouds stitched.");
@@ -285,7 +298,15 @@ class Program
 
             // Small object
             Console.WriteLine("Stitching small object...");
-            var finalPointCloudSmallObject = StitchPointClouds(new DirectoryInfo(smallObjectDirPath), fullResolution);
+            var smallWorkspaceRoiBox = new Zivid.NET.Settings.RegionOfInterestGroup.BoxGroup
+            {
+                Enabled = true,
+                PointO = new Zivid.NET.PointXYZ { x = -150, y = 300, z = 50 },
+                PointA = new Zivid.NET.PointXYZ { x = -150, y = 600, z = 50 },
+                PointB = new Zivid.NET.PointXYZ { x = 150, y = 300, z = 50 },
+            };
+            smallWorkspaceRoiBox.Extents = new Zivid.NET.Range<double>(-75, 40);
+            var finalPointCloudSmallObject = StitchPointClouds(new DirectoryInfo(smallObjectDirPath), fullResolution, smallWorkspaceRoiBox);
             VisualizePointCloud(finalPointCloudSmallObject);
             var fileNameSmall = "StitchedPointCloudSmallObject.ply";
             var plyFileSmall = new Zivid.NET.Experimental.PointCloudExport.FileFormat.PLY(
@@ -298,7 +319,15 @@ class Program
 
             // Big object
             Console.WriteLine("Stitching big object...");
-            var finalPointCloudBigObject = StitchPointClouds(new DirectoryInfo(bigObjectDirPath), fullResolution);
+            var bigWorkspaceRoiBox = new Zivid.NET.Settings.RegionOfInterestGroup.BoxGroup
+            {
+                Enabled = true,
+                PointO = new Zivid.NET.PointXYZ { x = -1000, y = 50, z = 50 },
+                PointA = new Zivid.NET.PointXYZ { x = -1000, y = 450, z = 50 },
+                PointB = new Zivid.NET.PointXYZ { x = 750, y = 350, z = 50 },
+            };
+            bigWorkspaceRoiBox.Extents = new Zivid.NET.Range<double>(-150, 20);
+            var finalPointCloudBigObject = StitchPointClouds(new DirectoryInfo(bigObjectDirPath), fullResolution, bigWorkspaceRoiBox);
             VisualizePointCloud(finalPointCloudBigObject);
             var fileNameBig = "StitchedPointCloudBigObject.ply";
             var plyFileBig = new Zivid.NET.Experimental.PointCloudExport.FileFormat.PLY(

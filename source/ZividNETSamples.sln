@@ -4,11 +4,15 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture", "Camera\Basic\Capture\Capture.csproj", "{DD533F88-E34D-41A8-B734-1B94A5A4A31F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect", "Camera\Basic\Connect\Connect.csproj", "{31893406-C9F1-4FB7-B1F5-A26C80AB38B9}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureFromFileCamera", "Camera\Basic\CaptureFromFileCamera\CaptureFromFileCamera.csproj", "{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHDRCompleteSettings", "Camera\Basic\CaptureHDRCompleteSettings\CaptureHDRCompleteSettings.csproj", "{C0E744F5-0DDD-4E29-B899-101546A6CBEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWithSettingsFromYML", "Camera\Basic\CaptureWithSettingsFromYML\CaptureWithSettingsFromYML.csproj", "{F19339D7-0C30-471F-8E61-B86B895C440E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateFileCameraFromZDFWithDiagnostics", "Camera\Basic\CreateFileCameraFromZDFWithDiagnostics\CreateFileCameraFromZDFWithDiagnostics.csproj", "{E6F73ADC-4B2E-5F98-AD54-FEAB23456789}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureHalconViaGenICam", "Camera\Advanced\CaptureHalconViaGenICam\CaptureHalconViaGenICam.csproj", "{35493A59-15D7-4B66-ACCE-297CC252B392}"
 EndProject
@@ -19,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticNetworkConfigurationForCameras", "Camera\InfoUtilOther\Network\AutomaticNetworkConfigurationForCameras\AutomaticNetworkConfigurationForCameras.csproj", "{FEE22B4E-A257-443B-8B29-E1C8124A18F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraInfo", "Camera\InfoUtilOther\CameraInfo\CameraInfo.csproj", "{6117292F-5426-48A7-91FB-B801126E576E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckHealth", "Camera\InfoUtilOther\CheckHealth\CheckHealth.csproj", "{453B7C4F-01E5-41D3-80D8-396A109CF0A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCameraIntrinsics", "Camera\InfoUtilOther\GetCameraIntrinsics\GetCameraIntrinsics.csproj", "{A4F8D63B-E3E9-48DD-A950-276245BACE7B}"
 EndProject
@@ -74,6 +80,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaCheckerboard", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIBoxViaArucoMarker", "Applications\Advanced\ROI\ROIBoxViaArucoMarker\ROIBoxViaArucoMarker.csproj", "{96CC8163-6D2F-4FF9-B89C-FD2A137AC672}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaskPointCloud", "Applications\Advanced\MaskPointCloud\MaskPointCloud.csproj", "{2A8B5C47-3F1E-4D9A-8E2B-7C9F4A6B1D3E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3DInLoop", "Applications\Advanced\Visualization\CaptureVis3DInLoop\CaptureVis3DInLoop.csproj", "{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureVis3DInLoopWithKeypressExit", "Applications\Advanced\Visualization\CaptureVis3DInLoopWithKeypressExit\CaptureVis3DInLoopWithKeypressExit.csproj", "{C6EAB595-DA7E-4BCC-92F4-5F677C25B29B}"
@@ -97,6 +105,10 @@ Global
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Debug|x64.Build.0 = Debug|x64
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Release|x64.ActiveCfg = Release|x64
 		{DD533F88-E34D-41A8-B734-1B94A5A4A31F}.Release|x64.Build.0 = Release|x64
+		{31893406-C9F1-4FB7-B1F5-A26C80AB38B9}.Debug|x64.ActiveCfg = Debug|x64
+		{31893406-C9F1-4FB7-B1F5-A26C80AB38B9}.Debug|x64.Build.0 = Debug|x64
+		{31893406-C9F1-4FB7-B1F5-A26C80AB38B9}.Release|x64.ActiveCfg = Release|x64
+		{31893406-C9F1-4FB7-B1F5-A26C80AB38B9}.Release|x64.Build.0 = Release|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Debug|x64.ActiveCfg = Debug|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Debug|x64.Build.0 = Debug|x64
 		{1A47C619-0DEC-4ADD-80DC-5677DEBFA1E1}.Release|x64.ActiveCfg = Release|x64
@@ -109,6 +121,10 @@ Global
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Debug|x64.Build.0 = Debug|x64
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.ActiveCfg = Release|x64
 		{F19339D7-0C30-471F-8E61-B86B895C440E}.Release|x64.Build.0 = Release|x64
+		{E6F73ADC-4B2E-5F98-AD54-FEAB23456789}.Debug|x64.ActiveCfg = Debug|x64
+		{E6F73ADC-4B2E-5F98-AD54-FEAB23456789}.Debug|x64.Build.0 = Debug|x64
+		{E6F73ADC-4B2E-5F98-AD54-FEAB23456789}.Release|x64.ActiveCfg = Release|x64
+		{E6F73ADC-4B2E-5F98-AD54-FEAB23456789}.Release|x64.Build.0 = Release|x64
 		{35493A59-15D7-4B66-ACCE-297CC252B392}.Debug|x64.ActiveCfg = Debug|x64
 		{35493A59-15D7-4B66-ACCE-297CC252B392}.Debug|x64.Build.0 = Debug|x64
 		{35493A59-15D7-4B66-ACCE-297CC252B392}.Release|x64.ActiveCfg = Release|x64
@@ -129,6 +145,10 @@ Global
 		{6117292F-5426-48A7-91FB-B801126E576E}.Debug|x64.Build.0 = Debug|x64
 		{6117292F-5426-48A7-91FB-B801126E576E}.Release|x64.ActiveCfg = Release|x64
 		{6117292F-5426-48A7-91FB-B801126E576E}.Release|x64.Build.0 = Release|x64
+		{453B7C4F-01E5-41D3-80D8-396A109CF0A6}.Debug|x64.ActiveCfg = Debug|x64
+		{453B7C4F-01E5-41D3-80D8-396A109CF0A6}.Debug|x64.Build.0 = Debug|x64
+		{453B7C4F-01E5-41D3-80D8-396A109CF0A6}.Release|x64.ActiveCfg = Release|x64
+		{453B7C4F-01E5-41D3-80D8-396A109CF0A6}.Release|x64.Build.0 = Release|x64
 		{A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Debug|x64.ActiveCfg = Debug|x64
 		{A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Debug|x64.Build.0 = Debug|x64
 		{A4F8D63B-E3E9-48DD-A950-276245BACE7B}.Release|x64.ActiveCfg = Release|x64
@@ -253,6 +273,10 @@ Global
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Debug|x64.Build.0 = Debug|x64
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.ActiveCfg = Release|x64
 		{844EFF6C-E988-43D5-813D-3E1B47579DCC}.Release|x64.Build.0 = Release|x64
+		{2A8B5C47-3F1E-4D9A-8E2B-7C9F4A6B1D3E}.Debug|x64.ActiveCfg = Debug|x64
+		{2A8B5C47-3F1E-4D9A-8E2B-7C9F4A6B1D3E}.Debug|x64.Build.0 = Debug|x64
+		{2A8B5C47-3F1E-4D9A-8E2B-7C9F4A6B1D3E}.Release|x64.ActiveCfg = Release|x64
+		{2A8B5C47-3F1E-4D9A-8E2B-7C9F4A6B1D3E}.Release|x64.Build.0 = Release|x64
 		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Debug|x64.ActiveCfg = Debug|x64
 		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Debug|x64.Build.0 = Debug|x64
 		{6F96328C-09CB-4EAA-B6FC-5B495F49E2B2}.Release|x64.ActiveCfg = Release|x64
