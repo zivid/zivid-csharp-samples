@@ -37,7 +37,7 @@ class Program
             Console.WriteLine("Computing new camera correction...");
             var correction = Zivid.NET.Calibration.Calibrator.ComputeCameraCorrection(dataset);
             var accuracyEstimate = correction.AccuracyEstimate;
-            Console.WriteLine("If written to the camera, this correction can be expected to yield a dimension accuracy error of "
+            Console.WriteLine("If written to the camera, this correction can be expected to yield a dimension trueness error of "
                     + (accuracyEstimate.DimensionAccuracy * 100).ToString("0.00") + "% or better in the range of z=["
                     + accuracyEstimate.ZMin.ToString("0.00") + "," + accuracyEstimate.ZMax.ToString("0.00")
                     + "] across the full FOV. Accuracy close to where the correction data was collected is likely better.");

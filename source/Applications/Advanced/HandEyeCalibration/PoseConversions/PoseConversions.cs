@@ -1,6 +1,6 @@
 ﻿// DOCTAG-START-ALL-1
 /*
-Convert to/from Transformation Matrix (Rotation Matrix + Translation Vector)
+Convert to/from Transformation Matrix (Rotation Matrix + Translation Vector).
 
 Zivid primarily operate with a (4x4) transformation matrix. This example implements functions to convert to and from:
 AxisAngle, Rotation Vector, Roll-Pitch-Yaw, Quaternion.
