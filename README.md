@@ -79,9 +79,8 @@ from the camera can be used.
       normals and print a subset.
     - [CaptureHalconViaGenICam] - Capture and save a point cloud, with
       colors, using GenICam interface and Halcon C++ SDK.
-    - [CaptureHalconViaZivid] - Capture a point cloud, with colors,
-      using Zivid SDK, transform it to a Halcon point cloud and save it
-      using Halcon C++ SDK.
+    - [CaptureHalconViaZivid] - Capture a colored point cloud with the
+      Zivid SDK, convert it to a HALCON point cloud and save it.
   - **InfoUtilOther**
     - [CameraInfo] - List connected cameras and print camera version and
       state information for each connected camera.
@@ -89,15 +88,13 @@ from the camera can be used.
     - [CaptureWithDiagnostics] - Capture a 2D+3D frame and a 2D frame
       from the Zivid camera with diagnostics enabled.
     - [CheckHealth] - Poll the camera health check from a separate
-      thread while capturing in the main thread, printing the statuses
-      and values every second.
+      thread while capturing, printing statuses and values each second.
     - [FirmwareUpdater] - Update firmware on the Zivid camera.
     - [FrameInfo] - Read frame info from the Zivid camera.
     - [GetCameraIntrinsics] - Read intrinsic parameters from the Zivid
       camera (OpenCV model) or estimate them from the point cloud.
-    - [MeasureSceneConditions] - Measure ambient light conditions in the
-      scene and output the measured flickering frequency of the ambient
-      light if flickering is detected.
+    - [MeasureSceneConditions] - Measure ambient light in the scene and
+      report the flickering frequency when flickering is detected.
     - [Warmup] - Short example of a basic way to warm up the camera with
       specified time and capture cycle.
     - **Network**
@@ -141,11 +138,11 @@ from the camera can be used.
       - [TransformPointCloudFromMillimetersToMeters] - Transform point
         cloud data from millimeters to meters.
       - [TransformPointCloudViaArucoMarker] - Transform a point cloud
-        from camera to ArUco marker coordinate frame by estimating the
-        marker's pose from the point cloud.
+        from camera to ArUco marker coordinate frame using the marker's
+        estimated pose.
       - [TransformPointCloudViaCheckerboard] - Transform a point cloud
-        from camera to checkerboard (Zivid Calibration Board) coordinate
-        frame by getting checkerboard pose from the API.
+        from camera to checkerboard coordinate frame using the pose from
+        the API.
     - **Roi**
       - [ROIBoxViaArucoMarker] - Filter the point cloud based on a ROI
         box given relative to the ArUco marker on a Zivid Calibration
@@ -154,8 +151,8 @@ from the camera can be used.
         box given relative to the Zivid Calibration Board.
     - **Stitching**
       - [StitchContinuouslyRotatingObject] - Stitch point clouds from a
-        continuously rotating object without pre-alignment using Local
-        Point Cloud Registration and apply Voxel Downsample.
+        continuously rotating object using Local Point Cloud
+        Registration, then downsample.
       - [StitchUsingRobotMountedCamera] - Stitch multiple point clouds
         captured with a robot mounted camera.
       - [StitchViaLocalPointCloudRegistration] - Stitch two point clouds
@@ -164,10 +161,10 @@ from the camera can be used.
     - **HandEyeCalibration**
       - [HandEyeCalibration] - Perform Hand-Eye calibration.
       - [PoseConversions] - Convert to/from Transformation Matrix
-        (Rotation Matrix + Translation Vector)
-      - [UtilizeHandEyeCalibration] - Transform single data point or
-        entire point cloud from camera to robot base reference frame
-        using Hand-Eye calibration
+        (Rotation Matrix + Translation Vector).
+      - [UtilizeHandEyeCalibration] - Transform a data point or entire
+        point cloud from camera to robot base frame using the Hand-Eye
+        calibration matrix.
     - **MultiCamera**
       - [MultiCameraCalibration] - Use captures of a calibration object
         to generate transformation matrices to a single coordinate
