@@ -182,7 +182,7 @@ Launch the Command Prompt by pressing `Win` + `R` keys on the keyboard,
 then type `cmd` and press `Enter`.
 
 Navigate to a location where you want to clone the repository, then run
-to following command:
+the following command:
 
 ``` bat
 git clone https://github.com/zivid/zivid-csharp-samples
