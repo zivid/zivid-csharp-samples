@@ -1,6 +1,6 @@
 # C# samples
 
-This repository contains csharp code samples for Zivid SDK v2.18.0. For
+This repository contains csharp code samples for Zivid SDK v2.19.0. For
 tested compatibility with earlier SDK versions, please check out
 [accompanying releases].
 
@@ -70,8 +70,7 @@ from the camera can be used.
     - [CaptureWithSettingsFromYML] - Capture images and point clouds,
       with and without color, from the Zivid camera with settings from
       YML file.
-    - [Connect] - Connect to a Zivid camera using the different
-      available methods.
+    - [Connect] - Connect to a Zivid camera.
     - [CreateFileCameraFromZDFWithDiagnostics] - Capture a frame with
       diagnostics enabled and create a file camera from it.
   - **Advanced**
@@ -102,7 +101,7 @@ from the camera can be used.
         configure the IP addresses of connected cameras to match the
         network of the user's PC.
       - [NetworkConfiguration] - Uses Zivid API to change the IP address
-        of the Zivid camera.
+        and hostname of the Zivid camera.
   - **Maintenance**
     - [CorrectCameraInField] - Correct the dimension trueness of a Zivid
       camera.

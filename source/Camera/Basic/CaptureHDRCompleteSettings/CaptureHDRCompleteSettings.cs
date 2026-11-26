@@ -56,7 +56,11 @@ class Program
                             Red = 1.0,
                         },
                         Gamma = 1.0,
-                        Experimental = { Mode = Zivid.NET.Settings2D.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption.Automatic },
+                        Experimental =
+                        {
+                            Mode = Zivid.NET.Settings2D.ProcessingGroup.ColorGroup.ExperimentalGroup.ModeOption.Automatic,
+                            HighlightSuppression = { Enabled = false },
+                        },
                     },
                 },
             };

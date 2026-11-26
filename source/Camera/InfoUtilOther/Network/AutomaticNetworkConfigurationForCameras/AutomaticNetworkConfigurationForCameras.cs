@@ -7,8 +7,10 @@ Usage:
   proposed IP addresses without making actual changes. Note: camera-side Ethernet
   link speed will also be skipped, as it requires connecting to the camera.
 
+Each camera keeps its current hostname.
+
 For more information on network configuration, check out this tutorial:
-https://support.zivid.com/en/latest/camera/getting-started/software-installation/zivid-two-network-configuration.html
+https://support.zivid.com/en/latest/camera/getting-started/software-installation/network-configuration.html
 */
 
 using System;
@@ -63,6 +65,7 @@ class Program
 
                     var newConfig = new Zivid.NET.NetworkConfiguration()
                     {
+                        Hostname = camera.NetworkConfiguration.Hostname,
                         IPV4 = {
                             Mode = Zivid.NET.NetworkConfiguration.IPV4Group.ModeOption.Manual,
                             Address = newIpAddress.ToString(),
