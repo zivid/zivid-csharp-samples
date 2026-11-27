@@ -1,8 +1,15 @@
 ﻿/*
-Uses Zivid API to change the IP address of the Zivid camera.
+Uses Zivid API to change the IP address and hostname of the Zivid camera.
 
-For more information on network configuration, check out this tutorial:
-https://support.zivid.com/en/latest/camera/getting-started/software-installation/zivid-two-network-configuration.html
+The new configuration keeps the camera's current hostname unless you enter a new one. A configuration without a
+hostname makes the camera use its default hostname, zivid-<serial number>. To connect to the camera by its hostname,
+add the .local suffix, for example zivid-2020C0DE.local.
+
+For how to configure a static IP address, check out this tutorial:
+https://support.zivid.com/en/latest/camera/getting-started/software-installation/network-configuration/static-ip-network-configuration.html
+
+For how to configure DHCP, check out this tutorial:
+https://support.zivid.com/en/latest/camera/getting-started/software-installation/network-configuration/dhcp-network-configuration.html
 */
 
 using System;
@@ -27,6 +34,7 @@ class NetworkConfiguration
 
             Console.WriteLine("Current network configuration of camera {0}:", camera.Info.SerialNumber);
             Console.WriteLine(originalConfig.ToString());
+            Console.WriteLine("Current hostname: {0}", camera.State.Network.Hostname);
             Console.WriteLine();
 
             var mode = Zivid.NET.NetworkConfiguration.IPV4Group.ModeOption.Manual;
@@ -53,8 +61,19 @@ class NetworkConfiguration
                 }
             }
 
+            var hostname = originalConfig.Hostname;
+            Console.Write(
+                "Enter new hostname, or leave empty to keep the current one [{0}]: ",
+                camera.State.Network.Hostname);
+            var inputHostname = Console.ReadLine();
+            if (!string.IsNullOrEmpty(inputHostname))
+            {
+                hostname = inputHostname;
+            }
+
             var newConfig = new Zivid.NET.NetworkConfiguration()
             {
+                Hostname = hostname,
                 IPV4 = {
                     Mode = mode,
                     Address = address,
@@ -75,6 +94,7 @@ class NetworkConfiguration
 
             Console.WriteLine("Updated network configuration of camera {0}:", camera.Info.SerialNumber);
             Console.WriteLine(camera.NetworkConfiguration.ToString());
+            Console.WriteLine("Hostname: {0}", camera.State.Network.Hostname);
             Console.WriteLine();
 
             Console.WriteLine("Camera status is '{0}'", camera.State.Status);

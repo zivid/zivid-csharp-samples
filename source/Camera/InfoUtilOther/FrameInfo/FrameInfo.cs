@@ -49,6 +49,17 @@ class Program
 
                 Console.WriteLine("Thermal throttling time:");
                 Console.WriteLine(frameInfo.Metrics.ThrottlingTime.Milliseconds + " ms");
+
+                Console.WriteLine("Transfer time:");
+                var transferTime = frameInfo.Metrics.TransferTime;
+                if (transferTime.HasValue)
+                {
+                    Console.WriteLine(transferTime.Value.Milliseconds + " ms");
+                }
+                else
+                {
+                    Console.WriteLine("Not available for this frame");
+                }
             }
         }
         catch (Exception ex)
